@@ -1,0 +1,6 @@
+# Default format for videos
+--format 'best[ext = mp4][height <= 480]'
+
+# Save all videos under downloads directory
+--output /media/files/Ricardo/Downloads/%(title)s.%(ext)s
+

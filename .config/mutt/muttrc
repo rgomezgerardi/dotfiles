@@ -1,0 +1,54 @@
+# ===============================================
+# ================== Global =====================
+# ===============================================
+
+# Set the email sort order in the index page
+set sort = "reverse-date-received"
+
+# Abort if a message contains no subject
+set abort_nosubject = no
+
+# Check for new email
+#set mail_check = 60
+#set timeout = 30
+
+# Save copy of outgoing messages
+#set copy = no
+
+# Force tls connection
+#set ssl_starttls = yes
+#set ssl_force_tls = yes
+
+# Set the dafault text editor
+set editor = "nvim"
+
+# ===============================================
+# =============== Gmail Account =================
+# ===============================================
+# Source default account configuration
+#source "gpg2 -dq ~/.mutt/gmail.gpg |"
+# Remember Desactivate
+# https://www.google.com/settings/security/lesssecureapps
+
+set realname = "Ricardo Gomez"
+set from = "rgomezgerardi@gmail.com"
+
+# Imap settings
+set imap_user = "rgomezgerardi@gmail.com"
+#set imap_pass = ""
+set ssl_force_tls = yes
+
+# Smtp settings
+set smtp_url = "smtps://rgomezgerardi@smtp.gmail.com:465"
+set smtp_pass = "8!0#424rd"
+
+# Remote gmail folders
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+set trash = "+Trash"
+
+# ===============================================
+# =================== Macros ====================
+# ===============================================
