@@ -1,15 +1,26 @@
+# ==========================================================
+#
+#  ████████╗███████╗██████╗ ███╗   ███╗██╗████████╗███████╗
+#  ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║╚══██╔══╝██╔════╝
+#     ██║   █████╗  ██████╔╝██╔████╔██║██║   ██║   █████╗  
+#     ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║   ██║   ██╔══╝  
+#     ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║   ██║   ███████╗
+#     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚══════╝
+#
+#  Config File                       Edit By: Ricardo Gomez
+# ==========================================================
 [options]
+
 #allow_bold = true
 #audible_bell = false
 #bold_is_bright = true
 #cell_height_scale = 1.0
 #cell_width_scale = 1.0
-#clickable_url = true
+clickable_url = true
 #dynamic_title = true
 
 # Fonts
-font = Hack 12
-
+font = MesloLGS NF 13
 #fullscreen = true
 #icon_name = terminal
 #mouse_autohide = false
@@ -23,7 +34,7 @@ scrollback_lines = 10000
 #hyperlinks = false
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
-#browser = xdg-open
+browser = xdg-open
 
 # "system", "on" or "off"
 #cursor_blink = system

@@ -1,26 +1,34 @@
 # You can edit this file by hand, but it's recommended not to do that.
 
 # Marks:
+'C
+	/home/ruth/.config
+	..
+1600394301
 'D
 	/media/files/Ricardo/Documents/
 	..
-1593333313
+1599329874
 'G
 	/media/windows/Users/Gerardi/
 	..
 1595824021
 'H
-	/home/ruth/
+	/
 	..
-1592267885
+1599329874
 'M
-	/media/files/Ricardo/Music/
+	/media/files/Ricardo/Music
 	..
-1597395901
+1600394301
 'N
 	/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC/
 	..
 1593333313
+'P
+	/media/files/Ricardo/Pictures
+	..
+1600394301
 'R
 	/
 	..
@@ -30,657 +38,962 @@
 	..
 1595376503
 'b
-	/media/files/Ricardo/Books/
+	/media/files/Ricardo/Books
 	..
-1593333313
+1600394301
+'c
+	/media/cdrom
+	..
+1600394301
 'd
-	/media/files/Ricardo/Downloads/
+	/media/files/Ricardo/Downloads
 	..
-1593333313
+1600394301
 'g
-	/media/windows/Users/Gerardi/
+	/media/windows/Users/Gerardi
 	..
-1595852770
+1600394301
 'h
 	/home/ruth/
 	..
-1592267885
+1599329874
+'k
+	/home/ruth
+	Downloads
+1600388835
 'l
 	/media/files/Ricardo/Movies & Series
 	The Umbrella Academy
 1597395906
 'm
-	/media/files/Ricardo/Movies & Series/
+	/media/files/Ricardo/Videos/Movies
 	..
-1597395901
+1600394301
 'n
-	/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC/
+	/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC
 	..
-1595852770
+1600394301
 'o
 	/home/ruth/.config/awesome/themes/papyelgringo/theme
 	default-theme.lua
 1596272817
 'p
-	/media/files/Ricardo/
+	/media/phone
 	..
-1595376262
+1600394301
 'r
-	/media/files/Ricardo/
+	/media/files/Ricardo
 	..
-1593333313
+1600394301
+'s
+	/media/files/Ricardo/Videos/Series
+	..
+1600394301
 't
-	/media/files/Ricardo/Torrent/
+	/media/files/Ricardo/Torrent
 	..
-1593333313
+1600394301
 'u
-	/media/usb/
+	/media/usb
 	..
-1593333559
+1600394301
 'v
-	/media/files/Ricardo/Videos/
+	/media/files/Ricardo/Videos
 	..
-1596413268
+1600394301
 'w
-	/media/windows/
+	/media/windows
 	..
-1595852770
+1600394301
 'z
-	/home/ruth/.config/vifm/
+	/home/ruth/.config/vifm
 	..
-1592271001
+1600487104
 
 # Bookmarks:
 
 # TUI:
 al
-q0
+q1
 v2
 ov
-m-1
+m79
 l2
 r2
 
 # Left window history (oldest to newest):
-d/media/files/Ricardo/Programming/Scripts/Bash
-	Help
-1
-d/media/files/Ricardo/Programming/Scripts/Bash/Help
-	Codigos para el Log en Bash 2.png
-2
-d/media/files/Ricardo/Programming/Scripts/Bash
-	Help
-1
-d/media/files/Ricardo/Programming/Scripts/Bash/Help
-	associative_arrays.sh
-9
-d/home/ruth
-	Scripts
-16
-d/home/ruth/Scripts
-	revnoc.sh
-7
-d/media/files/Ricardo
-	Programs
-17
-d/media/files/Ricardo/Programs
+d/media/files/Ricardo/Programming
+	Python
+3
+d/media/files/Ricardo/Programming/Python
 	..
 0
-d/media/files/Ricardo
-	Resources
-18
-d/media/files/Ricardo/Resources
-	DotFiles
-1
-d/media/files/Ricardo/Resources/DotFiles
-	Scripts
-5
-d/media/files/Ricardo/Resources/DotFiles/Scripts
-	revnoc
-8
-d/home/ruth
-	Scripts
-16
-d/home/ruth/Scripts
-	revnoc
-7
-d/media/files/Ricardo/Downloads
-	The.Umbrella.Academy.S02.COMPLETE.720p.NF.WEBRip.x264-GalaxyTV[TGx]
+d/media/files/Ricardo/Programming
+	Python
+3
+d/media/files/Ricardo/Programming/Python
+	..
+0
+d/media/files/Ricardo/Programming
+	Python
+3
+d/media/files/Ricardo/Programming/Python
+	..
+0
+d/media/files/Ricardo/Programming
+	Python
+3
+d/media/files/Ricardo/Programming/Python
+	..
+0
+d/media/files/Ricardo/Programming
+	Python
+3
+d/media/files/Ricardo/Programming/Python
+	guess-the-number.py
 4
-d/media/files/Ricardo/Downloads/The.Umbrella.Academy.S02.COMPLETE.720p.NF.WEBRip.x264-GalaxyTV[TGx]
-	The.Umbrella.Academy.S02E01.720p.NF.WEBRip.x264-GalaxyTV.srt
-3
 d/media/files/Ricardo/Downloads
-	The.Umbrella.Academy.S02.COMPLETE.720p.NF.WEBRip.x264-GalaxyTV[TGx]
+	Tenet.2020.HC.HDCam.XviD.B4ND1T69
+3
+d/media/files/Ricardo/Downloads/Tenet.2020.HC.HDCam.XviD.B4ND1T69
+	Sample-3.avi
+5
+d/media/files/Ricardo/Downloads
+	The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
 4
-d/media/files/Ricardo/Downloads/The.Umbrella.Academy.S02.COMPLETE.720p.NF.WEBRip.x264-GalaxyTV[TGx]
-	.unwanted
-1
-d/media/files/Ricardo/Movies & Series
-	The Umbrella Academy
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy
-	Season 2
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	Subtitles
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/Subtitles
-	The Umbrella Academy 2x02.srt
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	Subtitles
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/Subtitles
-	The Umbrella Academy 2x01.srt
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	Subtitles
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/Subtitles
-	The Umbrella Academy 2x01.srt
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	The Umbrella Academy 2x09.mkv
-10
-d/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC
-	The Umbrella Academy 2x05.mpg
-5
-d/media/files/Ricardo/Movies & Series
-	The Umbrella Academy
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy
-	Season 2
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	The Umbrella Academy 2x10.mkv
-11
-d/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC
-	The Umbrella Academy 2x05.mpg
-5
-d/media/files/Ricardo/Movies & Series
-	The Umbrella Academy
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy
-	Season 2
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	Subtitles
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/Subtitles
-	The Umbrella Academy 2x07.srt
-7
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	Subtitles
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/Subtitles
-	.The Umbrella Academy 2x07.srt
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	Subtitles
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/Subtitles
-	.The Umbrella Academy 2x07.srt
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	Subtitles
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/Subtitles
-	.The Umbrella Academy 2x07.srt
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	subtitles
-1
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/subtitles
-	The Umbrella Academy 2x08.srt
-8
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	Subtitles
-1
-d/media/files/Ricardo
-	Resources
-18
-d/home/ruth
-	Scripts
-16
-d/home/ruth/Scripts
-	revnoc
-7
-d/media/files/Ricardo
-	Resources
-18
-d/media/files/Ricardo/Resources
-	DotFiles
-1
-d/media/files/Ricardo/Resources/DotFiles
-	Scripts
-5
-d/media/files/Ricardo/Resources/DotFiles/Scripts
-	rdowny.sh
-7
-d/home/ruth
-	Scripts
-16
-d/home/ruth/Scripts
-	anyvideoconverter.sh
-1
-d/home/ruth
-	.cache
-1
-d/media/files/Ricardo
-	Resources
-18
-d/media/files/Ricardo/Resources
-	DotFiles
-1
-d/media/files/Ricardo/Resources/DotFiles
-	.cache
-1
-d/media/files/Ricardo/Resources/DotFiles/.cache
-	wine
-1
-d/media/files/Ricardo/Resources/DotFiles/.cache/wine
+d/media/files/Ricardo/Downloads/The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
 	..
 0
-d/media/files/Ricardo/Resources/DotFiles/.cache
-	winetricks
-2
-d/media/files/Ricardo/Resources/DotFiles/.cache/winetricks
-	..
-0
-d/media/files/Ricardo/Resources/DotFiles/.cache
-	winetricks
-2
-d/media/files/Ricardo/Resources/DotFiles
-	.config
-2
-d/media/files/Ricardo/Resources/DotFiles/.config
-	fontconfig
-2
-d/media/files/Ricardo/Resources/DotFiles/.config/fontconfig
-	..
-0
-d/media/files/Ricardo/Resources/DotFiles/.config
-	fontconfig
-2
-d/media/files/Ricardo/Resources/DotFiles/.config/fontconfig
-	conf.d
-1
-d/media/files/Ricardo/Resources/DotFiles/.config/fontconfig/conf.d
-	..
-0
-d/media/files/Ricardo/Resources/DotFiles/.config/fontconfig
-	conf.d
-1
-d/media/files/Ricardo/Resources/DotFiles/.config
-	nvim
-3
-d/media/files/Ricardo/Resources/DotFiles
-	.config
-2
-d/media/files/Ricardo/Resources/DotFiles/.config
-	nvim
-3
-d/media/files/Ricardo/Resources/DotFiles
-	.cache
-1
-d/media/files/Ricardo/Resources/DotFiles/.cache
-	winetricks
-2
-d/media/files/Ricardo/Resources/DotFiles
-	.cache
-1
-d/media/files/Ricardo/Resources/DotFiles/.cache
-	winetricks
-2
-d/media/files/Ricardo/Resources/DotFiles
-	.cache
-1
-d/media/files/Ricardo/Resources
-	DotFiles
-1
-d/media/files/Ricardo/Resources/DotFiles
-	.config
-2
-d/media/files/Ricardo/Resources/DotFiles/.config
-	vifm
-7
-d/media/files/Ricardo/Resources/DotFiles
-	.cache
-1
-d/media/usb
-	The Umbrella Academy 2x05.mkv
-2
-d/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC
-	The Umbrella Academy 2x03.mpg
-3
-d/media/usb
-	The Umbrella Academy 2x05.mkv
-2
-d/media
-	usb
-3
-d/media/usb
-	The Umbrella Academy 2x05.mkv
-2
-d/home/ruth
-	.cache
-1
-d/media/files/Ricardo/Movies & Series
-	The Umbrella Academy
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy
-	Season 2
-2
-d/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2
-	The Umbrella Academy 2x05.mkv
-6
-d/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC
-	The Umbrella Academy 2x03.mpg
-3
-d/media/usb
-	System Volume Information
-1
 d/media/files/Ricardo/Downloads
-	American Hangman .2018.hdrip.720p.subesp.mp4.fdmdownload
-6
+	The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
+4
+d/home/ruth
+	.config
+2
+d/home/ruth/.config
+	moc
+15
+d/home/ruth/.config/moc
+	config
+3
+d/media/files/Ricardo
+	Books
+1
+d/media/files/Ricardo/Books
+	-
+1
+d/media/files/Ricardo
+	Comics
+2
+d/media/files/Ricardo/Comics
+	..
+0
 d/media/files/Ricardo
 	Books
 1
 d/media/files/Ricardo/Books
 	Manuals
-3
-d/media/files/Ricardo/Books/Manuals
-	Advance Bash-Scripting Guide - Mendel Cooper.pdf
 2
-d/media/usb
-	The Umbrella Academy 2x06.mpg
+d/media/files/Ricardo/Books/Manuals
+	ASS-Specs.doc
+1
+d/media/files/Ricardo/Books
+	Pentesting
 3
-d/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC
-	The Umbrella Academy 2x05.mpg
-5
-d/media/usb
-	The Umbrella Academy 2x06.mpg
+d/media/files/Ricardo/Books/Pentesting
+	..
+0
+d/media/files/Ricardo/Books
+	Python
 4
+d/media/files/Ricardo/Books/Python
+	Automate the Boring Stuff with Python - Al Sweigart.pdf
+1
+d/media/files/Ricardo/Books
+	Python
+4
+d/media/files/Ricardo/Books/Python
+	Automate the Boring Stuff with Python - Al Sweigart.pdf
+1
+d/media/files/Ricardo/Books
+	Python
+4
+d/media/files/Ricardo
+	Books
+1
+d/media/files/Ricardo/Books
+	Pentesting
+3
+d/media/files/Ricardo/Books/Pentesting
+	..
+0
+d/media/files/Ricardo/Books
+	Pentesting
+3
+d/media/files/Ricardo/Books/Pentesting
+	Advanced Penetration Testing - Wil Allsopp.pdf
+1
+d/media/files/Ricardo/Books
+	Pentesting
+3
+d/home/ruth
+	.config
+2
+d/home/ruth/.config
+	moc
+15
+d/home/ruth/.config/moc
+	keymap
+4
+d/home/ruth/.config
+	moc
+15
+d/home/ruth
+	.config
+2
+d/home/ruth/.config
+	variables
+35
+d/media/files/Ricardo/Videos/Movies
+	Example
+1
+d/media/files/Ricardo/Videos/Movies/Example
+	..
+0
+d/media/files/Ricardo/Videos/Movies
+	Example
+1
+d/media/files/Ricardo/Videos/Movies/Example
+	..
+0
+d/media/files/Ricardo/Videos/Movies
+	Example
+1
+d/media/files/Ricardo/Videos/Series
+	The Boys
+2
+d/media/files/Ricardo/Videos/Series/The Boys
+	Season 2
+1
+d/media/files/Ricardo/Videos/Series/The Boys/Season 2
+	The.Boys.S02E04.WEB.x264-PHOENiX.mkv
+4
+d/media/files/Ricardo/Videos/Movies
+	Example
+1
+d/media/files/Ricardo/Videos/Movies/Example
+	..
+0
+d/media/files/Ricardo/Videos/Movies
+	Mulan.2020.mp4
+5
+d/media/files/Ricardo/Videos
+	Courses
+2
+d/media/files/Ricardo/Videos/Courses
+	..
+0
+d/media/files/Ricardo/Videos
+	-
+1
+d/media/files/Ricardo/Videos/-
+	Toy Story 4 Trailer.mp4
+3
+d/media/files/Ricardo/Videos
+	Series
+4
+d/media/files/Ricardo/Videos/Series
+	The Boys
+2
+d/media/files/Ricardo/Videos/Series/The Boys
+	Season 2
+1
+d/media/files/Ricardo/Videos/Series/The Boys/Season 2
+	The.Boys.S02E04.WEB.x264-PHOENiX.mkv
+4
+d/media/files/Ricardo/Videos/Series/The Boys
+	Season 2
+1
+d/media/files/Ricardo/Videos/Series
+	The Boys
+2
+d/media/files/Ricardo/Videos
+	Series
+4
+d/media/files/Ricardo
+	Videos
+20
+d/media/files/Ricardo/Videos
+	Series
+4
+d/media/files/Ricardo/Downloads
+	The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
+5
+d/media/files/Ricardo/Downloads/The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
+	..
+0
+d/media/files/Ricardo/Downloads
+	Sin confirmar 434481.crdownload
+8
+d/media/files/Ricardo
+	Downloads
+6
+d/media/files/Ricardo/Downloads
+	Sin confirmar 89430.crdownload
+7
+d/media/files/Ricardo
+	Downloads
+6
+d/media/files/Ricardo/Downloads
+	desktop.ini
+7
+d/media/files/Ricardo
+	Comics
+2
+d/media/files/Ricardo/Comics
+	Deadly Class
+1
+d/media/files/Ricardo/Comics/Deadly Class
+	..
+0
+d/media/files/Ricardo/Comics
+	Deadly Class
+1
+d/media/files/Ricardo/Comics/Deadly Class
+	..
+0
+d/media/files/Ricardo/Comics
+	Deadly Class
+1
+d/media/files/Ricardo
+	Books
+1
+d/media/files/Ricardo/Books
+	Manuals
+2
+d/media/files/Ricardo/Books/Manuals
+	ASS-Specs.doc
+1
+d/media/files/Ricardo/Books
+	Python
+4
+d/media/files/Ricardo/Books/Python
+	Automate the Boring Stuff with Python - Al Sweigart.pdf
+1
+d/media/files/Ricardo
+	Books
+1
+d/media/files/Ricardo/Books
+	Python
+4
+d/media/files/Ricardo/Books/Python
+	Automate the Boring Stuff with Python - Al Sweigart.pdf
+1
+d/
+	bin
+1
+d/bin
+	..
+0
+d/
+	usr
+21
+d/usr
+	bin
+1
+d/usr/bin
+	..
+0
+d/media/files/Ricardo/Downloads
+	Scott Pilgrim vs the World (2010)
+3
+d/media/files/Ricardo/Videos/Movies
+	Before.the.Fire.2020.mp4
+3
+d/media/files/Ricardo/Videos/Series
+	The Boys
+2
+d/media/files/Ricardo/Videos/Series/The Boys
+	Season 2
+1
+d/media/files/Ricardo/Videos/Series/The Boys/Season 2
+	The.Boys.S02E05.WEB.x264-PHOENiX.mkv
+5
+d/media/files/Ricardo/Videos/Movies
+	Ava.2020.mp4
+1
 d
 
 # Right window history (oldest to newest):
+D/media/files/Ricardo
+	Git
+9
+D/media/files/Ricardo/Git
+	dotfiles
+3
+D/media/files/Ricardo
+	Sony PlayStation Portable
+20
+D/media/files/Ricardo/Sony PlayStation Portable
+	..
+0
+D/media/files/Ricardo
+	Books
+1
+D/media/files/Ricardo/Books
+	Python
+4
+D/media/files/Ricardo/Books/Python
+	Black Hat Python - Justin Seitz.pdf
+2
+D/media/files/Ricardo/Books
+	Python
+4
+D/media/files/Ricardo/Books/Python
+	Cracking Codes with Python - Al Sweigart.pdf
+3
+D/media/files/Ricardo/Downloads
+	Sin confirmar 434481.crdownload
+3
 D/home/ruth
-	..
-0
-D/home
-	..
-0
-D/
-	media
-8
-D/media
-	..
-0
-D/
-	media
-8
-D/media
-	iso
+	Downloads
+17
+D/home/ruth/Downloads
+	Tela
+5
+D/media/files/Ricardo/Movies & Series
+	Ava.2020.srt
+4
+D/media/files/Ricardo/Music
+	Downloaded
 2
-D/
-	media
-8
+D/media/files/Ricardo/Music/Downloaded
+	Semilla - Irepelusa.mp3
+13
+D/media/files/Ricardo/Movies & Series
+	names.txt
+12
+D/media/files/Ricardo/Music
+	Rap
+6
+D/media/files/Ricardo/Music/Rap
+	-
+1
+D/media/files/Ricardo/Music/Rap/-
+	Spanish
+2
+D/media/files/Ricardo/Music/Rap/-/Spanish
+	AL2 el Aldeano -  Como (VIDEO OFICIAL).mp3
+1
+D/media/files/Ricardo/Music/Rap/-
+	English
+1
+D/media/files/Ricardo/Music/Rap/-/English
+	Pump it ( Black Eye Peas ).mp3
+21
+D/media/files/Ricardo/Music/Rap/-
+	English
+1
+D/media/files/Ricardo/Music/Rap
+	-
+1
+D/media/files/Ricardo/Music
+	Pop
+5
+D/media/files/Ricardo/Music/Pop
+	-
+1
+D/media/files/Ricardo/Music/Pop/-
+	The Weeknd, Kendrick Lamar - Pray For Me (Audio).mp3
+34
+D/media/files/Ricardo/Music/Pop
+	-
+1
+D/media/files/Ricardo/Music
+	Rap
+6
+D/media/files/Ricardo/Music/Rap
+	-
+1
+D/media/files/Ricardo/Music/Rap/-
+	English
+1
+D/media/files/Ricardo/Music/Rap/-/English
+	Gangster's Paradise ( Coolio ).mp3
+13
+D/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC
+	Ava.2020.mpg
+1
 D/home/ruth
-	.config
+	example.txt
+35
+D/media/files/Ricardo/Videos
+	Movies
+3
+D/media/files/Ricardo/Videos/Movies
+	Example
+1
+D/media/files/Ricardo/Videos/Movies/Example
+	..
+0
+D/media/files/Ricardo/Videos/Movies
+	Ava.2020.mp4
 2
-D/home/ruth/.config
-	rofi
-19
-D/home/ruth/.config/rofi
-	themes
+D/media/files/Ricardo/Videos
+	Series
+4
+D/media/files/Ricardo/Videos/Series
+	The Boys
 2
-D/home/ruth/.config/rofi/themes
-	material.rasi
+D/media/files/Ricardo
+	Books
+1
+D/media/files/Ricardo/Books
+	-
+1
+D/media/files/Ricardo/Books/-
+	..
+0
+D/media/files/Ricardo/Books
+	-
+1
+D/media/files/Ricardo
+	Books
+1
+D/media/files/Ricardo/Books
+	Manuals
+2
+D/media/files/Ricardo/Books/Manuals
+	The Z Shell Manual - Paul Falstad.pdf
 7
-D/home/ruth/.config/rofi
-	themes
+D/media/files/Ricardo/Books
+	Manuals
 2
-D/home/ruth/.config/rofi/themes
-	arc-dark-red.rasi
+D/media/files/Ricardo
+	Books
+1
+D/media/files/Ricardo/Books
+	Python
+4
+D/media/files/Ricardo/Books/Python
+	Automate the Boring Stuff with Python - Al Sweigart.pdf
+1
+D/home/ruth
+	example.txt
+35
+D/media/files/Ricardo
+	Drivers
+7
+D/media/files/Ricardo/Drivers
+	..
+0
+D/media/files/Ricardo
+	Programs
+17
+D/media/files/Ricardo/Programs
+	Drivers
+7
+D/media/files/Ricardo/Programs/Drivers
+	Double Driver
+1
+D/media/files/Ricardo/Programs
+	Drivers
+7
+D/media/files/Ricardo/Programs/Drivers
+	Snappy Driver Instaler R1909
+3
+D/media/files/Ricardo/Programs
+	Drivers
+7
+D/media/files/Ricardo/Programs/Drivers
+	Snappy Driver Instaler R1909
+3
+D/media/files/Ricardo/Programs
+	Drivers
+7
+D/media/files/Ricardo
+	Programs
+17
+D/media/files/Ricardo/Programs
+	Drivers Manager
+7
+D/media/files/Ricardo
+	Programs
+16
+D/media/files/Ricardo/Programs
+	Drivers Manager
+8
+D/media/files/Ricardo/Programs/Drivers Manager
+	..
+0
+D/media/files/Ricardo/Programs
+	Drivers Manager
+8
+D/media/files/Ricardo
+	Origami
+12
+D/media/files/Ricardo/Origami
+	Origami
 2
+D/media/files/Ricardo/Origami/Origami
+	..
+0
+D/media/files/Ricardo/Origami
+	Books
+1
+D/media/files/Ricardo/Origami/Books
+	Origami Design Secrets 2nd Edition - Robert Lang.pdf
+2
+D/media/files/Ricardo/Origami
+	Diagrams
+2
+D/media/files/Ricardo/Origami/Diagrams
+	..
+0
+D/media/files/Ricardo/Origami
+	Pictures
+3
+D/media/files/Ricardo/Origami/Pictures
+	ORIGAMI DOLPHIN (Jo Nakashima)
+2
+D/media/files/Ricardo/Origami/Pictures/ORIGAMI DOLPHIN (Jo Nakashima)
+	Captura de pantalla de 2019-08-24 23-14-36.png
+24
+D/media/files/Ricardo
+	Books
+1
+D/media/files/Ricardo/Books
+	Python
+4
+D/media/files/Ricardo/Books/Python
+	Automate the Boring Stuff with Python - Al Sweigart.pdf
+1
+D/media/files/Ricardo
+	Programming
+15
+D/media/files/Ricardo/Programming
+	C++
+1
+D/media/files/Ricardo/Programming/C++
+	Lenguaje de Programacion
+1
+D/media/files/Ricardo/Programming/C++/Lenguaje de Programacion
+	Registro_Persona_1
+9
+D/media/files/Ricardo/Programming/C++/Lenguaje de Programacion/Registro_Persona_1
+	Untitled1.cpp
+1
+D/media/files/Ricardo/Programming/C++/Lenguaje de Programacion
+	Registro_Persona_1
+9
+D/media/files/Ricardo/Programming/C++
+	Lenguaje de Programacion
+1
+D/media/files/Ricardo
+	Books
+1
+D/media/files/Ricardo/Books
+	Python
+4
+D/media/files/Ricardo/Books/Python
+	..
+0
+D/media/files/Ricardo/Books
+	Python
+4
+D/media/files/Ricardo/Books/Python
+	Cracking Codes with Python - Al Sweigart.pdf
+3
+D/media/files/Ricardo/Downloads
+	Hot Fuzz (2007)
+1
+D/media/files/Ricardo/Downloads/Hot Fuzz (2007)
+	..
+0
+D/media/files/Ricardo/Downloads
+	The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
+4
+D/media/files/Ricardo/Downloads/The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
+	..
+0
+D/media/files/Ricardo
+	Programming
+15
+D/media/files/Ricardo/Programming
+	Python
+3
+D/media/files/Ricardo/Programming/Python
+	TicTacToe.py
+1
 D
 
 # Command line history (oldest to newest):
-:mkdir drop_Data
-:mkdir mod.lua
-:nvim mod.lua
-:!nvim mod.lua
-:mkdir awesome
-:!vifm.desktop
-:!sudo nvim vifm.desktop
-:find vifm.*
-:find vifm*
-:!zathura /media/files/Ricardo/Documents/Assignments/I.U.P.\ Santiago\ Mariño/Ingles\ II/Unidad\ V/
-:!zathura /media/files/Ricardo/Documents/Assignments/I.U.P.\ Santiago\ Mariño/Ingles\ II/Unidad\ V/2\ Linking\ Clauses.pdf
-:!firefox /media/files/Ricardo/Documents/Assignments/I.U.P.\ Santiago\ Mariño/Ingles\ II/Unidad\ V/2\ Linking\ Clauses.pdf
-:find rc.lua
-:find rc*lua
-:!firefox /media/files/Ricardo/Documents/Assignments/I.U.P.\ Santiago\ Mariño/./-/Pemsum\ de\ Estudio\ \(47.\ 2011\).pdf
-:mkdir Video
-:!sudo mv boot/ boot2/
-:!unrar x C4rr10n.rar
-:mkdir Lutris
-:cache
-:mkdir cache
-:mkdir Halo
-:!unrar x Halo Combat Evolved.iso
-:!un
-:mkdir Halo Combat Evolved
-:mkdir "Halo Combat Evolved"
-:!unzip -q Halo\ Combat\ Evolved.iso
-:mkdir Halo 1.0.10 Fixed
-:mkdir "Halo 1.0.10 Fixed"
-:mkdir Halo Patch 1.0.10
-:mkdir "Halo Patch 1.0.10"
-:mkdir "Halo Anti Cheat 2"
-:!7z x %f
-:mkdir "Halo - Combat Evolved"
-:find wine
-:!chown root:root %f
-:!chmod 777 %f
-:!sudo umount /media/usb
-:mkdir "Halo Installation"
-:find awesome
-:!rufi --show dmenu --theme ~/rofi-themes/User\ Themes/arc-red-dark.rasi
-:!rofi --show dmenu --theme ~/rofi-themes/User\ Themes/arc-red-dark.rasi
-:!rofi -show drun -theme ~/rofi-themes/User\ %f
-:!rofi -show drun -theme ~/rofi-themes/User\ "%f"
-:!rofi -show drun -theme ~/rofi-themes/User\ Themes/"%f"
-:!rofi -show drun -theme "%f"
-:!sudo chmod 755 %f
-:firefox %f
-:!firefox %f
-:mkdir xmobar
-:!nvim xmobarrc
-:nvim launch.sh
-:!nvim launch.sh
-:mkdir themes
-:q
-:mkdir Guitar
-:!nvim Scrot_Commands.txt
-:mkdir youtube-dl
-:!nvim config
+:mkdir figlet
+:select *.torrent
+:editor filetype
+:!nvim filetype
+:!nvim vifmrc.new
+:!nvim Minimal.vifm
+:mkdir Commands
+:%s~_Commands~~g
+:!nvim onedark.vifm
+:tree!
 :find vifm
-:find grub-customizer
-:mkdir JetBrains_Mono
-:mkdir Manuals
-:mkdir Season 1
-:mkdir "Season 1/Subtitles" "Season 2/Subtitles"
-:mkdir "Season 1" "Season 2"
-:mkdir Subtitles
-:mkdir "The Umbrella Academy"
-:mkdir fonts
-:% s~[A-z]~[a-z]~g
-:mkdir
-:mkdir monospace
-:mkdir Families
-:mkdir Roboto
-:mkdir Fira-Code
-:!unzip -q %f
-:mkdir Sans-Serif
-:mkdir Serif
-:mkdir Handwriting
-:mkdir monospaced
-:mkdir sans
-:mkdir sans-serif
-:%s~ ~-~g
-:mkdir Phone/
-:mkdir mutt
-:nvim muttrc
-:!nvim muttrc
-:!celluloid %f
-:shutdown -r now
-:!shutdown -r now
-:nvim example.txt
-:.,.+
+:colorscheme astrell-root
+:colorscheme astrell-user
+:colorscheme dmilith-root
+:colorscheme dmilith-user
+:colorscheme istib-solarized-dark
+:colorscheme juef-zenburn
+:colorscheme reicheltd-light
+:colorscheme solarized-dark
+:colorscheme dar
+:colorscheme minimal
+:colorscheme dark
+:nvim example.ext
 :!nvim example.txt
-:rm %f
-:!rm %f
-:!gimp
-:nvim arguments.sh
-:!nvim arguments.sh
-:w
+:nvim jj
+:nvim vifmimg
+:!chmod +x %c
+:find ueberzug
+:%s~~~g
+:%s~Animal~img~g
+:mkdir Draw
+:%s~_~-~g
+:%s~Vertical~img~g
+:mkdir Gif
+:%s~Wallpaper~img~g
+:!rm -rd %f
+:%s~go~go-~g
+:mkd
+:mkdir -
+:!ffprobe -i %c
+:!ffprobe -i %c && pause
+:find polybar
+:rm -rd %f
+:!rm -r %f
+:!rofi -y
+:libreoff
+:!rofi -dmenu -theme %c
+:!rofi -drun -theme %c
+:!sudo chown ruth:ruth %f
+:!sudo chmod 777 %f
+:!sudo chmod -x %f
+:!sudo chmod +x %f
+:!sudo chmod -w %f
+:nvim oneline.rasi
+:!sudo chmod 755 %f
+:!rofi -show drun -theme %c
+:mkdir Polybar
+:!firefox %f
+:!firefox %f &> /dev/null &
+:mkdir Phone
+:mkdir Python
+:nvim init-fisa.vim
+:init-grinberg.vim
+:nvim init-grinberg.vim
 :wq
+:ss
+:!aa
+:!ss
+:mkdir colors
+:colorscheme h
+:kkkkk
+:!chmod 755 default.vim
+:!chmod -x default.vim
+:!rm %f
+:!chmod 755 slate.vim
+:!chmod -x %f
+:!sudo rm %f
+:sudo cp %f ./
+:!sudo cp %f ./
+:!sudo cp %f /usr/share/nvim/runtime/colors/
+:!chown root:root default.vim
+:!nvim options.txt
+:!chown ruth:ruth default.vim
+:mkdir autoload
+:w
+:!nvim .zshrc-distrotube
+:!nvim distrotube.rasi
+:!nvim config-distrotube.rasi
+:!nvim picom-distrotube.conf
+:!nvim config-distrotube
+:!nvim distrotube-theme
+:!nvim clock
+:!chown clock %f
+:!chown ruth:ruth %f
+:!chmod 755 %f
+:nvim magic8ball.py
+:!zathura %f
+:mkdir zsh
+:mkdir Vim
+:mkdir Termite
+:nvim TicTacToe.py
 
 # Search history (oldest to newest):
-/t
-/r
-/n
-/b
-/i
-/zathu
-/vifhh
-/pac
-/pacman
-/Mj/
-/d
-/!cd media/phone
+/mkdir fonts
+/AN
+/nvim syntax.txt
+/mkdir doc
+/usr
+/polh
+/Progra
+/Down
+/polyb
+/pol
+/polyba
+/licen
+/polybar
+/po
+/.conf
+/poly
+/.bas
+/uebe
+/pyth
+/site
+/ueb
+/doc
 /vif
+//??-__
+/.vifm
+/_Commands
+/find 
+/Animal
+/us
+/shar
 /vifm
-/ico
-/hh
-/l
-/m/M
-/find proton
-/defa
-/aweso
-/11
-/xd
-/gasjj
-/[A-z]
-/ 
+/_
+/Vertical
+/.gif
+/Wallpaper
+/go
+/git
+/fon
+/cljjjkk
+/rofi
+/.lo
+/icon
+/icons
+/m
+/python
+/colors
+/mkdir colors
+/nvim
+/nvim distrotube.rasi
+/termi
+/Pro
+/Sun
+/S
+/Program
+/python3
 
 # Prompt history (oldest to newest):
-pI Saw Her Standing There (Remastered 2009) beatles.mp3
-pI Saw Her Standing There - The Beatles.mp3
-pThe Riverboat Song - Ocean Colour Scene.mp3
-pWonderful Tonight - Eric Clapton.mp3
-pFake Plastic Trees - Radiohead.mp3
-pWonderwall - Oasis.mp3
-pWonderwal - Oasis & Robbie Williams -.mp3
-pWonderwall - Oasis & Robbie Williams -.mp3
-pWild world - Cat Stevens.mp3
-pWild World - Cat Stevens.mp3
-pMononoki
-pGuitar_ChordSongwriting_Cheat_Sheet.pdf
-pGuitar Chord Songwriting Cheat Sheet - Dave Tran.pdf
-pFFmpeg.pdf
-pLearning FFmpeg.pdf
-pASS-Specs.doc
-py
-pnames.txt
-pThe.Umbrella.Academy.S01E01.720p.NF.WEBRip.x264-GalaxyTV.mkv
-poutput.ass
-pThe.Umbrella.Academy.S01E01.720p.NF.WEBRip.x264-GalaxyTV.ass
-poutput.mpg
-pThe.Umbrella.Academy.S01E01.720p.NF.WEBRip.x264-GalaxyTV.srt
-pThe.Umbrella.Academy.S01E01.720p.NF.WEBRip.x264-GalaxyTV.mpg
-pThe.Umbrella.Academy.S01E01.mpg
-pmonospaced
-pJetBrains_Mono
-pHack
-pMonospaced
-pSegoe_UI
-pJetBrains-Mono
-pSegoe-UI.ttf
-pSegoe-UI-Italic.ttf
-pSegoe-UI-Bold.ttf
-pSegoe-UI-Bold-Italic.ttf
-pFira_Code_v5.2.zip
-phack
-proboto
-pmononoki
-pjetbrains-mono
-pfira-code
-pTimes_New_Roman
-pTimes-New-Roman
-ptimes-new-roman
-ptimes new roman-bold-italic.ttf
-pfonts2
-pThe.Umbrella.Academy.S01E02.720p.NF.WEBRip.x264-GalaxyTV'.mkv
-p.srt
-pThe.Umbrella.Academy.S01E02.720p.NF.WEBRip.x264-GalaxyTV.mkv
-pThe.Umbrella.Academy.S01E02.720p.NF.WEBRip.x264-GalaxyTV.srt
-pThe Umbrella Academy 1x02.srt
-pThe.Umbrella.Academy.S01E03.720p.NF.WEBRip.x264-GalaxyTV.srt
-pThe Umbrella Academy 1x05old.mpg
-pmultimedia.mp4
-ptake-on-me-0.mp3
-ptake-on-me-03.mp3
-ptake-on-me-3.mp3
-pneomuttrc
-pmuttrc
-pPete Yorn - Lose You- Lyrics video (High quality sound) (House MD)2.mp3
-pBe Thankful You're You2.mp3
-pLose You.mp3
-pLose You - Pete Yorn.mp3
-pTake On Me - Ellie.mp3
-pWayfaring Stranger Guitar Lesson Tutorial.mp4
-pAntonella chiquita 2.jpg
-pAnto chiquita 3.jpg
-pMiami 2.jpg
-pMiami 1.jpg
-pThe.Umbrella.Academy.S02E01.720p.NF.WEBRip.x264-GalaxyTV.mkv
-pThe.Umbrella.Academy.S02E01.720p.NF.WEBRip.x264-GalaxyTV.srt
-pThe.Umbrella.Academy.S02E02.720p.NF.WEBRip.x264-GalaxyTV.srt
-pThe.Umbrella.Academy.S02E03.720p.NF.WEBRip.x264-GalaxyTV.srt
-pThe.Umbrella.Academy.S02E04.720p.NF.WEBRip.x264-GalaxyTV.srt
-pCode
-pData Base
-pC++
-pDataBase
-pBreakout
-pWebDesign
-pProyects
-pProjects
-pResources
-pMenus
-pHelp
-ploops.sh
-plogs.sh
-pask_user.sh
-pdebug.sh
-pconditionals.sh
-prevnoc.sh2
-prevnoc
-pThe.Umbrella.Academy.S02E01.720p.NF.WEBRip.x264-GalaxyTV.mkvj
-pThe.Umbrella.Academy.S02E01.mpg
-psubtitles
-pThe Umbrella Academy 2x07.srt
-pThe Umbrella Academy 2x08.srt
-pSubtitles
-prevnoc2
-pAdvance Bash-Scripting Guide - Mendel Cooper.pdf
+pimg-2.jpg
+pimg-3.jpg
+pvifmmedia
+pRlogo20-1.jpg
+pRlogo20.jpg
+pRlogo12.jpg
+pRlogo12.svg
+pRlogo06.jpg
+pRlogo03.jpg
+pR
+pR-03.jpg
+pR-06.jpg
+pR-12.jpg
+pR-12.svg
+pPixelArt
+pClap-Trap 1.png
+pClapTrap-2.png
+pClapTrap-1.png
+pR6-1.png
+pR6-2.png
+pRicard-1.png
+pIngles-.jpg
+pIngles-3.jpg
+pIngles-1.jpg
+pIngles-2.jpg
+pDragon-1.jpg
+pDragon-2.jpg
+pTo-Do
+pClapTrap-1.jpg
+pClapTrap-2.jpg
+pOasis'1.png
+pOasis-1.png
+pmr.robot.png
+pWallpaper-2.jpg.png
+pimg-45.png
+pimg-045.png
+p46.jpg
+pMountains.jpg
+pimg-047.jpg
+pimg-0462.jpg
+ptint2.old
+ptint2
+profi.old
+profi
+pimg-046.jpg
+pdmenu.rasi
+pmedia.mp4
+pconfig.rasi.old
+ppapirus-dark
+poneline.rasi
+ptest.rasi
+pHow To Think Like a Computer Scientist - Allen Downey.pdf
+pCracking Codes with Python - Al Sweigart.pdf
+pAutomate the Boring Stuff with Python - Al Sweigart.pdf
+pPython Playground - .pdf
+pPython Playground - Mash.pdf
+pPython Playground - Mahesh Venkitachalam.pdf
+pInvent Your Own Computer Games with Python - Al Sweigart.pdf
+pThe Web Application Hackers Handbook 2  - Dafydd Stuttard and Marcus Pinto.pdf
+pCodin
+p.rasi
+pdefault.rasi
+pplugins.vim
+pinit-distrotube.vim
+pplug.vim
+prevnoc.sh
+pvirtualboxstart.sh
+pfontpreview.sh
+pramds
+popensong
+pbase16-greenscale-dark.vim
+pbase16-greenscak-dark.vim
+pdefault.vim
+pBlack Hat Python - Justin Seitz.pdf
+pAva.2020.srt
+pAva.2020.mp4
+pconfig.rasi
+ppicom.conf
+pclock
+pimg-008.jpg
+pimg-009.jpg
+pdistrotube
+pSemilla - Irepelusa.mp3
+pSemilla - Irepelusa1.mp3
+pSemilla - Irepelusa2.mp3
+pSemilla - Irepelusa3.mp3
+pMulan.2020.mp4
+pMulan.2020.srt
+pThe.Terminal.2004.mp4
+paliases
+palias
+pCourses
+pZsh
+pThe Z Shell Manual.pdf
+pThe Z Shell Manual - .pdf
+pThe Z Shell Manual - Paul .pdf
+pThe Z Shell Manual - Paul Falstad.pdf
+pDrivers Manager
+pDrivers 
+pBooks
 
 # Local filter history (oldest to newest):
 
 # Registers:
+""/media/files/.vifm-Trash-1000/000_Sin confirmar 89430.crdownload
+""/media/files/.vifm-Trash-1000/000_Sin confirmar 434481.crdownload
 
 # Directory stack (oldest to newest):
 
@@ -1415,6 +1728,894 @@ t/media/files/.vifm-Trash-1000/000_The Umbrella Academy 2x08.srt
 	/media/files/Ricardo/Movies & Series/The Umbrella Academy/Season 2/The Umbrella Academy 2x08.srt
 t/media/files/.vifm-Trash-1000/000_revnoc2
 	/media/files/Ricardo/Resources/DotFiles/Scripts/revnoc2
+t/home/ruth/.local/share/vifm/Trash/000_youtube-dl
+	/home/ruth/.cache/youtube-dl
+t/home/ruth/.local/share/vifm/Trash/000_915resolution
+	/home/ruth/.cache/yay/915resolution
+t/home/ruth/.local/share/vifm/Trash/001_fmit
+	/home/ruth/.cache/yay/fmit
+t/home/ruth/.local/share/vifm/Trash/001_freedownloadmanager
+	/home/ruth/.cache/yay/freedownloadmanager
+t/home/ruth/.local/share/vifm/Trash/001_go-mtpfs-git
+	/home/ruth/.cache/yay/go-mtpfs-git
+t/home/ruth/.local/share/vifm/Trash/000_ibus-uniemoji
+	/home/ruth/.cache/yay/ibus-uniemoji
+t/home/ruth/.local/share/vifm/Trash/001_libtorrent-ps
+	/home/ruth/.cache/yay/libtorrent-ps
+t/home/ruth/.local/share/vifm/Trash/001_lingot
+	/home/ruth/.cache/yay/lingot
+t/home/ruth/.local/share/vifm/Trash/000_moc-pulse
+	/home/ruth/.cache/yay/moc-pulse
+t/home/ruth/.local/share/vifm/Trash/000_ncpamixer
+	/home/ruth/.cache/yay/ncpamixer
+t/home/ruth/.local/share/vifm/Trash/000_ncpamixer-git
+	/home/ruth/.cache/yay/ncpamixer-git
+t/home/ruth/.local/share/vifm/Trash/000_polybar
+	/home/ruth/.cache/yay/polybar
+t/home/ruth/.local/share/vifm/Trash/001_rtorrent-ps
+	/home/ruth/.cache/yay/rtorrent-ps
+t/home/ruth/.local/share/vifm/Trash/000_simple-mtpfs
+	/home/ruth/.cache/yay/simple-mtpfs
+t/home/ruth/.local/share/vifm/Trash/000_timeshift
+	/home/ruth/.cache/yay/timeshift
+t/home/ruth/.local/share/vifm/Trash/000_ttf-ms-fonts
+	/home/ruth/.cache/yay/ttf-ms-fonts
+t/home/ruth/.local/share/vifm/Trash/000_ttf-twemoji
+	/home/ruth/.cache/yay/ttf-twemoji
+t/home/ruth/.local/share/vifm/Trash/000_ttf-vista-fonts
+	/home/ruth/.cache/yay/ttf-vista-fonts
+t/home/ruth/.local/share/vifm/Trash/000_tuneit
+	/home/ruth/.cache/yay/tuneit
+t/home/ruth/.local/share/vifm/Trash/001_xfce4-panel-profiles
+	/home/ruth/.cache/yay/xfce4-panel-profiles
+t/home/ruth/.local/share/vifm/Trash/000_xseticon
+	/home/ruth/.cache/yay/xseticon
+t/media/files/.vifm-Trash-1000/000_wine
+	/media/files/Ricardo/Resources/DotFiles/.cache/wine
+t/media/files/.vifm-Trash-1000/000_winetricks
+	/media/files/Ricardo/Resources/DotFiles/.cache/winetricks
+t/home/ruth/.local/share/vifm/Trash/000_tint2
+	/home/ruth/.cache/tint2
+t/home/ruth/.local/share/vifm/Trash/000_thumbnails
+	/home/ruth/.cache/thumbnails
+t/home/ruth/.local/share/vifm/Trash/002_ranger
+	/home/ruth/.cache/ranger
+t/home/ruth/.local/share/vifm/Trash/000_qtshadercache-x86_64-little_endian-lp64
+	/home/ruth/.cache/qtshadercache-x86_64-little_endian-lp64
+t/home/ruth/.local/share/vifm/Trash/001_flatpak
+	/home/ruth/.cache/flatpak
+t/home/ruth/.local/share/vifm/Trash/000_Softdeluxe
+	/home/ruth/.cache/Softdeluxe
+t/media/files/.vifm-Trash-1000/000_tint2rc.backup.1596182720
+	/media/files/Ricardo/Resources/DotFiles/.config/tint2/tint2rc.backup.1596182720
+t/media/files/.vifm-Trash-1000/000_tint2rc.backup.1596185588
+	/media/files/Ricardo/Resources/DotFiles/.config/tint2/tint2rc.backup.1596185588
+t/media/files/.vifm-Trash-1000/000_tint2
+	/media/files/Ricardo/Resources/DotFiles/.config/tint2
+t/media/files/.vifm-Trash-1000/000_fonts
+	/media/files/Ricardo/Resources/DotFiles/.local/share/fonts/fonts
+t/media/files/.vifm-Trash-1000/000_.proxychains
+	/media/files/Ricardo/Resources/DotFiles/.proxychains
+t/media/files/.vifm-Trash-1000/000_bookmarks.html
+	/media/files/Ricardo/Resources/DotFiles/Downloads/bookmarks.html
+t/media/files/.vifm-Trash-1000/000_Downloads
+	/media/files/Ricardo/Resources/DotFiles/Downloads
+t/media/files/.vifm-Trash-1000/000_Scripts
+	/media/files/Ricardo/Resources/Scripts
+t/home/ruth/.local/share/vifm/Trash/000_.config
+	/home/ruth/Git/dotfiles/.config
+t/home/ruth/.local/share/vifm/Trash/000_dotfiles
+	/home/ruth/Git/dotfiles
+t/home/ruth/.local/share/vifm/Trash/000_sans
+	/home/ruth/Git/dotfiles/.local/share/fonts/sans
+t/home/ruth/.local/share/vifm/Trash/000_sans-serif
+	/home/ruth/Git/dotfiles/.local/share/fonts/sans-serif
+t/home/ruth/.local/share/vifm/Trash/000_fira-code
+	/home/ruth/Git/dotfiles/.local/share/fonts/monospaced/fira-code
+t/home/ruth/.local/share/vifm/Trash/000_mononoki
+	/home/ruth/Git/dotfiles/.local/share/fonts/monospaced/mononoki
+t/home/ruth/.local/share/vifm/Trash/000_jetbrains-mono
+	/home/ruth/Git/dotfiles/.local/share/fonts/monospaced/jetbrains-mono
+t/media/files/.vifm-Trash-1000/000_papyelgringo
+	/media/files/Ricardo/Resources/Dotfiles/.config/awesome/themes/papyelgringo
+t/media/files/.vifm-Trash-1000/000_red_flat
+	/media/files/Ricardo/Resources/Dotfiles/.config/awesome/themes/red_flat
+t/media/files/.vifm-Trash-1000/000_The.Umbrella.Academy.S02.COMPLETE.720p.NF.WEBRip.x264-GalaxyTV[TGx]
+	/media/files/Ricardo/Downloads/The.Umbrella.Academy.S02.COMPLETE.720p.NF.WEBRip.x264-GalaxyTV[TGx]
+t/home/ruth/.local/share/vifm/Trash/001_.moc
+	/home/ruth/.moc
+t/home/ruth/.local/share/vifm/Trash/000_playlists
+	/home/ruth/.config/cmus/playlists
+t/home/ruth/.local/share/vifm/Trash/000_equalizer
+	/home/ruth/.config/moc/equalizer
+t/home/ruth/.local/share/vifm/Trash/000_last_directory
+	/home/ruth/.config/moc/last_directory
+t/home/ruth/.local/share/vifm/Trash/000_pid
+	/home/ruth/.config/moc/pid
+t/home/ruth/.local/share/vifm/Trash/000_socket2
+	/home/ruth/.config/moc/socket2
+t/home/ruth/.local/share/vifm/Trash/000_softmixer
+	/home/ruth/.config/moc/softmixer
+t/home/ruth/.local/share/vifm/Trash/000_fonts2
+	/home/ruth/.config/figlet/fonts2
+t/media/files/.vifm-Trash-1000/000_Target.Number.One.2020.mp4
+	/media/files/Ricardo/Movies & Series/Target.Number.One.2020.mp4
+t/media/files/.vifm-Trash-1000/000_Target.Number.One.2020.srt
+	/media/files/Ricardo/Movies & Series/Target.Number.One.2020.srt
+t/media/files/.vifm-Trash-1000/000_FAST & FURIOUS CROSSROADS Gameplay Walkthrough Part 1 FULL GAME [1080P HD PS4 PRO].mp4
+	/media/files/Ricardo/Movies & Series/FAST & FURIOUS CROSSROADS Gameplay Walkthrough Part 1 FULL GAME [1080P HD PS4 PRO].mp4
+t/home/ruth/.local/share/vifm/Trash/000_figlet-fonts
+	/home/ruth/Git/figlet-fonts
+t/home/ruth/.local/share/vifm/Trash/000_3D Diagonal.flf
+	/home/ruth/.config/figlet/fonts/3D Diagonal.flf
+t/home/ruth/.local/share/vifm/Trash/000_3-D.flf
+	/home/ruth/.config/figlet/fonts/3-D.flf
+t/home/ruth/.local/share/vifm/Trash/000_3x5.flf
+	/home/ruth/.config/figlet/fonts/3x5.flf
+t/home/ruth/.local/share/vifm/Trash/000_5 Line Oblique.flf
+	/home/ruth/.config/figlet/fonts/5 Line Oblique.flf
+t/home/ruth/.local/share/vifm/Trash/000_646-ca.flc
+	/home/ruth/.config/figlet/fonts/646-ca.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-ca2.flc
+	/home/ruth/.config/figlet/fonts/646-ca2.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-cn.flc
+	/home/ruth/.config/figlet/fonts/646-cn.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-cu.flc
+	/home/ruth/.config/figlet/fonts/646-cu.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-de.flc
+	/home/ruth/.config/figlet/fonts/646-de.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-dk.flc
+	/home/ruth/.config/figlet/fonts/646-dk.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-es.flc
+	/home/ruth/.config/figlet/fonts/646-es.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-es2.flc
+	/home/ruth/.config/figlet/fonts/646-es2.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-fr.flc
+	/home/ruth/.config/figlet/fonts/646-fr.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-gb.flc
+	/home/ruth/.config/figlet/fonts/646-gb.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-hu.flc
+	/home/ruth/.config/figlet/fonts/646-hu.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-irv.flc
+	/home/ruth/.config/figlet/fonts/646-irv.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-it.flc
+	/home/ruth/.config/figlet/fonts/646-it.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-jp.flc
+	/home/ruth/.config/figlet/fonts/646-jp.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-kr.flc
+	/home/ruth/.config/figlet/fonts/646-kr.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-no.flc
+	/home/ruth/.config/figlet/fonts/646-no.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-no2.flc
+	/home/ruth/.config/figlet/fonts/646-no2.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-pt.flc
+	/home/ruth/.config/figlet/fonts/646-pt.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-pt2.flc
+	/home/ruth/.config/figlet/fonts/646-pt2.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-se.flc
+	/home/ruth/.config/figlet/fonts/646-se.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-se2.flc
+	/home/ruth/.config/figlet/fonts/646-se2.flc
+t/home/ruth/.local/share/vifm/Trash/000_646-yu.flc
+	/home/ruth/.config/figlet/fonts/646-yu.flc
+t/home/ruth/.local/share/vifm/Trash/000_8859-2.flc
+	/home/ruth/.config/figlet/fonts/8859-2.flc
+t/home/ruth/.local/share/vifm/Trash/000_8859-3.flc
+	/home/ruth/.config/figlet/fonts/8859-3.flc
+t/home/ruth/.local/share/vifm/Trash/000_8859-4.flc
+	/home/ruth/.config/figlet/fonts/8859-4.flc
+t/home/ruth/.local/share/vifm/Trash/000_8859-5.flc
+	/home/ruth/.config/figlet/fonts/8859-5.flc
+t/home/ruth/.local/share/vifm/Trash/000_8859-7.flc
+	/home/ruth/.config/figlet/fonts/8859-7.flc
+t/home/ruth/.local/share/vifm/Trash/000_8859-8.flc
+	/home/ruth/.config/figlet/fonts/8859-8.flc
+t/home/ruth/.local/share/vifm/Trash/000_8859-9.flc
+	/home/ruth/.config/figlet/fonts/8859-9.flc
+t/home/ruth/.local/share/vifm/Trash/000_AMC Razor.flf
+	/home/ruth/.config/figlet/fonts/AMC Razor.flf
+t/home/ruth/.local/share/vifm/Trash/000_AMC Razor2.flf
+	/home/ruth/.config/figlet/fonts/AMC Razor2.flf
+t/home/ruth/.local/share/vifm/Trash/000_AMC Slash.flf
+	/home/ruth/.config/figlet/fonts/AMC Slash.flf
+t/home/ruth/.local/share/vifm/Trash/000_AMC Slider.flf
+	/home/ruth/.config/figlet/fonts/AMC Slider.flf
+t/media/files/.vifm-Trash-1000/000_Brooklyn.Nine-Nine.S04E06.HDTV.x264-FLEET[eztv].mkv.fdmdownload
+	/media/files/Ricardo/Downloads/Brooklyn.Nine-Nine.S04E06.HDTV.x264-FLEET[eztv].mkv.fdmdownload
+t/media/files/.vifm-Trash-1000/000_Brooklyn.Nine-Nine.S04E05.HDTV.x264-FUM[ettv]
+	/media/files/Ricardo/Downloads/Brooklyn.Nine-Nine.S04E05.HDTV.x264-FUM[ettv]
+t/media/files/.vifm-Trash-1000/000_Target.Number.One.2020.WEBRip.x264-ION10
+	/media/files/Ricardo/Downloads/Target.Number.One.2020.WEBRip.x264-ION10
+t/media/files/.vifm-Trash-1000/000_2020-08-23-044653_1600x900_scrot.png
+	/media/files/Ricardo/Downloads/2020-08-23-044653_1600x900_scrot.png
+t/home/ruth/.local/share/vifm/Trash/000_rtorrent
+	/home/ruth/.config/rtorrent
+t/media/files/.vifm-Trash-1000/000_Legacy.of.Lies.2020.WEBRip.x264-ION10-[rarbg.to].torrent
+	/media/files/Ricardo/Torrent/Legacy.of.Lies.2020.WEBRip.x264-ION10-[rarbg.to].torrent
+t/media/files/.vifm-Trash-1000/000_The.Big.Ugly.2020.WEB-DL.x264-FGT-[rarbg.to].torrent
+	/media/files/Ricardo/Torrent/The.Big.Ugly.2020.WEB-DL.x264-FGT-[rarbg.to].torrent
+t/media/files/.vifm-Trash-1000/000_Yes.God.Yes.2019.WEBRip.x264-ION10-[rarbg.to].torrent
+	/media/files/Ricardo/Torrent/Yes.God.Yes.2019.WEBRip.x264-ION10-[rarbg.to].torrent
+t/home/ruth/.local/share/vifm/Trash/000_rtorrent.rc
+	/home/ruth/.config/rtorrent/rtorrent.rc
+t/home/ruth/.local/share/vifm/Trash/000_vifm.png
+	/home/ruth/.local/share/icons/pixmaps/vifm.png
+t/home/ruth/.local/share/vifm/Trash/000_.xsession-errors
+	/home/ruth/.xsession-errors
+t/home/ruth/.local/share/vifm/Trash/000_.zshrc
+	/home/ruth/.zshrc
+t/home/ruth/.local/share/vifm/Trash/000_histfile
+	/home/ruth/.config/zsh/histfile
+t/home/ruth/.local/share/vifm/Trash/000_.zshenv
+	/home/ruth/.zshenv
+t/home/ruth/.local/share/vifm/Trash/003_.zshrc
+	/home/ruth/.config/zsh/.zshrc
+t/home/ruth/.local/share/vifm/Trash/000_.zcompdump
+	/home/ruth/.zcompdump
+t/home/ruth/.local/share/vifm/Trash/000_.zprofile
+	/home/ruth/.zprofile
+t/home/ruth/.local/share/vifm/Trash/001_.zcompdump
+	/home/ruth/.config/zsh/.zcompdump
+t/media/files/.vifm-Trash-1000/000_Project.Power.2020.WEBRip.x264-ION10
+	/media/files/Ricardo/Downloads/Project.Power.2020.WEBRip.x264-ION10
+t/media/files/.vifm-Trash-1000/000_0 canciones.txt
+	/media/files/Ricardo/Downloads/CancionesAntonella/0 canciones.txt
+t/media/files/.vifm-Trash-1000/000_Project.Power.2020.WEBRip.x264-ION10-[rarbg.to].torrent
+	/media/files/Ricardo/Torrent/Project.Power.2020.WEBRip.x264-ION10-[rarbg.to].torrent
+t/home/ruth/.local/share/vifm/Trash/000_debian.appx
+	/home/ruth/debian.appx
+t/media/files/.vifm-Trash-1000/000_2020-09-01-221150_1600x900_scrot.png
+	/media/files/Ricardo/Downloads/2020-09-01-221150_1600x900_scrot.png
+t/media/files/.vifm-Trash-1000/000_NerdFonts
+	/media/files/Ricardo/Resources/Fonts/NerdFonts
+t/home/ruth/.local/share/vifm/Trash/001_jetbrains-mono
+	/home/ruth/.local/share/fonts/monospaced/jetbrains-mono
+t/media/files/.vifm-Trash-1000/000_Dotfiles
+	/media/files/Ricardo/Resources/Dotfiles
+t/media/files/.vifm-Trash-1000/000_Inkscape Extensiones
+	/media/files/Ricardo/Resources/Inkscape Extensiones
+t/media/files/.vifm-Trash-1000/000_Colores Hexadecimales.txt
+	/media/files/Ricardo/Resources/Colores Hexadecimales.txt
+t/home/ruth/.local/share/vifm/Trash/000_hack
+	/home/ruth/.local/share/fonts/monospaced/hack
+t/home/ruth/.local/share/vifm/Trash/001_fira-code
+	/home/ruth/.local/share/fonts/monospaced/fira-code
+t/home/ruth/.local/share/vifm/Trash/001_mononoki
+	/home/ruth/.local/share/fonts/monospaced/mononoki
+t/home/ruth/.local/share/vifm/Trash/000_monospaced
+	/home/ruth/.local/share/fonts/monospaced
+t/home/ruth/.local/share/vifm/Trash/001_sans
+	/home/ruth/.local/share/fonts/sans
+t/home/ruth/.local/share/vifm/Trash/001_sans-serif
+	/home/ruth/.local/share/fonts/sans-serif
+t/home/ruth/.local/share/vifm/Trash/000_.p10k.zsh
+	/home/ruth/.config/zsh/.p10k.zsh
+t/home/ruth/.local/share/vifm/Trash/000_.histfile
+	/home/ruth/.config/zsh/.histfile
+t/home/ruth/.local/share/vifm/Trash/000_zshrc
+	/home/ruth/.config/zsh/zshrc
+t/home/ruth/.local/share/vifm/Trash/000_fontpreview
+	/home/ruth/Scripts/fontpreview
+t/home/ruth/.local/share/vifm/Trash/001_fontpreview
+	/home/ruth/fontpreview
+t/home/ruth/.local/share/vifm/Trash/002_last_directory
+	/home/ruth/last_directory
+t/home/ruth/.local/share/vifm/Trash/000_vifm-help.txt
+	/home/ruth/.config/vifm/vifm-help.txt
+t/home/ruth/.local/share/vifm/Trash/000_vifm-help.txt.old
+	/home/ruth/.config/vifm/vifm-help.txt.old
+t/home/ruth/.local/share/vifm/Trash/000_vifminfo
+	/home/ruth/.config/vifm/vifminfo
+t/home/ruth/.local/share/vifm/Trash/000_vifmrc.new
+	/home/ruth/.config/vifm/vifmrc.new
+t/home/ruth/.local/share/vifm/Trash/000_vifm_devicons
+	/home/ruth/Git/vifm_devicons
+t/home/ruth/.local/share/vifm/Trash/000_rootfiles
+	/home/ruth/Git/rootfiles
+t/media/files/.vifm-Trash-1000/000_Project.Power.2020.mp4
+	/media/files/Ricardo/Movies & Series/Project.Power.2020.mp4
+t/media/files/.vifm-Trash-1000/000_Project.Power.2020.srt
+	/media/files/Ricardo/Movies & Series/Project.Power.2020.srt
+t/media/files/.vifm-Trash-1000/000_The.One.and.Only.Ivan.2020.mp4
+	/media/files/Ricardo/Movies & Series/The.One.and.Only.Ivan.2020.mp4
+t/media/files/.vifm-Trash-1000/000_The.One.and.Only.Ivan.2020.srt
+	/media/files/Ricardo/Movies & Series/The.One.and.Only.Ivan.2020.srt
+t/home/ruth/.local/share/vifm/Trash/000_for_bin_my
+	/home/ruth/.config/vifm/colors/for_bin_my
+t/home/ruth/.local/share/vifm/Trash/000_for_bin
+	/home/ruth/.config/vifm/colors/for_bin
+t/home/ruth/.local/share/vifm/Trash/000_g80.vifm
+	/home/ruth/.config/vifm/colors/g80.vifm
+t/home/ruth/.local/share/vifm/Trash/000_iceberg.vifm
+	/home/ruth/.config/vifm/colors/iceberg.vifm
+t/home/ruth/.local/share/vifm/Trash/000_onedark.vifm
+	/home/ruth/.config/vifm/colors/onedark.vifm
+t/home/ruth/.local/share/vifm/Trash/000_palenight.vifm
+	/home/ruth/.config/vifm/colors/palenight.vifm
+t/home/ruth/.local/share/vifm/Trash/000_ph.vifm
+	/home/ruth/.config/vifm/colors/ph.vifm
+t/home/ruth/.local/share/vifm/Trash/000_zenburn.vifm
+	/home/ruth/.config/vifm/colors/zenburn.vifm
+t/home/ruth/.local/share/vifm/Trash/001_bin
+	/home/ruth/.config/vifm/bin
+t/home/ruth/.local/share/vifm/Trash/000_Hack Bold Italic Nerd Font Complete Mono Windows Compatible.ttf
+	/home/ruth/Downloads/Hack Bold Italic Nerd Font Complete Mono Windows Compatible.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Bold Italic Nerd Font Complete Mono.ttf
+	/home/ruth/Downloads/Hack Bold Italic Nerd Font Complete Mono.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Bold Italic Nerd Font Complete Windows Compatible.ttf
+	/home/ruth/Downloads/Hack Bold Italic Nerd Font Complete Windows Compatible.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Bold Italic Nerd Font Complete.ttf
+	/home/ruth/Downloads/Hack Bold Italic Nerd Font Complete.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Bold Nerd Font Complete Mono Windows Compatible.ttf
+	/home/ruth/Downloads/Hack Bold Nerd Font Complete Mono Windows Compatible.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Bold Nerd Font Complete Mono.ttf
+	/home/ruth/Downloads/Hack Bold Nerd Font Complete Mono.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Bold Nerd Font Complete Windows Compatible.ttf
+	/home/ruth/Downloads/Hack Bold Nerd Font Complete Windows Compatible.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Bold Nerd Font Complete.ttf
+	/home/ruth/Downloads/Hack Bold Nerd Font Complete.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Italic Nerd Font Complete Mono Windows Compatible.ttf
+	/home/ruth/Downloads/Hack Italic Nerd Font Complete Mono Windows Compatible.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Italic Nerd Font Complete Mono.ttf
+	/home/ruth/Downloads/Hack Italic Nerd Font Complete Mono.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Italic Nerd Font Complete Windows Compatible.ttf
+	/home/ruth/Downloads/Hack Italic Nerd Font Complete Windows Compatible.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Italic Nerd Font Complete.ttf
+	/home/ruth/Downloads/Hack Italic Nerd Font Complete.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Regular Nerd Font Complete Mono Windows Compatible.ttf
+	/home/ruth/Downloads/Hack Regular Nerd Font Complete Mono Windows Compatible.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Regular Nerd Font Complete Mono.ttf
+	/home/ruth/Downloads/Hack Regular Nerd Font Complete Mono.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Regular Nerd Font Complete Windows Compatible.ttf
+	/home/ruth/Downloads/Hack Regular Nerd Font Complete Windows Compatible.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Hack Regular Nerd Font Complete.ttf
+	/home/ruth/Downloads/Hack Regular Nerd Font Complete.ttf
+t/home/ruth/.local/share/vifm/Trash/000_Before.the.Fire.2020.WEBRip.x264-ION10
+	/home/ruth/.config/rtorrent/work/Before.the.Fire.2020.WEBRip.x264-ION10
+t/media/files/.vifm-Trash-1000/000_Yes.God.Yes.2019.WEBRip.x264-ION10
+	/media/files/Ricardo/Downloads/Yes.God.Yes.2019.WEBRip.x264-ION10
+t/media/files/.vifm-Trash-1000/000_HALO 2 - N viejo.rar (1).fdmdownload
+	/media/files/Ricardo/Downloads/HALO 2 - N viejo.rar (1).fdmdownload
+t/media/files/.vifm-Trash-1000/000_HALO 2 - N viejo.rar.fdmdownload
+	/media/files/Ricardo/Downloads/HALO 2 - N viejo.rar.fdmdownload
+t/home/ruth/.local/share/vifm/Trash/000_astrell-root.vifm
+	/home/ruth/.config/vifm/colors/astrell-root.vifm
+t/home/ruth/.local/share/vifm/Trash/000_astrell-user.vifm
+	/home/ruth/.config/vifm/colors/astrell-user.vifm
+t/home/ruth/.local/share/vifm/Trash/000_dmilith-root.vifm
+	/home/ruth/.config/vifm/colors/dmilith-root.vifm
+t/home/ruth/.local/share/vifm/Trash/000_dmilith-user.vifm
+	/home/ruth/.config/vifm/colors/dmilith-user.vifm
+t/home/ruth/.local/share/vifm/Trash/000_istib-solarized-dark.vifm
+	/home/ruth/.config/vifm/colors/istib-solarized-dark.vifm
+t/home/ruth/.local/share/vifm/Trash/000_juef-zenburn.vifm
+	/home/ruth/.config/vifm/colors/juef-zenburn.vifm
+t/home/ruth/.local/share/vifm/Trash/000_reicheltd-light.vifm
+	/home/ruth/.config/vifm/colors/reicheltd-light.vifm
+t/home/ruth/.local/share/vifm/Trash/000_solarized-dark.vifm
+	/home/ruth/.config/vifm/colors/solarized-dark.vifm
+t/home/ruth/.local/share/vifm/Trash/000_ricardo
+	/home/ruth/Downloads/ricardo
+t/home/ruth/.local/share/vifm/Trash/000_example.txt
+	/home/ruth/Downloads/example.txt
+t/home/ruth/.local/share/vifm/Trash/000_systemfilemanagerold_103229
+	/home/ruth/Downloads/systemfilemanagerold_103229
+t/home/ruth/.local/share/vifm/Trash/000_Hack
+	/home/ruth/Downloads/Hack
+t/home/ruth/.local/share/vifm/Trash/000_Hola
+	/home/ruth/Downloads/Hola
+t/home/ruth/.local/share/vifm/Trash/000_hola
+	/home/ruth/Downloads/hola
+t/home/ruth/.local/share/vifm/Trash/000_File_Manager_Archive-128.png
+	/home/ruth/Downloads/File_Manager_Archive-128.png
+t/home/ruth/.local/share/vifm/Trash/000_69-file_manager-256.png
+	/home/ruth/Downloads/69-file_manager-256.png
+t/home/ruth/.local/share/vifm/Trash/000_vifmimg
+	/home/ruth/Git/vifmimg
+t/home/ruth/.local/share/vifm/Trash/000_:w
+	/home/ruth/.config/vifm/scripts/:w
+t/home/ruth/.local/share/vifm/Trash/000_vifmrun.new
+	/home/ruth/.config/vifm/scripts/vifmrun.new
+t/home/ruth/.local/share/vifm/Trash/000_img
+	/home/ruth/.config/vifm/scripts/img
+t/home/ruth/.local/share/vifm/Trash/000_vifmimg.new
+	/home/ruth/.config/vifm/scripts/vifmimg.new
+t/home/ruth/.local/share/vifm/Trash/000_vifmimg.new.2
+	/home/ruth/.config/vifm/scripts/vifmimg.new.2
+t/home/ruth/.local/share/vifm/Trash/000_vifmimg.old
+	/home/ruth/.config/vifm/scripts/vifmimg.old
+t/home/ruth/.local/share/vifm/Trash/000_fntprevw
+	/home/ruth/Scripts/fntprevw
+t/media/files/.vifm-Trash-1000/000_Music
+	/media/files/Ricardo/Downloads/Music
+t/media/files/.vifm-Trash-1000/000_Canciones Anto MP3
+	/media/files/Antonella/Canciones Anto MP3
+t/media/files/.vifm-Trash-1000/000_Wallpaper-45.png
+	/media/files/Ricardo/Pictures/WallPapers/Wallpaper-45.png
+t/media/files/.vifm-Trash-1000/000_7.jpg
+	/media/files/Ricardo/Pictures/Landscapes/Ray, Rel y Tru/7.jpg
+t/media/files/.vifm-Trash-1000/000_1.jpg
+	/media/files/Ricardo/Pictures/Landscapes/Ray, Rel y Tru/1.jpg
+t/media/files/.vifm-Trash-1000/000_Vertical
+	/media/files/Ricardo/Pictures/Vertical
+t/media/files/.vifm-Trash-1000/000_f1.png
+	/media/files/Ricardo/Pictures/Effects/f1.png
+t/home/ruth/.local/share/vifm/Trash/000_command-macros.txt
+	/home/ruth/.config/vifm/doc/command-macros.txt
+t/home/ruth/.local/share/vifm/Trash/000_doc
+	/home/ruth/.config/vifm/doc
+t/home/ruth/.local/share/vifm/Trash/000_vifmrc.clasic
+	/home/ruth/.config/vifm/vifmrc.clasic
+t/home/ruth/.local/share/vifm/Trash/000_vifmimgpdffile
+	/home/ruth/.config/vifm/vifmimgpdffile
+t/home/ruth/.local/share/vifm/Trash/000_vifmimgpdfpage
+	/home/ruth/.config/vifm/vifmimgpdfpage
+t/media/files/.vifm-Trash-1000/000_Draw
+	/media/files/Ricardo/Pictures/Photos/Draw
+t/media/files/.vifm-Trash-1000/000_3.jpg
+	/media/files/Ricardo/Pictures/Landscapes/Ray, Rel y Tru/3.jpg
+t/media/files/.vifm-Trash-1000/000_Ray, Rel y Tru
+	/media/files/Ricardo/Pictures/Landscapes/Ray, Rel y Tru
+t/media/files/.vifm-Trash-1000/000_giphy1.gif
+	/media/files/Ricardo/Pictures/Objects/giphy1.gif
+t/media/files/.vifm-Trash-1000/000_Objects
+	/media/files/Ricardo/Pictures/Objects
+t/media/files/.vifm-Trash-1000/000_Corazones1.jpg
+	/media/files/Ricardo/Pictures/Textures & Patterns/Corazones1.jpg
+t/media/files/.vifm-Trash-1000/000_vifm
+	/media/files/Ricardo/Git/sdushantha/vifm
+t/media/files/.vifm-Trash-1000/000_epub-thumbnailer
+	/media/files/Ricardo/Git/epub-thumbnailer
+t/media/files/.vifm-Trash-1000/000_fontpreview
+	/media/files/Ricardo/Git/fontpreview
+t/media/files/.vifm-Trash-1000/000_example.txt
+	/media/files/Ricardo/Git/example.txt
+t/media/files/.vifm-Trash-1000/000_This_is_the_Police_2_v1.0.7
+	/media/files/Ricardo/Games/This_is_the_Police_2_v1.0.7
+t/media/files/.vifm-Trash-1000/000_Drop
+	/media/files/Ricardo/Games/Drop
+t/media/files/.vifm-Trash-1000/000_Guía Fácil y Completa de Expresiones Regulares desde Cero.mp4
+	/media/files/Ricardo/Videos/Guía Fácil y Completa de Expresiones Regulares desde Cero.mp4
+t/media/files/.vifm-Trash-1000/000_Rlogo20-2.jpg
+	/media/files/Ricardo/Designs/Logos/Rlogo/Rlogo20-2.jpg
+t/media/files/.vifm-Trash-1000/000_R6-2.png
+	/media/files/Ricardo/Designs/PixelArt/R6-2.png
+t/media/files/.vifm-Trash-1000/000_Ricard 2.png
+	/media/files/Ricardo/Designs/PixelArt/Ricard 2.png
+t/media/files/.vifm-Trash-1000/000_Oasis.png
+	/media/files/Ricardo/Designs/Oasis.png
+t/media/files/.vifm-Trash-1000/000_Oasis.svg
+	/media/files/Ricardo/Designs/Oasis.svg
+t/media/files/.vifm-Trash-1000/000_Sin título-1.ai
+	/media/files/Ricardo/Designs/Sin título-1.ai
+t/media/files/.vifm-Trash-1000/000_Sin título-2.ai
+	/media/files/Ricardo/Designs/Sin título-2.ai
+t/media/files/.vifm-Trash-1000/000_Wallpaper-.jpg.png
+	/media/files/Ricardo/Pictures/Wallpaper-.jpg.png
+t/media/files/.vifm-Trash-1000/000_img-045.png
+	/media/files/Ricardo/Pictures/WallPapers/img-045.png
+t/home/ruth/.local/share/vifm/Trash/000_themes
+	/home/ruth/.config/polybar/themes
+t/media/files/.vifm-Trash-1000/000_i3
+	/media/files/Ricardo/Git/sdushantha/i3
+t/media/files/.vifm-Trash-1000/000_kitty
+	/media/files/Ricardo/Git/sdushantha/kitty
+t/media/files/.vifm-Trash-1000/000_other
+	/media/files/Ricardo/Git/sdushantha/other
+t/media/files/.vifm-Trash-1000/000_ncmpcpp
+	/media/files/Ricardo/Git/sdushantha/ncmpcpp
+t/media/files/.vifm-Trash-1000/000_X
+	/media/files/Ricardo/Git/sdushantha/X
+t/media/files/.vifm-Trash-1000/002_.gitignore
+	/media/files/Ricardo/Git/sdushantha/.gitignore
+t/media/files/.vifm-Trash-1000/000_.stow.local.ignore
+	/media/files/Ricardo/Git/sdushantha/.stow.local.ignore
+t/media/files/.vifm-Trash-1000/001_README.md
+	/media/files/Ricardo/Git/sdushantha/README.md
+t/media/files/.vifm-Trash-1000/000_img-047.jpg
+	/media/files/Ricardo/Pictures/WallPapers/img-047.jpg
+t/media/files/.vifm-Trash-1000/000_img-023.png
+	/media/files/Ricardo/Pictures/WallPapers/img-023.png
+t/media/files/.vifm-Trash-1000/000_img-043.jpg
+	/media/files/Ricardo/Pictures/WallPapers/img-043.jpg
+t/media/files/.vifm-Trash-1000/000_img-029.jpg
+	/media/files/Ricardo/Pictures/WallPapers/img-029.jpg
+t/media/files/.vifm-Trash-1000/000_2020-09-09-033323_1600x900_scrot.png
+	/media/files/Ricardo/Downloads/2020-09-09-033323_1600x900_scrot.png
+t/media/files/.vifm-Trash-1000/000_[TGx]Downloaded from torrentgalaxy.to .txt
+	/media/files/Ricardo/Downloads/The.Boys.S02E01.WEB.x264-PHOENiX[TGx]/[TGx]Downloaded from torrentgalaxy.to .txt
+t/media/files/.vifm-Trash-1000/000_The.Boys.S02E02.WEB.x264-PHOENiX[TGx]
+	/media/files/Ricardo/Downloads/The.Boys.S02E02.WEB.x264-PHOENiX[TGx]
+t/media/files/.vifm-Trash-1000/000_The.Boys.S02E03.WEB.x264-PHOENiX[TGx]
+	/media/files/Ricardo/Downloads/The.Boys.S02E03.WEB.x264-PHOENiX[TGx]
+t/media/files/.vifm-Trash-1000/001_The
+	/media/files/Ricardo/Downloads/The
+t/home/ruth/.local/share/vifm/Trash/000_program.sh
+	/home/ruth/Scripts/program.sh
+t/home/ruth/.local/share/vifm/Trash/000_cplay
+	/home/ruth/Scripts/cplay
+t/home/ruth/.local/share/vifm/Trash/000_anyvideoconverter
+	/home/ruth/Scripts/anyvideoconverter
+t/home/ruth/.local/share/vifm/Trash/002_freedownloadmanager
+	/home/ruth/Scripts/freedownloadmanager
+t/home/ruth/.local/share/vifm/Trash/000_Hack.zip
+	/home/ruth/Downloads/Hack.zip
+t/home/ruth/.local/share/vifm/Trash/000_out.png
+	/home/ruth/Downloads/out.png
+t/home/ruth/.local/share/vifm/Trash/000_settings.svg
+	/home/ruth/Downloads/settings.svg
+t/home/ruth/.local/share/vifm/Trash/000_systemfilemanager_103248.svg
+	/home/ruth/Downloads/systemfilemanager_103248.svg
+t/home/ruth/.local/share/vifm/Trash/000_systemfilemanagerold_103229.svg
+	/home/ruth/Downloads/systemfilemanagerold_103229.svg
+t/home/ruth/.local/share/vifm/Trash/000_tenor.gif
+	/home/ruth/Downloads/tenor.gif
+t/home/ruth/.local/share/vifm/Trash/000_term-256color.py
+	/home/ruth/Downloads/term-256color.py
+t/home/ruth/.local/share/vifm/Trash/000_launcher_icon_v3-06-128.png
+	/home/ruth/Downloads/launcher_icon_v3-06-128.png
+t/home/ruth/.local/share/vifm/Trash/000_FIFO_UEBERZUG
+	/home/ruth/FIFO_UEBERZUG
+t/home/ruth/.local/share/vifm/Trash/001_themes
+	/home/ruth/.config/termite/themes
+t/home/ruth/.local/share/vifm/Trash/000_config.rasi
+	/home/ruth/.config/rofi/config.rasi
+t/home/ruth/.local/share/vifm/Trash/000_Papirus
+	/home/ruth/.local/share/icons/Papirus
+t/home/ruth/.local/share/vifm/Trash/000_Papirus-Light
+	/home/ruth/.local/share/icons/Papirus-Light
+t/media/files/.vifm-Trash-1000/000_Before.the.Fire.2020.WEBRip.x264-ION10
+	/media/files/Ricardo/Downloads/Before.the.Fire.2020.WEBRip.x264-ION10
+t/media/files/.vifm-Trash-1000/000_Tenet.2020.KOR.HDCAM.H264-BabyTorrent
+	/media/files/Ricardo/Downloads/Tenet.2020.KOR.HDCAM.H264-BabyTorrent
+t/media/files/.vifm-Trash-1000/000_url.html
+	/media/files/Ricardo/Downloads/url.html
+t/home/ruth/.local/share/vifm/Trash/000_default.rasi
+	/home/ruth/.config/rofi/themes/default.rasi
+t/media/files/.vifm-Trash-1000/000_com.buffstudio.myoasis_2.015-APK_Award.apk
+	/media/files/Ricardo/Phone/Apps/com.buffstudio.myoasis_2.015-APK_Award.apk
+t/home/ruth/.local/share/vifm/Trash/000_vim-bang-terminal
+	/home/ruth/.config/nvim/plugged/vim-bang-terminal
+t/home/ruth/.local/share/vifm/Trash/000_plugins.vim
+	/home/ruth/.config/nvim/plugins.vim
+t/home/ruth/.local/share/vifm/Trash/000_keys.vim
+	/home/ruth/.config/nvim/keys.vim
+t/home/ruth/.local/share/vifm/Trash/000_vim-script-runner
+	/home/ruth/.config/nvim/plugged/vim-script-runner
+t/media/files/.vifm-Trash-1000/000_The.Boys.S02E04.WEB.x264-PHOENiX[TGx]
+	/media/files/Ricardo/Downloads/The.Boys.S02E04.WEB.x264-PHOENiX[TGx]
+t/media/files/.vifm-Trash-1000/000_The Terminal (2004)
+	/media/files/Ricardo/Downloads/The Terminal (2004)
+t/media/files/.vifm-Trash-1000/000_2020-09-14-235620_1600x900_scrot.png
+	/media/files/Ricardo/Downloads/2020-09-14-235620_1600x900_scrot.png
+t/media/files/.vifm-Trash-1000/000_Tenet_2020_Spanish-ELSUBTITLE.COM-ST_58368240.srt
+	/media/files/Ricardo/Downloads/Tenet_2020_Spanish-ELSUBTITLE.COM-ST_58368240.srt
+t/media/files/.vifm-Trash-1000/000_Tenet_2020_Spanish-ELSUBTITLE.COM-ST_58407867.srt
+	/media/files/Ricardo/Downloads/Tenet_2020_Spanish-ELSUBTITLE.COM-ST_58407867.srt
+t/home/ruth/.local/share/vifm/Trash/000_Ava.2020.WEB-DL.x264-FGT
+	/home/ruth/.config/rtorrent/work/Ava.2020.WEB-DL.x264-FGT
+t/media/files/.vifm-Trash-1000/000_Ava.2020.WEB-DL.x264-FGT-[rarbg.to].torrent
+	/media/files/Ricardo/Torrent/Ava.2020.WEB-DL.x264-FGT-[rarbg.to].torrent
+t/media/files/.vifm-Trash-1000/000_War.With.Grandpa.2020.WEBRip.x264-ION10-[rarbg.to].torrent
+	/media/files/Ricardo/Torrent/War.With.Grandpa.2020.WEBRip.x264-ION10-[rarbg.to].torrent
+t/media/files/.vifm-Trash-1000/000_rofi-themes
+	/media/files/Ricardo/Git/rofi-themes
+t/home/ruth/.local/share/vifm/Trash/000_base16
+	/home/ruth/.config/nvim/colors/base16
+t/home/ruth/.local/share/vifm/Trash/000_base16-brushtrees-dark.vim
+	/home/ruth/.config/nvim/colors/base16-brushtrees-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-mellow-purple.vim
+	/home/ruth/.config/nvim/colors/base16-mellow-purple.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-mexico-light.vim
+	/home/ruth/.config/nvim/colors/base16-mexico-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-mocha.vim
+	/home/ruth/.config/nvim/colors/base16-mocha.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-monokai.vim
+	/home/ruth/.config/nvim/colors/base16-monokai.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-nord.vim
+	/home/ruth/.config/nvim/colors/base16-nord.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-ocean.vim
+	/home/ruth/.config/nvim/colors/base16-ocean.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-oceanicnext.vim
+	/home/ruth/.config/nvim/colors/base16-oceanicnext.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-one-light.vim
+	/home/ruth/.config/nvim/colors/base16-one-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-onedark.vim
+	/home/ruth/.config/nvim/colors/base16-onedark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-outrun-dark.vim
+	/home/ruth/.config/nvim/colors/base16-outrun-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-papercolor-dark.vim
+	/home/ruth/.config/nvim/colors/base16-papercolor-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-papercolor-light.vim
+	/home/ruth/.config/nvim/colors/base16-papercolor-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-paraiso.vim
+	/home/ruth/.config/nvim/colors/base16-paraiso.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-phd.vim
+	/home/ruth/.config/nvim/colors/base16-phd.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-pico.vim
+	/home/ruth/.config/nvim/colors/base16-pico.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-pop.vim
+	/home/ruth/.config/nvim/colors/base16-pop.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-porple.vim
+	/home/ruth/.config/nvim/colors/base16-porple.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-railscasts.vim
+	/home/ruth/.config/nvim/colors/base16-railscasts.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-solarized-light.vim
+	/home/ruth/.config/nvim/colors/base16-solarized-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-spacemacs.vim
+	/home/ruth/.config/nvim/colors/base16-spacemacs.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-summerfruit-dark.vim
+	/home/ruth/.config/nvim/colors/base16-summerfruit-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-summerfruit-light.vim
+	/home/ruth/.config/nvim/colors/base16-summerfruit-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-synth-midnight-dark.vim
+	/home/ruth/.config/nvim/colors/base16-synth-midnight-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-tomorrow-night-eighties.vim
+	/home/ruth/.config/nvim/colors/base16-tomorrow-night-eighties.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-tomorrow-night.vim
+	/home/ruth/.config/nvim/colors/base16-tomorrow-night.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-tomorrow.vim
+	/home/ruth/.config/nvim/colors/base16-tomorrow.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-tube.vim
+	/home/ruth/.config/nvim/colors/base16-tube.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-twilight.vim
+	/home/ruth/.config/nvim/colors/base16-twilight.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-unikitty-dark.vim
+	/home/ruth/.config/nvim/colors/base16-unikitty-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-unikitty-light.vim
+	/home/ruth/.config/nvim/colors/base16-unikitty-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-woodland.vim
+	/home/ruth/.config/nvim/colors/base16-woodland.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-xcode-dusk.vim
+	/home/ruth/.config/nvim/colors/base16-xcode-dusk.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-zenburn.vim
+	/home/ruth/.config/nvim/colors/base16-zenburn.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-shapeshifter.vim
+	/home/ruth/.config/nvim/colors/base16-shapeshifter.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-snazzy.vim
+	/home/ruth/.config/nvim/colors/base16-snazzy.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-solarflare.vim
+	/home/ruth/.config/nvim/colors/base16-solarflare.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-solarized-dark.vim
+	/home/ruth/.config/nvim/colors/base16-solarized-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-seti.vim
+	/home/ruth/.config/nvim/colors/base16-seti.vim
+t/home/ruth/.local/share/vifm/Trash/000_mimeapps.list
+	/home/ruth/.config/mimeapps.list
+t/home/ruth/.local/share/vifm/Trash/000_kdenliverc
+	/home/ruth/.config/kdenliverc
+t/home/ruth/.local/share/vifm/Trash/000_kdenlive-layoutsrc
+	/home/ruth/.config/kdenlive-layoutsrc
+t/home/ruth/.local/share/vifm/Trash/000_.base16_theme
+	/home/ruth/.base16_theme
+t/home/ruth/.local/share/vifm/Trash/000_default.vim
+	/home/ruth/.config/nvim/colors/default.vim
+t/media/files/.vifm-Trash-1000/000_Gray Hat Python Python Programming for Hackers and Reverse Engineers ( PDFDrive.com ).pdf
+	/media/files/Ricardo/Downloads/Gray Hat Python Python Programming for Hackers and Reverse Engineers ( PDFDrive.com ).pdf
+t/media/files/.vifm-Trash-1000/000_2020-09-15-165400_1600x900_scrot.png
+	/media/files/Ricardo/Downloads/2020-09-15-165400_1600x900_scrot.png
+t/media/files/.vifm-Trash-1000/000_2020-09-15-165401_1600x900_scrot.png
+	/media/files/Ricardo/Downloads/2020-09-15-165401_1600x900_scrot.png
+t/media/files/.vifm-Trash-1000/000_2020-09-15-165401_1600x900_scrot_000.png
+	/media/files/Ricardo/Downloads/2020-09-15-165401_1600x900_scrot_000.png
+t/media/files/.vifm-Trash-1000/000_2020-09-15-165401_1600x900_scrot_001.png
+	/media/files/Ricardo/Downloads/2020-09-15-165401_1600x900_scrot_001.png
+t/media/files/.vifm-Trash-1000/000_2020-09-15-165401_1600x900_scrot_002.png
+	/media/files/Ricardo/Downloads/2020-09-15-165401_1600x900_scrot_002.png
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-cave-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-cave-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-cave.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-cave.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-dune-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-dune-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-dune.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-dune.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-estuary-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-estuary-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-estuary.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-estuary.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-forest-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-forest-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-forest.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-forest.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-heath-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-heath-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-heath.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-heath.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-lakeside-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-lakeside-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-lakeside.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-lakeside.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-plateau-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-plateau-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-plateau.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-plateau.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-savanna-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-savanna-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-savanna.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-savanna.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-seaside-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-seaside-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-seaside.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-seaside.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-sulphurpool-light.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-sulphurpool-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atelier-sulphurpool.vim
+	/home/ruth/.config/nvim/colors/base16-atelier-sulphurpool.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-atlas.vim
+	/home/ruth/.config/nvim/colors/base16-atlas.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-3024.vim
+	/home/ruth/.config/nvim/colors/base16-3024.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-apathy.vim
+	/home/ruth/.config/nvim/colors/base16-apathy.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-bespin.vim
+	/home/ruth/.config/nvim/colors/base16-bespin.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-bathory.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-bathory.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-burzum.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-burzum.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-dark-funeral.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-dark-funeral.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-gorgoroth.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-gorgoroth.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-immortal.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-immortal.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-khold.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-khold.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-marduk.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-marduk.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-mayhem.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-mayhem.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-nile.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-nile.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal-venom.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal-venom.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-black-metal.vim
+	/home/ruth/.config/nvim/colors/base16-black-metal.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-brewer.vim
+	/home/ruth/.config/nvim/colors/base16-brewer.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-brogrammer.vim
+	/home/ruth/.config/nvim/colors/base16-brogrammer.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-default-dark.vim
+	/home/ruth/.config/nvim/colors/base16-default-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-default-light.vim
+	/home/ruth/.config/nvim/colors/base16-default-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-chalk.vim
+	/home/ruth/.config/nvim/colors/base16-chalk.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-circus.vim
+	/home/ruth/.config/nvim/colors/base16-circus.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-classic-dark.vim
+	/home/ruth/.config/nvim/colors/base16-classic-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-classic-light.vim
+	/home/ruth/.config/nvim/colors/base16-classic-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-codeschool.vim
+	/home/ruth/.config/nvim/colors/base16-codeschool.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-cupcake.vim
+	/home/ruth/.config/nvim/colors/base16-cupcake.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-cupertino.vim
+	/home/ruth/.config/nvim/colors/base16-cupertino.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-darktooth.vim
+	/home/ruth/.config/nvim/colors/base16-darktooth.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-dracula.vim
+	/home/ruth/.config/nvim/colors/base16-dracula.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-eighties.vim
+	/home/ruth/.config/nvim/colors/base16-eighties.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-embers.vim
+	/home/ruth/.config/nvim/colors/base16-embers.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-flat.vim
+	/home/ruth/.config/nvim/colors/base16-flat.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-fruit-soda.vim
+	/home/ruth/.config/nvim/colors/base16-fruit-soda.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-github.vim
+	/home/ruth/.config/nvim/colors/base16-github.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-google-dark.vim
+	/home/ruth/.config/nvim/colors/base16-google-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-google-light.vim
+	/home/ruth/.config/nvim/colors/base16-google-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-grayscale-light.vim
+	/home/ruth/.config/nvim/colors/base16-grayscale-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-gruvbox-dark-hard.vim
+	/home/ruth/.config/nvim/colors/base16-gruvbox-dark-hard.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-gruvbox-dark-medium.vim
+	/home/ruth/.config/nvim/colors/base16-gruvbox-dark-medium.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-gruvbox-dark-pale.vim
+	/home/ruth/.config/nvim/colors/base16-gruvbox-dark-pale.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-gruvbox-dark-soft.vim
+	/home/ruth/.config/nvim/colors/base16-gruvbox-dark-soft.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-gruvbox-light-hard.vim
+	/home/ruth/.config/nvim/colors/base16-gruvbox-light-hard.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-gruvbox-light-medium.vim
+	/home/ruth/.config/nvim/colors/base16-gruvbox-light-medium.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-gruvbox-light-soft.vim
+	/home/ruth/.config/nvim/colors/base16-gruvbox-light-soft.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-harmonic-light.vim
+	/home/ruth/.config/nvim/colors/base16-harmonic-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-heetch-light.vim
+	/home/ruth/.config/nvim/colors/base16-heetch-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-heetch.vim
+	/home/ruth/.config/nvim/colors/base16-heetch.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-helios.vim
+	/home/ruth/.config/nvim/colors/base16-helios.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-hopscotch.vim
+	/home/ruth/.config/nvim/colors/base16-hopscotch.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-horizon-dark.vim
+	/home/ruth/.config/nvim/colors/base16-horizon-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-ia-dark.vim
+	/home/ruth/.config/nvim/colors/base16-ia-dark.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-ia-light.vim
+	/home/ruth/.config/nvim/colors/base16-ia-light.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-irblack.vim
+	/home/ruth/.config/nvim/colors/base16-irblack.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-isotope.vim
+	/home/ruth/.config/nvim/colors/base16-isotope.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-macintosh.vim
+	/home/ruth/.config/nvim/colors/base16-macintosh.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-marrakesh.vim
+	/home/ruth/.config/nvim/colors/base16-marrakesh.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-material-darker.vim
+	/home/ruth/.config/nvim/colors/base16-material-darker.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-material-lighter.vim
+	/home/ruth/.config/nvim/colors/base16-material-lighter.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-material-palenight.vim
+	/home/ruth/.config/nvim/colors/base16-material-palenight.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-material-vivid.vim
+	/home/ruth/.config/nvim/colors/base16-material-vivid.vim
+t/home/ruth/.local/share/vifm/Trash/000_base16-materia.vim
+	/home/ruth/.config/nvim/colors/base16-materia.vim
+t/media/files/.vifm-Trash-1000/000_ava-2020-spanish-yify-248982.zip
+	/media/files/Ricardo/Downloads/ava-2020-spanish-yify-248982.zip
+t/home/ruth/.local/share/vifm/Trash/000_distrotube
+	/home/ruth/.config/moc/themes/distrotube
+t/home/ruth/.local/share/vifm/Trash/000_War.With.Grandpa.2020.WEBRip.x264-ION10
+	/home/ruth/.config/rtorrent/work/War.With.Grandpa.2020.WEBRip.x264-ION10
+t/media/files/.vifm-Trash-1000/000_War.with.Grandpa.2020.srt
+	/media/files/Ricardo/Movies & Series/War.with.Grandpa.2020.srt
+t/home/ruth/.local/share/vifm/Trash/000_playlist.m3u
+	/home/ruth/.config/moc/state/playlist.m3u
+t/home/ruth/.local/share/vifm/Trash/000_Mulan.2020.WEBRip.x264-ION10
+	/home/ruth/.config/rtorrent/work/Mulan.2020.WEBRip.x264-ION10
+t/media/files/.vifm-Trash-1000/000_Young, Wild and Free ( Wiz Khalifa Feat. Snoop Dogg ).mp3
+	/media/files/Ricardo/Music/Rap - Pop/The BΔlck Eyed PeΔs/-/Young, Wild and Free ( Wiz Khalifa Feat. Snoop Dogg ).mp3
+t/home/ruth/.local/share/vifm/Trash/000_terminal
+	/home/ruth/terminal
+t/media/files/.vifm-Trash-1000/000_Movies & Series
+	/media/files/Ricardo/Movies & Series
+t/media/files/.vifm-Trash-1000/000_2020-09-17-051239_1600x900_scrot.png
+	/media/files/Ricardo/Downloads/2020-09-17-051239_1600x900_scrot.png
+t/media/files/.vifm-Trash-1000/000_2020-09-17-051239_1600x900_scrot_000.png
+	/media/files/Ricardo/Downloads/2020-09-17-051239_1600x900_scrot_000.png
+t/media/files/.vifm-Trash-1000/000_Tenet.2020.HC.HDCam.XviD.B4ND1T69
+	/media/files/Ricardo/Downloads/Tenet.2020.HC.HDCam.XviD.B4ND1T69
+t/media/files/.vifm-Trash-1000/000_Tenet 2020 HC HDTC XviD B4ND1T69.srt
+	/media/files/Ricardo/Downloads/Tenet 2020 HC HDTC XviD B4ND1T69.srt
+t/media/files/.vifm-Trash-1000/000_Tenet 2020 HC HDTC XviD MP3 LLG.srt
+	/media/files/Ricardo/Downloads/Tenet 2020 HC HDTC XviD MP3 LLG.srt
+t/media/files/.vifm-Trash-1000/000_Tenet.2020.HC.HDCam.XviD.B4ND1T69.avi
+	/media/files/Ricardo/Downloads/Tenet.2020.HC.HDCam.XviD.B4ND1T69.avi
+t/media/files/.vifm-Trash-1000/000_tenet-spanish-2287904.zip
+	/media/files/Ricardo/Downloads/tenet-spanish-2287904.zip
+t/media/files/.vifm-Trash-1000/000_Sin confirmar 89430.crdownload
+	/media/files/Ricardo/Downloads/Sin confirmar 89430.crdownload
+t/media/files/.vifm-Trash-1000/000_Sin confirmar 434481.crdownload
+	/media/files/Ricardo/Downloads/Sin confirmar 434481.crdownload
+t/media/files/.vifm-Trash-1000/000_2020-09-18-212808_1600x900_scrot.png
+	/media/files/Ricardo/Downloads/2020-09-18-212808_1600x900_scrot.png
+t/media/files/.vifm-Trash-1000/000_2020-09-18-212808_1600x900_scrot_000.png
+	/media/files/Ricardo/Downloads/2020-09-18-212808_1600x900_scrot_000.png
+t/media/files/.vifm-Trash-1000/000_The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
+	/media/files/Ricardo/Downloads/The.Boys.S02E05.WEB.x264-PHOENiX[TGx]
+t/home/ruth/.local/share/vifm/Trash/000_Documents
+	/home/ruth/Documents
+t/media/files/.vifm-Trash-1000/000_dotfiles
+	/media/files/Ricardo/Git/dotfiles
+t/media/files/.vifm-Trash-1000/000_QtProject.conf
+	/media/files/Ricardo/Git/dotfiles/.config/QtProject.conf
+t/media/files/.vifm-Trash-1000/000_rtorrent.rc
+	/media/files/Ricardo/Git/dotfiles/.config/rtorrent/rtorrent.rc
+t/media/files/.vifm-Trash-1000/000_rtorrent
+	/media/files/Ricardo/Git/dotfiles/.config/rtorrent/rtorrent
+t/media/files/.vifm-Trash-1000/001_rtorrent
+	/media/files/Ricardo/Git/dotfiles/.config/rtorrent
 
 # State:
 f

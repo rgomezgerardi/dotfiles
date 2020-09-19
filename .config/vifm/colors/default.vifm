@@ -1,7 +1,3 @@
-" You can edit this file by hand.
-" The " character at the beginning of a line comments out the line.
-" Blank lines are ignored.
-
 " The Default color scheme is used for any directory that does not have
 " a specified scheme and for parts of user interface like menus. A
 " color scheme set for a base directory will also
