@@ -1,116 +1,64 @@
-/*
- * sidetab-adapta theme,
- * based on sidetab theme by deadguy.
- *
- * This theme has been dedicated to the public domain.
- *
- */
-
-configuration {
-        show-icons:   true;
-        sidebar-mode: true;
-}
-
 * {
-        background-color:           #222d32;
-        text-color:                 #ffffff;
+	// Colors Variables
+	foreground:		#f0f0f0;
+	background:		#282C33cc;
+	background-alt:		#2e343f99;
+	color-1:		#2b87dc;
 
-        accent-color:               #00bcd4;
-        accent2-color:              #4db6ac;
-        hover-color:                #39454b;
-        urgent-color:               #ff5252;
-        window-color:               #ffffff;
-
-        selected-normal-foreground: @window-color;
-        normal-foreground:          @text-color;
-        selected-normal-background: @hover-color;
-        normal-background:          @background-color;
-
-        selected-urgent-foreground: @background-color;
-        urgent-foreground:          @text-color;
-        selected-urgent-background: @urgent-color;
-        urgent-background:          @background-color;
-
-        selected-active-foreground: @window-color;
-        active-foreground:          @text-color;
-        selected-active-background: @hover-color;
-        active-background:          @accent-color;
+	// Global Options
+        font:			"MesloLGS NF 10";
+	text-color:		@foreground;
+	background-color:	@background;
+  	border-color:		@background-alt;
 }
 
 #window {
-        anchor:   west;
-        location: west;
-        width:    384px;
-        height:   100%;
+        anchor:			north west;
+	location:		north west;
+	x-offset:		89px;
+	y-offset:		1px;
+        width: 			512px;
+//	height:			68%;
+        //padding:		0px 1%;
+	//border-radius:	50% 50% 50% 50%;
 }
 
-#mainbox {
-        children: [ entry, listview, mode-switcher ];
+inputbar {
+	border:			0 0 1px 0;
+	border-color:		@color-1;
+	margin:			0px 0px 2px 0px;
+	children:		[ prompt, textbox-prompt, entry ];
 }
+
+prompt {
+	enabled:		false;
+	padding:		0px;
+	border:			0 1px 0 0;
+}
+                                                                      
+textbox-prompt {                                                
+	expand:			false;                                                    
+	str:			"Search:";
+ }
 
 entry {
-        expand: false;
-        margin: 8px;
+	padding:		0px 0px 0px 0px;
+	expand:			true;
+}
+
+listview {
+  cycle:			false;
+  margin:			0 0 -1px 0;
+  scrollbar:			false;
 }
 
 element {
-        padding: 8px;
+  border:			0 0 1px 0;
+  padding:			16px;
 }
 
-element normal.normal {
-        background-color: @normal-background;
-        text-color:       @normal-foreground;
+element selected {
+  background-color:		@background-alt;
 }
 
-element normal.urgent {
-        background-color: @urgent-background;
-        text-color:       @urgent-foreground;
-}
-
-element normal.active {
-        background-color: @active-background;
-        text-color:       @active-foreground;
-}
-
-element selected.normal {
-        background-color: @selected-normal-background;
-        text-color:       @selected-normal-foreground;
-        border:           0 4px solid 0 0;
-        border-color:     @accent2-color;
-}
-
-element selected.urgent {
-        background-color: @selected-urgent-background;
-        text-color:       @selected-urgent-foreground;
-}
-
-element selected.active {
-        background-color: @selected-active-background;
-        text-color:       @selected-active-foreground;
-}
-
-element alternate.normal {
-        background-color: @normal-background;
-        text-color:       @normal-foreground;
-}
-
-element alternate.urgent {
-        background-color: @urgent-background;
-        text-color:       @urgent-foreground;
-}
-
-element alternate.active {
-        background-color: @active-background;
-        text-color:       @active-foreground;
-}
-
-button {
-        padding: 8px;
-}
-
-button selected {
-        background-color: @active-background;
-        text-color:       @background-color;
-}
-
-/* vim: ft=css
+// vim: ft=css

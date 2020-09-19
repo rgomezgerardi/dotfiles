@@ -1,0 +1,344 @@
+; ==========================================================
+;
+;  ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;  ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;  ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;  ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;  ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;  ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;  Config File                       Edit By: Ricardo Gomez
+; ==========================================================
+[settings]
+
+; Throttle settings
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+
+; Reload upon receiving XCB_RANDR_SCREEN_CHANGE_NOTIFY events
+screenchange-reload = true
+
+; Compositing operators
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+; Define fallback values used by all module formats
+format-foreground =
+format-background =
+format-underline =
+format-overline =
+format-spacing =
+format-padding =
+format-margin =
+format-offset =
+
+; Enables pseudo-transparency for the bar
+pseudo-transparency = false
+
+
+; ==========================================================
+; ================== Global WM settings ====================
+; ==========================================================
+[global/wm]
+
+; Adjust the _NET_WM_STRUT_PARTIAL value
+margin-top = 0
+margin-bottom = 0
+
+
+; ==========================================================
+; ======================== Colors ==========================
+; ==========================================================
+[colors]
+foreground = #f0f0f0
+;background = #292929
+background = #282C33
+alert = #ffb52a
+color1 = #2b87dc
+color2 = #b90d36
+color3 = #37c8ab
+color4 = #7731aa
+
+
+;===========================================================
+;======================= Separators ========================
+;===========================================================
+; Use raw formatting tags for mix fonts (%{T-}=Default)
+[module/separator-1]
+type = custom/text
+content = "%{T-}%{T-}"
+content-foreground = ${colors.color1}
+content-background = ${colors.background}
+
+;   |   | ⏽
+[module/separator-2]
+type = custom/text
+content = "%{T-}%{T-}"
+content-foreground = ${colors.color2}
+content-background = ${colors.background}
+
+[module/separator-3]
+type = custom/text
+content = "%{T-}%{T-}"
+content-foreground = ${colors.color1}
+content-background = ${colors.color2}
+
+
+; ==========================================================
+; ========================= Bar1 ===========================
+; ==========================================================
+[bar/bar1]
+
+; Size
+width = 100%
+height = 2%
+offset-y = 0
+offset-x = 0
+padding-left = 0
+padding-right = 0
+;radius = 10.0
+
+; Borders
+border-top-size = 0
+border-bottom-size = 0
+border-right-size = 0
+border-left-size = 0
+border-color =
+
+; Appereance
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; Line
+line-size = 2
+line-color = ${colors.alert}
+
+; Fonts
+font-0 = "MesloLGS NF:size=10:antialias=true;3"
+font-1 = "MesloLGS NF:size=12:antialias=true;3"
+font-2 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-3 = "Noto Color Emoji:scale=13;1"
+font-4 = "Twemoji:scale=8;1"
+
+; Mouse
+click-left = 
+click-middle = 
+click-right =
+scroll-up =
+scroll-down =
+double-click-left =
+double-click-middle =
+double-click-right =
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+; Tray
+;tray-position = right
+tray-detached = true
+tray-maxsize = 20
+tray-background = ${colors.background}
+tray-offset-x = -20%
+tray-offset-y = 3
+;tray-offset-x = 0
+;tray-offset-y = 98%
+tray-padding = 0
+tray-scale = 0.8
+
+; Modules
+modules-left 	= xworkspaces separator-1 launcher
+modules-center	= xwindow
+modules-right	= separator-2 cpu memory separator-3 volume network layout date
+module-margin-left = 0
+module-margin-right = 0
+;separator = " "
+
+
+; ==========================================================
+; ====================== Workspaces ========================
+; ==========================================================
+[module/xworkspaces]
+type = internal/xworkspaces
+
+pin-workspaces = false
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+
+format = "<label-state>"
+format-prefix = " "
+format-background = ${colors.color1}
+
+label-active = "%icon% "
+label-active-foreground = 
+label-empty = "%icon% "
+label-empty-foreground = ${colors.background}
+
+;       v     
+icon-default = "♟"
+icon-0 = "1;R"
+icon-1 = "2;U"
+icon-2 = "3;T"
+icon-3 = "4;H"
+
+
+; ==========================================================
+; ======================= Launcher =========================
+; ==========================================================
+[module/launcher]
+type = custom/text
+content = "Search:"
+content-prefix = " "
+content-foreground = ${colors.foreground}
+content-background = ${colors.background}
+
+
+; ==========================================================
+; ======================== Windows =========================
+; ==========================================================
+[module/xwindow]
+
+type = internal/xwindow
+label = " %title% "
+label-maxlen = 50
+label-empty = Empty
+
+format-background = ${colors.color1}
+format-prefix = ""
+format-prefix-foreground = ${colors.color1}
+format-prefix-background = ${colors.background}
+format-suffix = ""
+format-suffix-foreground = ${colors.color1}
+format-suffix-background = ${colors.background}
+
+
+; ==========================================================
+; ========================== Cpu ===========================
+; ==========================================================
+[module/cpu]
+type = internal/cpu
+
+interval = 2
+format = <label>
+format-prefix = " "
+format-suffix = " "
+format-background = ${colors.color2}
+
+;   
+label = "%{T2}%{T-} %percentage:2:3%%"
+
+; ==========================================================
+; ======================== Memory ==========================
+; ==========================================================
+[module/memory]
+type = internal/memory
+
+interval = 2
+format = <label>
+format-suffix = " "
+format-background = ${colors.color2}
+
+label = "%{T2}%{T-} %percentage_used:2:3%%"
+
+; ==========================================================
+; ======================= Volume ===========================
+; ==========================================================
+[module/volume]
+type = internal/alsa
+
+format-volume = <ramp-volume>
+format-volume-suffix = " "
+format-volume-background = ${colors.color1}
+format-muted-background = ${colors.color1}
+
+;format-muted = 
+;ramp-volume-0 = 
+;ramp-volume-1 = 
+;ramp-volume-2 = 
+
+format-muted = " ﱝ"
+ramp-volume-0 = " 奄"
+ramp-volume-1 = " 奔"
+ramp-volume-2 = " 墳"
+
+;format-muted = " 🔇 "
+;ramp-volume-0 = " 🔈 "
+;ramp-volume-1 = " 🔉 "
+;ramp-volume-2 = " 🔊 "
+
+
+; ==========================================================
+; ======================= Network ==========================
+; ==========================================================
+[module/network]
+type = internal/network
+
+interface = ens33
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-suffix = " "
+format-connected-font = 2
+format-connected-background = ${colors.color1}
+format-disconnected = <label-disconnected>
+format-disconnected-suffix = " "
+format-disconnected-font = 2
+format-disconnected-background = ${colors.color1}
+format-packetloss = <animation-packetloss> <label-connected>
+
+; 直睊|  ﯥ | 度ﴹ |   |   |   |  𥉉
+label-connected = "說"
+label-disconnected = "ﲁ " 
+
+;format-packetloss = <animation-packetloss> <label-connected>
+animation-packetloss-0 = 
+;animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+;animation-packetloss-1-foreground = #000000
+animation-packetloss-framerate = 500
+
+
+; ==========================================================
+; ======================== Layout ==========================
+; ==========================================================
+[module/layout]
+type = internal/xkeyboard
+
+;blacklist-0 = num lock
+;blacklist-1 = caps lock
+;blacklist-2 = scroll lock
+
+format = <label-layout>
+format-suffix = " "
+format-background = ${colors.color1}
+
+label-layout = "%icon%"
+
+layout-icon-default = ?
+layout-icon-0 = us;US
+layout-icon-1 = es;ES
+
+
+;===========================================================
+;========================== Date ===========================
+;===========================================================
+[module/date]
+type = internal/date
+
+interval = 5
+format-suffix = " "
+format-background = ${colors.color1}
+;format-prefix = ""
+;format-prefix-background = ${colors.background}
+
+date = "%m/%d/%y"
+date-alt = "%A, %d %B %Y"
+time = "%H:%M"
+time-alt = "%l:%M%P"
+label = "%time% %date%"
+
+
+# vim:ft=dosini

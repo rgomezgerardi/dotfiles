@@ -1,3 +1,15 @@
+// ==========================================================
+//
+//              ██████╗  ██████╗ ███████╗██╗
+//              ██╔══██╗██╔═══██╗██╔════╝██║
+//              ██████╔╝██║   ██║█████╗  ██║
+//              ██╔══██╗██║   ██║██╔══╝  ██║
+//              ██║  ██║╚██████╔╝██║     ██║
+//              ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝
+//
+//  Config File                       Edit By: Ricardo Gomez
+// ==========================================================
+
 configuration {
 /*	modi: "window,run,ssh";*/
 /*	width: 50;*/
@@ -52,7 +64,7 @@ configuration {
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
 	theme: "./themes/default";
-/*	icon-theme: ;*/
+	icon-theme: "papirus-dark";
 	show-icons: true;
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
@@ -65,9 +77,9 @@ configuration {
 /*	pid: "/run/user/1000/rofi.pid";*/
 /*	display-window: ;*/
 /*	display-windowcd: ;*/
-/*	display-run: ;*/
+//	display-run: ":";
 /*	display-ssh: ;*/
-/*	display-drun: ;*/
+//	display-drun: ":";
 /*	display-combi: ;*/
 /*	display-keys: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/

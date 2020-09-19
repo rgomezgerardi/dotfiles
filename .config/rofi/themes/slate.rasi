@@ -1,3 +1,10 @@
+//configuration {
+//	display-drun: "";
+//	display-run: "";
+//	display-window: "";
+//	display-ssh: "~#";
+//}
+
 * {
   background-color: #282C33;
   border-color: #2e343f;
