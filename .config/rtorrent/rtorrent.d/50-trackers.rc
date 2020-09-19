@@ -1,0 +1,12 @@
+#                                                                                 vim: ft=dosini
+# Tracker Modes
+#
+# To disable / override these settings, execute this command as the 'ruth' user:
+#
+#   echo >>~/.config/rtorrent/rtorrent.d/.rcignore "50-trackers.rc"
+#
+# Then restart rTorrent.
+
+dht.mode.set = disable
+protocol.pex.set = no
+trackers.use_udp.set = no

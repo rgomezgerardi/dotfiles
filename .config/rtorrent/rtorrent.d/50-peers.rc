@@ -1,0 +1,18 @@
+#                                                                                 vim: ft=dosini
+# Peer settings
+#
+# To disable / override these settings, execute this command as the 'ruth' user:
+#
+#   echo >>~/.config/rtorrent/rtorrent.d/.rcignore "50-peers.rc"
+#
+# Then restart rTorrent.
+
+
+throttle.min_peers.normal.set = 20
+throttle.max_peers.normal.set = 60
+
+throttle.min_peers.seed.set = 30
+throttle.max_peers.seed.set = 80
+
+trackers.numwant.set = 80
+protocol.encryption.set = allow_incoming,try_outgoing,enable_retry

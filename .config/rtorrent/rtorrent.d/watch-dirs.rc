@@ -1,0 +1,15 @@
+#                                                                                 vim: ft=dosini
+# This file regularly executes standard directory watches. If you use `pyrotorque`,
+# you should disable the schedule.
+#
+# `pyro.category.add` is defined by ‘pyrocore’.
+#
+# To disable / override these settings, execute this command as the 'ruth' user:
+#
+#   echo >>~/.config/rtorrent/rtorrent.d/.rcignore "watch-dirs.rc"
+#
+# Then restart rTorrent.
+
+pyro.category.add = hdtv
+
+schedule2 = watch_dirs, 121, 10, ((import, (cat, (cfg.basedir), "rtorrent.d/watch-dirs.rc.include")))

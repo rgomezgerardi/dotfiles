@@ -1,0 +1,1 @@
+schedule2 = nocron_during_startup, 600, 0, "execute.nothrow=rm,/home/ruth/NOCRON"

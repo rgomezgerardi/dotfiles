@@ -1,0 +1,4 @@
+#                                                                                 vim: ft=dosini
+# Set session name using the hostname from the Ansible inventory
+
+session.name.set = (cat,"",":",(system.pid))
