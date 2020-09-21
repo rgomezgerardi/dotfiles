@@ -1,0 +1,186 @@
+# ========================================================
+#
+#            █████╗ ██╗     ██╗ █████╗ ███████╗
+#           ██╔══██╗██║     ██║██╔══██╗██╔════╝
+#           ███████║██║     ██║███████║███████╗
+#           ██╔══██║██║     ██║██╔══██║╚════██║
+#           ██║  ██║███████╗██║██║  ██║███████║
+#           ╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝
+#
+# Config File                       Edit By: Ricardo Gomez
+# ========================================================
+
+# Global alias
+#alias -g downloads="$DOWNLOADS"
+#alias -g music="$MUSIC"
+#alias -g videos='$VIDEOS'
+#alias -g movies="$MOVIES"
+#alias -g series="$SERIES"
+#alias -g courses="$COURSES"
+
+# Suffix alias
+alias -s txt="$EDITOR"
+
+# Add handy alias and flags
+alias ss="sudo shutdown now"
+alias sr="sudo shutdown -r now"
+alias cp="cp --interactive --verbose"
+alias mv="mv --interactive --verbose"
+alias rm="rm --verbose"
+alias lsblk="lsblk -f"
+alias umount="umount --verbose --force --recursive"
+alias vi='nvim'
+alias vifm="$HOME/.config/vifm/scripts/vifmrun"
+alias rsync="rsync --human-readable --progress --verbose"
+alias ffmpeg='ffmpeg -hide_banner -y'
+alias mutt='neomutt'
+alias yt='youtube-dl'
+alias moc="mocp --config ~/.config/moc/config"
+alias rtorrent="~/.config/rtorrent/start"
+alias figlet="figlet -f ~/.config/figlet/fonts/ANSI\ Shadow.flf"
+
+# Enable color support
+if [ -x /usr/bin/dircolors ]; then
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	alias ls='ls --color=auto'
+	alias ll='ls -la --color=auto'
+	alias dir='dir --color=auto'
+	alias vdir='vdir --color=auto'
+	alias grep='grep --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
+fi
+
+# Navigation
+alias ..='cd ..' 
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../..'
+alias .5='cd ../../../..'
+alias .6='cd ../../../../..'
+
+# Switch between shells
+alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
+alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
+
+# Edit the fstab
+alias fstab="sudo $EDITOR /etc/fstab"
+
+# Packages Manager
+alias pacsyu='sudo pacman -Syyu'			# Update only standard pkgs
+alias yaysua='yay -Sua --noconfirm'			# Update only AUR pkgs
+alias yaysyu='yay -Syu --noconfirm'			# Update standard pkgs and AUR pkgs
+alias unlock='sudo rm /var/lib/pacman/db.lck'		# Remove pacman lock
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'	# Remove orphaned packages
+alias mirror1='sudo reflector --verbose --latest 30 --sort rate --save /etc/pacman.d/mirrorlist'
+alias mirror2='sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirror'	# Get fastest mirrors
+alias mirror3='sudo pacman-mirrors -g'
+
+# Mount and Umount Devices
+alias mount-iso='sudo mount -o loop --target /media/iso --source'
+alias mount-usb='sudo mount -o uid=1000,gid=1000 --target /media/usb --source /dev/sdb1'
+alias mount-dvd='sudo mount -o ro,loop --target /media/dvd --source /dev/sr0'
+alias mount-phone='simple-mtpfs --device 1 ~/Phone -o enable-move -o auto_unmount'
+alias umount-iso='sudo umount /media/iso'
+alias umount-usb='sudo umount /media/usb'
+alias umount-dvd='sudo umount /media/dvd'
+alias umount-phone='sudo fusermount -u ~/Phone'
+
+# Git
+alias git-push='git add . ; git commit -m "Upload Files" ; git push origin'
+
+# Youtube-DL
+alias ytv="yt --format 'best[ext = mp4][height <= 480]'"
+alias yta='yt --extract-audio --audio-format mp3 --audio-quality 192k -o "$MUSIC/Downloaded/%(title)s.%(ext)s"'
+
+# Get error messages from journalctl
+alias jctl='journalctl -p 3 -xb'
+
+# Reload termite configuration without exiting
+alias reload="killall -USR1 termite"
+
+# Show workspaces names
+alias workspaces='prop -root _NET_DESKTOP_NAMES'
+
+# Coping files to usb with rsync
+rsync-copy-usb() { rsync --verbose --human-readable --progress --partial --archive "$@" /media/usb }
+
+
+# ========================================================
+# =================== Config Files =======================
+# ========================================================
+cf () {				     # usage: cf <program>
+	if [ $# -gt 0 ]; then
+		case $@ in
+			"alias")		$EDITOR ~/.config/alias		;;
+			"variables")	$EDITOR ~/.config/variables	;;
+			"bash")		$EDITOR ~/.bashrc		;;
+			"zsh")		$EDITOR ~/.config/zsh/zshrc	;;
+			"nvim")		$EDITOR ~/.config/nvim/init.vim	;;
+			"nvimplugin")	$EDITOR ~/.config/nvim/plug.vim	;;
+			"vifm")		$EDITOR ~/.config/vifm/vifmrc	;;
+			"vifmfiletype")	$EDITOR ~/.config/vifm/filetype	;;
+			"vifmcolors")	$EDITOR ~/.config/vifm/colors/dark.vifm	;;
+			"picom")	$EDITOR ~/.config/picom/picom.conf	;;
+			"termite")	$EDITOR ~/.config/termite/config	;;
+			"awesome")	$EDITOR ~/.config/awesome/rc.lua	;;
+			"awesomekeys")	$EDITOR ~/.config/awesome/keys.lua	;;
+			"awesometheme")	$EDITOR ~/.config/awesome/themes/default/theme.lua		;;      
+			"rofi")		$EDITOR ~/.config/rofi/config.rasi	;;
+			"rtorrent")	$EDITOR ~/.config/rtorrent/rtorrent.rc	;;
+			"polybar")	$EDITOR ~/.config/polybar/config	;;
+			"zathura")	$EDITOR ~/.config/zathura/zathurarc	;;
+			"mutt")		$EDITOR ~/.config/mutt/muttrc		;;
+			"moc")		$EDITOR ~/.config/moc/config		;;
+			"mockeys")	$EDITOR ~/.config/moc/keymap		;;
+
+			*) echo "'$1' does not have a custom config file !" && exit 1 ;;
+		esac
+	else
+		echo "Error: You did not enter any arguments !" && exit 1
+	fi
+}
+
+
+# ========================================================
+# ================== Commands Files ======================
+# ========================================================
+alias cmddebian='$EDITOR $DOCUMENTS/Commands/Debian.txt'
+alias cmdarch='$EDITOR $DOCUMENTS/Commands/Arch.txt'
+alias cmdwine='$EDITOR $DOCUMENTS/Commands/Wine.txt'
+alias cmdtermux='$EDITOR $DOCUMENTS/Commands/Termux.txt'
+alias cmdyoutube-dl='$EDITOR $DOCUMENTS/Commands/Youtube-DL.txt'
+alias cmdregex='$EDITOR $DOCUMENTS/Commands/Regular_Expressions.txt'
+alias cmdbackup='$EDITOR $DOCUMENTS/Commands/Backup.txt'
+alias cmdffmpeg='$EDITOR $DOCUMENTS/Commands/FFmpeg.txt'
+alias cmdgrub='$EDITOR $DOCUMENTS/Commands/Grub.txt'
+alias cmdlutris='$EDITOR $DOCUMENTS/Commands/Lutris.txt'
+
+
+# ========================================================
+# ================ Archive Extraction ====================
+# ========================================================
+ex () {					# usage: ex <file>
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tar.bz2)   tar xjf $1		;;
+			*.tar.gz)    tar xzf $1		;;
+			*.bz2)       bunzip2 $1		;;
+			*.rar)       unrar x $1		;;
+			*.gz)        gunzip $1		;;
+			*.tar)       tar xf $1		;;
+			*.tbz2)      tar xjf $1		;;
+			*.tgz)       tar xzf $1   	;;
+			*.zip)       unzip $1     	;;
+			*.Z)         uncompress $1	;;
+			*.7z)        7z x $1		;;
+			*.deb)       ar x $1		;;
+			*.tar.xz)    tar xf $1		;;
+			*.tar.zst)   unzstd $1		;;      
+			*.iso)       7z x $1		;;	# Extract .iso file using 7zip
+			*)           echo "'$1' cannot be extracted via ex()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file" && exit 1
+	fi
+}
