@@ -1,10 +1,12 @@
---[[ ==============================================================
-     _                                       __        __         
-    / \__      _____  ___  ___  _ __ ___   __\ \      / / __ ___  
-   / _ \ \ /\ / / _ \/ __|/ _ \| '_ ` _ \ / _ \ \ /\ / / '_ ` _ \ 
-  / ___ \ V  V /  __/\__ \ (_) | | | | | |  __/\ V  V /| | | | | |
- /_/   \_\_/\_/ \___||___/\___/|_| |_| |_|\___| \_/\_/ |_| |_| |_|
- 
+--[[ =============================================================
+
+   █████╗ ██╗    ██╗███████╗███████╗ ██████╗ ███╗   ███╗███████╗
+  ██╔══██╗██║    ██║██╔════╝██╔════╝██╔═══██╗████╗ ████║██╔════╝
+  ███████║██║ █╗ ██║█████╗  ███████╗██║   ██║██╔████╔██║█████╗  
+  ██╔══██║██║███╗██║██╔══╝  ╚════██║██║   ██║██║╚██╔╝██║██╔══╝ 
+  ██║  ██║╚███╔███╔╝███████╗███████║╚██████╔╝██║ ╚═╝ ██║███████╗
+  ╚═╝  ╚═╝ ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
+
  Config File				 Edited by: Ricardo Gomez
 =============================================================== --]]
 
@@ -62,14 +64,11 @@ end
 -- ============================
 -- Themes
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/default/theme.lua")
--- for s = 1, screen.count() do
---  	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
--- end
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.floating,
+    -- awful.layout.suit.floating,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
@@ -77,7 +76,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
+    -- awful.layout.suit.max,
     -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier,
     -- awful.layout.suit.corner.nw,
@@ -110,7 +109,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)    
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
 
 end)
 
@@ -119,7 +118,6 @@ end)
 --        Mouse Bindings
 -- ============================
 root.buttons(gears.table.join(
---    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -132,61 +130,30 @@ root.buttons(gears.table.join(
 awful.rules.rules = {
 	-- All clients will match this rule.
 	{ rule = { },
+--		except_any = { class = { "xfce4-panel", } },
+		
 		properties = {
+			screen = awful.screen.preferred,
 			border_width = beautiful.border_width,
 			border_color = beautiful.border_normal,
 			focus = awful.client.focus.filter,
 			raise = true,
 			keys = clientkeys,
 			buttons = clientbuttons,
-			screen = awful.screen.preferred,
 			placement = awful.placement.no_overlap+awful.placement.no_offscreen
-			--size_hints_honor = false
-		}	
+		},
+
 	},
 
-	-- Floating clients.
-	{ rule_any = {
-		instance = {
-			"DTA",  -- Firefox addon DownThemAll.
-			"copyq",  -- Includes session name in class.
-			"pinentry",
-			},
-        
-		class = {
-			"Arandr",
-			"Blueman-manager",
-			"Gpick",
-			"Kruler",
-			"MessageWin",  -- kalarm.
-			"Sxiv",
-			"Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-			"Wpa_gui",
-			"veromix",
-			"xtightvncviewer"
-		},
-			
-
-		-- Note that the name property shown in xprop might be set slightly after creation of the client
-	        -- and the name shown there might not match defined rules here.
-	        name = {
-			"Event Tester",  -- xev.
-		},
-		
-		role = {
-			"AlarmWindow",  -- Thunderbird's calendar.
-			"ConfigManager",  -- Thunderbird's about:config.
-			"pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-		}
-		
-	 }, 
-		properties = {
-			floating = true 
-		}
+	-- Floating clients
+	{ rule_any = { class = { "Firefox", } }, 
+		properties = { floating = true },
 	},
-   		--  -- Set Firefox to always map on the tag named "2" on screen 1.
-   		--  -- { rule = { class = "Firefox" },
-   		--  --   properties = { screen = 1, tag = "2" } },
+
+	-- Maximized clients
+	{ rule_any = { name = { "Vifm", "Moc", "rTorrent" }, class = { "Firefox", "Zathura", } },
+		properties = { maximized = true, },	
+	},
 }
 
 
@@ -206,31 +173,22 @@ client.connect_signal("manage", function (c)
         awful.placement.no_offscreen(c)
     end
     
-    c.shape = function(cr,w,h)
-          gears.shape.rounded_rect(cr,w,h,16)
-    end
-end)
-
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
+    --c.shape = function(cr,w,h)
+    --      gears.shape.rounded_rect(cr,w,h,16)
+    --end
 end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
-
--- Autostart Compositor
+-- ============================
+--          Autostartup
+-- ============================
+-- Compositor
 awful.spawn.with_shell("picom -b")
 
---awful.spawn.with_shell("/home/ruth/.config/tint2/launch.sh")
-
 -- Launch xfce4 Panel
-awful.spawn.with_shell("~/.local/share/xfce4-panel-profiles/launch.sh")
+--awful.spawn.with_shell("~/.local/share/xfce4-panel-profiles/launch.sh")
 
 -- Launch Polybar
---awful.spawn.with_shell("~/.config/polybar/launch.sh")
-
--- -- Start Panel
--- awesome.connect_signal('exit', function(args) awful.util.spawn('touch ~/.awesome-restart') end)
--- awesome.connect_signal('startup', function(args) awful.util.spawn('bash -c "rm ~/.awesome-restart || ~/script-to-run-on-startup.sh"')end)
+awful.spawn.with_shell("~/.config/polybar/launch.sh")

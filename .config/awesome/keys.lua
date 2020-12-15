@@ -17,11 +17,13 @@ modkey = "Mod4"
 -- Default Programs
 Terminal = "termite"
 Browser = "firefox"
-FileManager = Terminal .. " -e " .. "vifm"
-Launcher = "rofi -show drun"
-DownloadManager = "home/ruth/Scripts/freedownloadmanager.sh"
+FileManager = Terminal .. " -t 'Vifm' -e " .. '"/home/ruth/.config/vifm/scripts/vifmrun"'
+Launcher = "rofi -show drun -theme /home/ruth/.config/rofi/themes/default.rasi"
+DownloadManager = Terminal .. " -t 'rTorrent' -e " .. '"/home/ruth/.config/rtorrent/start"'
 ScreenCapture = "scrot -e 'mv $f /media/files/Ricardo/Downloads/ 2>/dev/null'"
 MenuEmojis = "ibus emoji"
+MusicPlayer = Terminal .. " -t 'Moc' -e " .. '"mocp --config /home/ruth/.config/moc/config"'
+
 
 -- ============================
 --        Key Bindings
@@ -60,6 +62,8 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "e", function () awful.spawn(MenuEmojis) end,
               {description = "Open the Emojis Menu", group = "Launcher"}),
  
+    awful.key({ modkey,           }, "m", function () awful.spawn(MusicPlayer) end,
+              {description = "Music Player", group = "Launcher"}),
 
     -- Layout
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
@@ -68,16 +72,16 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "Decrease Master Width Factor", group = "Layout"}),
 
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
+    awful.key({ modkey, "Control"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
 
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
+    awful.key({ modkey, "Control"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
 
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "k",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
 
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "j",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
 
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 2)                end,
@@ -133,16 +137,16 @@ clientkeys = gears.table.join(
     awful.key({ modkey 		  }, "q",      function (c) c:kill()                         end,
 	      {description = "Close", group = "Client"}),
 
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
+    awful.key({ modkey,    }, "", function () awful.client.swap.byidx(  1)    end,
               {description = "Swap with Next Client", group = "Client"}),
 
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
+    awful.key({ modkey,    }, "", function () awful.client.swap.byidx( -1)    end,
               {description = "Swap with Previous Client", group = "Client"}),
 
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Control" }, "f",  awful.client.floating.toggle                     ,
               {description = "Toggle Floating", group = "Client"}),
 
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+    awful.key({ modkey, "Alt" }, "h", function (c) c:swap(awful.client.getmaster()) end,
               {description = "Move to Master", group = "Client"}),
 
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
@@ -154,11 +158,11 @@ clientkeys = gears.table.join(
     awful.key({ modkey,           }, "s", function (c) c.minimized = true end,
               {description = "Minimize", group = "Client"}),
 
-    awful.key({ modkey,           }, "w", function (c) c.maximized = not c.maximized c:raise() end,
-              {description = "Maximize", group = "Client"}),
-
-    awful.key({ modkey, "Control" }, "w", function () local c = awful.client.restore() if c then c:emit_signal( "request::activate", "key.unminimize", {raise = true} ) end end,
+    awful.key({ modkey,		  }, "w", function () local c = awful.client.restore() if c then c:emit_signal( "request::activate", "key.unminimize", {raise = true} ) end end,
               {description = "Restore Minimized", group = "Client"}),
+
+    awful.key({ modkey,           }, "f", function (c) c.maximized = not c.maximized c:raise() end,
+              {description = "Maximize", group = "Client"}),
 
     awful.key({ modkey, "Control" }, "m", function (c) c.maximized_vertical = not c.maximized_vertical c:raise() end ,
               {description = "Maximize Vertically", group = "Client"}),
@@ -166,7 +170,7 @@ clientkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "m", function (c) c.maximized_horizontal = not c.maximized_horizontal c:raise() end ,
               {description = "Maximize Horizontally", group = "Client"}),
 
-    awful.key({ modkey,           }, "f", function (c) c.fullscreen = not c.fullscreen c:raise() end,
+    awful.key({ modkey,           }, "F11", function (c) c.fullscreen = not c.fullscreen c:raise() end,
 	      {description = "Toggle Fullscreen", group = "Client"}),
 
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
