@@ -259,7 +259,7 @@ format-muted-background = ${colors.color1}
 ;ramp-volume-1 = 
 ;ramp-volume-2 = 
 
-format-muted = " ﱝ"
+format-muted = " ﱝ "
 ramp-volume-0 = " 奄"
 ramp-volume-1 = " 奔"
 ramp-volume-2 = " 墳"
@@ -334,7 +334,7 @@ format-background = ${colors.color1}
 ;format-prefix = ""
 ;format-prefix-background = ${colors.background}
 
-date = "%m/%d/%y"
+date = "%a, %m/%d/%y"
 date-alt = "%A, %d %B %Y"
 time = "%H:%M"
 time-alt = "%l:%M%P"
