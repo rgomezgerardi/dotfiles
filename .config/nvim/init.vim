@@ -14,7 +14,7 @@
 set encoding=utf-8
 
 " Define the shell
-"set shell=/bin/zsh
+set shell=/bin/zsh
 
 " Copy to clipboard
 set clipboard+=unnamedplus
@@ -37,9 +37,6 @@ let mapleader = "\\"
 " Enables 24-bit RGB color
 set termguicolors
 
-" Base16 256 colorspace
-let base16colorspace=256
-
 " Source Plugins
 source $HOME/.config/nvim/plug.vim
 
@@ -50,11 +47,10 @@ source $HOME/.config/nvim/plug.vim
 " Select the color theme
 if has('gui_running')
   set background=dark
-  colorscheme solarized
+  colorscheme default
 else
   colorscheme onedark
 endif
-
 
 " Show sidebar numbers
 set number relativenumber
@@ -68,6 +64,9 @@ syntax on
 
 " Display all matching results when we tab complete in command mode
 set wildmenu
+
+" Ignore case for completion
+set wildignorecase
 
 " Dont show --INSERT-- , --NORMAL-- , etc
 set noshowmode
@@ -92,11 +91,6 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-" ====================================================                                      
-" ==================== Commands ======================
-" ====================================================
-"command RenameMoviesSeriesFiles % s~\(\d\{4}\|[sS]\d\{1,2}[eExX]\d\{1,2}.\)\@<=.\+\(\.[a-z0-9]\{3,5}\)\@=~~g | % s~[._-]\+\(mp4\|avi\|mkv\|srt\)\@!~ ~g | % s~[([{]\(\d\{4}\)~\1~g 
-
 
 " ====================================================                                      
 " ================== Auto Commands ===================
@@ -119,6 +113,7 @@ if !exists("autocommands_loaded")
 	autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:split \| terminal python3 "%"<CR>
 endif
 
+
 " ====================================================                                      
 " ================== Key Mappings ====================
 " ====================================================
@@ -135,11 +130,11 @@ map <Leader>th <C-w>t<C-w>H
 map <Leader>tv <C-w>t<C-w>K
 
 " Edit and reload vimrc configuration file
-nnoremap <Leader>ve :e $MYVIMRC<CR>
+nnoremap <Leader>ve :w ; e $MYVIMRC<CR>
 nnoremap <Leader>vr :source $MYVIMRC<CR>
 
 " Enable folding with the spacebar
-nnoremap <space> za
+"nnoremap <space> za
 
 " Tab navigation
 map tt :tabnew 
@@ -151,6 +146,17 @@ imap <M-Left> <ESC>:tabp<CR>
 " Open terminal
 map <Leader>tt :vsplit \| terminal<CR>
 
-" Go to the end of the line
-inoremap <C-e> <C-o>$
+" Permanent regex very magic mode (cause interferes with vim's search-history)
+"nnoremap / /\v
+"vnoremap / /\v
+"cnoremap %s/ %smagic/
+"cnoremap \>s/ \>smagic/
+"nnoremap :g/ :g/\v
+"nnoremap :g// :g//
 
+" Yank line without the jump
+"nnoremap yy
+
+" Compile and open output
+"map <leader>G :w! \| !comp <c-r>%<CR><CR>
+"map <leader>o :!opout <c-r>%<CR><CR>
