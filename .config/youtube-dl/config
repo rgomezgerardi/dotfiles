@@ -3,4 +3,3 @@
 
 # Save all videos under downloads directory
 --output /media/files/Ricardo/Downloads/%(title)s.%(ext)s
-

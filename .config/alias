@@ -21,24 +21,6 @@
 # Suffix alias
 alias -s txt="$EDITOR"
 
-# Add handy alias and flags
-alias ss="sudo shutdown now"
-alias sr="sudo shutdown -r now"
-alias cp="cp --interactive --verbose"
-alias mv="mv --interactive --verbose"
-alias rm="rm --verbose"
-alias lsblk="lsblk -f"
-alias umount="umount --verbose --force --recursive"
-alias vi='nvim'
-alias vifm="$HOME/.config/vifm/scripts/vifmrun"
-alias rsync="rsync --human-readable --progress --verbose"
-alias ffmpeg='ffmpeg -hide_banner -y'
-alias mutt='neomutt'
-alias yt='youtube-dl'
-alias moc="mocp --config ~/.config/moc/config"
-alias rtorrent="~/.config/rtorrent/start"
-alias figlet="figlet -f ~/.config/figlet/fonts/ANSI\ Shadow.flf"
-
 # Enable color support
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -48,8 +30,26 @@ if [ -x /usr/bin/dircolors ]; then
 	alias vdir='vdir --color=auto'
 	alias grep='grep --color=auto'
 	alias fgrep='fgrep --color=auto'
-	alias egrep='egrep --color=auto'
 fi
+
+# Add handy alias and flags
+alias ss="sudo shutdown now"
+alias sr="sudo shutdown -r now"
+alias cp="cp --interactive --verbose"
+alias mv="mv --interactive --verbose"
+alias rm="rm --verbose"
+alias lsblk="lsblk -f"
+alias umount="umount --verbose --force --recursive"
+alias egrep="egrep --color=auto --line-number --only-matching"
+alias vi='nvim'
+alias vifm="$HOME/.config/vifm/scripts/vifmrun"
+alias rsync="rsync --human-readable --progress --verbose"
+alias ffmpeg='ffmpeg -hide_banner -y'
+alias mutt='neomutt'
+alias yt='/usr/bin/youtube-dl'
+alias moc="mocp --config ~/.config/moc/config"
+alias rtorrent="~/.config/rtorrent/start"
+alias figlet="figlet -f ~/.config/figlet/fonts/ANSI\ Shadow.flf"
 
 # Navigation
 alias ..='cd ..' 
@@ -72,7 +72,8 @@ alias yaysua='yay -Sua --noconfirm'			# Update only AUR pkgs
 alias yaysyu='yay -Syu --noconfirm'			# Update standard pkgs and AUR pkgs
 alias unlock='sudo rm /var/lib/pacman/db.lck'		# Remove pacman lock
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'	# Remove orphaned packages
-alias mirror1='sudo reflector --verbose --latest 30 --sort rate --save /etc/pacman.d/mirrorlist'
+#alias mirror1='sudo reflector --verbose --latest 30 --sort rate --save /etc/pacman.d/mirrorlist'
+alias mirror1='sudo reflector --verbose --fastest 16 -latest 16 --number 16 --sort rate --save /etc/pacman.d/mirror'
 alias mirror2='sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirror'	# Get fastest mirrors
 alias mirror3='sudo pacman-mirrors -g'
 
@@ -91,7 +92,7 @@ alias git-push='git add . ; git commit -m "Upload Files" ; git push origin'
 
 # Youtube-DL
 alias ytv="yt --format 'best[ext = mp4][height <= 480]'"
-alias yta='yt --extract-audio --audio-format mp3 --audio-quality 192k -o "$MUSIC/Downloaded/%(title)s.%(ext)s"'
+alias yta='yt --extract-audio --audio-format mp3 --audio-quality 192k'
 
 # Get error messages from journalctl
 alias jctl='journalctl -p 3 -xb'
@@ -109,35 +110,36 @@ rsync-copy-usb() { rsync --verbose --human-readable --progress --partial --archi
 # ========================================================
 # =================== Config Files =======================
 # ========================================================
-cf () {				     # usage: cf <program>
+cf () {				     # Usage: cf <program>
 	if [ $# -gt 0 ]; then
 		case $@ in
-			"alias")		$EDITOR ~/.config/alias		;;
-			"variables")	$EDITOR ~/.config/variables	;;
-			"bash")		$EDITOR ~/.bashrc		;;
-			"zsh")		$EDITOR ~/.config/zsh/zshrc	;;
-			"nvim")		$EDITOR ~/.config/nvim/init.vim	;;
-			"nvimplugin")	$EDITOR ~/.config/nvim/plug.vim	;;
-			"vifm")		$EDITOR ~/.config/vifm/vifmrc	;;
-			"vifmfiletype")	$EDITOR ~/.config/vifm/filetype	;;
-			"vifmcolors")	$EDITOR ~/.config/vifm/colors/dark.vifm	;;
-			"picom")	$EDITOR ~/.config/picom/picom.conf	;;
-			"termite")	$EDITOR ~/.config/termite/config	;;
-			"awesome")	$EDITOR ~/.config/awesome/rc.lua	;;
-			"awesomekeys")	$EDITOR ~/.config/awesome/keys.lua	;;
-			"awesometheme")	$EDITOR ~/.config/awesome/themes/default/theme.lua		;;      
-			"rofi")		$EDITOR ~/.config/rofi/config.rasi	;;
-			"rtorrent")	$EDITOR ~/.config/rtorrent/rtorrent.rc	;;
-			"polybar")	$EDITOR ~/.config/polybar/config	;;
-			"zathura")	$EDITOR ~/.config/zathura/zathurarc	;;
-			"mutt")		$EDITOR ~/.config/mutt/muttrc		;;
-			"moc")		$EDITOR ~/.config/moc/config		;;
-			"mockeys")	$EDITOR ~/.config/moc/keymap		;;
+			"alias")		$EDITOR ~/.config/alias					;;
+			"envars")		$EDITOR ~/.config/envars				;;
+			"bash")			$EDITOR ~/.bashrc					;;
+			"zsh")			$EDITOR ~/.config/zsh/zshrc				;;
+			"nvim")			$EDITOR ~/.config/nvim/init.vim				;;
+			"nvim plugin")		$EDITOR ~/.config/nvim/plug.vim				;;
+			"vifm")			$EDITOR ~/.config/vifm/vifmrc				;;
+			"vifm filetype")	$EDITOR ~/.config/vifm/filetype				;;
+			"vifm colors")		$EDITOR ~/.config/vifm/colors/dark.vifm			;;
+			"picom")		$EDITOR ~/.config/picom/picom.conf			;;
+			"termite")		$EDITOR ~/.config/termite/config			;;
+			"awesome")		$EDITOR ~/.config/awesome/rc.lua			;;
+			"awesome keys")		$EDITOR ~/.config/awesome/keys.lua			;;
+			"awesome theme")	$EDITOR ~/.config/awesome/themes/default/theme.lua	;;      
+			"rofi")			$EDITOR ~/.config/rofi/config.rasi			;;
+			"rtorrent")		$EDITOR ~/.config/rtorrent/rtorrent.rc			;;
+			"polybar")		$EDITOR ~/.config/polybar/config			;;
+			"zathura")		$EDITOR ~/.config/zathura/zathurarc			;;
+			"youtube-dl")		$EDITOR ~/.config/youtube-dl/config			;;
+			"mutt")			$EDITOR ~/.config/mutt/muttrc				;;
+			"moc")			$EDITOR ~/.config/moc/config				;;
+			"moc keymap")		$EDITOR ~/.config/moc/keymap				;;
 
-			*) echo "'$1' does not have a custom config file !" && exit 1 ;;
+			*) echo "Error: Program '$1' does not have a custom config file !" ;;
 		esac
 	else
-		echo "Error: You did not enter any arguments !" && exit 1
+		echo "Error: You did not enter any arguments !"
 	fi
 }
 
@@ -145,16 +147,28 @@ cf () {				     # usage: cf <program>
 # ========================================================
 # ================== Commands Files ======================
 # ========================================================
-alias cmddebian='$EDITOR $DOCUMENTS/Commands/Debian.txt'
-alias cmdarch='$EDITOR $DOCUMENTS/Commands/Arch.txt'
-alias cmdwine='$EDITOR $DOCUMENTS/Commands/Wine.txt'
-alias cmdtermux='$EDITOR $DOCUMENTS/Commands/Termux.txt'
-alias cmdyoutube-dl='$EDITOR $DOCUMENTS/Commands/Youtube-DL.txt'
-alias cmdregex='$EDITOR $DOCUMENTS/Commands/Regular_Expressions.txt'
-alias cmdbackup='$EDITOR $DOCUMENTS/Commands/Backup.txt'
-alias cmdffmpeg='$EDITOR $DOCUMENTS/Commands/FFmpeg.txt'
-alias cmdgrub='$EDITOR $DOCUMENTS/Commands/Grub.txt'
-alias cmdlutris='$EDITOR $DOCUMENTS/Commands/Lutris.txt'
+cmd () {				     # Usage: cf <program>
+	if [ $# -gt 0 ]; then
+		case $@ in
+			"debian")	$EDITOR $DOCUMENTS/Commands/Debian.txt			;;
+			"arch")		$EDITOR $DOCUMENTS/Commands/Arch.txt			;;
+			"wine")		$EDITOR $DOCUMENTS/Commands/Wine.txt			;;
+			"termux")	$EDITOR $DOCUMENTS/Commands/Termux.txt			;;
+			"youtube-dl")	$EDITOR $DOCUMENTS/Commands/Youtube-DL.txt		;;
+			"regex")	$EDITOR $DOCUMENTS/Commands/Regex.txt			;;
+			"backup")	$EDITOR $DOCUMENTS/Commands/Backup.txt			;;
+			"ffmpeg")	$EDITOR $DOCUMENTS/Commands/FFmpeg.txt			;;
+			"grub")		$EDITOR $DOCUMENTS/Commands/Grub.txt			;;
+			"lutris")	$EDITOR $DOCUMENTS/Commands/Lutris.txt			;;
+			"rtorrent")	$EDITOR $DOCUMENTS/Commands/Rtorrent.txt		;;
+			"github")	$EDITOR $DOCUMENTS/Commands/Github.txt			;;
+
+			*) echo "Error: Program '$1' does not have a custom config file !" ;;
+		esac
+	else
+		echo "Error: You did not enter any arguments !"
+	fi
+}
 
 
 # ========================================================

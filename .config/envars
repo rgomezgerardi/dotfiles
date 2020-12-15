@@ -4,16 +4,24 @@
 # environment variables
 export PATH=$PATH:$HOME/Scripts
 export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin
 export WINEPREFIX=~/Wine/Default
 
 # Programs
 export EDITOR=/bin/nvim
+export BROWSER=/bin/firefox
+export READER=/bin/zathura
+
+# rTorrent
+export RT_HOME="${RT_HOME:-$HOME/.config/rtorrent}"
 
 # Folders
 export DOWNLOADS=/media/files/Ricardo/Downloads
-export DOCUMENTS=/media/files/Ricardo/Documents/Linux
+export DOCUMENTS=/media/files/Ricardo/Documents
+export GITHUB=/media/files/Ricardo/Documents/Linux/Github
 export MUSIC=/media/files/Ricardo/Music
 export VIDEOS=/media/files/Ricardo/Videos
 export MOVIES=/media/files/Ricardo/Videos/Movies
 export SERIES=/media/files/Ricardo/Videos/Series
 export COURSES=/media/files/Ricardo/Videos/Courses
+export PROGRAMMING=/media/files/Ricardo/Programming

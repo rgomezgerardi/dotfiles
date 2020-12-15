@@ -24,8 +24,14 @@ HISTFILE=~/.cache/zsh/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
+
 # Prompt
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+RUSER=$([ -f "$HOME/.config/zsh/ruser" ] && shuf -n1 ~/.config/zsh/ruser)
+#PS1="%F{#000000}%K{#f0f0f0}  %k%f%F{#f0f0f0}%K{#2b87dc}%k%f%F{#f0f0f0}%K{#2b87dc} %B%4(~,../%3~,%~)%b %k%f%F{#2b87dc}%f "
+PS1="%F{#000000}%K{#f0f0f0} $RUSER %k%f%F{#f0f0f0}%K{#2b87dc}%k%f%F{#f0f0f0}%K{#2b87dc} %B%4(~,../%3~,%~)%b %k%f%F{#2b87dc}%f "
+
+# Add custom funtions completion
+fpath=(~/.config/zsh/completions $fpath)
 
 # Basic auto/tab completion
 autoload -Uz compinit && compinit
@@ -36,6 +42,7 @@ _comp_options+=(globdots)		# Include hidden files.
 # Use case-insensitive and partial completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 setopt no_list_ambiguous
+zstyle ":completion:*:descriptions" format "%B%d%b"
 
 # Expanding Global Alias
 globalias() {
@@ -61,13 +68,11 @@ setopt autopushd
 # Use Git-like -N instead of the default +N
 setopt pushdignoredups
 
-# Function Completion
-fpath=(~/.config/zsh/completions $fpath)
-
-setopt beep extendedglob nomatch notify
+#setopt beep extendedglob nomatch notify
 
 # Load aliases and envariament variables if existent.
-[ -f "$HOME/.config/variables" ] && source "$HOME/.config/variables"
+
+# Load Alias if existent
 [ -f "$HOME/.config/alias" ] && source "$HOME/.config/alias"
 
 
@@ -128,14 +133,14 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 
-# Theme
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+# # Theme
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+# 
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
+# # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+# [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh

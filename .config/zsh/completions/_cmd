@@ -1,0 +1,20 @@
+#compdef cmd
+
+_arguments \
+    "1:Program:($(ls ~/.config))" \
+    "2:Setting:->setting"
+
+case $state in
+	setting)
+		case $words[2] in
+			nvim)
+				compadd "$@" plugin ;;
+			vifm)
+				compadd "$@" filetype colors ;;
+    			awesome)
+				compadd "$@" keys theme ;;
+    			moc)
+				compadd "$@" keymap ;;
+			*)
+		esac
+esac

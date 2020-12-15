@@ -23,7 +23,7 @@ set trash
 set history=100
 
 " Open with preview window
-view
+"view
 
 " Automatically resolve symbolic links on l or Enter
 set nofollowlinks
@@ -89,7 +89,7 @@ set confirm-=delete
 " set grepprg='ag --line-numbers %i %a %s'
 
 " Add the flag to start a interactive shell 
-" set shellcmdflag+=i
+"set shellcmdflag+=ic
 " set shellcmdflag=-ic
 
 " Add additional place to look for executables
@@ -121,6 +121,7 @@ mark M "/media/files/Ricardo/Music"
 mark v "/media/files/Ricardo/Videos"
 mark m "/media/files/Ricardo/Videos/Movies"
 mark s "/media/files/Ricardo/Videos/Series"
+mark G "/mefia/files/Ricardo/Git"
 mark w "/media/windows"
 mark g "/media/windows/Users/Gerardi"
 mark n "/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC"
@@ -132,14 +133,16 @@ mark n "/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC"
 " :com[mand][!] command_name action
 command! df df -h %m 2> /dev/null
 command! diff vim -d %f %F
-command! zip zip -r %f.zip %f
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep nvim "+grep %a"
 command! reload :write | restart
-command! nvim :!nvim %a
+
+" Programs
 command! rm :!rm %a
+command! vi :!nvim %a
+command! python :!python %a
 
 " Empty the ruler. By default, it shows the number of directories+files.
 set rulerformat=
@@ -165,22 +168,18 @@ vnoremap w :view<cr>gv
 nnoremap gg ggj
 
 " Interaction with system clipboard
-if executable('xclip')
+ if executable('xclip')
 	" Yank current directory path into the clipboard
-    	nnoremap yd :!echo %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
-    	" Yank current file path into the clipboard
-    	nnoremap yf :!echo %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
-    	" Yank current file name without extention
-    	nnoremap yw :!echo %c | sed 's/\.[^.]*$//' | xclip -selection clipboard %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
-elseif executable('xsel')
-	" Yank current directory path into primary and selection clipboards
-	nnoremap yd :!echo -n %d | xsel --input --primary %i &&
-                \ echo -n %d | xsel --clipboard --input %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
-	" Yank current file path into into primary and selection clipboards
-	nnoremap yf :!echo -n %c:p | xsel --input --primary %i &&
-                \ echo -n %c:p | xsel --clipboard --input %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
-	" Yank current file name without extention
-	nnoremap yw :!echo -n %c | sed 's/\.[^.]*$//' | xsel --input --primary %i && echo -n %c | sed 's/\.[^.]*$//' | xsel --clipboard --input %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+	nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+	
+	" Yank current file path into the clipboard
+	nnoremap yf :!echo -n %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+	
+	" Yank current filename without path into the clipboard
+	nnoremap yn :!echo -n %c | xclip -selection clipboard %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+	
+	" Yank root of current file's name into the clipboard
+	nnoremap yr :!echo -n %c:r | xclip -selection clipboard %i<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
 endif
 
 " Open file in new terminal window with nvim
@@ -215,7 +214,7 @@ nnoremap ,w :set wrap!<cr>
 nnoremap x :!ex %c<cr>
 
 " Delete file permanent using rm
-nnoremap dp :!rm --verbose -r %f<cr>
+nnoremap dp :!rm --verbose -r %c:p<cr>
 
 " Get the PDF scrolling functionalities (vifmimg)
 map > :!~/.config/vifm/scripts/vifmimg inc<CR>
