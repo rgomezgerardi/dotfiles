@@ -1,0 +1,16 @@
+#                                                                                 vim: ft=dosini
+# CURL options regarding SSL certificates and DNS
+#
+# Note that newer rTorrent versions also have these commands, i.e. you can create a copy of
+# this file as 'curl-options-vanilla.rc', if you want to enable these options in case you
+# run a vanilla version.
+#
+# To altogether disable these settings, execute this command as the 'ruth' user:
+#
+#   echo >>~/.config/rtorrent/New-Configuration/rtorrent.d/.rcignore "curl-options.rc"
+#
+# Then restart rTorrent.
+
+catch = network.http.ssl_verify_peer.set=0
+catch = network.http.ssl_verify_host.set=0
+catch = network.http.dns_cache_timeout.set=25

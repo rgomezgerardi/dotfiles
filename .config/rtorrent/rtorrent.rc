@@ -1,0 +1,278 @@
+# ========================================================================	vim: ft=dosini
+#
+#  ██████╗ ████████╗ ██████╗ ██████╗ ██████╗ ███████╗███╗   ██╗████████╗
+#  ██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝████╗  ██║╚══██╔══╝
+#  ██████╔╝   ██║   ██║   ██║██████╔╝██████╔╝█████╗  ██╔██╗ ██║   ██║   
+#  ██╔══██╗   ██║   ██║   ██║██╔══██╗██╔══██╗██╔══╝  ██║╚██╗██║   ██║   
+#  ██║  ██║   ██║   ╚██████╔╝██║  ██║██║  ██║███████╗██║ ╚████║   ██║   
+#  ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   
+#
+#  Config File                                  Edited By: Ricardo Gomez
+# ========================================================================
+
+# Where rtorrent saves the session
+#session.path.set = ~/.config/rtorrent/.session/
+
+# Where rtorrent saves the downloaded files
+#directory.default.set = /media/files/Ricardo/Downloads
+
+# Check the hash after the end of the download
+#pieces.hash.on_completion.set = yes
+
+# The retio upload time after the download is complete
+#ratio.upload.set = 5M
+#group2.seeding.ratio.upload.set = 5M
+
+# Automatically resume incomplete downloads when starting rTorrent
+# load.start = "~/.config/rtorrent/.session/*.torrent"
+
+
+# ========================================================================
+# ====================== rTorrent-PS General =============================
+# ========================================================================
+# Root directory of this instance.
+method.insert = cfg.basedir, private|const|string, (cat, "/home/ruth/.config/rtorrent", "/")
+
+# `system.has` polyfill (the "false=" silences the `catch` command, in rTorrent-PS 1.1+)
+catch = {"false=", "method.redirect=system.has,false"}
+
+# Set "pyro.extended" to 1 to activate rTorrent-PS features!
+method.insert = pyro.extended, const|value, (system.has, rtorrent-ps)
+
+# Set "pyro.bin_dir" to the "bin" directory where you installed the pyrocore tools!
+# Make sure you end it with a "/"; if this is left empty, then the shell's path is searched.
+method.insert = pyro.bin_dir, const|string, ~/.config/rtorrent/pyrocore/
+
+# Set this to '0' to prevent logging of existing key bindings being replaced
+branch=(pyro.extended), ((ui.bind_key.verbose.set, 0))
+
+# Since "network.scgi.open_local" is parsed by "rtcontrol", this must be a literal value,
+# and also not moved out of the main configuration file!
+network.scgi.open_local = /home/ruth/.config/rtorrent/.scgi_local
+
+# SCHEDULE: Make SCGI socket group-writable and secure
+schedule2 = scgi_permission, 0, 0, "execute.nothrow=chmod,\"g+w,o=\",/home/ruth/.config/rtorrent/.scgi_local"
+
+# Uncomment the following line for debugging purposes only
+#log.execute = (cat, /tmp/rtorrent-bootstrap-, (system.pid), .log)
+
+
+# ========================================================================
+# ======================== PyroScope Settings ============================
+# ========================================================================
+# Regarding options to change 'pyrocore' configuration defaults, see the comments in the files located in this directory:
+# ~/.config/rtorrent/pyroscope/rtorrent.d
+
+# Import "pyrocore" defaults
+import = ~/.config/rtorrent/pyroscope/rtorrent-pyro.rc.default
+
+## TORQUE: Daemon watchdog schedule
+## Must be activated by touching the "~/.config/rtorrent/pyroscope/run/pyrotorque" file!
+## Set the second argument of 'pyro.watchdog' (i.e. after the last ',')
+## to "-v" or "-q" to change log verbosity.
+schedule2 = pyro_watchdog, 30, 300, "pyro.watchdog=~/.config/rtorrent/pyroscope,"
+
+
+# ========================================================================
+# ========================== Instance Layout =============================
+# ========================================================================10
+# Layout of paths in the filesystem
+
+# CONFIG: Manifest constants (base layout)
+method.insert = cfg.watch, string|private|const, (cat, (cfg.basedir), "watch/")
+method.insert = cfg.logs,  string|private|const, (cat, (cfg.basedir), "log/")
+
+# Set fundamental system paths
+network.http.capath.set = "/etc/ssl/certs"
+session.path.set        = (cat, (cfg.basedir), "session")
+directory.default.set   = "/media/files/Ricardo/Downloads"
+system.cwd.set          = "/media/files/Ricardo/Torrent"
+
+# Write a PID file into the session directory
+execute.nothrow = bash, -c, (cat, "echo >",\
+    (session.path), "rtorrent.pid", " ", (system.pid))
+
+# Report major config values on startup
+print = (cat, "CFG base:    ", (cfg.basedir))
+print = (cat, "CFG session: ", (session.path))
+
+
+# ========================================================================
+# ================ Log Rotation, Archival, and Pruning ===================
+# ========================================================================15
+# Note that the "main" log is only rotated when using rTorrent-PS 1.1+ (after 2017-03-26), since 
+# 'log.open_file' needed to learn how to re-open first. Otherwise, you will get a daily console warning.
+
+# Settings for archival delay, and retention [days]
+method.insert.value = pyro.log_retention.days, 7
+method.insert.value = pyro.log_archival.days,  2
+
+# Create HUGE xmlrpc log files?
+method.insert.value = pyro.log.xmlrpc.enabled, 0
+
+method.insert = pyro._log.xmlrpc.closing, const|private|simple, \
+    "if = (system.has, fixed-log-xmlrpc-close), (cat,), (cat, /dev/null)"
+
+# Create a "YYYY-mm-dd-HHMMSS" time stamp
+method.insert = pyro.date_iso.log_stamp, simple|private,\
+    "execute.capture_nothrow = bash, -c, \"echo -n $(date +%Y-%m-%d-%H%M%S)\""
+
+# String value for the currently used time stamp, changed on rotation
+method.insert = pyro.log_stamp.current, string
+
+# Create a full logfile path using the current stamp
+method.insert = pyro.logfile_path, simple|private,\
+    "cat = (cfg.logs), (argument.0), \"-\", (pyro.log_stamp.current), .log"
+
+# (Re-)open all logs with a current time stamp; the main log file
+# is just opened, you need to add some logging scopes yourself!
+method.insert = pyro.log_rotate, multi|rlookup|static
+method.set_key = pyro.log_rotate, !stamp,\
+    "pyro.log_stamp.current.set = (cat, (pyro.date_iso.log_stamp))"
+method.set_key = pyro.log_rotate, execute,\
+    "log.execute = (pyro.logfile_path, execute)"
+method.set_key = pyro.log_rotate, messages,\
+    "branch = (pyro.extended), ((log.messages, (pyro.logfile_path, messages) ))"
+method.set_key = pyro.log_rotate, xmlrpc,\
+    "branch = pyro.log.xmlrpc.enabled=, \"log.xmlrpc=(pyro.logfile_path, xmlrpc)\", \
+                                        \"log.xmlrpc=(pyro._log.xmlrpc.closing)\""
+method.set_key = pyro.log_rotate, ~main,\
+    "log.open_file = log, (pyro.logfile_path, rtorrent)"
+
+# Logrotate schedule (rotating shortly after 1AM, so DST shenanigans
+# are taken care of, and rotation is always near the begin of the next day)
+schedule2 = pyro_daily_log_rotate, 01:05:00, 24:00:00, ((pyro.log_rotate))
+
+# Log file archival and pruning
+method.insert = pmb._logfile_find_cmd, simple|private,\
+     "cat = \"find \", (cfg.logs),\
+            \" -daystart -type f -name '*.\", (argument.0),\"'\",\
+            \" -mtime +\", (argument.1),\
+            \" -exec nice \", (argument.2), \" '{}' ';'\""
+
+schedule2 = pyro_logfile_archival, 01:10:00, 24:00:00,\
+    "execute.nothrow = bash, -c, (pmb._logfile_find_cmd, log, (pyro.log_archival.days), gzip)"
+
+schedule2 = pyro_logfile_pruning, 01:20:00, 24:00:00,\
+    "execute.nothrow = bash, -c, (pmb._logfile_find_cmd, log.gz, (pyro.log_retention.days), rm)"
+
+# Open logs initially on startup
+pyro.log_rotate=
+schedule2 = pyro_startup_log_xmlrpc_open, 7, 0, \
+    "branch = pyro.log.xmlrpc.enabled=, \"log.xmlrpc=(pyro.logfile_path, xmlrpc)\""
+
+# ========================================================================
+# ===================== Bash Completion Handlers =========================
+# ========================================================================
+#
+#   echo >>~/.config/rtorrent/New-Configuration/rtorrent.d/.rcignore "bash-completion-handlers.rc"
+#
+# Then restart rTorrent.
+
+# EVENT: Call bash completion handlers
+method.set_key = event.download.finished, bash_handlers,\
+    "d.save_resume= ; execute.nothrow=~/.config/rtorrent/pyrocore/_event.download.finished,$d.hash=,$d.name=,$d.base_path="
+
+# ========================================================================
+# ============================ Connection ================================
+# ========================================================================
+## Which ports rtorrent can use
+#network.port_range.set = 60124-64124
+#
+### Authorize UDP trackers
+#trackers.use_udp.set = yes
+#
+## Enable DHT (for torrents without trackers)
+##on auto
+#dht.mode.set = on
+##63425 
+#dht.port.set = 6881
+#protocol.pex.set = yes
+#
+## Enable encryption when possible
+#protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+
+
+# ========================================================================
+# ============================ Throttling ================================
+# ========================================================================
+
+## Adjust max and min peers
+#throttle.max_peers.normal.set = 80
+#throttle.min_peers.normal.set = 50
+#
+### Adjust max and min uploads
+#throttle.max_uploads.set = 20
+#throttle.min_uploads.set = 10
+#
+### Global upload and download rate in KBps (Set 0 for unlimited)
+#throttle.global_down.max_rate.set_kb = 0
+#throttle.global_up.max_rate.set_kb = 0
+#
+## Maximum number of simultaneous downloads and uploads slots (global slots!) (`max_downloads_global`, `max_uploads_global`)
+#throttle.max_downloads.global.set = 300
+#throttle.max_uploads.global.set   = 300
+#
+## Maximum number of simultaneous downloads and uploads slots per torrent
+#throttle.max_downloads.set = 50
+#throttle.max_uploads.set = 50
+
+
+# ========================================================================
+# ============================ Automation ================================
+# ========================================================================
+# Watch directory to add a magnetic torrent and start it
+#schedule2 = watch_directory_start, 10, 2, "load.start_verbose=~/rtorrent/watch/start/*.torrent"
+
+
+# ========================================================================
+# =========================== Keybindigs =================================
+# ========================================================================
+
+# Quit (this desactive Ctrl + Q)
+method.insert = pmb._print_noquit, simple|private, "print=\"^Q is disabled, use 'q' to quit\""
+pyro.bind_key = no_quit, ^q, "pmb._print_noquit="
+pyro.bind_key = quit, q, "execute.throw=kill,-INT,(system.pid)"
+
+# Go Up
+pyro.bind_key = navigation_pgup, k, "ui.focus.pgup="
+
+# Go Down
+pyro.bind_key = navigation_pgdn, j, "ui.focus.pgdn="
+
+# Go to the first
+pyro.bind_key = navigation_home, g, "ui.focus.home="
+
+# Got to the last
+pyro.bind_key = navigation_end,  G, "ui.focus.end="
+
+# Sort by uploaded rate
+pyro.bind_key = my_uploaded_view, u, "view.sort = uploaded ; ui.current_view.set = uploaded"
+
+
+# Color scheme for 8 ANSI colors
+#
+#pyro.color_theme.name    = "Default (8 ANSI colors)"
+#
+#ui.color.alarm.set       = "white on red"
+#ui.color.complete.set    = "white"
+##ui.color.custom1.set     = "gray"
+#ui.color.even.set        = ""
+#ui.color.focus.set       = "reverse"
+#ui.color.footer.set      = "white on blue"
+#ui.color.incomplete.set  = "yellow"
+#ui.color.info.set        = "white"
+#ui.color.label.set       = "gray"
+#ui.color.leeching.set    = "yellow"
+#ui.color.odd.set         = ""
+#ui.color.progress0.set   = "red"
+#ui.color.progress20.set  = "red"
+#ui.color.progress40.set  = "magenta"
+#ui.color.progress60.set  = "yellow"
+#ui.color.progress80.set  = "yellow"
+#ui.color.progress100.set = "green"
+#ui.color.progress120.set = "green"
+#ui.color.queued.set      = "magenta"
+#ui.color.seeding.set     = "green"
+#ui.color.stopped.set     = "blue"
+#ui.color.title.set       = "white on blue"
