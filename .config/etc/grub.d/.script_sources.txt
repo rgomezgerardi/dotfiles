@@ -1,0 +1,6 @@
+"current_name";"default_name"
+"proxifiedScripts/linux";"10_linux"
+"34_linux_xen";"20_linux_xen"
+"proxifiedScripts/os-prober";"30_os-prober"
+"proxifiedScripts/custom";"40_custom"
+"42_grub-customizer_menu_color_helper";"6_grub-customizer_menu_color_helper"

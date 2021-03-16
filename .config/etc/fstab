@@ -1,0 +1,21 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+
+# /dev/sda5 - Swap
+UUID=f4256a9d-73cf-4c3d-918d-6bc341843c29	none      	swap      	defaults  	0 0
+
+# /dev/sda6 - Arch Linux
+UUID=16cdd8de-a1e4-4dae-830f-7640482836e3	/         	ext4      	rw,relatime	0 1
+
+# /dev/sda1 - Files
+UUID=E6F088F1F088C96F	/media/files    ntfs	uid=1000,gid=1000,big_writes	0	0
+
+# /dev/sda3 - Windows10
+#UUID=0A06C42806C4171B	/media/windows	ntfs	rw,uid=1000,gid=1000,dmask=022,fmask=133,allow_other	0	0
+
+# Pendrive
+#/dev/sdb1	/media/usb	vfat	nosuid,nodev,nofail,uid=1000,gid=1000,dmask=000,fmask=000,x-gvfs-show,x-systemd.device-timeout=1ms	0	0
+# Dvd - Cd
+#UUID=2019-08-15-21-52-52-00             /media/iso                iso9660 ro,user,auto  0 0
