@@ -1,5 +1,4 @@
-" ====================================================
-"
+" ==================================================== 
 "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
 "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
 "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
@@ -18,27 +17,23 @@ set shell=/bin/zsh
 
 " Copy to clipboard
 set clipboard+=unnamedplus
-
-" Save as sudo
-ca w!! w !sudo tee "%"
-
 " Change the default terminal size
 "set termwinsize=10x0
 
-" When scrolling, keep cursor 3 lines away from screen border
+" When scrolling, keep cursor away from screen border
 set scrolloff=3
 
 " No create a swap file
 set noswapfile
 
-" Change the <leader> key map
-let mapleader = "\\"
-
 " Enables 24-bit RGB color
 set termguicolors
 
+" Source Keybindings
+if !empty(expand(glob('~/.config/nvim/keys.vim'))) | source $HOME/.config/nvim/keys.vim | endif
+" stdpath("config")
 " Source Plugins
-source $HOME/.config/nvim/plug.vim
+if !empty(expand(glob('~/.config/nvim/plug.vim'))) | source $HOME/.config/nvim/plug.vim | endif
 
 
 " ====================================================                                      
@@ -51,6 +46,15 @@ if has('gui_running')
 else
   colorscheme onedark
 endif
+
+" Ignore upper/lower case when searching
+"set ignorecase
+
+" Show partial matches for a search phrase
+"set incsearch
+
+" Highlight all matching phrases
+"set hlsearch
 
 " Show sidebar numbers
 set number relativenumber
@@ -70,7 +74,7 @@ set wildignorecase
 
 " Dont show --INSERT-- , --NORMAL-- , etc
 set noshowmode
-set noshowcmd
+"set noshowcmd
 
 " Enable folding
 set foldmethod=marker
@@ -91,10 +95,46 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
+" Number of spaces that a <Tab> in the file counts for
+set tabstop=8
+
+" Number of spaces to use for each step of (auto)indent
+set shiftwidth=4
+
+" Number of spaces that a <Tab> counts for while performing editing
+" operations, like inserting a <Tab> or using <BS>.  It "feels" like
+" <Tab>s are being inserted, while in fact a mix of spaces and <Tab>s is used 
+set softtabstop=-1
+
+"In Insert mode: (don't) Use the appropriate number of spaces to insert a <Tab>
+set noexpandtab
+
+" When on, a <Tab> in front of a line inserts blanks according to
+" 'shiftwidth'.  'tabstop' or 'softtabstop' is used in other places
+set smarttab
+
+" Copy indent from current line when starting a new line (typing <CR>
+" in Insert mode or when using the "o" or "O" command)
+set noautoindent
+
+" Do smart autoindenting when starting a new line
+set nosmartindent
+
+" Enables automatic C program indenting
+set nocindent
+" ====================================================                                      
+" ====================== Alias =======================
+" ====================================================
+" Save as sudo
+ca w!! w !sudo tee "%"
+
 
 " ====================================================                                      
 " ================== Auto Commands ===================
 " ====================================================
+" Disable automatic comment insertion (:set formatoptions?)
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 if !exists("autocommands_loaded")
 	let autocommands_loaded = 1
 	
@@ -112,51 +152,3 @@ if !exists("autocommands_loaded")
 	autocmd FileType python map <buffer> <F5> :w<CR>:split \| terminal python3 "%"<CR>
 	autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:split \| terminal python3 "%"<CR>
 endif
-
-
-" ====================================================                                      
-" ================== Key Mappings ====================
-" ====================================================
-" Split navigations 
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-noremap <silent> <C-Left> :vertical resize +3<CR>
-noremap <silent> <C-Right> :vertical resize -3<CR>
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :resize -3<CR>
-map <Leader>th <C-w>t<C-w>H
-map <Leader>tv <C-w>t<C-w>K
-
-" Edit and reload vimrc configuration file
-nnoremap <Leader>ve :w ; e $MYVIMRC<CR>
-nnoremap <Leader>vr :source $MYVIMRC<CR>
-
-" Enable folding with the spacebar
-"nnoremap <space> za
-
-" Tab navigation
-map tt :tabnew 
-map <M-Right> :tabn<CR>
-imap <M-Right> <ESC>:tabn<CR>
-map <M-Left> :tabp<CR>
-imap <M-Left> <ESC>:tabp<CR>
-
-" Open terminal
-map <Leader>tt :vsplit \| terminal<CR>
-
-" Permanent regex very magic mode (cause interferes with vim's search-history)
-"nnoremap / /\v
-"vnoremap / /\v
-"cnoremap %s/ %smagic/
-"cnoremap \>s/ \>smagic/
-"nnoremap :g/ :g/\v
-"nnoremap :g// :g//
-
-" Yank line without the jump
-"nnoremap yy
-
-" Compile and open output
-"map <leader>G :w! \| !comp <c-r>%<CR><CR>
-"map <leader>o :!opout <c-r>%<CR><CR>
