@@ -11,12 +11,7 @@
 # ========================================================
 
 # Global alias
-#alias -g downloads="$DOWNLOADS"
-#alias -g music="$MUSIC"
-#alias -g videos='$VIDEOS'
-#alias -g movies="$MOVIES"
-#alias -g series="$SERIES"
-#alias -g courses="$COURSES"
+alias -g bg="&> /dev/null &"
 
 # Suffix alias
 alias -s txt="$EDITOR"
@@ -50,6 +45,7 @@ alias yt='/usr/bin/youtube-dl'
 alias moc="mocp --config ~/.config/moc/config"
 alias rtorrent="~/.config/rtorrent/start"
 alias figlet="figlet -f ~/.config/figlet/fonts/ANSI\ Shadow.flf"
+alias mpv="mpv --player-operation-mode=pseudo-gui"
 
 # Navigation
 alias ..='cd ..' 
@@ -73,7 +69,7 @@ alias yaysyu='yay -Syu --noconfirm'			# Update standard pkgs and AUR pkgs
 alias unlock='sudo rm /var/lib/pacman/db.lck'		# Remove pacman lock
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'	# Remove orphaned packages
 #alias mirror1='sudo reflector --verbose --latest 30 --sort rate --save /etc/pacman.d/mirrorlist'
-alias mirror1='sudo reflector --verbose --fastest 16 -latest 16 --number 16 --sort rate --save /etc/pacman.d/mirror'
+alias mirror1='sudo reflector --verbose --fastest 20 --latest 20 --number 20 --sort rate --save /etc/pacman.d/mirror'
 alias mirror2='sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirror'	# Get fastest mirrors
 alias mirror3='sudo pacman-mirrors -g'
 
@@ -117,24 +113,37 @@ cf () {				     # Usage: cf <program>
 			"envars")		$EDITOR ~/.config/envars				;;
 			"bash")			$EDITOR ~/.bashrc					;;
 			"zsh")			$EDITOR ~/.config/zsh/zshrc				;;
-			"nvim")			$EDITOR ~/.config/nvim/init.vim				;;
-			"nvim plugin")		$EDITOR ~/.config/nvim/plug.vim				;;
-			"vifm")			$EDITOR ~/.config/vifm/vifmrc				;;
-			"vifm filetype")	$EDITOR ~/.config/vifm/filetype				;;
-			"vifm colors")		$EDITOR ~/.config/vifm/colors/dark.vifm			;;
+			
+			"vifm")			$EDITOR -p						\
+						~/.config/vifm/vifmrc					\
+						~/.config/vifm/filetype					\
+						~/.config/vifm/colors/dark.vifm				;;
 			"picom")		$EDITOR ~/.config/picom/picom.conf			;;
 			"termite")		$EDITOR ~/.config/termite/config			;;
-			"awesome")		$EDITOR ~/.config/awesome/rc.lua			;;
-			"awesome keys")		$EDITOR ~/.config/awesome/keys.lua			;;
-			"awesome theme")	$EDITOR ~/.config/awesome/themes/default/theme.lua	;;      
+			"mpv")			$EDITOR ~/.config/mpv/mpv.conf				;;
+			"inkscape")		$EDITOR ~/.config/inkscape/keys/custom.xml		;;
+			"awesome")		$EDITOR -p						\
+						~/.config/awesome/rc.lua				\
+						~/.config/awesome/keys.lua				\
+						~/.config/awesome/themes/default/theme.lua		;;
+			"qtile")		$EDITOR ~/.config/qtile/config.py			;;
 			"rofi")			$EDITOR ~/.config/rofi/config.rasi			;;
 			"rtorrent")		$EDITOR ~/.config/rtorrent/rtorrent.rc			;;
 			"polybar")		$EDITOR ~/.config/polybar/config			;;
 			"zathura")		$EDITOR ~/.config/zathura/zathurarc			;;
 			"youtube-dl")		$EDITOR ~/.config/youtube-dl/config			;;
 			"mutt")			$EDITOR ~/.config/mutt/muttrc				;;
-			"moc")			$EDITOR ~/.config/moc/config				;;
-			"moc keymap")		$EDITOR ~/.config/moc/keymap				;;
+			"nvim")			$EDITOR -p						\
+						~/.config/nvim/init.vim					\
+						~/.config/nvim/keys.vim					\
+						~/.config/nvim/plug.vim					;;
+			"moc")			$EDITOR -p						\
+						~/.config/moc/config					\
+						~/.config/moc/keymap					;;
+			"qute")			$EDITOR -p 						\
+						~/.config/qutebrowser/config.py 			\
+						~/.config/qutebrowser/keymap.py 			\
+						~/.config/qutebrowser/quickmarks			;;
 
 			*) echo "Error: Program '$1' does not have a custom config file !" ;;
 		esac
@@ -147,11 +156,12 @@ cf () {				     # Usage: cf <program>
 # ========================================================
 # ================== Commands Files ======================
 # ========================================================
-cmd () {				     # Usage: cf <program>
+cmd () {				     # Usage: cmd <program>
 	if [ $# -gt 0 ]; then
 		case $@ in
 			"debian")	$EDITOR $DOCUMENTS/Commands/Debian.txt			;;
 			"arch")		$EDITOR $DOCUMENTS/Commands/Arch.txt			;;
+			"aria2")	$EDITOR $DOCUMENTS/Commands/Aria2.txt			;;
 			"wine")		$EDITOR $DOCUMENTS/Commands/Wine.txt			;;
 			"termux")	$EDITOR $DOCUMENTS/Commands/Termux.txt			;;
 			"youtube-dl")	$EDITOR $DOCUMENTS/Commands/Youtube-DL.txt		;;
@@ -164,6 +174,34 @@ cmd () {				     # Usage: cf <program>
 			"github")	$EDITOR $DOCUMENTS/Commands/Github.txt			;;
 
 			*) echo "Error: Program '$1' does not have a custom config file !" ;;
+		esac
+	else
+		echo "Error: You did not enter any arguments !"
+	fi
+}
+
+
+# ========================================================
+# ==================== Lits Files ========================
+# ========================================================
+list () {				# Usage: list <program>
+	if [ $# -gt 0 ]; then
+		case $@ in
+			"addons")	$EDITOR $DOCUMENTS/Lists/addons.txt			;;
+			"game")		$EDITOR $DOCUMENTS/Lists/game.txt			;;
+			"key")		$EDITOR $DOCUMENTS/Lists/key.txt			;;
+			"keyword")	$EDITOR $DOCUMENTS/Lists/keyword.txt			;;
+			"link")		$EDITOR $DOCUMENTS/Lists/link.txt			;;
+			"movie")	$EDITOR $DOCUMENTS/Lists/movie.txt			;;
+			"password")	$EDITOR $DOCUMENTS/Lists/password.txt			;;
+			"program")	$EDITOR $DOCUMENTS/Lists/program.txt			;;
+			"r")		$EDITOR $DOCUMENTS/Lists/r.txt				;;
+			"serie")	$EDITOR $DOCUMENTS/Lists/serie.txt			;;
+			"song")		$EDITOR $DOCUMENTS/Lists/song.txt			;;
+			"todo")		$EDITOR $DOCUMENTS/Lists/todo.txt			;;
+			"video")	$EDITOR $DOCUMENTS/Lists/video.txt			;;
+
+			*) echo "Error: List '$1' does not have a file !" ;;
 		esac
 	else
 		echo "Error: You did not enter any arguments !"

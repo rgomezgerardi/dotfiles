@@ -26,9 +26,9 @@ SAVEHIST=10000
 
 
 # Prompt
-RUSER=$([ -f "$HOME/.config/zsh/ruser" ] && shuf -n1 ~/.config/zsh/ruser)
+#RUSER=$([ -f "$HOME/.config/zsh/ruser" ] && shuf -n1 ~/.config/zsh/ruser)
 #PS1="%F{#000000}%K{#f0f0f0}  %k%f%F{#f0f0f0}%K{#2b87dc}%k%f%F{#f0f0f0}%K{#2b87dc} %B%4(~,../%3~,%~)%b %k%f%F{#2b87dc}%f "
-PS1="%F{#000000}%K{#f0f0f0} $RUSER %k%f%F{#f0f0f0}%K{#2b87dc}%k%f%F{#f0f0f0}%K{#2b87dc} %B%4(~,../%3~,%~)%b %k%f%F{#2b87dc}%f "
+PS1="%F{#000000}%K{#f0f0f0} arch %k%f%F{#f0f0f0}%K{#2b87dc}%k%f%F{#f0f0f0}%K{#2b87dc} %B%4(~,../%3~,%~)%b %k%f%F{#2b87dc}%f "
 
 # Add custom funtions completion
 fpath=(~/.config/zsh/completions $fpath)
@@ -72,9 +72,11 @@ setopt pushdignoredups
 
 # Load aliases and envariament variables if existent.
 
-# Load Alias if existent
-[ -f "$HOME/.config/alias" ] && source "$HOME/.config/alias"
+# Load Environment Variables if existent
+[ -f "$HOME/.config/-/envars" ] && source "$HOME/.config/-/envars"
 
+# Load Alias if existent
+[ -f "$HOME/.config/-/alias" ] && source "$HOME/.config/-/alias"
 
 # ========================================================
 # ==================== Vi Navigation =====================

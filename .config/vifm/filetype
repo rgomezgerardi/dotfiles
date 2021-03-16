@@ -35,8 +35,10 @@ fileviewer <audio/*>
 
 " Video
 filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx]
-	 \ {Open using celluloid}
-	 \ celluloid --new-window %f %i < /dev/null &> /dev/null &
+"	 \ {Open using celluloid}
+"	 \ celluloid --new-window %f %i < /dev/null &> /dev/null &
+	 \ {Open using mpv}
+	 \ mpv %f &> /dev/null &
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx]
         \ vifmimg videopreview %px %py %pw %ph %c
         \ %pc
@@ -94,9 +96,10 @@ fileviewer *.[1-8]
 " ========================================================
 " Web
 filextype *.html,*.htm
-        \ {Open with firefox}
-        \ firefox %f &,
-filextype *.html,*.htm nvim %f 2>/dev/null &
+        \ {Open with qutebrowser}
+        \ qutebrowser --target tab %f &> /dev/null &
+
+" filextype *.html,*.htm nvim %f &> /dev/null &
 
 " Object
 filetype *.o
@@ -115,6 +118,7 @@ filetype *.exe
 filetype *.md5
        \ {Check MD5 hash sum}
        \ md5sum -c %f %S,
+
 
 " SHA1
 filetype *.sha1
