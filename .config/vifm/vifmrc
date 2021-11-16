@@ -1,0 +1,174 @@
+" ========================================================
+"
+"            ██╗   ██╗██╗███████╗███╗   ███╗
+"            ██║   ██║██║██╔════╝████╗ ████║
+"            ██║   ██║██║█████╗  ██╔████╔██║
+"            ╚██╗ ██╔╝██║██╔══╝  ██║╚██╔╝██║
+"             ╚████╔╝ ██║██║     ██║ ╚═╝ ██║
+"              ╚═══╝  ╚═╝╚═╝     ╚═╝     ╚═╝
+"
+" Config File                       Edit By: Ricardo Gomez
+" ========================================================
+
+" Command used to edit files in various contexts
+set vicmd="nvim"
+"set vicmd="emacs &> /dev/null &"
+
+" This makes vifm perform file operations on its own instead of relying on standard utilities like `cp`
+set syscalls
+
+" Trash Directory
+set trash
+
+" This is how many directories to store in the directory history
+set history=80
+
+" Open with preview window
+"view
+
+" Automatically resolve symbolic links on l or Enter
+set nofollowlinks
+
+" Entered commands with unambiguous beginning using :! (e.g. :!Te instead of :!Terminal or :!Te<tab>)
+set fastrun
+
+" Natural sort of (version) numbers within text
+set sortnumbers
+
+" Maximum number of changes that can be undone
+set undolevels=80
+
+" Use Vim's format of help file (has highlighting and "hyperlinks"). If you would rather use a plain text help file set novimhelp
+set vimhelp
+
+" Run an executable file when you press return on the file name
+set runexec
+
+" List of color schemes to try (picks the first one supported by the terminal)
+colorscheme Default-256 Default
+
+" Selected color scheme
+colorscheme dark
+
+" Format for displaying time in file list
+set timefmt=%m/%d\ %H:%M
+
+" Show list of matches on tab completion in command-line mode
+set wildmenu
+
+" Display completions in a form of popup with descriptions of the matches
+set wildstyle=popup
+
+" Display suggestions in normal, visual and view modes for keys, marks and registers (at most 5 files).  In other view, when available.
+set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+
+" Ignore case in search patterns unless it contains at least one uppercase letter
+set ignorecase
+set smartcase
+
+" Don't highlight search results automatically
+set nohlsearch
+
+" Use increment searching (search while typing)
+set incsearch
+
+" Try to leave some space from cursor to upper/lower border in lists
+set scrolloff=4
+
+" Don't do too many requests to slow file systems
+if !has('win')
+    set slowfs=curlftpfs
+endif
+
+" Set custom status line look
+set statusline="  Hint: %z%= %A %10u:%-7g %15E %20d  "
+"set statusline="  %t%= %A %10u:%-7g %15E %20d  "
+"set statusline="%{system('lsattr -l ' . expand('%c'))}"
+
+" What should be saved automatically between vifm sessions
+set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
+
+" Dont show delete confirmation
+set confirm-=delete
+
+" Use ag (the silver searcher) instead of grep
+" set grepprg='ag --line-numbers %i %a %s'
+
+" Add the flag to start a interactive shell 
+"set shellcmdflag+=ic
+" set shellcmdflag=-ic
+
+" Add additional places to look for executables
+let $PATH = $HOME.'/.local/bin:/usr/local/bin:'.$PATH
+
+" Empty the ruler. By default, it shows the number of directories+files.
+"set rulerformat=
+set rulerformat='%2l-%S%[ +%x%]'
+
+" Server
+let $VIFM_SERVER_NAME = v:default
+
+
+" File Type and File Viewer
+source "$HOME/.config/vifm/filetype"
+
+" Keys 
+source "$HOME/.config/vifm/keymap"
+
+" Set icons (Required Nerd Font)
+source $HOME/.config/vifm/icons
+
+
+" ========================================================
+" ======================= Marks ==========================
+" ========================================================
+mark B "~/.local/bin"
+mark C "/media/files/Ricardo/Documents/Assignments/College"
+mark D "/media/files/Ricardo/Documents"
+mark F "~/.local/share/fonts"
+mark G "/media/files/Ricardo/Documents/Github"
+mark H "/"
+mark M "/media/files/Ricardo/Music"
+mark N "/media/files/Ricardo/Documents/Notes"
+mark O "/media/files/Ricardo/Origami"
+mark P "~/Phone/Internal shared storage"
+mark R "/media/files/Ricardo/Projects/Godot/2d/Rotyen"
+mark b "/media/files/Ricardo/Books"
+mark c "~/.config"
+mark d "/media/files/Ricardo/Downloads"
+mark f "/media/files/Ricardo/Resources/Fonts"
+mark g "/media/windows/Users/Gerardi"
+mark h "~"
+mark m "/media/files/Ricardo/Videos/Movies"
+mark n "/media/windows/Users/Gerardi/Documents/Any Video Converter/DVD_NTSC"
+mark p "/media/files/Ricardo/Pictures"
+mark P "/media/files/Ricardo/Projects"
+mark r "/media/files/Ricardo"
+mark s "/media/files/Ricardo/Videos/Series"
+mark t "/media/files/Ricardo/Torrent"
+mark u "/media/usb"
+mark v "/media/files/Ricardo/Videos"
+mark w "/media/windows"
+mark z "~/.config/vifm" 
+
+
+" ========================================================
+" ====================== Commands ========================
+" ========================================================
+" :com[mand][!] command_name action
+command! df df -h %m 2> /dev/null
+command! diff vim -d %f %F
+command! run !! ./%f
+command! make !!make %a
+command! mkcd :mkdir "%a" | cd "%a"
+command! vgrep nvim "+grep %a"
+command! reload :write | restart
+
+" Programs
+command! rm :!rm %a
+command! ex :!ex %a
+command! vi :!st nvim %a 2> /dev/null &
+command! emacs :!/bin/emacs %a %i &
+command! python :!python %a
+command! dragon :!dragon-drag-and-drop --all --and-exit %f %i &
+command! renies :!python ~/.local/bin/python/renies.py %f %i
