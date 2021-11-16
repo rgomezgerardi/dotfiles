@@ -1,0 +1,28 @@
+# Enable copy to clipboard
+set selection-clipboard clipboard
+
+# Set tilde instead of full path in status bar
+set statusbar-home-tilde
+
+# Set the background of zathura
+set default-bg "#646464"
+
+# Disables the status bar. CTRL+N to enable it.
+#set guioptions ""
+
+# Start in color invert mode
+set recolor true
+
+# Changing the keyboard shortcut to invert the colors to the same from MuPDF
+map i recolor
+
+map x fullscreen
+
+# Recolor the PDF
+set recolor-darkcolor "#dcdccc" 
+set recolor-lightcolor "#01181D"
+
+# Switching the keybindings for reload and rotate
+#map r reload
+#map R rotate
+
