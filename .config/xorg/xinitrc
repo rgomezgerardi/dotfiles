@@ -1,0 +1,72 @@
+#!/bin/sh
+
+modmap=$MODMAP
+resources=$RESOURCES
+session=$SESSION
+
+# Keyboard Configuration (This shlould be above xmodmap)
+args=(
+    # MODEL
+    -model pc105
+
+    # LAYOUT
+    -layout us,es 
+
+    # VARIANT
+   -variant , 
+    
+    # OPTION
+    # Switching to another layout
+    -option grp:alt_shift_toggle
+   
+    # Key to choose the 3rd level (Right Alt; Shift+Right Alt as Compose)
+    #-option lv3:ralt_switch_multikey   
+    
+    # Swap Esc and Caps Lock
+    #-option caps:swapescape                
+
+    # Make Caps Lock an additional Esc, but Shift + Caps Lock is the regular Caps Lock
+    -option caps:escape_shifted_capslock
+
+    # Menu is mapped to Win
+    -option altwin:menu_win
+
+    # Shift + Num Lock enables PointerKeys
+    -option keypad:pointerkeys
+    
+    # Numeric keypad Delete behavior
+    -option kpdl:dot
+    
+    # Kill the X server
+    -option terminate:ctrl_alt_bksp
+)
+setxkbmap "${args[@]}"
+
+# Activating NumLock
+numlockx &
+
+# X11
+[ -f "$resources" ] && xrdb -merge "$resources"
+[ -f "$modmap" ] && xmodmap "$modmap"
+
+# Display Resolution
+
+# Compositor
+picom &
+
+# Automounting USB
+#udiskie &
+
+# Emacs Server
+#emacs --bg-daemon &
+
+# Wallpaper
+#xwallpaper --daemon --stretch '/media/files/Ricardo/Pictures/WallPapers/img-45.png' &
+
+# System Monitor
+#conky --demonize --pause=5 &
+
+# Download Manager
+
+# Window Manager
+DISPLAY=:0 exec $HOME/.local/bin/dwm
