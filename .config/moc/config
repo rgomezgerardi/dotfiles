@@ -1,0 +1,290 @@
+# ========================================================
+#
+#             ███╗   ███╗ ██████╗  ██████╗
+#             ████╗ ████║██╔═══██╗██╔════╝
+#             ██╔████╔██║██║   ██║██║     
+#             ██║╚██╔╝██║██║   ██║██║     
+#             ██║ ╚═╝ ██║╚██████╔╝╚██████╗
+#             ╚═╝     ╚═╝ ╚═════╝  ╚═════╝
+#
+# Config File                       Edit By: Ricardo Gomez
+# ========================================================
+
+# Show file titles (title, author, album) instead of file names?
+ReadTags = yes
+
+# Directory in which you store your music files
+MusicDir = $MUSIC
+
+# Start in the music directory by default
+StartInMusicDir = yes
+
+# How to sort
+Sort = FileName
+
+# Show errors in the streams (for example, broken frames in MP3 files)?
+ShowStreamErrors = yes
+
+# Ignore CRC errors in MP3 files?
+MP3IgnoreCRCErrors = yes
+
+# Set playback toggles.
+Repeat = no
+Shuffle = no
+AutoNext = yes
+
+# Set the default format string:
+#FormatString = "%(n:%n :)%(a:%a - :)%(t:%t:)%(A: \(%A\):)"
+FormatString = "%(t:%t:)"
+
+# Input and output buffer sizes (in kilobytes).
+#InputBuffer = 512                  # Minimum value is 32KB
+#OutputBuffer = 512                 # Minimum value is 128KB
+
+# Set how much to fill the input buffer before playing
+Prebuffering = 64
+
+# Use this HTTP proxy server for internet streams.  If not set, the
+# environment variables http_proxy and ALL_PROXY will be used if present.
+#
+# Format: HTTPProxy = PROXY_NAME:PORT
+#
+#HTTPProxy =
+
+# Select the sound driver
+SoundDriver = JACK:ALSA:OSS:SNDIO
+
+# Save software mixer state
+Softmixer_SaveState = yes
+
+# Save equalizer state
+Equalizer_SaveState = yes
+
+# Show files with dot at the beginning?
+ShowHiddenFiles = no
+
+# Hide file name extensions?
+HideFileExtension = yes
+
+# Show file format in menu?
+ShowFormat = yes
+
+# Show file time in menu[ 'yes' | 'no' | 'IfAvailable']
+ShowTime = yes
+
+# Show time played as a percentage in the time progress bar.
+ShowTimePercent = yes
+
+# Theme file to use.  This can be absolute path or relative to
+Theme = ${HOME}/.config/moc/themes/default
+
+# Should MOC try to autoload the default lyrics file for an audio?  (The
+# default lyrics file is a text file with the same file name as the audio
+# file name with any trailing "extension" removed.)
+AutoLoadLyrics = yes
+
+# MOC directory (where pid file, socket and state files are stored).
+MOCDir = "${HOME}/.config/moc/state
+
+# Use mmap() to read files.  mmap() is much slower on NFS.
+UseMMap = no
+
+# Use MIME to identify audio files.  This can make for slower loading
+UseMimeMagic = no
+
+# Assume this encoding for ID3 version 1/1.1 tags (MP3 files). This option is ignored if UseRCC is set to 'yes'.
+ID3v1TagsEncoding = WINDOWS-1250
+
+# Use librcc to fix ID3 version 1/1.1 tags encoding.
+UseRCC = yes
+
+# Use librcc to filenames and directory names encoding.
+UseRCCForFilesystem = yes
+
+# Assume that if the encoding of ID3v2 is set to ISO-8859-1 then the ID3v1TagsEncoding will be the same
+EnforceTagsEncoding = no
+
+# Enable the conversion of filenames from the local encoding to UTF-8.
+FileNamesIconv = no
+
+# Should MOC precache files to assist gapless playback?
+Precache = yes
+
+# Remember the playlist after exit?
+SavePlaylist = no
+
+# When using more than one client (interface) at a time, do they share the playlist?
+SyncPlaylist = yes
+
+# Choose a keymap file
+Keymap = ${HOME}/.config/moc/keymap
+
+# Use ASCII rather than graphic characters for drawing lines.  This helps on some terminals.
+ASCIILines = no
+
+# FastDirs, these allow you to jump directly to a directory
+Fastdir1 = "${MusicDir}/Downloaded"
+Fastdir2 = "${MusicDir}/Indie"
+Fastdir3 = "${HOME}/Downloads"
+#Fastdir4 =
+#Fastdir5 =
+#Fastdir6 =
+#Fastdir7 =
+#Fastdir8 =
+#Fastdir9 =
+#Fastdir10 =
+
+# How fast to seek (in number of seconds per keystroke)
+SeekTime = 1
+SilentSeekTime = 5
+
+# Always use this sample rate (in Hz) when opening the audio device (0 desactivate)
+ForceSampleRate = 0
+
+# Setting this option to 'yes' allows MOC to use 24bit output
+Allow24bitOutput = no
+
+# Use realtime priority for output buffer thread. This will prevent gaps while playing even with heavy load
+UseRealtimePriority = no
+
+# The number of audio files for which MOC will cache tags.
+TagsCacheSize = 256
+
+# Number items in the playlist.
+PlaylistNumbering = yes
+
+# Change the position and size of the menus
+Layout1 = directory(0,0,50%,100%):playlist(50%,0,FILL,100%)
+Layout2 = directory(0,0,100%,50%):playlist(0,50%,100%,FILL)
+Layout3 = directory(50%,50%,50%,50%)
+
+# When the song changes, should the menu be scrolled so that the currently played file is visible?
+FollowPlayedFile = yes
+
+# What to do if the interface was started and the server is already playing something from the playlist
+CanStartInPlaylist = yes
+
+# Executing external commands (1 - 10)
+ExecCommand1 = "rm -r %f"
+ExecCommand2 = "cp %f /media/phone"
+ExecCommand3 = "echo Playing %R"
+#ExecCommand4 =
+#ExecCommand5 =
+#ExecCommand6 =
+#ExecCommand7 =
+#ExecCommand8 =
+#ExecCommand9 =
+#ExecCommand10 =
+
+# Display the cursor in the line with the selected file
+UseCursorSelection = no
+
+# Display full paths instead of just file names in the playlist
+PlaylistFullPaths = no
+
+# The following setting describes how block markers are displayed in the play time progress bar
+BlockDecorators = "`\"'"
+
+# How long (in seconds) to leave a message displayed on the screen
+MessageLingerTime = 3
+
+# Display a prefix on delayed messages indicating the number of queued messages still to be displayed
+PrefixQueuedMessages = yes
+
+# String to append to the queued message count if any error messages are still waiting to be displayed
+ErrorMessagesQueued = "!"
+
+# Self-describing ModPlug options (with 'yes' or 'no' values).
+ModPlug_Oversampling = yes
+ModPlug_NoiseReduction = yes
+ModPlug_Reverb = no
+ModPlug_MegaBass = no
+ModPlug_Surround = no
+
+# ModPlug resampling mode.
+# Valid values are:
+#
+#     FIR -      8 tap fir filter (extremely high quality)
+#     SPLINE -   Cubic spline interpolation (high quality)
+#     LINEAR -   Linear interpolation (fast, good quality)
+#     NEAREST -  No interpolation (very fast, extremely bad sound quality)
+#
+#ModPlug_ResamplingMode = FIR
+
+# Other self-describing ModPlug audio characteristic options.
+# (Note that the 32 bit sample size seems to be buggy.)
+#ModPlug_Channels = 2               # 1 or 2 channels
+#ModPlug_Bits = 16                  # 8, 16 or 32 bits
+#ModPlug_Frequency = 44100          # 11025, 22050, 44100 or 48000 Hz
+#ModPlug_ReverbDepth = 0            # 0 (quiet) to 100 (loud)
+#ModPlug_ReverbDelay = 0            # Delay in ms (usually 40-200ms)
+#ModPlug_BassAmount = 0             # 0 (quiet) to 100 (loud).
+#ModPlug_BassRange = 10             # Cutoff in Hz (10-100).
+#ModPlug_SurroundDepth = 0          # Surround level 0(quiet)-100(heavy).
+#ModPlug_SurroundDelay = 0          # Surround delay in ms, usually 5-40ms.
+#ModPlug_LoopCount = 0              # 0 (never), n (times) or -1 (forever)
+
+# Self-describing TiMidity audio characteristic options.
+TiMidity_Rate = 44100              # Between 8000 and 48000
+TiMidity_Bits = 16                 # 8 or 16
+TiMidity_Channels = 2              # 1 or 2
+TiMidity_Volume = 100              # 0 to 800
+
+# You can setup a TiMidity-Config-File here
+#TiMidity_Config =
+
+# Self-describing SidPlay2 audio characteristic options.
+SidPlay2_DefaultSongLength = 180   # If not in database (in seconds)
+SidPlay2_MinimumSongLength = 0     # Play at least n (in seconds)
+SidPlay2_Frequency = 44100         # 4000 to 48000
+SidPlay2_Bits = 16                 # 8 or 16
+SidPlay2_Optimisation = 0          # 0 (worst quality) to 2 (best quality)
+
+# Set path to a HVSC-compatible database (if not set, database is disabled).
+#SidPlay2_Database =
+
+# SidPlay2 playback Mode:
+#
+#     "M": Mono (best for many SIDs)
+#     "S": Stereo
+#     "L"/"R": Left / Right
+#
+#SidPlay2_PlayMode = "M"
+
+# Use start-song information from SID ('yes') or start at first song
+# ('no').  Songs before the start-song won't be played.  (Note that this
+# option previously took the values 1 and 0; these are now deprecated
+# in favour of 'yes' and 'no'.)
+#SidPlay2_StartAtStart = yes
+
+# Play sub-tunes.  (Note that this option previously took the values 1
+# and 0; these are now deprecated in favour of 'yes' and 'no'.noSidPlay2_PlaySubTunes = yes
+
+# Run the OnSongChange command when a new song starts playing.
+# Specify the full path (i.e. no leading '~') of an executable to run.
+# Arguments will be passed, and you can use the following escapes:
+#
+#     %a artist
+#     %r album
+#     %f filename
+#     %t title
+#     %n track
+#     %d file duration in XX:YY form
+#     %D file duration, number of seconds
+#
+# No pipes/redirects can be used directly, but writing a shell script
+# can do the job.
+#
+# Example:    OnSongChange = "/home/jack/.moc/myscript %a %r"
+#
+#OnSongChange =
+
+# Execute the command every time a song starts playing regardless of whether or not it is just repeating
+RepeatSongChange = no
+
+# Run the OnStop command (full path, no arguments) when MOC changes state
+# to stopped (i.e., when user stopped playing or changes a song).
+#OnStop = "/home/jack/.moc/myscript_on_stop"
+
+# This determines which song to play after finishing all the songs in the queue
+QueueNextSongReturn = yes

@@ -1,0 +1,64 @@
+* {
+	// Colors Variables
+	foreground:		#f0f0f0;
+	background:		#282C33cc;
+	background-alt:		#2e343f99;
+	color-1:		#2b87dc;
+
+	// Global Options
+        font:			"MesloLGS NF 10";
+	text-color:		@foreground;
+	background-color:	@background;
+  	border-color:		@background-alt;
+}
+
+#window {
+        anchor:			north west;
+	location:		north west;
+	x-offset:		89px;
+	y-offset:		1px;
+        width: 			512px;
+//	height:			68%;
+        //padding:		0px 1%;
+	//border-radius:	50% 50% 50% 50%;
+}
+
+inputbar {
+	border:			0 0 1px 0;
+	border-color:		@color-1;
+	margin:			0px 0px 2px 0px;
+	children:		[ prompt, textbox-prompt, entry ];
+}
+
+prompt {
+	enabled:		false;
+	padding:		0px;
+	border:			0 1px 0 0;
+}
+                                                                      
+textbox-prompt {                                                
+	expand:			false;                                                    
+	str:			"Search:";
+ }
+
+entry {
+	padding:		0px 0px 0px 0px;
+	expand:			true;
+}
+
+listview {
+  cycle:			false;
+  margin:			0 0 -1px 0;
+  scrollbar:			false;
+}
+
+element {
+  border:			0 0 1px 0;
+  padding:			16px;
+}
+
+element selected {
+  background-color:		@background-alt;
+}
+
+// vim: ft=css

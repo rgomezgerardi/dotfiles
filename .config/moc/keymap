@@ -1,0 +1,178 @@
+# The format of this file is:
+#
+#     - Lines beginning with # are comments.
+#     - Blank lines are ignored.
+#     - Every other line is expected to be in one of the formats:
+#
+#           COMMAND = [KEY ...]
+#           COMMAND += KEY ...
+#
+# The KEY can be:
+#
+#     - Just a char, like i, L, ", *
+#     - CTRL-KEY sequence: ^k (CTRL-k), ^4
+#     - ALT-KEY (meta) sequence: M-j (ALT-j), M-/
+#     - Special keys: DOWN, UP
+#                     LEFT, RIGHT
+#                     HOME, END
+#                     BACKSPACE
+#                     INS, DEL
+#                     ENTER
+#                     PAGE_UP, PAGE_DOWN
+#                     SPACE, TAB
+#                     KEYPAD_CENTER
+#                     ESCAPE
+#                     F1 - F12
+#
+# Note that the use of a digit as a KEY is deprecated.
+#
+# Maximum number of KEYs for one COMMAND is 5.
+#
+# Omitting the KEY for a COMMAND will unbind all its default keys.  They
+# will also be automatically unbound when you bind new KEYs to it. Individual
+# default KEYs will be automatically unbound when they are explicitly bound
+# to some other COMMAND.
+#
+# Using the '+=' form will cause the KEYs to be appended to any existing
+# (default or explicit) bindings for the COMMAND.  Appending an existing
+# default binding for the same COMMAND will cause MOC to think of that KEY
+# as then being explicitly bound.
+#
+# Only one binding for any given COMMAND can appear in the keymap file.  One
+# exception to this is that if the default keys for a COMMAND are explicitly
+# unbound then a subsequent binding may appear for it.  A second exception
+# is that multiple appending bindings may appear.
+#
+# Meta-key detection is sensitive to the ESCDELAY environment variable (see
+# the manpage for ncurses(3)).  In its absence, MOC resets the default
+# delay to 25ms.  If you need to emulate meta-key sequences using the ESC
+# key, then you may need to set the value of ESCDELAY back to its ncurses
+# default of 1000ms (but doing so will make the response to the ESC key
+# sluggish).
+#
+# If MOC's keypresses are being filtered through some other program (in a
+# GUI environment, for example) which also does meta-key detection, then
+# MOC is at the mercy of the timings with which that program presents them.
+#
+# Default key configuration for MOC (and a list of all available commands):
+
+# MOC control keys:
+quit                  = q
+quit_client           = Q
+
+# Menu and interface control keys:
+go                    = ENTER l
+menu_down             = j
+menu_up               = k
+menu_page_down        = 
+menu_page_up          = 
+menu_first_item       = g
+menu_last_item        = G
+search_menu           = /
+toggle_read_tags      = f
+toggle_show_time      = ^t
+toggle_show_format    = ^f
+toggle_menu           = TAB SPACE
+toggle_layout         = `
+toggle_hidden_files   = o
+next_search           = ^j
+show_lyrics           = 
+theme_menu            = T
+help                  = F1
+refresh               = ^r
+reload                = r
+
+# Audio playing and positioning keys:
+seek_forward          = .
+seek_backward         = ,
+seek_forward_fast     = M-l
+seek_backward_fast    = M-h
+pause                 = c
+stop                  = s
+next                  = n
+previous              = p
+toggle_shuffle        = S
+toggle_repeat         = R
+toggle_auto_next      = X
+toggle_mixer          = x
+go_url                = 
+
+# Volume control keys:
+volume_down_1         = {
+volume_up_1           = }
+volume_down_5         = [
+volume_up_5           = ]
+volume_10             = M-1
+volume_20             = M-2
+volume_30             = M-3
+volume_40             = M-4
+volume_50             = M-5
+volume_60             = M-6
+volume_70             = M-7
+volume_80             = M-8
+volume_90             = M-9
+
+# Directory navigation keys: defaults are Shift-number
+# (i.e., 'shift 1' -> '!' -> 'Fastdir1').
+go_to_a_directory     = :
+go_to_music_directory = m
+go_to_fast_dir1       = !
+go_to_fast_dir2       = @
+go_to_fast_dir3       = #
+go_to_fast_dir4       = $
+go_to_fast_dir5       = %
+go_to_fast_dir6       = ^
+go_to_fast_dir7       = &
+go_to_fast_dir8       = *
+go_to_fast_dir9       = (
+go_to_fast_dir10      = )
+go_to_playing_file    = ~
+go_up                 = h
+
+# Playlist specific keys:
+add_file              = a i
+add_directory         = A I
+plist_add_stream      = ^u
+delete_from_playlist  = d
+playlist_full_paths   = 
+plist_move_up         = u
+plist_move_down       = 
+save_playlist         = V
+remove_dead_entries   = Y
+clear_playlist        = C
+
+# Queue manipulation keys:
+enqueue_file          = z
+clear_queue           = Z
+
+# User interaction control:
+history_up            = k
+history_down          = j
+delete_to_start       = 
+delete_to_end         = 
+cancel                = ^x ESCAPE
+hide_message          = M
+
+# Softmixer specific keys:
+toggle_softmixer      = 
+toggle_make_mono      = 
+
+# Equalizer specific keys:
+toggle_equalizer      = 
+equalizer_refresh     = 
+equalizer_prev        = 
+equalizer_next        =
+
+# External commands:
+mark_start            = 
+mark_end              = 
+exec_command1         = D 
+exec_command2         = F2
+exec_command3         = F3
+exec_command4         = 
+exec_command5         = 
+exec_command6         = 
+exec_command7         = 
+exec_command8         = 
+exec_command9         = 
+exec_command10        = F10
