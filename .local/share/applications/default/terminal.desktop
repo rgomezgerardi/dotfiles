@@ -1,0 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Version=1.5
+Name=Terminal
+GenericName=Terminal
+NoDisplay=false
+Comment=Terminal
+#Icon=
+Exec=st
+Terminal=false
+#Actions=
+MimeType=application/x-terminal-emulator;
+Categories=System;TerminalEmulator;
+Keywords=shell;prompt;command;commandline;cmd;
+#PrefersNonDefaultGPU=

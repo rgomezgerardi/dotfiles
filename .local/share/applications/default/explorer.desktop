@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Version=1.5
+Name=Explorer
+GenericName=File Manager
+NoDisplay=false
+Comment=Terminal file manager
+Icon=vifm
+Exec=vifm %F
+Terminal=true
+#Actions=
+MimeType=inode/directory;
+Categories=System;FileTools;FileManager;Utility;ConsoleOnly;
+Keywords=File;Directory;Browse;
+#PrefersNonDefaultGPU=
+
+

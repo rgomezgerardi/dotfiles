@@ -1,0 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Version=1.5
+Name=Idle
+GenericName=Text Editor
+NoDisplay=false
+Comment=Edit text and much more
+Icon=emacs
+Exec=emacs %F
+Terminal=false
+#Actions=
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+Categories=Development;TextEditor;
+Keywords=Text;Editor;
+#PrefersNonDefaultGPU=

@@ -1,0 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Version=1.5
+Name=Browser
+GenericName=Web Browser
+NoDisplay=false
+Comment=Web browser
+Icon=qutebrowser
+Exec=qutebrowser %u
+Terminal=false
+#Actions=
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/qute;
+Categories=Network;WebBrowser;
+Keywords=web;browser;internet
+#PrefersNonDefaultGPU=
