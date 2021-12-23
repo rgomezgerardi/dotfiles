@@ -1,28 +1,37 @@
-vt emulation
-------------
+- desktopentry
+- netwmicon
+- bold is not bright
+- title parsing fix
+- dynamic-cursor-color
+- selection color
+- selectionbg-alpha
+- clipboard
+- delkey
+- CSI 22, 23
 
-* double-height support
-
-code & interface
-----------------
-
-* add a simple way to do multiplexing
-
-drawing
--------
-* add diacritics support to xdraws()
-	* switch to a suckless font drawing library
-* make the font cache simpler
-* add better support for brightening of the upper colors
-
-bugs
-----
-
-* fix shift up/down (shift selection in emacs)
-* remove DEC test sequence when appropriate
-
-misc
-----
-
-    $ grep -nE 'XXX|TODO' st.c
-
+Order
+|---+-------------------------------+-------|
+|   | Patch                         | Error |
+|---+-------------------------------+-------|
+|   | vim browse                    |     0 |
+|   | universcroll                  |     0 |
+|---+-------------------------------+-------|
+|   | anysize                       |     0 |
+|   | sync                          |     0 |
+|   | xclearwin                     |     0 |
+|   | xresources                    |     0 |
+|---+-------------------------------+-------|
+|   | boxdraw                       |     0 |
+|   | font2                         |     0 |
+|   | undercurl                     |     0 |
+|   | visualbell2                   |     0 |
+|   | w3m                           |     0 |
+|   | blinking cursor               |     1 |
+|   | ligatures                     |     2 |
+|---+-------------------------------+-------|
+|   | invert                        |     2 |
+|---+-------------------------------+-------|
+|   | alpha + alpha focus highlight |     5 |
+|---+-------------------------------+-------|
+|   | total                         |    10 |
+|---+-------------------------------+-------|

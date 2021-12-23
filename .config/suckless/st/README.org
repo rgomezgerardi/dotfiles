@@ -3,18 +3,14 @@
 
 * Simple
 This is a fork (not really) of st, a simple terminal emulator for X which sucks less.
-https://st.suckless.org
+[[https://st.suckless.org]]
 
 * Obtain
 In order to build st you need the Xlib header files.
 
-#+begin_src shell
-git clone 'https://gitlab.com/rgomezgerardi/st' && make clean install --directory ./st
-#+end_src
-
 Additional required packages:
-- libxft-bgra
-- w3m
++ libxft-bgra
++ w3m
 
 * Runing
 If you did not install st with make clean install, you must compile the st terminfo entry with the following command:
@@ -65,45 +61,5 @@ Cool right?, Oh! If I only knew something about being cool.
 + w3m
 
 * Credit
-This fork was brought to you by these people [[file:./CREDITS][CREDITS]]
+This fork was brought to you by these people [[file:./CREDITS][CREDITS]].\\
 They did the real work, if it was useful give your thanks to them.
-
-
-* TODO COMMENT
-- [] desktopentry
-- [] netwmicon
-- [] bold is not bright
-- [] title parsing fix
-- [] dynamic-cursor-color
-- [] selection color
-- [] selectionbg-alpha
-- [] clipboard
-- [] delkey
-- [] CSI 22, 23
-
-** Order
-|---+-------------------------------+-------|
-|   | Patch                         | Error |
-|---+-------------------------------+-------|
-|   | vim browse                    |     0 |
-|   | universcroll                  |     0 |
-|---+-------------------------------+-------|
-|   | anysize                       |     0 |
-|   | sync                          |     0 |
-|   | xclearwin                     |     0 |
-|   | xresources                    |     0 |
-|---+-------------------------------+-------|
-|   | boxdraw                       |     0 |
-|   | font2                         |     0 |
-|   | undercurl                     |     0 |
-|   | visualbell2                   |     0 |
-|   | w3m                           |     0 |
-|   | blinking cursor               |     1 |
-|   | ligatures                     |     2 |
-|---+-------------------------------+-------|
-|   | invert                        |     2 |
-|---+-------------------------------+-------|
-|   | alpha + alpha focus highlight |     5 |
-|---+-------------------------------+-------|
-| # | total                         |    10 |
-|---+-------------------------------+-------|
