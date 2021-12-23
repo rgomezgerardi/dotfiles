@@ -1,0 +1,85 @@
+st - simple terminal
+--------------------------------------------------------
+Based on Aurélien APTEL <aurelien.aptel@gmail.com> bt source code.
+
+
+alpha
+--------------------------------------------------------
+Eon S. Jeon - esjeon@hyunmu.am
+pr - protodev@gmx.net
+Laslo Hunhold - dev@frign.de
+Ivan J. - parazyd@dyne.org
+Matthew Parnell - matt@parnmatt.co.uk
+Johannes Mayrhofer - jm.spam@gmx.net
+Àlex Ramírez aramirez@posteo.net
+
+
+alpha focus highlight
+--------------------------------------------------------
+Julius Hülsmann - <juliusHuelsmann [at] gmail [dot] com>
+glpub: Fix: erroneous color reset
+Milos Stojanovic: Code Formatting
+Yui: Fix spelling errors
+
+
+invert
+--------------------------------------------------------
+Miles Alan - m@milesalan.com
+
+
+universcroll
+--------------------------------------------------------
+Dennis Lee
+
+
+vim browse
+--------------------------------------------------------
+Julius Hülsmann - <juliusHuelsmann [at] gmail [dot] com>
+Kevin Velghe: Fix: Underline highlight
+dadaurs: Port Version 1 to st-295a43f
+smartding: detect and fix clipboard bug
+
+
+anysize
+--------------------------------------------------------
+Augusto Born de Oliveira - augustoborn@gmail.com
+
+
+xclearwin
+--------------------------------------------------------
+Christian Tenllado - ctenllado@gmail.com
+
+
+xresources
+--------------------------------------------------------
+@dcat on Github
+Devin J. Pohly - djpohly@gmail.com (git port)
+Sai Praneeth Reddy - spr.mora04@gmail.com (read borderpx from xresources)
+Benji Encalada Mora - @benjifs (replace xfps and actionfps)
+
+
+blinking cursor
+--------------------------------------------------------
+Genki Sky - https://lists.suckless.org/hackers/1708/15376.html
+Steve Ward - planet36@gmail.com
+jvyden
+
+
+font2
+--------------------------------------------------------
+Kirill Bugaev kirill.bugaev87@gmail.com
+
+
+ligatures
+--------------------------------------------------------
+Alexander Rogachev - https://github.com/cog1to
+
+undercurl
+--------------------------------------------------------
+HexOctal - (github.com/hexoctal) hex0octal@gmail.com
+
+
+visualbell2, w3m, boxdraw, sync
+--------------------------------------------------------
+Avi Halachmi (:avih) - https://github.com/avih
+
