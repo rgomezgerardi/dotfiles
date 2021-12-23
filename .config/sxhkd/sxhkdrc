@@ -1,0 +1,107 @@
+super + Escape
+	pkill -USR1 -x sxhkd
+
+{_,shift + ,super + }XF86MonBrightness{Down,Up}
+	bright {-1,-10,min,+1,+10,max}
+
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+super + {_,shift + }q
+	bspc node -{c,k}
+
+super + @space
+	bspc desktop -l next
+
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+super + g
+	bspc node -s biggest.window
+
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+super + {_,alt + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+super + alt + p
+	bspc config focus_follows_pointer {true,false}
+
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+super + ctrl + alt + {Left,Down,Up,Right}
+  n=10; \
+  { d1=left;   d2=right;  dx=-$n; dy=0;   \
+  , d1=bottom; d2=top;    dx=0;   dy=$n;  \
+  , d1=top;    d2=bottom; dx=0;   dy=-$n; \
+  , d1=right;  d2=left;   dx=$n;  dy=0;   \
+  } \
+  bspc node --resize $d1 $dx $dy || bspc node --resize $d2 $dx $dy
+
+super + Return
+	st
+
+super + r
+	rofi -show drun -theme onedark
+
+super + d
+	tdrop
+
+super + e
+	tdrop --width 90%  --height 90% --x-offset 0  --y-offset 1 \
+		  --number 1 --class "explorer"  --name "Explorer" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "explorer" -c "Explorer" \
+		  vifm
+
+super + i
+	emacsclient --alternate-editor="" --create-frame
+
+super + alt + m
+	thunderbird
+
+super + a
+	tdrop
+
+super + m
+	tdrop
+
+super + shift + equal
+	sxiv -rt "$HOME/image"
+
+super + e
+	tdrop
+
+super + b
+	brave
+
+# Screenshot
+super + c
+	scrot --exec mv $f /media/files/Ricardo/Pictures/Screenshots %Y-%m-%d_%H:%M:%S_scrot.png
+
+# Capture Zone
+super + alt c
+	scrot --select --line style=dash,width=2,color=#1793d1,opacity=80 --freeze --exec mv $f ${SCREENSHOTS} %d-%m-%Y_%H:%M:%S.png
