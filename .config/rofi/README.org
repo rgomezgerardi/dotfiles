@@ -1,3 +1,9 @@
+#+TITLE: Rofi Custom Configuration 
+#+AUTHOR: Ricardo Gomez
+#+EMAIL: rgomezgerardi@gmail.com
+#+PROPERTY: header-args :tangle config.rasi :noweb strip-export :cache yes
+
+#+begin_src css
 @theme "./themes/onedark.rasi"
 
 configuration {
@@ -146,3 +152,4 @@ configuration {
       sorting-method:    "name";
   }
 }
+#+end_src

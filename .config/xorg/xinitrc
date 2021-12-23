@@ -45,28 +45,43 @@ setxkbmap "${args[@]}"
 # Activating NumLock
 numlockx &
 
+# Hide the cursor during typing/movement
+xbanish &
+#unclutter &
+
+# Keymap
+pgrep -x sxhkd > /dev/null || sxhkd &
+
 # X11
 [ -f "$resources" ] && xrdb -merge "$resources"
 [ -f "$modmap" ] && xmodmap "$modmap"
 
-# Display Resolution
+### Display 
+# Resolution
+
+# Cursor
+xsetroot -cursor_name left_ptr &
+
+# Wallpaper
+xwallpaper --daemon --stretch '/mnt/files/Ricardo/Pictures/WallPapers/img-45.png' &
 
 # Compositor
-picom &
+picom --daemon &
 
-# Automounting USB
+# Automounting
 #udiskie &
 
 # Emacs Server
 emacs --bg-daemon &
-
-# Wallpaper
-xwallpaper --daemon --stretch '/mnt/files/Ricardo/Pictures/WallPapers/img-45.png' &
 
 # System Monitor
 #conky --demonize --pause=5 &
 
 # Download Manager
 
+# Status Bar
+$HOME/.config/polybar/launch.sh
+
 # Window Manager
-DISPLAY=:0 exec $HOME/.local/bin/dwm
+exec bspwm
+# DISPLAY=:0 exec $HOME/.local/bin/dwm

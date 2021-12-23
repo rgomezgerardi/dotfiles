@@ -34,23 +34,23 @@ Basic text editing facilities.
 Most basic editing facilities.
 
 #+begin_src emacs-lisp
-  (setq-default tab-width 4)  ; Distance between tab stops, in columns
+(setq-default tab-width 4)  ; Distance between tab stops, in columns
 #+end_src
 
 ** Electricity
 Electric behavior for self inserting keys.
 
 #+begin_src emacs-lisp
-  (use-package electric
-    :demand
-    :custom
-    (electric-indent-inhibit t)  ; Auto close bracket insertion
-    (electric-pair-pairs '((?\" . ?\") (?\{ . ?\})))
-    (electric-indent-chars '(?\n ?\^?))
-    :config
-    (electric-indent-mode 0)  ; Toggle on-the-fly reindentation 
-    (electric-layout-mode 0)  ; Automatically insert newlines around some chars
-    (electric-pair-mode 0))  ; Toggle automatic parens pairing
+(use-package electric
+  :demand
+  :custom
+  (electric-indent-inhibit t)  ; Auto close bracket insertion
+  (electric-pair-pairs '((?\" . ?\") (?\{ . ?\})))
+  (electric-indent-chars '(?\n ?\^?))
+  :config
+  (electric-indent-mode 0)  ; Toggle on-the-fly reindentation 
+  (electric-layout-mode 0)  ; Automatically insert newlines around some chars
+  (electric-pair-mode 0))  ; Toggle automatic parens pairing
 #+end_src
 
 ** Emulations
@@ -63,6 +63,8 @@ https://github.com/emacs-evil/evil
 #+begin_src emacs-lisp
 (use-package evil
   :demand
+  ;; :gfhook
+  ;; #'(lambda () (add-hook 'quit-window-hook #'(kill-current-buffer)))
   :custom
   (evil-respect-visual-line-mode t)
   (evil-shift-width 4)
@@ -455,16 +457,16 @@ https://github.com/company-mode/company-mode
   :custom
   (company-minimum-prefix-length 0)
   (company-idle-delay 0.0)
-  (company-backends '(company-bbdb
-					  company-semantic
-					  company-cmake
-					  company-capf
-					  ;; company-clang
-					  company-files
-					  (company-dabbrev-code company-gtags company-etags company-keywords)
-					  company-oddmuse
-					  company-dabbrev
-					  ))
+  ;; (company-backends '(company-bbdb
+  ;; 					  company-semantic
+  ;; 					  company-cmake
+  ;; 					  company-capf
+  ;; 					  ;; company-clang
+  ;; 					  company-files
+  ;; 					  (company-dabbrev-code company-gtags company-etags company-keywords)
+  ;; 					  company-oddmuse
+  ;; 					  company-dabbrev
+  ;; 					  ))
   :config
   (add-hook 'css-mode-hook
             (lambda ()
@@ -533,8 +535,8 @@ https://github.com/noctuid/general.el
   (general-def "<escape>" #'keyboard-escape-quit)
 
   (my-leader-def
-    "e r"   '((lambda () (interactive) (load-file "~/.config/emacs-vanilla/init.el")) :which-key "Reload emacs config")
-    "e i"   '((lambda () (interactive) (find-file "~/.config/emacs-vanilla/README.org")) :which-key "Open emacs config")
+    "e r"   '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
+    "e i"   '((lambda () (interactive) (find-file "~/.config/emacs/README.org")) :which-key "Open emacs config")
     "e k"   '((lambda () (interactive) (kill-emacs)) :which-key "Exit the emacs job and kill it")
     "b i"   '(ibuffer :which-key "Ibuffer")
     "b k"   '(kill-current-buffer :which-key "Kill current buffer")
@@ -731,52 +733,52 @@ Visualize blanks (TAB, (HARD) SPACE and NEWLINE).
 * Files
 Support for editing files.
 
-#+begin_src emacs-lisp :tangle early-init.el
-  ;; (use-package files
-  ;;   :ensure nil
-  ;;   :custom (revert-buffer-function 'inform-revert-modified-file))
-
+#+begin_src emacs-lisp
+(use-package files
+  :straight (:type built-in)
+  :preface
   ; Prevent Emacs from asking "modified buffers exist; exit anyway?"
   (defun +/my-save-buffers-kill-emacs (&optional arg)
 	"Offer to save each buffer(once only), then kill this Emacs process.
-  With prefix ARG, silently save all file-visiting buffers, then kill."
+With prefix ARG, silently save all file-visiting buffers, then kill."
 	(interactive "P")
 	(save-some-buffers arg t)
 	(and (or (not (fboundp 'process-list))
-		 ;; process-list is not defined on MSDOS.
-		 (let ((processes (process-list))
-		   active)
-		   (while processes
-			 (and (memq (process-status (car processes)) '(run stop open listen))
-			  (process-query-on-exit-flag (car processes))
-			  (setq active t))
-			 (setq processes (cdr processes)))
-		   (or (not active)
-		   (progn (list-processes t)
-			  (yes-or-no-p "Active processes exist; kill them and exit anyway? ")))))
+			 ;; process-list is not defined on MSDOS.
+			 (let ((processes (process-list))
+				   active)
+			   (while processes
+				 (and (memq (process-status (car processes)) '(run stop open listen))
+					  (process-query-on-exit-flag (car processes))
+					  (setq active t))
+				 (setq processes (cdr processes)))
+			   (or (not active)
+				   (progn (list-processes t)
+						  (yes-or-no-p "Active processes exist; kill them and exit anyway? ")))))
 		 ;; Query the user for other things, perhaps.
 		 (run-hook-with-args-until-failure 'kill-emacs-query-functions)
 		 (or (null confirm-kill-emacs)
-		 (funcall confirm-kill-emacs "Really exit Emacs? "))
+			 (funcall confirm-kill-emacs "Really exit Emacs? "))
 		 (kill-emacs)))
-  (fset 'save-buffers-kill-emacs '+/my-save-buffers-kill-emacs)
-
+  :custom
+  (vc-handled-backends nil)
+  (vc-follow-symlinks t)
+  (vc-git-print-log-follow nil)
+  (find-file-visit-truename t)
+  ;; (revert-buffer-function 'inform-revert-modified-file)
   ; Smooth Scroll
-  (setq 
-   ;; redisplay-dont-pause nil
-		;; scroll-margin 3
-		scroll-step 1)
-		;; scroll-conservatively 10000
-		;; scroll-preserve-screen-position 1)
-
-   ;; (setq scroll-margin 1
-   ;;      scroll-conservatively 0
-   ;;      scroll-up-aggressively 0.01
-   ;;      scroll-down-aggressively 0.01)
-   ;;    (setq-default scroll-up-aggressively 0.01
-   ;; (setq scroll-conservatively 10000)
-	  ;; (setq auto-window-vscroll nil);;      scroll-down-aggressively 0.01)
-
+  ;; (scroll-step 1)
+  ;; (redisplay-dont-pause nil)
+  ;; (scroll-margin 3)
+  ;; (scroll-conservatively 10000)
+  ;; (scroll-preserve-screen-position 1)
+  ;; (scroll-margin 1)
+  ;; (scroll-conservatively 0)
+  ;; (scroll-up-aggressively 0.01)
+  ;; (scroll-down-aggressively 0.01)
+  ;; (auto-window-vscroll nil) ;;      scroll-down-aggressively 0.01
+  :config
+  (fset 'save-buffers-kill-emacs '+/my-save-buffers-kill-emacs))
 #+end_src
 
 ** Auto Save
@@ -1042,36 +1044,54 @@ https://orgmode.org
 (use-package org
   :straight (:type built-in)
   :preface
+  (defun +/org-babel-tangle-append ()
+	"Append source code block at point to its tangle file.
+The command works like `org-babel-tangle' with prefix arg
+but `delete-file' is ignored."
+	(interactive)
+	(cl-letf (((symbol-function 'delete-file) #'ignore))
+      (org-babel-tangle '(4))))
+
+  (defun +/org-babel-make-suckless ()
+    "Tangle a configuration file automatically after save"
+	(interactive)
+    (let ((dir-conf "suckless")
+		  (dir-file (file-name-nondirectory (directory-file-name (file-name-directory (directory-file-name (file-name-directory (buffer-file-name))))))))
+	  (when (string-equal dir-conf dir-file)
+		(async-shell-command "suckmake st"))))
+
   (defun +/org-babel-tangle-config ()
-    "Tangle an org file automatically after save if it is inside of user-emacs-directory variable"
-    (let ((dir-conf (directory-file-name (expand-file-name user-emacs-directory)))
-	  (dir-file (directory-file-name (file-name-directory (expand-file-name (buffer-file-name))))))
-  (when (string-equal dir-conf dir-file)
-	(let ((ext-conf (concat "org"))
-	  (ext-file (file-name-extension (buffer-file-name))))
-	  (when (string-equal ext-conf ext-file)
-	    (let ((org-confirm-babel-evaluate nil))  ; Dynamic scoping to the rescue
-	  (org-babel-tangle)))))))
+    "Tangle a configuration file automatically after save"
+    (let ((conf '("README.org"
+				  "RUNCOM.org"
+				  "CONFIG.org"))
+		  (file (file-name-nondirectory(expand-file-name (buffer-file-name)))))
+	  (when (member file conf)
+		(org-babel-tangle)
+		(+/org-babel-make-suckless))))
   :gfhook
   #'(lambda () (add-hook 'after-save-hook #'+/org-babel-tangle-config))
   ;; #'variable-pitch-mode
   ;; #'auto-fill-mode ;; #'turn-on-auto-fill
   :config
   <<org-config>>
+  (setq org-babel-tangle-use-relative-file-links nil)
   :custom
   (org-support-shift-select 'always)
   <<org-custom>>
   :general
   (:states 'normal :keymaps 'org-mode-map
-   "M-j" #'org-next-visible-heading
-   "M-k" #'org-previous-visible-heading
-   "C-j" #'org-metadown
-   ;; "C-'" #'org-edit-special
-   "C-k" #'org-metaup))
-  ;; (my-leader-def
-  ;;   "a" #'org-agenda
-  ;;   "c" #'org-capture
-  ;;   "l" #'org-store-link))
+		   "M-j" #'org-next-visible-heading
+		   "M-k" #'org-previous-visible-heading
+		   "C-j" #'org-metadown
+		   "C-c C-v +" #'+/org-babel-tangle-append
+		   ;; "C-'" #'org-edit-special
+		   "C-k" #'org-metaup)
+  (my-leader-def
+	"o d" #'org-babel-demarcate-block
+	"o a" #'org-agenda
+	"o c" #'org-capture
+	"o l" #'org-store-link))
 #+end_src
 
 **** Agenda
@@ -1273,12 +1293,12 @@ Fill-column for visual-line-mode.
 https://github.com/joostkremers/visual-fill-column
 
 #+begin_src emacs-lisp
-(setq-default fill-column 80)
+(setq-default fill-column 120)
 
 (use-package visual-fill-column
   :ghook 'org-mode-hook
   :custom
-  (visual-fill-column-width 100)
+  (visual-fill-column-width 120)
   (visual-fill-column-center-text t)
   :config ())  ; Show message if verbose is activated
 #+end_src
@@ -1971,8 +1991,8 @@ https://github.com/emacs-dashboard/emacs-dashboard
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
   (dashboard-show-shortcuts t)
-  ;; (dashboard-startup-banner 'logo)
-  (dashboard-startup-banner (expand-file-name "banner.txt" user-emacs-directory))
+  (dashboard-startup-banner 'logo)
+  ;; (dashboard-startup-banner (expand-file-name "banner.txt" user-emacs-directory))
   (dashboard-items '((recents  . 5)
 					 (bookmarks . 5)
 					 (projects . 5)
@@ -2422,6 +2442,7 @@ https://github.com/hlissner/emacs-doom-themes
   (doom-themes-treemacs-theme "doom-atom")
   :config
   (load-theme 'doom-one t)
+  (setq doom-theme 'doom-one)  ; This is for highlight indent guide
   (doom-themes-visual-bell-config)  ; Enable flashing the mode-line on error
   (doom-themes-treemacs-config)  ; Install doom-themes' treemacs configuration
   (doom-themes-org-config))  ; Corrects (and improves) org-mode's native fontification
@@ -2443,15 +2464,20 @@ Minor mode to highlight indentation
 https://github.com/DarthFennec/highlight-indent-guides
 
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-one)
-
 (use-package highlight-indent-guides
-  :hook ((prog-mode
-		  text-mode
-		  conf-mode) . highlight-indent-guides-mode)
+  :preface
+  (defun +/indent-guides-init-faces-h (&rest _)
+    (when (display-graphic-p)
+      (highlight-indent-guides-auto-set-faces)))
+  :ghook '(conf-mode-hook prog-mode-hook text-mode-hook)
+  ;; HACK `highlight-indent-guides' calculates its faces from the current theme,
+  ;;      but is unable to do so properly in terminal Emacs, where it only has
+  ;;      access to 256 colors. So if the user uses a daemon we must wait for
+  ;;      the first graphical frame to be available to do.
+  :gfhook ('(doom-load-theme-hook) #'+/indent-guides-init-faces-h)
   :custom
   (highlight-indent-guides-suppress-auto-error t)
-  (highlight-indent-guides-character 9474)  ; | 124  ⇥ 8677  ⇨ 8680  ↦ 8614    default 9474
+  (highlight-indent-guides-character 9474)  ; | 124  ⇥ 8677  ⇨ 8680  ↦ 8614 default 9474
   (highlight-indent-guides-method 'character)  ; Method to use when displaying indent guides
   (highlight-indent-guides-responsive 'stack)
   (highlight-indent-guides-auto-enabled t)
@@ -2474,17 +2500,8 @@ https://github.com/DarthFennec/highlight-indent-guides
 ;; Highlight Indent Guides Top Odd Face
 ;; Background: #5fce69637c8c
   :config
-  (defun +indent-guides-init-faces-h (&rest _)
-    (when (display-graphic-p)
-      (highlight-indent-guides-auto-set-faces)))
-
-  ;; HACK `highlight-indent-guides' calculates its faces from the current theme,
-  ;;      but is unable to do so properly in terminal Emacs, where it only has
-  ;;      access to 256 colors. So if the user uses a daemon we must wait for
-  ;;      the first graphical frame to be available to do.
-  (add-hook 'doom-load-theme-hook #'+indent-guides-init-faces-h)
   (when doom-theme
-    (+indent-guides-init-faces-h))
+    (+/indent-guides-init-faces-h))
 
   ;; `highlight-indent-guides' breaks when `org-indent-mode' is active
   (+/add-hook 'org-mode-local-vars-hook
@@ -2501,7 +2518,7 @@ https://github.com/DarthFennec/highlight-indent-guides
 (setq prettify-symbols-alist '(("lambda" . 955)))
 #+end_src
 
-** Ligature
+** COMMENT Ligature
 Typographic Ligatures in Emacs.
 https://github.com/mickeynp/ligature.el
 
@@ -2569,9 +2586,9 @@ https://github.com/Wilfred/helpful
 	"h v" #'helpful-variable
 	"h c" #'helpful-command
 	"h i" #'info
-	"h r" '(info-emacs-manual :which-key "Emacs Manual")
-	"h O" '((lambda () (interactive) (info "org")) :which-key "Org Manual")
-	"h R" '((lambda () (interactive) (info "elisp")) :which-key "Org Manual")
+	"h r" #'(info-emacs-manual :which-key "Emacs Manual")
+	"h O" #'((lambda () (interactive) (info "org")) :which-key "Org Manual")
+	"h R" #'((lambda () (interactive) (info "elisp")) :which-key "Org Manual")
 	"h k" #'helpful-key)
   :config ())  ; Show message if verbose is activated
 #+end_src
@@ -2698,18 +2715,3 @@ This macro accepts, in order:
 		 forms))))))
 #+end_src
 
-** TODO
-- svg-tags
-- Repair dashboard width
-- agressive-indent-mode
-- org-download
-- nov.el
-- show-css package
-- web-beautify
-- xah-css-mode
-- counsel-css
-- winum
-- Markdown mode
-- https://github.com/rocky/emacs-loc-changes
-- company emoji
-https://github.com/tarsius/keycast

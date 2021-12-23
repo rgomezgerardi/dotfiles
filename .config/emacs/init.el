@@ -148,6 +148,7 @@ This macro accepts, in order:
   (doom-themes-treemacs-theme "doom-atom")
   :config
   (load-theme 'doom-one t)
+  (setq doom-theme 'doom-one)  ; This is for highlight indent guide
   (doom-themes-visual-bell-config)  ; Enable flashing the mode-line on error
   (doom-themes-treemacs-config)  ; Install doom-themes' treemacs configuration
   (doom-themes-org-config))  ; Corrects (and improves) org-mode's native fontification
@@ -196,8 +197,8 @@ This macro accepts, in order:
   (general-def "<escape>" #'keyboard-escape-quit)
 
   (my-leader-def
-    "e r"   '((lambda () (interactive) (load-file "~/.config/emacs-vanilla/init.el")) :which-key "Reload emacs config")
-    "e i"   '((lambda () (interactive) (find-file "~/.config/emacs-vanilla/README.org")) :which-key "Open emacs config")
+    "e r"   '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
+    "e i"   '((lambda () (interactive) (find-file "~/.config/emacs/README.org")) :which-key "Open emacs config")
     "e k"   '((lambda () (interactive) (kill-emacs)) :which-key "Exit the emacs job and kill it")
     "b i"   '(ibuffer :which-key "Ibuffer")
     "b k"   '(kill-current-buffer :which-key "Kill current buffer")
@@ -222,6 +223,8 @@ This macro accepts, in order:
 
 (use-package evil
   :demand
+  ;; :gfhook
+  ;; #'(lambda () (add-hook 'quit-window-hook #'(kill-current-buffer)))
   :custom
   (evil-respect-visual-line-mode t)
   (evil-shift-width 4)
@@ -459,16 +462,16 @@ This macro accepts, in order:
   :custom
   (company-minimum-prefix-length 0)
   (company-idle-delay 0.0)
-  (company-backends '(company-bbdb
-					  company-semantic
-					  company-cmake
-					  company-capf
-					  ;; company-clang
-					  company-files
-					  (company-dabbrev-code company-gtags company-etags company-keywords)
-					  company-oddmuse
-					  company-dabbrev
-					  ))
+  ;; (company-backends '(company-bbdb
+  ;; 					  company-semantic
+  ;; 					  company-cmake
+  ;; 					  company-capf
+  ;; 					  ;; company-clang
+  ;; 					  company-files
+  ;; 					  (company-dabbrev-code company-gtags company-etags company-keywords)
+  ;; 					  company-oddmuse
+  ;; 					  company-dabbrev
+  ;; 					  ))
   :config
   (add-hook 'css-mode-hook
             (lambda ()
@@ -525,6 +528,52 @@ This macro accepts, in order:
 	"0 f" #'treemacs-find-file
 	"0 d" #'treemacs-delete-other-windows))
 
+(use-package files
+  :straight (:type built-in)
+  :preface
+  ; Prevent Emacs from asking "modified buffers exist; exit anyway?"
+  (defun +/my-save-buffers-kill-emacs (&optional arg)
+	"Offer to save each buffer(once only), then kill this Emacs process.
+With prefix ARG, silently save all file-visiting buffers, then kill."
+	(interactive "P")
+	(save-some-buffers arg t)
+	(and (or (not (fboundp 'process-list))
+			 ;; process-list is not defined on MSDOS.
+			 (let ((processes (process-list))
+				   active)
+			   (while processes
+				 (and (memq (process-status (car processes)) '(run stop open listen))
+					  (process-query-on-exit-flag (car processes))
+					  (setq active t))
+				 (setq processes (cdr processes)))
+			   (or (not active)
+				   (progn (list-processes t)
+						  (yes-or-no-p "Active processes exist; kill them and exit anyway? ")))))
+		 ;; Query the user for other things, perhaps.
+		 (run-hook-with-args-until-failure 'kill-emacs-query-functions)
+		 (or (null confirm-kill-emacs)
+			 (funcall confirm-kill-emacs "Really exit Emacs? "))
+		 (kill-emacs)))
+  :custom
+  (vc-handled-backends nil)
+  (vc-follow-symlinks t)
+  (vc-git-print-log-follow nil)
+  (find-file-visit-truename t)
+  ;; (revert-buffer-function 'inform-revert-modified-file)
+  ; Smooth Scroll
+  ;; (scroll-step 1)
+  ;; (redisplay-dont-pause nil)
+  ;; (scroll-margin 3)
+  ;; (scroll-conservatively 10000)
+  ;; (scroll-preserve-screen-position 1)
+  ;; (scroll-margin 1)
+  ;; (scroll-conservatively 0)
+  ;; (scroll-up-aggressively 0.01)
+  ;; (scroll-down-aggressively 0.01)
+  ;; (auto-window-vscroll nil) ;;      scroll-down-aggressively 0.01
+  :config
+  (fset 'save-buffers-kill-emacs '+/my-save-buffers-kill-emacs))
+
 ;; (use-package ranger
 ;; :demand
 ;; :init (ranger-override-dired-mode t))
@@ -576,16 +625,31 @@ This macro accepts, in order:
 (use-package org
   :straight (:type built-in)
   :preface
+  (defun +/org-babel-tangle-append ()
+	"Append source code block at point to its tangle file.
+The command works like `org-babel-tangle' with prefix arg
+but `delete-file' is ignored."
+	(interactive)
+	(cl-letf (((symbol-function 'delete-file) #'ignore))
+      (org-babel-tangle '(4))))
+
+  (defun +/org-babel-make-suckless ()
+    "Tangle a configuration file automatically after save"
+	(interactive)
+    (let ((dir-conf "suckless")
+		  (dir-file (file-name-nondirectory (directory-file-name (file-name-directory (directory-file-name (file-name-directory (buffer-file-name))))))))
+	  (when (string-equal dir-conf dir-file)
+		(async-shell-command "suckmake st"))))
+
   (defun +/org-babel-tangle-config ()
-    "Tangle an org file automatically after save if it is inside of user-emacs-directory variable"
-    (let ((dir-conf (directory-file-name (expand-file-name user-emacs-directory)))
-	  (dir-file (directory-file-name (file-name-directory (expand-file-name (buffer-file-name))))))
-  (when (string-equal dir-conf dir-file)
-	(let ((ext-conf (concat "org"))
-	  (ext-file (file-name-extension (buffer-file-name))))
-	  (when (string-equal ext-conf ext-file)
-	    (let ((org-confirm-babel-evaluate nil))  ; Dynamic scoping to the rescue
-	  (org-babel-tangle)))))))
+    "Tangle a configuration file automatically after save"
+    (let ((conf '("README.org"
+				  "RUNCOM.org"
+				  "CONFIG.org"))
+		  (file (file-name-nondirectory(expand-file-name (buffer-file-name)))))
+	  (when (member file conf)
+		(org-babel-tangle)
+		(+/org-babel-make-suckless))))
   :gfhook
   #'(lambda () (add-hook 'after-save-hook #'+/org-babel-tangle-config))
   ;; #'variable-pitch-mode
@@ -598,19 +662,19 @@ This macro accepts, in order:
         org-ellipsis " ↴")  ; The ellipsis to use in the Org mode outline (▾  ↴)
   (setq org-fontify-quote-and-verse-blocks t)
   
-  (dolist (face 
-  	 '((org-level-1 . 1.2)
-  	   (org-level-2 . 1.18)
-  	   (org-level-3 . 1.16)
-  	   (org-level-4 . 1.14)
-  	   (org-level-5 . 1.12)
-  	   (org-level-6 . 1.1)
-  	   (org-level-7 . 1.1)
-  	   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil
-  		  :font "FiraCode Nerd Font"
-  		  :weight 'medium
-  		  :height (cdr face)))
+  ;; (dolist (face 
+  ;; 	 '((org-level-1 . 1.2)
+  ;; 	   (org-level-2 . 1.18)
+  ;; 	   (org-level-3 . 1.16)
+  ;; 	   (org-level-4 . 1.14)
+  ;; 	   (org-level-5 . 1.12)
+  ;; 	   (org-level-6 . 1.1)
+  ;; 	   (org-level-7 . 1.1)
+  ;; 	   (org-level-8 . 1.1)))
+  ;;   (set-face-attribute (car face) nil
+  ;; 		  :font "FiraCode Nerd Font"
+  ;; 		  :weight 'medium
+  ;; 		  :height (cdr face)))
   
   ;(set-face-attribute 'org-document-title nil :font "FiraCode Nerd Font" :weight 'bold :height 1.3)
   
@@ -656,20 +720,23 @@ This macro accepts, in order:
     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
     (add-to-list 'org-structure-template-alist '("py" . "src python")))
+  (setq org-babel-tangle-use-relative-file-links nil)
   :custom
   (org-support-shift-select 'always)
   (org-export-backends '(ascii html icalendar latex man md odt org))
   :general
   (:states 'normal :keymaps 'org-mode-map
-   "M-j" #'org-next-visible-heading
-   "M-k" #'org-previous-visible-heading
-   "C-j" #'org-metadown
-   ;; "C-'" #'org-edit-special
-   "C-k" #'org-metaup))
-  ;; (my-leader-def
-  ;;   "a" #'org-agenda
-  ;;   "c" #'org-capture
-  ;;   "l" #'org-store-link))
+		   "M-j" #'org-next-visible-heading
+		   "M-k" #'org-previous-visible-heading
+		   "C-j" #'org-metadown
+		   "C-c C-v +" #'+/org-babel-tangle-append
+		   ;; "C-'" #'org-edit-special
+		   "C-k" #'org-metaup)
+  (my-leader-def
+	"o d" #'org-babel-demarcate-block
+	"o a" #'org-agenda
+	"o c" #'org-capture
+	"o l" #'org-store-link))
 
 ; Regular expression to match files for ‘org-agenda-files’
 ;(setq org-agenda-file-regexp )
@@ -695,12 +762,12 @@ This macro accepts, in order:
   (org-superstar-headline-bullets-list '("●" "◉" "○" "◉" "○"))
   :config ())  ; Show message if verbose is activated
 
-(setq-default fill-column 80)
+(setq-default fill-column 120)
 
 (use-package visual-fill-column
   :ghook 'org-mode-hook
   :custom
-  (visual-fill-column-width 100)
+  (visual-fill-column-width 120)
   (visual-fill-column-center-text t)
   :config ())  ; Show message if verbose is activated
 
@@ -1043,8 +1110,8 @@ This macro accepts, in order:
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
   (dashboard-show-shortcuts t)
-  ;; (dashboard-startup-banner 'logo)
-  (dashboard-startup-banner (expand-file-name "banner.txt" user-emacs-directory))
+  (dashboard-startup-banner 'logo)
+  ;; (dashboard-startup-banner (expand-file-name "banner.txt" user-emacs-directory))
   (dashboard-items '((recents  . 5)
 					 (bookmarks . 5)
 					 (projects . 5)
@@ -1267,15 +1334,20 @@ This macro accepts, in order:
   :gfhook ('(dashboard-mode-hook) #'(lambda () (solaire-mode 0)))  ; Disable for some modes
   :config ())  ; Show message if verbose is activated
 
-(setq doom-theme 'doom-one)
-
 (use-package highlight-indent-guides
-  :hook ((prog-mode
-		  text-mode
-		  conf-mode) . highlight-indent-guides-mode)
+  :preface
+  (defun +/indent-guides-init-faces-h (&rest _)
+    (when (display-graphic-p)
+      (highlight-indent-guides-auto-set-faces)))
+  :ghook '(conf-mode-hook prog-mode-hook text-mode-hook)
+  ;; HACK `highlight-indent-guides' calculates its faces from the current theme,
+  ;;      but is unable to do so properly in terminal Emacs, where it only has
+  ;;      access to 256 colors. So if the user uses a daemon we must wait for
+  ;;      the first graphical frame to be available to do.
+  :gfhook ('(doom-load-theme-hook) #'+/indent-guides-init-faces-h)
   :custom
   (highlight-indent-guides-suppress-auto-error t)
-  (highlight-indent-guides-character 9474)  ; | 124  ⇥ 8677  ⇨ 8680  ↦ 8614    default 9474
+  (highlight-indent-guides-character 9474)  ; | 124  ⇥ 8677  ⇨ 8680  ↦ 8614 default 9474
   (highlight-indent-guides-method 'character)  ; Method to use when displaying indent guides
   (highlight-indent-guides-responsive 'stack)
   (highlight-indent-guides-auto-enabled t)
@@ -1298,17 +1370,8 @@ This macro accepts, in order:
 ;; Highlight Indent Guides Top Odd Face
 ;; Background: #5fce69637c8c
   :config
-  (defun +indent-guides-init-faces-h (&rest _)
-    (when (display-graphic-p)
-      (highlight-indent-guides-auto-set-faces)))
-
-  ;; HACK `highlight-indent-guides' calculates its faces from the current theme,
-  ;;      but is unable to do so properly in terminal Emacs, where it only has
-  ;;      access to 256 colors. So if the user uses a daemon we must wait for
-  ;;      the first graphical frame to be available to do.
-  (add-hook 'doom-load-theme-hook #'+indent-guides-init-faces-h)
   (when doom-theme
-    (+indent-guides-init-faces-h))
+    (+/indent-guides-init-faces-h))
 
   ;; `highlight-indent-guides' breaks when `org-indent-mode' is active
   (+/add-hook 'org-mode-local-vars-hook
@@ -1319,28 +1382,6 @@ This macro accepts, in order:
 
 (global-prettify-symbols-mode 1)  ; Toggle Prettify-Symbols mode in all buffers
 (setq prettify-symbols-alist '(("lambda" . 955)))
-
-(use-package ligature
-  :straight (ligature :type git :host github :repo "mickeynp/ligature.el")
-  :ghook ('after-init-hook #'global-ligature-mode)
-  :custom
-  (ligature-ignored-major-modes '(minibuffer-inactive-mode dashboard-mode))
-  (ligature-mode-set-explicitly t)
-  :config
-  (ligature-set-ligatures 't '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "\\\\"
-                               ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-                               "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-                               "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-                               "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-                               "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-                               "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-                               "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-                               ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-                               "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-                               "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "?:" "://"
-                               "?=" "?." "??" ";;" "/*" "/=" "/>" "__" "~~" "(*" "*)" "||>"
-							   ;; "++" "//"  ; Trouble maker
-							   )))
 
 (setq byte-compile-warnings '(cl-functions))  ; Disable "Package cl is deprecated" message
 
@@ -1362,9 +1403,9 @@ This macro accepts, in order:
 	"h v" #'helpful-variable
 	"h c" #'helpful-command
 	"h i" #'info
-	"h r" '(info-emacs-manual :which-key "Emacs Manual")
-	"h O" '((lambda () (interactive) (info "org")) :which-key "Org Manual")
-	"h R" '((lambda () (interactive) (info "elisp")) :which-key "Org Manual")
+	"h r" #'(info-emacs-manual :which-key "Emacs Manual")
+	"h O" #'((lambda () (interactive) (info "org")) :which-key "Org Manual")
+	"h R" #'((lambda () (interactive) (info "elisp")) :which-key "Org Manual")
 	"h k" #'helpful-key)
   :config ())  ; Show message if verbose is activated
 

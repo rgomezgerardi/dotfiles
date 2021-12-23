@@ -1,0 +1,23 @@
+[Default Applications]
+# Browser
+text/html=browser.desktop
+x-scheme-handler/ftp=browser.desktop
+x-scheme-handler/http=browser.desktop
+x-scheme-handler/https=browser.desktop
+
+# Editor
+text/plain=editor.desktop;
+text/x-shellscript=text.desktop
+
+# Explorer
+inode/directory=explorer.desktop
+
+# Idle
+text/x-comma-separated-values=idle.desktop
+
+# Terminal
+application/x-terminal-emulator=terminal.desktop
+
+# Torrent
+application/x-bittorrent=torrent.desktop
+x-scheme-handler/magnet=torrent.desktop
