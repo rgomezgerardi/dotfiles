@@ -1,0 +1,6 @@
+#compdef suckmake
+
+_arguments \
+    "1:Program:($(ls ~/.config/suckless))" \
+
+# vim: ft=zsh sw=2 ts=2 et

@@ -1,0 +1,13 @@
+#compdef hello
+
+_arguments '-m[music file]:filename:->files' '-f[flags]:flag:->flags'
+case "$state" in
+    files)
+        local -a music_files
+        music_files=( Music/**/*.{mp3,wav,flac,ogg} )
+        _multi_parts / music_files
+        ;;
+    flags)
+        _values -s , 'flags' a b c d e
+        ;;
+esac
