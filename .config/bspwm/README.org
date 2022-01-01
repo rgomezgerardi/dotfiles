@@ -3,12 +3,6 @@
 #+EMAIL: rgomezgerardi@gmail.com
 #+PROPERTY: header-args :tangle bspwmrc :tangle-mode (identity #o755) :noweb strip-export :cache yes :shebang "#!/bin/sh"
 
-* Monitor
-
-#+begin_src shell
-bspc monitor -d I II III IV V VI VII VIII IX X
-#+end_src
-
 * Config
 ** Global
 
@@ -62,10 +56,10 @@ bspc config ignore_ewmh_struts false
 # bspc config normal_border_color
  
 # Color of the border of a focused window of an unfocused monitor.
-# bspc config active_border_color
+# bspc config active_border_color 
  
 # Color of the border of a focused window of a focused monitor.
-bspc config focused_border_color #51afef
+bspc config focused_border_color "#51afef"
  
 # Color of the node --presel-{dir,ratio} message feedback area.
 # bspc config presel_feedback_color
@@ -97,17 +91,17 @@ bspc config borderless_monocle true
 bspc config gapless_monocle true
 
 # Padding space added at the sides of the screen for the monocle desktop layout.
-bspc config top_monocle_padding, right_monocle_padding, bottom_monocle_padding, left_monocle_padding
+# bspc config top_monocle_padding, right_monocle_padding, bottom_monocle_padding, left_monocle_padding
  
 # Set the desktop layout to monocle if there’s only one tiled window in the tree.
-bspc config single_monocle
+bspc config single_monocle true
 #+end_src
  
 ** Window
    
 #+begin_src shell
 # Size of the gap that separates windows.
-bspc config window_gap 6
+bspc config window_gap 10
 
 # Window border width.
 bspc config border_width 2
@@ -153,19 +147,78 @@ bspc config swallow_first_click false
 bspc config focus_follows_pointer true
 #+end_src
 
+* Monitor
+
+#+begin_src shell
+# bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+#+end_src
+
+* Desktop
+
+#+begin_src shell
+bspc desktop ^1 --layout tiled
+bspc desktop ^2 --layout monocle
+bspc desktop ^3 --layout monocle
+bspc desktop ^4 --layout monocle
+bspc desktop ^5 --layout tiled
+bspc desktop ^6 --layout monocle
+bspc desktop ^7 --layout tiled
+bspc desktop ^8 --layout monocle
+bspc desktop ^9 --layout tiled
+bspc desktop ^10 --layout tiled
+#+end_src
+
+** COMMENT Desktop where all windows are floating
+
+#+begin_src shell
+FLOATING_DESKTOP_ID=$(bspc query -D -d '^9')
+
+bspc subscribe node_add | while read -a msg ; do
+   desk_id=${msg[2]}
+   wid=${msg[4]}
+   [ "$FLOATING_DESKTOP_ID" = "$desk_id" ] && bspc node "$wid" -t floating
+done
+#+end_src
+
 * Rules
 
 #+begin_src shell
-bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a St desktop='^1' state=tiled follow=on
 
-bspc rule -a Chromium desktop='^2'
-bspc rule -a Brave-browser desktop='^2'
+bspc rule -a Chromium desktop='^2' state=tiled follow=on
+bspc rule -a Brave-browser desktop='^2' state=tiled follow=on
+bspc rule -a *:*:"Picture in picture" state=floating manage=off border=off
+
+bspc rule -a Emacs desktop='^3' state=tiled follow=on
+
+bspc rule -a mpv desktop='^4' state=tiled follow=on
+
+bspc rule -a Gimp desktop='^8' state=pseudo_tiled follow=on
+bspc rule -a Krita desktop='^8' state=pseudo_tiled follow=on
 
 bspc rule -a Spotify desktop='^9'
+
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+
+# bspc rule -a Explorer state=floating rectangle=1500x800+50+80
 bspc rule -a Explorer state=floating
+bspc rule -a Music state=floating
+bspc rule -a Audio state=floating
+#+end_src
+
+* Receptacles
+* Launch Applications
+
+#+begin_src shell
+brave &> /dev/null &
+emacsclient --alternate-editor="" --create-frame &> /dev/null &
+st &> /dev/null &
+
+# Especify a desktop to start, otherwise it will start in the desktop of the last application launched
+# bspc desktop ^1 --focus
 #+end_src
 
 * COMMENT Other
