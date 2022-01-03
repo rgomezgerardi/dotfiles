@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<keyboard version="1">
+    <commands>
+        <key command="ReplaceColor" shortcut="Shift+R" removed="true" />
+        <key command="CanvasSize" shortcut="C" removed="true" />
+        <key command="OpenGroup" shortcut="Shift+E" removed="true" />
+        <key command="NewLayer" shortcut="Shift+N" removed="true" />
+        <key command="NewLayer" shortcut="Shift+Enter Pad" />
+        <key command="RemoveLayer" shortcut="Ctrl+Shift+Enter Pad" />
+    </commands>
+    <tools>
+        <key tool="rectangular_marquee" shortcut="M" removed="true" />
+        <key tool="rectangular_marquee" shortcut="Shift+R" />
+        <key tool="elliptical_marquee" shortcut="Shift+M" removed="true" />
+        <key tool="elliptical_marquee" shortcut="Shift+E" />
+        <key tool="lasso" shortcut="Q" removed="true" />
+        <key tool="lasso" shortcut="Shift+B" />
+        <key tool="polygonal_lasso" shortcut="Shift+Q" removed="true" />
+        <key tool="polygonal_lasso" shortcut="Shift+D" />
+        <key tool="magic_wand" shortcut="W" removed="true" />
+        <key tool="magic_wand" shortcut="Shift+F" />
+        <key tool="spray" shortcut="Shift+B" removed="true" />
+        <key tool="spray" shortcut="B" />
+        <key tool="eraser" shortcut="E" removed="true" />
+        <key tool="eraser" shortcut="C" />
+        <key tool="line" shortcut="L" removed="true" />
+        <key tool="line" shortcut="W" />
+        <key tool="curve" shortcut="Shift+L" removed="true" />
+        <key tool="curve" shortcut="W" />
+        <key tool="rectangle" shortcut="U" removed="true" />
+        <key tool="rectangle" shortcut="R" />
+        <key tool="filled_rectangle" shortcut="U" removed="true" />
+        <key tool="filled_rectangle" shortcut="R" />
+        <key tool="ellipse" shortcut="Shift+U" removed="true" />
+        <key tool="ellipse" shortcut="E" />
+        <key tool="filled_ellipse" shortcut="Shift+U" removed="true" />
+        <key tool="filled_ellipse" shortcut="E" />
+        <key tool="polygon" shortcut="Shift+D" removed="true" />
+        <key tool="polygon" shortcut="D" />
+        <key tool="blur" shortcut="R" removed="true" />
+        <key tool="jumble" shortcut="R" removed="true" />
+    </tools>
+    <quicktools />
+    <actions />
+    <wheel />
+</keyboard>
