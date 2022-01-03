@@ -1,9 +1,10 @@
 #+TITLE: Dotfiles
 #+AUTHOR: Ricardo Gomez
 
-What you got here is the work of my "be more efficient" linux way of think.
+What you got here is the work of my "be more efficient" linux way of thinking.
 
 * Obtaing
+You need stow btw.
 
 #+begin_src shell
 git clone "https://gitlab.com/rgomezgerardi/dotfiles" $HOME/documents/git/dotfiles
@@ -12,20 +13,20 @@ stow --no-folding --dir $HOME/documents/git/dotfiles --target $HOME
 #+end_src
 
 * Config
-Here, quicklinks to the dotfiles of some of my programs, para tu:
+Here, quick links to the dotfiles of some of my programs.
 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/zsh][Shell]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/suckless/st][Terminal]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/bspwm][Window Manager]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/sxhkd][Keybindings]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/vifm][File Manager]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/rofi][Launcher]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/nvim][Editor]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/moc][Music Player]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/.config/emacs][Whateveritisemacs]] 
-
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/zsh][Shell]] 
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/suckless/st][Terminal]] 
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/bspwm][Window Manager]] 
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/sxhkd][Keybindings]] 
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/vifm][File Manager]] 
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/rofi][Launcher]] 
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/nvim][Editor]] 
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/moc][Music Player]] 
++ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/emacs][Whateveremacsis]] 
+  
 * Credit
-Uff a lot of people, search and you will find.
+Uff! a lot of people, search and you will find.
 
 * Contact
 [[https://rgomezgerardi.cf][Website]] 
