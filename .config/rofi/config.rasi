@@ -1,7 +1,7 @@
 @theme "./themes/onedark.rasi"
 
 configuration {
-/*	modi: "window,run,ssh";*/
+	/*	modi: "window,run,ssh";*/
 /*	font: "mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/

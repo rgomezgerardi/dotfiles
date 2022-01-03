@@ -7,7 +7,7 @@
 @theme "./themes/onedark.rasi"
 
 configuration {
-/*	modi: "window,run,ssh";*/
+	/*	modi: "window,run,ssh";*/
 /*	font: "mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/
@@ -153,3 +153,9 @@ configuration {
   }
 }
 #+end_src
+
+* CREDITS
+
+The widget's themes and other themes, and scripts came from this incredible repo [[https://github.com/adi1090x/rofi][adi1090x/rofi]] so check it out
+
+* TODO Organize better themes folder, especially the widget part
