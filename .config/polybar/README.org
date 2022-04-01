@@ -1,0 +1,1817 @@
+#+TITLE: Emacs Custom Configuration 
+#+AUTHOR: Ricardo Gomez
+#+EMAIL: rgomezgerardi@gmail.com
+#+PROPERTY: header-args :tangle config :noweb strip-export :cache yes
+
+██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+
+* Applications Settings
+
+#+begin_src conf
+[settings]
+; The throttle settings lets the eventloop swallow up til X events
+; if they happen within Y millisecond after first event was received.
+; This is done to prevent flood of update event.
+;
+; For example if 5 modules emit an update event at the same time, we really
+; just care about the last one. But if we wait too long for events to swallow
+; the bar would appear sluggish so we continue if timeout
+; expires or limit is reached.
+throttle-output = 5
+throttle-output-for = 10
+
+; Reload upon receiving XCB_RANDR_SCREEN_CHANGE_NOTIFY events
+screenchange-reload = false
+
+; Enables pseudo-transparency for the bar
+; If set to true the bar can be transparent without a compositor.
+pseudo-transparency = false
+#+end_src
+
+** Compositing
+
+#+begin_src conf
+; @see: https://www.cairographics.org/manual/cairo-cairo-t.html#cairo-operator-t
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+#+end_src
+
+** Formats
+
+#+begin_src conf
+; Define fallback values used by all module formats
+format-foreground = 
+format-background = 
+format-underline =
+format-overline =
+format-spacing =
+format-padding =
+format-margin =
+format-offset =
+#+end_src
+
+* Global WM Settings
+
+#+begin_src conf
+[global/wm]
+
+; Adjust the _NET_WM_STRUT_PARTIAL value
+margin-top = 0
+margin-bottom = 0
+#+end_src
+
+* Colors
+** Doom One
+
+#+begin_src conf
+[colors]
+background     = #282c34
+foreground     = #bbc2cf
+background-alt = #21242b
+foreground-alt = #5B6268
+
+grey      = #3f444a
+red       = #ff6c6b
+orange    = #da8548
+green     = #98be65
+teal      = #4db5bd
+yellow    = #ECBE7B
+blue      = #51afef
+dark-blue = #2257A0
+magenta   = #c678dd
+violet    = #a9a1e1
+cyan      = #46D9FF
+dark-cyan = #5699AF
+#+end_src
+
+* Bar1
+
+#+begin_src conf
+[bar/bar1]
+
+; Locale used to localize various module data (e.g. date)
+locale = en_US.UTF-8 
+
+; Enable support for inter-process messaging
+enable-ipc = true
+#+end_src
+
+** Monitor
+
+#+begin_src conf
+; Use either of the following command to list available outputs:
+; $ polybar -M | cut -d ':' -f 1
+; $ xrandr -q | grep " connected" | cut -d ' ' -f1
+; If no monitor is given, the primary monitor is used if it exists
+monitor =
+
+; Use the specified monitor as a fallback if the main one is not found.
+monitor-fallback =
+
+; Require the monitor to be in connected state
+monitor-strict = false
+
+; Use fuzzy matching for monitors (only ignores dashes -)
+; Useful when monitors are named differently with different drivers.
+monitor-exact = true
+#+end_src
+
+** Window Manager
+
+#+begin_src conf
+; Tell the Window Manager not to configure the window.
+; Use this to detach the bar if your WM is locking its size/position.
+; Note: With this most WMs will no longer reserve space for 
+; the bar and it will overlap other windows. You need to configure
+; your WM to add a gap where the bar will be placed.
+override-redirect = false
+
+; Value to be used to set the WM_NAME atom
+; If the value is empty or undefined, the atom value
+; will be created from the following template: polybar-[BAR]_[MONITOR]
+; NOTE: The placeholders are not available for custom values
+wm-name =
+
+; Restack the bar window and put it above the
+; selected window manager's root
+;
+; Fixes the issue where the bar is being drawn
+; on top of fullscreen window's
+;
+; Currently supported WM's:
+;   bspwm
+;   i3 (requires: `override-redirect = true`)
+wm-restack = bspwm
+#+end_src
+
+** Position
+   
+#+begin_src conf
+; Put the bar at the bottom of the screen
+bottom = false
+
+; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in a width or height of 50% minus 10 pixels
+width = 10%
+height = 3%
+
+; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in an offset in the x or y direction 
+; of 50% minus 10 pixels
+offset-x = 6
+offset-y = 0
+
+; Number of spaces to add at the beginning/end of the bar
+; Individual side values can be defined using:
+;   padding-{left,right}
+padding = 0
+#+end_src
+
+** Appareance
+
+#+begin_src conf
+; Opacity value between 0.0 and 1.0 used on fade in/out
+dim-value = 1.0
+
+; Background ARGB color (e.g. #f00, #ff992a, #ddff1023)
+background = #00ffffff
+
+; Foreground ARGB color (e.g. #f00, #ff992a, #ddff1023)
+; foreground = 
+
+; Background gradient (vertical steps)
+;   background-[0-9]+ = #aarrggbb
+; background-0 = 
+
+; Value used for drawing rounded corners
+; Note: This shouldn't be used together with border-size because the border 
+; doesn't get rounded. For this to work you may also need to enable 
+; pseudo-transparency or use a compositor like picom.
+; Individual values can be defined using:
+;   radius-{top,bottom}
+; or
+;   radius-{top,bottom}-{left,right} (unreleased)
+; Polybar always uses the most specific radius definition for each corner.
+radius = 0.0
+
+; Under-/overline pixel size and argb color
+; Individual values can be defined using:
+;   {overline,underline}-size
+;   {overline,underline}-color
+line-size = 2
+line-color =
+
+; Values applied to all borders
+; Individual side values can be defined using:
+;   border-{left,top,right,bottom}-size
+;   border-{left,top,right,bottom}-color
+; The top and bottom borders are added to the bar height, so the effective
+; window height is:
+;   height + border-top-size + border-bottom-size
+; Meanwhile the effective window width is defined entirely by the width key and
+; the border is placed within this area. So you effectively only have the
+; following horizontal space on the bar:
+;   width - border-right-size - border-left-size
+; border-size can be defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in 50% minus 10 pixels. The percentage is relative
+; to the monitor width or height depending on the border direction. 
+border-size =
+border-color =
+#+end_src
+
+** Font
+
+#+begin_src conf
+; Set a DPI values used when rendering text
+; This only affects scalable fonts
+; Set this to 0 to let polybar calculate the dpi from the screen size.
+; dpi = 
+dpi-x = 96
+dpi-y = 96
+
+; Fonts are defined using <font-name>;<vertical-offset>
+; Font names are specified using a fontconfig pattern.
+;   font-0 = NotoSans-Regular:size=8;2
+;   font-1 = MaterialIcons:size=10
+;   font-2 = Termsynu:size=8;-1
+;   font-3 = FontAwesome:size=10
+; See the Fonts wiki page for more details
+font-0 = "Ubuntu:style=Light"
+font-1 = "Ubuntu:style=Medium"
+
+; Symbols
+font-2 = "Symbols Nerd Font:style=2048-em;1"
+
+font-3 = "Font Awesome 5 Brands Regular:style=Regular"
+font-4 = "Font Awesome 5 Free Regular:style=Regular"
+font-5 = "Font Awesome 5 Free Solid:style=Solid"
+#+end_src
+
+** Modules
+
+#+begin_src conf
+; Modules are added to one of the available blocks
+modules-left = menu
+modules-center = 
+modules-right = 
+
+; Number of spaces to add before/after each module
+; Individual side values can be defined using:
+;   module-margin-{left,right}
+module-margin = 0
+
+; The separator will be inserted between the output of each module
+; This has the same properties as a label
+separator =
+
+; Prefer fixed center position for the `modules-center` block. 
+; The center block will stay in the middle of the bar whenever
+; possible. It can still be pushed around if other blocks need
+; more space.
+; When false, the center block is centered in the space between 
+; the left and right block.
+fixed-center = true
+#+end_src
+
+** Tray
+
+#+begin_src conf
+; Position of the system tray window
+; If empty or undefined, tray support will be disabled
+; NOTE: A center aligned tray will cover center aligned modules
+;
+; Available positions:
+;   left
+;   center
+;   right
+;   none
+tray-position =
+
+; If true, the bar will not shift its
+; contents when the tray changes
+tray-detached = false
+
+; Tray icon max size
+tray-maxsize = 16
+
+; DEPRECATED! Since 3.3.0 the tray always uses pseudo-transparency
+; Enable pseudo transparency
+; Will automatically be enabled if a fully transparent
+; background color is defined using `tray-background`
+tray-transparent = false
+
+; Background color for the tray container 
+; ARGB color (e.g. #f00, #ff992a, #ddff1023)
+; By default the tray container will use the bar
+; background color.
+tray-background = ${root.background}
+
+; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 0
+tray-offset-y = 0
+
+; Pad the sides of each tray icon
+tray-padding = 0
+
+; Scale factor for tray clients
+tray-scale = 1.0
+#+end_src
+
+** Mouse
+
+#+begin_src conf
+; Fallback click handlers that will be called if
+; there's no matching module handler found.
+click-left = 
+click-middle = 
+click-right =
+scroll-up =
+scroll-down =
+double-click-left =
+double-click-middle =
+double-click-right =
+
+; Requires polybar to be built with xcursor support (xcb-util-cursor)
+; Possible values are:
+; - default   : The default pointer as before, can also be an empty string (default)
+; - pointer   : Typically in the form of a hand
+; - ns-resize : Up and down arrows, can be used to indicate scrolling
+cursor-click = 
+cursor-scroll = 
+#+end_src
+
+* Bar2
+  |   | ⏽         
+
+#+begin_src conf
+[bar/bar2]
+
+; Locale used to localize various module data (e.g. date)
+locale = en_US.UTF-8 
+
+; Enable support for inter-process messaging
+enable-ipc = true
+#+end_src
+
+** Monitor
+
+#+begin_src conf
+; Use either of the following command to list available outputs:
+; $ polybar -M | cut -d ':' -f 1
+; $ xrandr -q | grep " connected" | cut -d ' ' -f1
+; If no monitor is given, the primary monitor is used if it exists
+monitor =
+
+; Use the specified monitor as a fallback if the main one is not found.
+monitor-fallback =
+
+; Require the monitor to be in connected state
+monitor-strict = false
+
+; Use fuzzy matching for monitors (only ignores dashes -)
+; Useful when monitors are named differently with different drivers.
+monitor-exact = true
+#+end_src
+
+** Window Manager
+
+#+begin_src conf
+; Tell the Window Manager not to configure the window.
+; Use this to detach the bar if your WM is locking its size/position.
+; Note: With this most WMs will no longer reserve space for 
+; the bar and it will overlap other windows. You need to configure
+; your WM to add a gap where the bar will be placed.
+override-redirect = false
+
+; Value to be used to set the WM_NAME atom
+; If the value is empty or undefined, the atom value
+; will be created from the following template: polybar-[BAR]_[MONITOR]
+; NOTE: The placeholders are not available for custom values
+wm-name =
+
+; Restack the bar window and put it above the
+; selected window manager's root
+;
+; Fixes the issue where the bar is being drawn
+; on top of fullscreen window's
+;
+; Currently supported WM's:
+;   bspwm
+;   i3 (requires: `override-redirect = true`)
+wm-restack = bspwm
+#+end_src
+
+** Position
+
+#+begin_src conf
+; Put the bar at the bottom of the screen
+bottom = false
+
+; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in a width or height of 50% minus 10 pixels
+width = 20%
+height = 3%
+
+; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in an offset in the x or y direction 
+; of 50% minus 10 pixels
+offset-x = 40%
+offset-y = 0
+
+; Number of spaces to add at the beginning/end of the bar
+; Individual side values can be defined using:
+;   padding-{left,right}
+padding = 0
+padding-left =
+padding-right =
+#+end_src
+
+** Appareance
+
+#+begin_src conf
+; Opacity value between 0.0 and 1.0 used on fade in/out
+dim-value = 1.0
+
+; Background ARGB color (e.g. #f00, #ff992a, #ddff1023)
+background = #00ffffff
+
+; Foreground ARGB color (e.g. #f00, #ff992a, #ddff1023)
+; foreground = 
+
+; Background gradient (vertical steps)
+;   background-[0-9]+ = #aarrggbb
+; background-0 = 
+
+; Value used for drawing rounded corners
+; Note: This shouldn't be used together with border-size because the border 
+; doesn't get rounded. For this to work you may also need to enable 
+; pseudo-transparency or use a compositor like picom.
+; Individual values can be defined using:
+;   radius-{top,bottom}
+; or
+;   radius-{top,bottom}-{left,right} (unreleased)
+; Polybar always uses the most specific radius definition for each corner.
+radius = 0.0
+; radius-top = ${bar.radius-top}
+; radius-bottom = ${bar.radius-bottom}
+
+; Under-/overline pixel size and argb color
+; Individual values can be defined using:
+;   {overline,underline}-size
+;   {overline,underline}-color
+line-size = 2
+line-color =
+; overline-size   = ${bar.overline-size}
+; overline-color  = ${bar.overline-color}
+; underline-size  = ${bar.underline-size}
+; underline-color = ${bar.underline-color}
+
+; Values applied to all borders
+; Individual side values can be defined using:
+;   border-{left,top,right,bottom}-size
+;   border-{left,top,right,bottom}-color
+; The top and bottom borders are added to the bar height, so the effective
+; window height is:
+;   height + border-top-size + border-bottom-size
+; Meanwhile the effective window width is defined entirely by the width key and
+; the border is placed within this area. So you effectively only have the
+; following horizontal space on the bar:
+;   width - border-right-size - border-left-size
+; border-size can be defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in 50% minus 10 pixels. The percentage is relative
+; to the monitor width or height depending on the border direction. 
+border-size =
+border-color =
+#+end_src
+
+** Font
+   
+#+begin_src conf
+; Set a DPI values used when rendering text
+; This only affects scalable fonts
+; Set this to 0 to let polybar calculate the dpi from the screen size.
+; dpi = 
+dpi-x = 96
+dpi-y = 96
+
+; Fonts are defined using <font-name>;<vertical-offset>
+; Font names are specified using a fontconfig pattern.
+;   font-0 = NotoSans-Regular:size=8;2
+;   font-1 = MaterialIcons:size=10
+;   font-2 = Termsynu:size=8;-1
+;   font-3 = FontAwesome:size=10
+; See the Fonts wiki page for more details
+font-0 = "Ubuntu:style=Light"
+font-1 = "Ubuntu:style=Medium"
+
+
+; Symbols
+font-2 = "Symbols Nerd Font:style=2048-em;1"
+
+font-3 = "Font Awesome 5 Brands Regular:style=Regular"
+font-4 = "Font Awesome 5 Free Regular:style=Regular"
+font-5 = "Font Awesome 5 Free Solid:style=Solid"
+#+end_src
+
+** Modules
+
+#+begin_src conf
+; Modules are added to one of the available blocks
+;   modules-left = cpu ram
+;   modules-center = xwindow xbacklight
+;   modules-right = ipc clock
+modules-left =
+modules-center = bspwm
+modules-right =
+
+; Number of spaces to add before/after each module
+; Individual side values can be defined using:
+;   module-margin-{left,right}
+module-margin = 0
+
+; The separator will be inserted between the output of each module
+; This has the same properties as a label
+separator =
+
+; Prefer fixed center position for the `modules-center` block. 
+; The center block will stay in the middle of the bar whenever
+; possible. It can still be pushed around if other blocks need
+; more space.
+; When false, the center block is centered in the space between 
+; the left and right block.
+fixed-center = true
+#+end_src
+
+** Tray
+
+#+begin_src conf
+; Position of the system tray window
+; If empty or undefined, tray support will be disabled
+; NOTE: A center aligned tray will cover center aligned modules
+;
+; Available positions:
+;   left
+;   center
+;   right
+;   none
+tray-position =
+
+; If true, the bar will not shift its
+; contents when the tray changes
+tray-detached = false
+
+; Tray icon max size
+tray-maxsize = 16
+
+; DEPRECATED! Since 3.3.0 the tray always uses pseudo-transparency
+; Enable pseudo transparency
+; Will automatically be enabled if a fully transparent
+; background color is defined using `tray-background`
+tray-transparent = false
+
+; Background color for the tray container 
+; ARGB color (e.g. #f00, #ff992a, #ddff1023)
+; By default the tray container will use the bar
+; background color.
+tray-background = ${root.background}
+
+; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 0
+tray-offset-y = 0
+
+; Pad the sides of each tray icon
+tray-padding = 0
+
+; Scale factor for tray clients
+tray-scale = 1.0
+#+end_src
+
+** Mouse
+
+#+begin_src conf
+; Fallback click handlers that will be called if
+; there's no matching module handler found.
+click-left = 
+click-middle = 
+click-right =
+scroll-up =
+scroll-down =
+double-click-left =
+double-click-middle =
+double-click-right =
+
+; Requires polybar to be built with xcursor support (xcb-util-cursor)
+; Possible values are:
+; - default   : The default pointer as before, can also be an empty string (default)
+; - pointer   : Typically in the form of a hand
+; - ns-resize : Up and down arrows, can be used to indicate scrolling
+cursor-click = 
+cursor-scroll = 
+#+end_src
+
+* Bar3
+
+#+begin_src conf
+[bar/bar3]
+
+; Locale used to localize various module data (e.g. date)
+locale = en_US.UTF-8 
+
+; Enable support for inter-process messaging
+enable-ipc = true
+#+end_src
+
+** Monitor
+
+#+begin_src conf
+; Use either of the following command to list available outputs:
+; $ polybar -M | cut -d ':' -f 1
+; $ xrandr -q | grep " connected" | cut -d ' ' -f1
+; If no monitor is given, the primary monitor is used if it exists
+monitor =
+
+; Use the specified monitor as a fallback if the main one is not found.
+monitor-fallback =
+
+; Require the monitor to be in connected state
+monitor-strict = false
+
+; Use fuzzy matching for monitors (only ignores dashes -)
+; Useful when monitors are named differently with different drivers.
+monitor-exact = true
+#+end_src
+
+** Window Manager
+
+#+begin_src conf
+; Tell the Window Manager not to configure the window.
+; Use this to detach the bar if your WM is locking its size/position.
+; Note: With this most WMs will no longer reserve space for 
+; the bar and it will overlap other windows. You need to configure
+; your WM to add a gap where the bar will be placed.
+override-redirect = false
+
+; Value to be used to set the WM_NAME atom
+; If the value is empty or undefined, the atom value
+; will be created from the following template: polybar-[BAR]_[MONITOR]
+; NOTE: The placeholders are not available for custom values
+wm-name =
+
+; Restack the bar window and put it above the
+; selected window manager's root
+;
+; Fixes the issue where the bar is being drawn
+; on top of fullscreen window's
+;
+; Currently supported WM's:
+;   bspwm
+;   i3 (requires: `override-redirect = true`)
+wm-restack = bspwm
+#+end_src
+
+** Position
+   
+#+begin_src conf
+; Put the bar at the bottom of the screen
+bottom = false
+
+; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in a width or height of 50% minus 10 pixels
+width = 10%
+height = 3%
+
+; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in an offset in the x or y direction 
+; of 50% minus 10 pixels
+offset-x = 90%:-6
+offset-y = 0
+
+; Number of spaces to add at the beginning/end of the bar
+; Individual side values can be defined using:
+;   padding-{left,right}
+padding = 0
+#+end_src
+
+** Appareance
+
+#+begin_src conf
+; Opacity value between 0.0 and 1.0 used on fade in/out
+dim-value = 1.0
+
+; Background ARGB color (e.g. #f00, #ff992a, #ddff1023)
+background = #00ffffff
+
+; Foreground ARGB color (e.g. #f00, #ff992a, #ddff1023)
+; foreground = 
+
+; Background gradient (vertical steps)
+;   background-[0-9]+ = #aarrggbb
+; background-0 = 
+
+; Value used for drawing rounded corners
+; Note: This shouldn't be used together with border-size because the border 
+; doesn't get rounded. For this to work you may also need to enable 
+; pseudo-transparency or use a compositor like picom.
+; Individual values can be defined using:
+;   radius-{top,bottom}
+; or
+;   radius-{top,bottom}-{left,right} (unreleased)
+; Polybar always uses the most specific radius definition for each corner.
+radius = 0.0
+
+; Under-/overline pixel size and argb color
+; Individual values can be defined using:
+;   {overline,underline}-size
+;   {overline,underline}-color
+line-size = 2
+line-color =
+
+; Values applied to all borders
+; Individual side values can be defined using:
+;   border-{left,top,right,bottom}-size
+;   border-{left,top,right,bottom}-color
+; The top and bottom borders are added to the bar height, so the effective
+; window height is:
+;   height + border-top-size + border-bottom-size
+; Meanwhile the effective window width is defined entirely by the width key and
+; the border is placed within this area. So you effectively only have the
+; following horizontal space on the bar:
+;   width - border-right-size - border-left-size
+; border-size can be defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in 50% minus 10 pixels. The percentage is relative
+; to the monitor width or height depending on the border direction. 
+border-size =
+border-color =
+#+end_src
+
+** Font
+
+#+begin_src conf
+; Set a DPI values used when rendering text
+; This only affects scalable fonts
+; Set this to 0 to let polybar calculate the dpi from the screen size.
+; dpi = 
+dpi-x = 96
+dpi-y = 96
+
+; Fonts are defined using <font-name>;<vertical-offset>
+; Font names are specified using a fontconfig pattern.
+;   font-0 = NotoSans-Regular:size=8;2
+;   font-1 = MaterialIcons:size=10
+;   font-2 = Termsynu:size=8;-1
+;   font-3 = FontAwesome:size=10
+; See the Fonts wiki page for more details
+font-0 = "Ubuntu:style=Light"
+font-1 = "Ubuntu:style=Medium"
+
+; Symbols
+font-2 = "Symbols Nerd Font:style=2048-em;1"
+
+font-3 = "Font Awesome 5 Brands Regular:style=Regular"
+font-4 = "Font Awesome 5 Free Regular:style=Regular"
+font-5 = "Font Awesome 5 Free Solid:style=Solid"
+#+end_src
+
+** Modules
+
+#+begin_src conf
+; Modules are added to one of the available blocks
+;   modules-left = cpu ram
+;   modules-center = xwindow xbacklight
+;   modules-right = ipc clock
+modules-left =
+modules-center = 
+modules-right = menu
+
+; Number of spaces to add before/after each module
+; Individual side values can be defined using:
+;   module-margin-{left,right}
+module-margin = 0
+
+; The separator will be inserted between the output of each module
+; This has the same properties as a label
+separator =
+
+; Prefer fixed center position for the `modules-center` block. 
+; The center block will stay in the middle of the bar whenever
+; possible. It can still be pushed around if other blocks need
+; more space.
+; When false, the center block is centered in the space between 
+; the left and right block.
+fixed-center = true
+#+end_src
+
+** Tray
+
+#+begin_src conf
+; Position of the system tray window
+; If empty or undefined, tray support will be disabled
+; NOTE: A center aligned tray will cover center aligned modules
+;
+; Available positions:
+;   left
+;   center
+;   right
+;   none
+tray-position =
+
+; If true, the bar will not shift its
+; contents when the tray changes
+tray-detached = false
+
+; Tray icon max size
+tray-maxsize = 16
+
+; DEPRECATED! Since 3.3.0 the tray always uses pseudo-transparency
+; Enable pseudo transparency
+; Will automatically be enabled if a fully transparent
+; background color is defined using `tray-background`
+tray-transparent = false
+
+; Background color for the tray container 
+; ARGB color (e.g. #f00, #ff992a, #ddff1023)
+; By default the tray container will use the bar
+; background color.
+tray-background = ${root.background}
+
+; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 0
+tray-offset-y = 0
+
+; Pad the sides of each tray icon
+tray-padding = 0
+
+; Scale factor for tray clients
+tray-scale = 1.0
+#+end_src
+
+** Mouse
+
+#+begin_src conf
+; Fallback click handlers that will be called if
+; there's no matching module handler found.
+click-left = 
+click-middle = 
+click-right =
+scroll-up =
+scroll-down =
+double-click-left =
+double-click-middle =
+double-click-right =
+
+; Requires polybar to be built with xcursor support (xcb-util-cursor)
+; Possible values are:
+; - default   : The default pointer as before, can also be an empty string (default)
+; - pointer   : Typically in the form of a hand
+; - ns-resize : Up and down arrows, can be used to indicate scrolling
+cursor-click = 
+cursor-scroll = 
+#+end_src
+
+* Module
+** Example
+*** Format
+
+format-NAME = ...
+
+; The prefix and suffix properties contains all
+; properties that are available for any `<label>`.
+format-NAME-prefix = ...
+format-NAME-prefix-foreground = #f00
+format-NAME-suffix = ...
+format-NAME-suffix-background = #0f0
+
+; By only specifying alpha value, it will be
+; applied to the bar's default foreground/background color
+format-NAME-foreground = #aa[rrggbb]
+format-NAME-background = #aa[rrggbb]
+format-NAME-underline  = #aa[rrggbb]
+format-NAME-overline   = #aa[rrggbb]
+
+; Number of whitespaces
+format-NAME-padding = N
+format-NAME-margin  = N
+format-NAME-spacing = N
+
+; Use Nth font for this format (1-indexed)
+format-NAME-font = N
+
+; Displace the format block horizontally by +/-N pixels
+format-NAME-offset  = N
+
+**** Label
+
+label-NAME = foobar
+;label-NAME-foreground = #aarrggbb
+;label-NAME-background = #aarrggbb
+;label-NAME-overline = #aarrggbb
+;label-NAME-underline = #aarrggbb
+;label-NAME-font = N
+
+; Add N spaces to the left and right of the label contents
+; Default: 0
+label-NAME-padding = N
+
+; Truncate text if it exceeds given limit. 
+; Default: 0
+label-NAME-maxlen = 30
+
+; Pad with spaces if the text doesn't have at least minlen characters
+; Default: 0
+label-NAME-minlen = 10
+; Alignment when the text is shorter than minlen
+; Possible Values: left, center, right
+; Default: left
+label-NAME-alignment = center
+
+; Optionally append ... to the truncated string.
+; Default: true
+label-NAME-ellipsis = false
+
+**** Progress Bar
+
+bar-NAME-format = %fill%%indicator%%empty%
+bar-NAME-width = 10
+
+bar-NAME-gradient = true
+bar-NAME-foreground-0 = #00ff00
+bar-NAME-foreground-1 = #ff9900
+bar-NAME-foreground-2 = #ff0000
+
+; The fill, indicator and empty icon can be configured like any <label>
+bar-NAME-fill = x
+bar-NAME-indicator = x
+bar-NAME-empty = x
+
+**** Ramp
+
+ramp-NAME-0 = 🔈
+ramp-NAME-1 = 🔉
+ramp-NAME-2 = 🔊
+
+ramp-NAME-0-foreground = #00f
+ramp-NAME-1-background = #f90
+
+
+ramp-NAME-background = #fff
+ramp-NAME-foreground = #000
+ramp-NAME-0 = A
+ramp-NAME-0-foreground = #f00
+ramp-NAME-1 = B
+ramp-NAME-2 = C
+
+ramp-NAME-0 = A
+ramp-NAME-1 = B
+ramp-NAME-1-weight = 8
+ramp-NAME-2 = C
+
+** Bspwm
+   
+#+begin_src conf
+[module/bspwm]
+type = internal/bspwm
+
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
+pin-workspaces = true
+
+; Output mode flags after focused state label. Default: false
+inline-mode = false
+
+; Create click handler used to focus workspace. Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces. Default: true
+enable-scroll = true
+
+; Set the scroll cycle direction. Default: true
+reverse-scroll = true
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+#+end_src
+
+*** WS Icon
+**** COMMENT Outline
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 =  1;
+ws-icon-1 =  2;
+ws-icon-2 =  3;
+ws-icon-3 =  4;
+ws-icon-4 =  5;
+ws-icon-5 =  6;
+ws-icon-6 =  7;﫛
+ws-icon-7 =  8;
+ws-icon-8 =  9;
+ws-icon-9 = 10;
+ws-icon-default = 
+#+end_src
+
+**** COMMENT Box
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 =  1;
+ws-icon-1 =  2;爵
+ws-icon-2 =  3;ﬥ
+ws-icon-3 =  4;
+ws-icon-4 =  5;
+ws-icon-5 =  6;
+ws-icon-6 =  7;ﭵ
+ws-icon-7 =  8;
+ws-icon-8 =  9;ﴠ
+ws-icon-9 = 10;
+ws-icon-default = 
+#+end_src
+
+**** COMMENT Multiple
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 =  1;
+ws-icon-1 =  2;爵
+ws-icon-2 =  3;謹
+ws-icon-3 =  4;廊
+ws-icon-4 =  5;
+ws-icon-5 =  6;
+ws-icon-6 =  7;ﱘ
+ws-icon-7 =  8;隸
+ws-icon-8 =  9;ﴠ
+ws-icon-9 = 10;
+ws-icon-default = 
+#+end_src
+
+**** COMMENT Icons
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 =  1;
+ws-icon-1 =  2;
+ws-icon-2 =  3;
+ws-icon-3 =  4;
+ws-icon-4 =  5;
+ws-icon-5 =  6;
+ws-icon-6 =  7;﫛
+ws-icon-7 =  8;
+ws-icon-8 =  9;
+ws-icon-9 = 10;
+ws-icon-default = 
+#+end_src
+
+**** Numeric Box
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 0;
+ws-icon-default = ﱢ
+#+end_src
+
+**** COMMENT Numeric Box Outline
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 0;
+ws-icon-default = 
+#+end_src
+
+**** COMMENT Numeric Box Multiple Outline
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 0;
+ws-icon-default = 
+#+end_src
+
+**** COMMENT Radiobox
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 = 1;祿
+ws-icon-1 = 2;綠
+ws-icon-2 = 3;祿
+ws-icon-3 = 4;祿
+ws-icon-4 = 5;祿
+ws-icon-5 = 6;祿
+ws-icon-6 = 7;祿
+ws-icon-7 = 8;祿
+ws-icon-8 = 9;祿
+ws-icon-9 = 0;祿
+ws-icon-default = 祿
+#+end_src
+
+**** COMMENT Rhombus
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+ 
+ws-icon-default = ﰊ
+#+end_src
+
+**** COMMENT Circles
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 0;
+ws-icon-default = 
+#+end_src
+
+**** COMMENT Circles
+Nerd Fonts Symbols
+
+#+begin_src conf
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 0;
+ws-icon-default = 
+#+end_src
+
+*** Format
+	
+#+begin_src conf
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
+;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+; Default: <label-state>
+format = <label-state>
+; format-background = ${colors.background-alt} 
+; format-foreground = ${colors.foreground-alt} 
+
+; format-underline  = ${colors.violet}
+; format-overline   = ${colors.cyan}
+
+; Number of whitespaces
+; format-padding = 4
+; format-margin  = 4
+; format-spacing = 4
+#+end_src
+
+**** Label
+***** Monitor
+
+#+begin_src conf
+; Available tokens:
+;   %name%
+; Default: %name%
+label-monitor = %name%
+; label-monitor-foreground = #555
+; label-monitor-background = #555
+#+end_src
+
+***** Dimmed
+
+#+begin_src conf
+; If any values for label-dimmed-N are defined, the workspace/mode
+; colors will get overridden with those values if the monitor is out of focus
+; To only override workspaces in a specific state, use:
+;   label-dimmed-focused
+;   label-dimmed-occupied
+;   label-dimmed-urgent
+;   label-dimmed-empty
+; label-dimmed-focused-foreground = ${colors.blue}
+; label-dimmed-underline = ${bar/top.background}
+; label-dimmed-focused-background = #f00
+;label-dimmed-background = ${root.background}
+;label-dimmed-overline = ${root.background}
+;label-dimmed-underline = ${root.background}
+;label-dimmed-active-foreground = #f00
+#+end_src
+
+***** Desktop
+****** Focused 
+
+ #+begin_src conf
+ ; Available tokens:
+ ;   %name%
+ ;   %icon%
+ ;   %index%
+ ; Default: %icon% %name%
+ label-focused = %icon%
+ ; Rhombus
+ ; label-focused = ﰉ
+
+ label-focused-background = ${colors.background}
+ label-focused-foreground = ${colors.foreground}
+ label-focused-overline = ${colors.blue}
+ ; label-focused-underline = ${colors.blue}
+ ; label-focused-font = 5
+ label-focused-padding = 2
+ label-focused-maxlen = 2
+ label-focused-minlen = 1
+ label-focused-alignment = right
+ label-focused-ellipsis = false
+ #+end_src
+
+****** Empty
+
+ #+begin_src conf
+ ; Available tokens:
+ ;   %name%
+ ;   %icon%
+ ;   %index%
+ ; Default: %icon% %name%
+ label-empty = %icon%
+ label-empty-background = ${colors.background-alt}
+ label-empty-foreground = ${colors.foreground-alt}
+ label-empty-overline =
+ label-empty-underline =
+ label-empty-font = 1
+ label-empty-padding = 2
+ label-empty-maxlen = 2
+ label-empty-minlen = 1
+ label-empty-alignment = right
+ label-empty-ellipsis = false
+ #+end_src
+
+****** Occupied
+
+ #+begin_src conf
+ ; Available tokens:
+ ;   %name%
+ ;   %icon%
+ ;   %index%
+ label-occupied = %icon%
+ label-occupied-background = ${colors.background-alt}
+ label-occupied-foreground = ${colors.foreground}
+ label-occupied-overline =
+ label-occupied-underline =
+ ; label-occupied-font = 1
+ label-occupied-padding = 2
+ label-occupied-maxlen = 2
+ label-occupied-minlen = 1
+ label-occupied-alignment = right
+ label-occupied-ellipsis = false
+ #+end_src
+
+****** Urgent
+
+ #+begin_src conf
+ ; Available tokens:
+ ;   %name%
+ ;   %icon%
+ ;   %index%
+ ; Default: %icon% %name%
+ label-urgent = %icon%
+ label-urgent-background = ${colors.background-alt}
+ label-urgent-foreground = ${colors.red}
+ ; label-urgent-overline =
+ ; label-urgent-underline =
+ ; label-urgent-font = 1
+ label-urgent-padding = 2
+ label-urgent-maxlen = 2
+ label-urgent-minlen = 1
+ label-urgent-alignment = right
+ label-urgent-ellipsis = false
+ #+end_src
+
+***** Layout
+|  | ﬿ |  | 类 |
+
+#+begin_src conf
+; The following labels will be used to indicate the layout/mode
+; for the focused workspace. Requires <label-mode>
+;
+; Available tokens:
+;   None
+; label-monocle = 
+label-monocle = M
+;label-monocle-padding = 2
+;label-monocle-background = #171717
+;label-monocle-foreground = ${colors.accent}
+
+;label-tiled = 
+label-tiled = T
+#+end_src
+
+***** Window States
+ 类  
+
+#+begin_src conf
+; label-fullscreen = 
+label-fullscreen = F
+
+;label-floating = 
+label-floating = 
+;label-floating-padding = 2
+;label-floating-background = #171717
+;label-floating-foreground = ${colors.accent}
+
+label-pseudotiled = P
+;label-pseudotiled = pseudo
+;label-pseudotiled-background = #f09
+#+end_src
+
+***** Flags
+
+#+begin_src conf
+;label-locked = 
+;label-locked-foreground = #bd2c40
+
+;label-sticky = 
+;label-sticky-foreground = #fba922
+
+;label-private = 
+;label-private-foreground = #bd2c40
+
+;label-marked = M
+#+end_src
+
+***** Separator
+
+#+begin_src conf
+; Separator in between workspaces
+; label-separator = |
+; label-separator-foreground = #ffb52a
+; label-separator-padding = 2
+#+end_src
+
+** Menu
+
+#+begin_src conf
+[module/menu]
+type = custom/text
+
+; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
+click-left = ~/.local/bin/rofi/widget/power
+; click-middle = notify-send middle
+click-right = ~/.local/bin/rofi/about
+
+; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
+; scroll-up = notify-send scroll up
+; scroll-down = notify-send scroll down
+#+end_src
+
+*** Content
+ ⏻ 襤 
+
+#+begin_src conf
+; "content" has the same properties as "format-NAME"
+content = 
+; content = "%{T3}%{T-}"
+
+content-background = ${colors.background-alt}
+content-foreground = ${colors.foreground}
+; content-underline = ${colors.blue}
+; content-overline   = #aa[rrggbb]
+
+content-padding = 2
+content-margin = 
+content-spacing = 
+
+;content-font = N
+;content-offset  = N
+#+end_src
+
+** COMMENT Menu
+
+#+begin_src conf
+[module/menu-apps]
+type = custom/menu
+
+; If true, <label-toggle> will be to the left of the menu items (default).
+; If false, it will be on the right of all the items.
+; expand-right = true
+
+; "menu-LEVEL-N" has the same properties as "label-NAME" with
+; the additional "exec" property
+;
+; Commands will be executed using "/bin/sh -c $COMMAND"
+
+; menu-0-0 = Browsers
+; menu-0-0-exec = #menu-apps.open.1
+; menu-0-1 = Multimedia
+; menu-0-1-exec = #menu-apps.open.2
+
+; menu-1-0 = Firefox
+; menu-1-0-exec = firefox
+; menu-1-1 = Chromium
+; menu-1-1-exec = chromium
+
+; menu-2-0 = Gimp
+; menu-2-0-exec = gimp
+; menu-2-1 = Scrot
+; menu-2-1-exec = scrot
+
+
+menu-0-0 = Terminate WM
+menu-0-0-foreground = ${colors.accent}
+menu-0-0-exec = bspc quit -1
+menu-0-1 = Reboot
+menu-0-1-foreground = ${colors.accent}
+menu-0-1-exec = menu-open-1
+menu-0-2 = Power off
+menu-0-2-foreground = ${colors.accent}
+menu-0-2-exec = menu-open-2
+menu-0-3 = Lock
+menu-0-3-foreground = ${colors.accent}
+menu-0-3-exec = lockscreen
+
+menu-1-0 = Cancel
+menu-1-0-foreground = ${colors.accent}
+menu-1-0-exec = menu-open-0
+menu-1-1 = Reboot
+menu-1-1-foreground = ${colors.accent}
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = Power off
+menu-2-0-foreground = ${colors.accent}
+menu-2-0-exec = sudo poweroff
+menu-2-1 = Cancel
+menu-2-1-foreground = ${colors.accent}
+menu-2-1-exec = menu-open-0
+#+end_src
+
+*** Format
+
+#+begin_src conf
+; Available tags:
+;   <label-toggle> (default) - gets replaced with <label-(open|close)>
+;   <menu> (default)
+; If expand-right is true, the default will be "<label-toggle><menu>" and the
+; other way around otherwise.
+; Note that if you use <label-toggle> you must also include
+; the definition for <label-open>
+format = <label-toggle><menu>
+#+end_src
+
+**** Label
+
+#+begin_src conf
+label-open = Apps
+label-close = x
+#+end_src
+
+***** Separator
+
+#+begin_src conf
+; Optional item separator
+; Default: none
+; label-separator = |
+; label-separator-margin = 1
+#+end_src
+
+
+** COMMENT Volume
+
+#+begin_src conf
+[module/alsa]
+type = internal/alsa
+
+format-volume = <ramp-volume>
+format-volume-suffix = " "
+format-volume-background = ${colors.color1}
+format-muted-background = ${colors.color1}
+
+;format-muted = 
+;ramp-volume-0 = 
+;ramp-volume-1 = 
+;ramp-volume-2 = 
+
+format-muted = " ﱝ "
+ramp-volume-0 = " 奄"
+ramp-volume-1 = " 奔"
+ramp-volume-2 = " 墳"
+
+;format-muted = " 🔇 "
+;ramp-volume-0 = " 🔈 "
+;ramp-volume-1 = " 🔉 "
+;ramp-volume-2 = " 🔊 "
+#+end_src
+
+
+type = internal/volume
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
+
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = #777
+label-muted = sound muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-foreground = #666
+
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+ramp-headphones-foreground = #666
+
+** COMMENT Separators
+  |   | ⏽
+
+#+begin_src conf
+; Use raw formatting tags for mix fonts (%{T-}=Default)
+[module/separator-1]
+type = custom/text
+content = "%{T-}%{T-}"
+content-foreground = ${colors.color1}
+content-background = ${colors.background}
+
+[module/separator-2]
+type = custom/text
+content = "%{T-}%{T-}"
+content-foreground = ${colors.color2}
+content-background = ${colors.background}
+
+[module/separator-3]
+type = custom/text
+content = "%{T-}%{T-}"
+content-foreground = ${colors.color1}
+content-background = ${colors.color2}
+#+end_src
+
+** COMMENT Window
+
+#+begin_src conf
+[module/xwindow]
+
+type = internal/xwindow
+label = " %title% "
+label-maxlen = 50
+label-empty = Empty
+
+format-background = ${colors.color1}
+format-prefix = ""
+format-prefix-foreground = ${colors.color1}
+format-prefix-background = ${colors.background}
+format-suffix = ""
+format-suffix-foreground = ${colors.color1}
+format-suffix-background = ${colors.background}
+#+end_src
+
+
+** COMMENT Cpu
+;   
+
+#+begin_src conf
+[module/cpu]
+type = internal/cpu
+
+interval = 2
+format = <label>
+format-prefix = " "
+format-suffix = " "
+format-background = ${colors.color2}
+label = "%{T2}%{T-} %percentage:2:3%%"
+#+end_src
+
+** COMMENT Memory
+
+#+begin_src conf
+[module/memory]
+type = internal/memory
+
+interval = 2
+format = <label>
+format-suffix = " "
+format-background = ${colors.color2}
+
+label = "%{T2}%{T-} %percentage_used:2:3%%"
+#+end_src
+
+** COMMENT Network
+直睊|  ﯥ | 度ﴹ |   |   |   |  𥉉
+
+#+begin_src conf
+[module/network]
+type = internal/network
+
+interface = ens33
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-suffix = " "
+format-connected-font = 2
+format-connected-background = ${colors.color1}
+format-disconnected = <label-disconnected>
+format-disconnected-suffix = " "
+format-disconnected-font = 2
+format-disconnected-background = ${colors.color1}
+format-packetloss = <animation-packetloss> <label-connected>
+
+label-connected = "說"
+label-disconnected = "ﲁ " 
+
+;format-packetloss = <animation-packetloss> <label-connected>
+animation-packetloss-0 = 
+;animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+;animation-packetloss-1-foreground = #000000
+animation-packetloss-framerate = 500
+#+end_src
+
+** COMMENT Wifi
+[module/wifi]
+type = internal/network
+interface = net1
+interval = 3.0
+;udspeed-minwidth = 0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-foreground = #666
+format-connected-prefix-offset = -6
+label-connected = %downspeed:8%
+
+;format-disconnected = <label-disconnected>
+;format-disconnected-prefix = " "
+;format-disconnected-prefix-foreground = #666
+;label-disconnected = not connected
+;label-disconnected-foreground = #999
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = #666
+** COMMENT Date
+
+#+begin_src conf
+[module/date]
+type = internal/date
+
+interval = 5
+format-suffix = " "
+format-background = ${colors.color1}
+;format-prefix = ""
+;format-prefix-background = ${colors.background}
+
+date = "%a, %m/%d/%y"
+date-alt = "%A, %d %B %Y"
+time = "%H:%M"
+time-alt = "%l:%M%P"
+label = "%time% %date%"
+#+end_src
+
+
+# vim:ft=dosini
+
+** COMMENT FS-Root
+
+[module/fs-root]
+type = internal/fs
+mount-0 = /
+label-mounted = %{F#e60053}%percentage_used%%%{F-} used of %mountpoint%
+
+
+** COMMENT keyboard
+
+#+begin_src conf
+[module/keyboard]
+type = internal/xkeyboard
+
+;blacklist-0 = num lock
+;blacklist-1 = caps lock
+;blacklist-2 = scroll lock
+
+format = <label-layout>
+format-suffix = " "
+format-background = ${colors.color1}
+
+label-layout = "%icon%"
+
+layout-icon-default = ?
+layout-icon-0 = us;US
+layout-icon-1 = es;ES
+#+end_src
+
+
+** Github
+
+[module/github]
+type = internal/github
+token = ${file:/home/jaagr/.git-token}
+;empty-notifications = true
+label = %notifications%
+label-padding = 2
+label-background = #f0c209
+label-foreground = #000
+
+** Counter
+
+[module/counter]
+type = internal/counter
+format = <counter>
+interval = 0.1
+
+
+* TODO Get moc module
