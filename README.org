@@ -28,7 +28,10 @@ Here, quick links to the configuration of some of my programs.
 + [[file:.config/emacs][Whateveremacsis]] 
   
 * Contact
-[[https://rgomezgerardi.cf][Website]] \
-[[https://paypal.me/rgomezgerardi][Paypal]] \
-[[https://linkedin.com/in/rgomezgerardi][Linkedin]] \
+[[https://rgomezgerardi.cf][Website]]
+
+[[https://paypal.me/rgomezgerardi][Paypal]]
+
+[[https://linkedin.com/in/rgomezgerardi][Linkedin]]
+
 [[https://mail.google.com/mail/?view=cm&to=rgomezgerardi@gmail.com&su=Ralisk+-+][Gmail]]
