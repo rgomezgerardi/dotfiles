@@ -10,7 +10,8 @@ text/plain=editor.desktop;
 text/x-shellscript=text.desktop
 
 # Explorer
-inode/directory=explorer.desktop
+#inode/directory=explorer.desktop
+inode/directory=thunar.desktop
 
 # Idle
 text/x-comma-separated-values=idle.desktop

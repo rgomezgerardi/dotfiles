@@ -2,7 +2,7 @@
 alias -g bg="&> /dev/null &"
 
 alias -s txt="$EDITOR"
-alias -s {jpg,png}="$IMAGE_VIEWER"
+alias -s {jpg,png,bmp}="$IMAGE_VIEWER"
 alias -s md="$IDlE"
 
 if [ -x /usr/bin/dircolors ]; then
@@ -18,7 +18,6 @@ fi
 alias cp="cp --interactive --verbose"
 alias mv="mv --interactive --verbose"
 alias rm="rm --verbose"
-alias grep="grep --line-number"
 alias df='df --human-readable'
 alias lsblk="lsblk --fs"
 alias umount="umount --verbose --recursive --force"
@@ -31,9 +30,9 @@ alias rg="rg --sort path"
 
 alias pacman="sudo pacman --color auto"
 alias upgrade='sudo pacman -Syyu'
-alias install='sudo pacman -Syu && sudo pacman -Syu'
+# alias install='sudo pacman -Syu && sudo pacman -Syu'
 alias refresh='sudo pacman -Syy'
-alias remove='sudo pacman -Rsn'
+# alias remove='sudo pacman -Rsn'
 alias pacsyu='sudo pacman -Syyu'			# Update only standard pkgs
 alias yaysua='yay -Sua --noconfirm'			# Update only AUR pkgs
 alias yaysyu='yay -Syu --noconfirm'			# Update standard pkgs and AUR pkgs
@@ -83,8 +82,7 @@ alias la='ls -a'
 alias ll='ls -al'
 alias l.="ls -A | egrep '^\.'"
 
-alias gitpush='git add . ; git commit -m "Upload Files" ; git push origin'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias rmgitcache="rm -r ~/.cache/git"
 # alias m="git checkout main"
 # alias s="git checkout stable"
@@ -112,12 +110,12 @@ alias syslistenabled="systemctl list-unit-files --state=enabled"
 alias mount-iso='sudo mount -o loop --target /mnt/iso --source'
 alias mount-usb='sudo mount -o loop --target /mnt/usb --source /dev/sdb'
 alias mount-dvd='sudo mount -o ro,loop --target /mnt/dvd --source /dev/sr0'
-alias mount-phone='aft-mtp-mount ~/Phone'
+alias mount-phone="aft-mtp-mount $PHONE"
 
 alias umount-iso='sudo umount /mnt/iso'
 alias umount-usb='udiskie-umount /mnt/PENDRIVE'
 alias umount-dvd='sudo umount /mnt/dvd'
-alias umount-phone='fusermount -u ~/Phone'
+alias umount-phone="fusermount -u $PHONE"
 
 alias yt='youtube-dl'
 alias yta='yt --extract-audio --audio-format mp3 --audio-quality 192k'
@@ -131,11 +129,6 @@ alias yta-vorbis="yt --extract-audio --audio-format vorbis "
 alias yta-wav="yt --extract-audio --audio-format wav "
 alias ytv="yt --format 'best[ext = mp4][height <= 480]'"
 alias ytv-best="yt --format bestvideo+bestaudio "
-
-alias cd..='cd ..'
-alias pdw="pwd"
-alias upqll="paru -Syu --noconfirm"
-alias upal="paru -Syu --noconfirm"
 
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 alias gpg-check-fix="gpg2 --keyserver-options auto-key-retrieve --verify"
@@ -160,7 +153,7 @@ alias fix-pacman-keyserver="/usr/local/bin/arcolinux-fix-pacman-gpg-conf"
 
 # alias emacs="~/.local/bin/emacs"
 alias mocp="mocp --config ~/.config/moc/config"
-alias vifm="$HOME/.config/vifm/scripts/vifmrun"
+# alias vifm="$HOME/.config/vifm/scripts/vifmrun"
 alias rtorrent="~/.config/rtorrent/start"
 alias figlet="figlet -f ~/.config/figlet/fonts/ANSI\ Shadow.flf"
 
@@ -180,7 +173,7 @@ alias sr="sudo reboot"
 alias fstab="sudo $EDITOR /etc/fstab"
 
 # Dotfiles
-alias stow='stow --no-folding -d $HOME/documents/git/dotfiles -t $HOME'
+alias stow='stow --no-folding -d $HOME/documents/git/rgomezgerardi/dotfiles -t $HOME'
 
 # Switch between shells
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"

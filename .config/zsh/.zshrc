@@ -81,7 +81,7 @@ zle -N down-line-or-beginning-search
 compinit
 
 # Speedy keys
-xset r rate 210 40
+xset r rate 210 60
 
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct

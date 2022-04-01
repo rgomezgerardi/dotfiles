@@ -63,7 +63,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 xsetroot -cursor_name left_ptr &
 
 # Wallpaper
-xwallpaper --daemon --stretch '/mnt/files/Ricardo/Pictures/WallPapers/img-45.png' &
+xwallpaper --daemon --stretch '/mnt/files/Ricardo/Pictures/wallpaper/36.jpg' &
 
 # Compositor
 picom --daemon &
@@ -80,7 +80,7 @@ emacs --bg-daemon &
 # Download Manager
 
 # Status Bar
-$HOME/.config/polybar/launch.sh
+$HOME/.local/bin/polybar &
 
 # Window Manager
 exec bspwm

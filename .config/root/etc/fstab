@@ -1,0 +1,16 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+
+# /dev/sda5 - Swap
+#UUID=f4256a9d-73cf-4c3d-918d-6bc341843c29	none      	swap	defaults 			0	0
+
+# /dev/sda6 - Arch Linux
+UUID=8d67aaa2-c552-4353-9ae0-843d455ee11f	/         	ext4	rw,relatime,errors=remount-ro	0	1
+
+# /dev/sda1 - Files
+UUID=E6F088F1F088C96F				/media/files    ntfs	uid=1000,gid=1000,big_writes,X-mount.mkdir	0	0
+
+# /dev/sda3 - Windows10
+UUID=7272DBCC72DB9369				/media/windows	ntfs	uid=1000,gid=1000,big_writes	0	0

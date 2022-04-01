@@ -15,19 +15,18 @@ stow --no-folding --dir $HOME/documents/git/dotfiles --target $HOME
 * Config
 Here, quick links to the dotfiles of some of my programs.
 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/zsh][Shell]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/suckless/st][Terminal]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/bspwm][Window Manager]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/sxhkd][Keybindings]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/vifm][File Manager]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/rofi][Launcher]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/nvim][Editor]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/moc][Music Player]] 
-+ [[https://gitlab.com/rgomezgerardi/dotfiles/-/tree/main/.config/emacs][Whateveremacsis]] 
++ [[file:.config/zsh][Shell]] 
++ [[file:.config/suckless/st][Terminal]] 
++ [[file:.config/bspwm][Window Manager]] 
++ [[file:.config/sxhkd][Keybindings]] 
++ [[file:.config/vifm][File Manager]] 
++ [[file:.config/rofi][Launcher]] 
++ [[file:.config/nvim][Editor]] 
++ [[file:.config/moc][Music Player]] 
++ [[file:.config/emacs][Whateveremacsis]] 
   
-* Credit
-Uff! a lot of people, search and you will find.
-
 * Contact
-[[https://rgomezgerardi.cf][Website]] 
-
+[[https://rgomezgerardi.cf][Website]]
+[[https://paypal.me/rgomezgerardi][Paypal]]
+[[https://linkedin.com/in/rgomezgerardi][Linkedin]]
+[[https://mail.google.com/mail/?view=cm&to=rgomezgerardi@gmail.com&su=Ralisk+-+][Gmail]]

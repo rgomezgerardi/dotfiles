@@ -1,7 +1,7 @@
 #+TITLE: Sxhkd Custom Configuration 
 #+AUTHOR: Ricardo Gomez
 #+EMAIL: rgomezgerardi@gmail.com
-#+PROPERTY: header-args :tangle sxhkdrc :tangle-mode (identity #o644) :noweb strip-export :cache yes
+#+PROPERTY: header-args :tangle sxhkdrc :tangle-mode (identity #o644) :noweb strip-export :cache yes 
 
 * System
 ** Reload Configuration files:
@@ -41,7 +41,8 @@ super + {_,shift + }q
 *** Alternate between the tiled and monocle layout
 
 #+begin_src shell
-super + @space
+# super + {grave,Tab}
+super + Tab
 	bspc desktop -l next
 #+end_src
 
@@ -52,13 +53,6 @@ super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 #+end_src
 
-*** Swap the current node and the biggest window
-
-#+begin_src shell
-super + g
-	bspc node -s biggest.window
-#+end_src
-
 *** State / Flags
 ***** Set the window state
 
@@ -67,7 +61,7 @@ super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 #+end_src
 
-***** Set the node flags
+***** COMMENT Set the node flags
 
 #+begin_src shell
 super + ctrl + {m,x,y,z}
@@ -75,41 +69,44 @@ super + ctrl + {m,x,y,z}
 #+end_src
 
 *** Focus / Swap
-***** Focus the node in the given direction
+**** Focus the node in the given direction on the current desktop
 
 #+begin_src shell
 super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+	m='.local.!hidden.window'; \
+	focus () { \ 
+		if bspc query -T -d | grep -oq '"layout":"tiled"'; then \
+			bspc node -{f,s} "$1"; \
+		else \
+			bspc node -f "$2"; \
+		fi \
+	;} \
+	focus {west$m next$m,south$m prev$m,north$m next$m,east$m prev$m}; unset -f focus
 #+end_src
 
-***** COMMENT Focus the node for the given path jump
+**** COMMENT Focus the node for the given path jump
 
 #+begin_src shell
 super + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 #+end_src
 
-***** Focus the next/previous window in the current desktop
-#+begin_src shell
-super + {_,shift + }c
-	bspc node -f {next,prev}.local.!hidden.window
-#+end_src
-
-***** Focus the next/previous desktop in the current monitor
+**** Focus the next/previous desktop in the current monitor
 
 #+begin_src shell
-super + bracket{left,right}
+# super + bracket{left,right}
+super + {comma,period}
 	bspc desktop -f {prev,next}.local
 #+end_src
 
-***** Focus the last node/desktop
+**** Focus the last node/desktop
 
 #+begin_src shell
-super + {grave,Tab}
+super + {_,shift + }@space
 	bspc {node,desktop} -f last
 #+end_src
 
-***** COMMENT Focus the older or newer node in the focus history
+**** COMMENT Focus the older or newer node in the focus history
 
 #+begin_src shell
 super + {o,i}
@@ -118,18 +115,18 @@ super + {o,i}
 	bspc wm -h on
 #+end_src
 
-***** Focus or send to the given desktop
+**** Focus or send to the given desktop
 
 #+begin_src shell
 super + {_,alt + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 #+end_src
 
-***** Focus follow pointer
+**** COMMENT Swap the current node and the biggest window
 
 #+begin_src shell
-super + alt + p
-	bspc config focus_follows_pointer {true,false}
+super + g
+	bspc node -s biggest.window
 #+end_src
 
 *** COMMENT Preselect
@@ -161,41 +158,157 @@ super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 #+end_src
 
+***** Move current window to a pre-selected space
+
+#+begin_src shell
+super + shift + m
+    bspc node -n last.!automatic
+#+end_src
+
+***** COMMENT Rotate tree
+
+#+begin_src shell
+super + shift + {d,a}
+	bspc node @/ -C {forward,backward}
+#+end_src
+
+***** COMMENT Send to desktop
+
+#+begin_src shell
+super + shift + {1-9,0}
+    bspc node -d '^{1-9,10}' --follow
+#+end_src
+
+***** COMMENT Send to monitor
+
+#+begin_src shell
+super + shift + equal
+     node -m last --follow
+#+end_src
+
+***** COMMENT Show clipmenu
+
+#+begin_src shell
+alt + v
+    CM_LAUNCHER=rofi clipmenu \
+        -location 1 \
+        -m -3 \
+        -no-show-icons \
+        -theme-str '* \{ font: 10px; \}' \
+        -theme-str 'listview \{ spacing: 0; \}' \
+        -theme-str 'window \{ width: 20em; \}'
+#+end_src
+
+***** COMMENT Show help
+
+#+begin_src shell
+super + slash
+    sxhkd-help
+#+end_src
+
+***** COMMENT Generate password
+
+#+begin_src shell
+super + r ; g ; p
+    tr -dc "a-zA-Z0-9_#@.-" < /dev/urandom | head -c 14 | xclip -selection clipboard
+#+end_src
+
+***** COMMENT Change wallpaper
+
+#+begin_src shell
+super + r ; c ; b
+    RAND=$(find "$WALLPAPERS" -xtype f | sort -R | head -1) \
+        xwallpaper --zoom "$WALLPAPERS/$RAND"
+#+end_src
+
+***** COMMENT Change lock screen wallpaper
+
+#+begin_src shell
+super + r ; c ; l
+    betterlockscreen -u $WALLPAPERS; \
+    notify-send 'betterlockscreen' 'Changed background'
+#+end_src
+
+***** COMMENT Close screen
+
+#+begin_src shell
+super + shift + c
+    sleep 0.5; xset dpms force standby
+#+end_src
+
+***** COMMENT Lock screen
+
+#+begin_src shell
+super + shift + x
+    betterlockscreen -l dim -t ''
+#+end_src
+
+***** COMMENT Mimic Chrome OS shortcuts
+****** Emulate home/end keys
+
+#+begin_src shell
+ctrl + alt + @{Up,Down}
+    xte 'keyup Control_L' 'keyup Alt_L' 'key {Home,End}'
+#+end_src
+
+****** Emulate home/end keys with shift
+
+#+begin_src shell
+ctrl + alt + shift + @{Up,Down}
+    xte 'keyup Control_L' 'keyup Alt_L' 'key {Home,End}'
+#+end_src
+
+****** Emulate delete key
+
+#+begin_src shell
+~alt + BackSpace
+    xte 'keyup Alt_L' 'key Delete' 'keydown Alt_L'
+#+end_src
+
 *** Move / Resize
-***** Expand a window by moving one of its side outward
+**** Move a floating window
 
 #+begin_src shell
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+super + ctrl {h,j,k,l}
+	 node -v {-20 0,0 20,0 -20,20 0}
 #+end_src
 
-***** Contract a window by moving one of its side inward
-
-#+begin_src shell
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-#+end_src
-
-***** Move a floating window
-
-#+begin_src shell
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
-#+end_src
-
-*** Smart resize
+**** Smart resize
 Will grow or shrink depending on location.
 Will always grow for floating nodes.
 
 #+begin_src shell
-super + ctrl + alt + {Left,Down,Up,Right}
+super + alt + {h,j,k,l}
   n=10; \
   { d1=left;   d2=right;  dx=-$n; dy=0;   \
   , d1=bottom; d2=top;    dx=0;   dy=$n;  \
   , d1=top;    d2=bottom; dx=0;   dy=-$n; \
   , d1=right;  d2=left;   dx=$n;  dy=0;   \
   } \
-  bspc node --resize $d1 $dx $dy || bspc node --resize $d2 $dx $dy
+   node --resize $d1 $dx $dy ||  node --resize $d2 $dx $dy
+#+end_src
+
+**** COMMENT Expand/contract a window by moving one of its side outward/inward
+
+#+begin_src shell
+super + s : {h,j,k,l}
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+#+end_src
+
+**** COMMENT Expand a window by moving one of its side outward
+
+#+begin_src shell
+super + alt + {h,j,k,l}
+	 node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+#+end_src
+
+**** COMMENT Contract a window by moving one of its side inward
+
+#+begin_src shell
+super + alt + shift + {h,j,k,l}
+	 node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 #+end_src
 
 *** COMMENT Others
@@ -205,6 +318,13 @@ super + {h,j,k,l}
 
 super + alt + control + {h,j,k,l} ; {0-9}
 	bspc node @{west,south,north,east} -r 0.{0-9}
+
+** Statusbar
+
+#+begin_src shell
+super + alt + b
+	$HOME/.local/bin/polybar
+#+end_src
 
 * Program
 ** Terminal
@@ -218,25 +338,7 @@ super + Return
 
 #+begin_src shell
 super + r
-	rofi -show drun -theme onedark
-#+end_src
-
-** Download
-
-#+begin_src shell
-super + d
-	tdrop 
-#+end_src
-
-** Explorer
-
-#+begin_src shell
-super + e
-	tdrop --width 90%  --height 90% --x-offset 0  --y-offset 1 \
-		  --number 1 --class "explorer"  --name "Explorer" \
-		  --auto-detect-wm --monitor-aware \
-		  st -n "explorer" -c "Explorer" \
-		  vifm 
+	rofi -show drun
 #+end_src
 
 ** Idle
@@ -254,20 +356,6 @@ super + alt + m
 	thunderbird
 #+end_src
 
-** Audio
-
-#+begin_src shell
-super + a
-	tdrop 
-#+end_src
-
-** Music
-
-#+begin_src shell
-super + m
-	tdrop
-#+end_src
-
 ** Image
 
 #+begin_src shell
@@ -278,8 +366,6 @@ super + shift + equal
 ** Editor
 
 #+begin_src shell
-super + e
-	tdrop 
 #+end_src
 
 ** Browser
@@ -294,11 +380,56 @@ super + b
 #+begin_src shell
 # Screenshot
 super + c
-	scrot --exec mv $f /media/files/Ricardo/Pictures/Screenshots %Y-%m-%d_%H:%M:%S_scrot.png
+	scrot --exec 'mv $f /mnt/files/Ricardo/Pictures/Screenshots' %d-%m-%Y_%H:%M:%S_scrot.png
 
 # Capture Zone
 super + alt c
-	scrot --select --line style=dash,width=2,color=#1793d1,opacity=80 --freeze --exec mv $f ${SCREENSHOTS} %d-%m-%Y_%H:%M:%S.png
+	scrot --select --line style=dash,width=2,color=#51afef,opacity=100 --freeze --exec 'mv $f /mnt/files/Ricardo/Pictures/Screenshots' %d-%m-%Y_%H:%M:%S.png
+#+end_src
+
+* Scratchpad
+** Explorer
+
+#+begin_src shell
+super + e
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 1 --class "explorer" --name "Explorer" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "explorer" -c "Explorer" \
+		  vifm 
+#+end_src
+
+** Download
+
+#+begin_src shell
+super + d
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 2 --class "download" --name "Download" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "download" -c "Download" \
+		  rtorrent 
+#+end_src
+
+** Audio
+
+#+begin_src shell
+super + a
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 3 --class "audio"  --name "Audio" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "audio" -c "Audio" \
+		  ncpamixer
+#+end_src
+
+** Music
+
+#+begin_src shell
+super + m
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 4 --class "music"  --name "Music" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "music" -c "Music" \
+		  mocp --config $HOME/.config/moc/config 
 #+end_src
 
 * COMMENT Other

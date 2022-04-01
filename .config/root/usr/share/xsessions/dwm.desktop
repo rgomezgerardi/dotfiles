@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Dwm
+Comment=Dynamic Window Manager
+Exec=sh -c "$HOME/.config/x11/xinitrc" &> /dev/null
+Icon=dwm
+Type=Application
+

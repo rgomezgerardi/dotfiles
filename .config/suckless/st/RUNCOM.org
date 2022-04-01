@@ -17,6 +17,9 @@ static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 static char *font2[] = {
 /*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
 /*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
+
+	/* Symbols */
+	/* "Symbols Nerd Font:pixelsize=12:antialias=true:autohint=true", */
 };
 #+end_src
 
@@ -252,7 +255,7 @@ static unsigned int defaultcs = 258;
 static unsigned int defaultrcs = 256;
 
 unsigned int bg = 257; 
-unsigned int bgUnfocused = 256;
+unsigned int bgUnfocused = 257;
 unsigned int const currentBg = 257, buffSize = 2048;
 
 // Enable double / triple click yanking / selection of word / line.
@@ -702,3 +705,9 @@ Undercurl style. Set UNDERCURL_STYLE to one of the available styles.
 // Active style
 #define UNDERCURL_STYLE UNDERCURL_SPIKY
 #+end_src
+
+
+
+; Local Variables:
+; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
+; End:

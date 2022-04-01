@@ -15,7 +15,7 @@ export MANWIDTH=999
 #export QT_IM_MODULE=ibus
 
 #export SHELL=zsh
-# export TERMINAL=st
+export TERMINAL="st"
 export EDITOR="nvim"
 export IDLE="emacsclient"
 #export IDLE="emacsclient -c -a emacs"
@@ -23,27 +23,35 @@ export BROWSER="brave"
 export READER="zathura"
 export IMAGE_VIEWER="sxiv"
 
+export DESKTOP_SESSION="bspwm"
+
 # Wine
 export WINEPREFIX="$HOME/Wine/Default"
 
 # rTorrent
 export RT_HOME="$XDG_CONFIG_HOME/rtorrent"
 
+# export MESA_GL_VERSION_OVERRIDE=4.5
+
 # Ranger
 #export RANGER_LOAD_DEFAULT_RC=FALSE
 
-export BOOKS=/mnt/files/Ricardo/Books
-export COMMANDS=/mnt/files/Ricardo/Documents/Commands
-export COURSES=/mnt/files/Ricardo/Videos/Courses
-export DOCUMENTS=/mnt/files/Ricardo/Documents
-export DOWNLOADS=/mnt/files/Ricardo/Downloads
-export GITHUB=/mnt/files/Ricardo/Documents/Github
-export MOVIES=/mnt/files/Ricardo/Videos/Movies
-export MUSIC=/mnt/files/Ricardo/Music
-export NOTES=/mnt/files/Ricardo/Documents/Notes
-export PICTURES=/mnt/files/Ricardo/Pictures
-export PROGRAMS=/mnt/files/Ricardo/Programs
-export PROJECTS=/mnt/files/Ricardo/Projects
-export ROTYEN=/mnt/files/Ricardo/Projects/godot/2d/Rotyen
-export SERIES=/mnt/files/Ricardo/Videos/Series
-export VIDEOS=/mnt/files/Ricardo/Videos
+export GIT="$HOME/documents/git"
+export PHONE="$HOME/phone"
+
+export FILES="/mnt/files/Ricardo"
+export BOOKS="$FILES/Books"
+export DOWNLOADS="$FILES/Downloads"
+
+export VIDEOS="$FILES/Videos"
+export MOVIES="$VIDEOS/Movies"
+export SERIES="$VIDEOS/Series"
+
+export DOCUMENTS="$FILES/Documents"
+export NOTES="$DOCUMENTS/Notes"
+
+export MUSIC="$FILES/Music"
+export PICTURES="$FILES/Pictures"
+export PROGRAMS="$FILES/Programs"
+export PROJECTS="$FILES/Projects"
+export ROTYEN="$PROJECTS/godot/2d/Rotyen"
