@@ -1,8 +1,8 @@
-#+TITLE:  Dotfiles
-#+AUTHOR: Ricardo Gomez
-#+EMAIL:  rgomezgerardi@gmail.com
-#+OPTIONS: \n:t
-
+:PROPERTIES:
+:author: Ricardo Gomez
+:email:  rgomezgerardi@gmail.com
+:title:  My Personal Configuration Files
+:END:
 
 What you got here is the work of my "be more efficient" linux way of thinking.
 
@@ -30,6 +30,9 @@ Here, quick links to the configuration of some of my programs.
   
 * Contact
 [[https://rgomezgerardi.cf][Website]]
+
 [[https://paypal.me/rgomezgerardi][Paypal]]
+
 [[https://linkedin.com/in/rgomezgerardi][Linkedin]]
+
 [[https://mail.google.com/mail/?view=cm&to=rgomezgerardi@gmail.com&su=Ralisk+-+][Gmail]]
