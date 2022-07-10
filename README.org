@@ -1,6 +1,7 @@
 #+TITLE:  Dotfiles
 #+AUTHOR: Ricardo Gomez
 #+EMAIL:  rgomezgerardi@gmail.com
+#+OPTIONS: \n:t
 
 
 What you got here is the work of my "be more efficient" linux way of thinking.
@@ -9,9 +10,9 @@ What you got here is the work of my "be more efficient" linux way of thinking.
 You need stow btw.
 
 #+begin_src shell
-git clone "https://gitlab.com/rgomezgerardi/dotfiles" $HOME/documents/git/dotfiles
-cd $HOME/documents/git/dotfiles
-stow --no-folding --dir $HOME/documents/git/dotfiles --target $HOME
+git clone "https://gitlab.com/rgomezgerardi/dotfiles" $HOME/repo/rgomezgerardi/dotfiles
+cd $HOME/repo/rgomezgerardi/dotfiles
+stow --no-folding --dir $HOME/repo/rgomezgerardi/dotfiles --target $HOME
 #+end_src
 
 * Config
@@ -29,9 +30,6 @@ Here, quick links to the configuration of some of my programs.
   
 * Contact
 [[https://rgomezgerardi.cf][Website]]
-
 [[https://paypal.me/rgomezgerardi][Paypal]]
-
 [[https://linkedin.com/in/rgomezgerardi][Linkedin]]
-
 [[https://mail.google.com/mail/?view=cm&to=rgomezgerardi@gmail.com&su=Ralisk+-+][Gmail]]
