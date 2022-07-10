@@ -59,7 +59,7 @@ violet    = #a9a1e1
 cyan      = #46D9FF
 dark-cyan = #5699AF
 
-[bar/bar1]
+[bar/left]
 
 ; Locale used to localize various module data (e.g. date)
 locale = en_US.UTF-8 
@@ -113,7 +113,7 @@ bottom = false
 ; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in a width or height of 50% minus 10 pixels
-width = 10%
+width = 20%
 height = 3%
 
 ; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
@@ -202,9 +202,7 @@ font-4 = "Font Awesome 5 Free Regular:style=Regular"
 font-5 = "Font Awesome 5 Free Solid:style=Solid"
 
 ; Modules are added to one of the available blocks
-modules-left = menu
-modules-center = 
-modules-right = 
+modules-left = home window
 
 ; Number of spaces to add before/after each module
 ; Individual side values can be defined using:
@@ -282,7 +280,8 @@ double-click-right =
 cursor-click = 
 cursor-scroll =
 
-[bar/bar2]
+[bar/center]
+; inherit                       = bar/base
 
 ; Locale used to localize various module data (e.g. date)
 locale = en_US.UTF-8 
@@ -336,14 +335,14 @@ bottom = false
 ; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in a width or height of 50% minus 10 pixels
-width = 20%
+width = 40%
 height = 3%
 
 ; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in an offset in the x or y direction 
 ; of 50% minus 10 pixels
-offset-x = 40%
+offset-x = 30%
 offset-y = 0
 
 ; Number of spaces to add at the beginning/end of the bar
@@ -438,7 +437,7 @@ font-5 = "Font Awesome 5 Free Solid:style=Solid"
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
 modules-left =
-modules-center = bspwm
+modules-center = desktop
 modules-right =
 
 ; Number of spaces to add before/after each module
@@ -517,7 +516,7 @@ double-click-right =
 cursor-click = 
 cursor-scroll =
 
-[bar/bar3]
+[bar/right]
 
 ; Locale used to localize various module data (e.g. date)
 locale = en_US.UTF-8 
@@ -571,14 +570,14 @@ bottom = false
 ; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in a width or height of 50% minus 10 pixels
-width = 10%
+width = 20%
 height = 3%
 
 ; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in an offset in the x or y direction 
 ; of 50% minus 10 pixels
-offset-x = 90%:-6
+offset-x = 80%:-6
 offset-y = 0
 
 ; Number of spaces to add at the beginning/end of the bar
@@ -649,8 +648,8 @@ dpi-y = 96
 ;   font-2 = Termsynu:size=8;-1
 ;   font-3 = FontAwesome:size=10
 ; See the Fonts wiki page for more details
-font-0 = "Ubuntu:style=Light"
-font-1 = "Ubuntu:style=Medium"
+font-0 = "Ubuntu:style=Light;2"
+font-1 = "Ubuntu:style=Medium;2"
 
 ; Symbols
 font-2 = "Symbols Nerd Font:style=2048-em;1"
@@ -659,13 +658,7 @@ font-3 = "Font Awesome 5 Brands Regular:style=Regular"
 font-4 = "Font Awesome 5 Free Regular:style=Regular"
 font-5 = "Font Awesome 5 Free Solid:style=Solid"
 
-; Modules are added to one of the available blocks
-;   modules-left = cpu ram
-;   modules-center = xwindow xbacklight
-;   modules-right = ipc clock
-modules-left =
-modules-center = 
-modules-right = menu
+modules-right = network volume layout date exit
 
 ; Number of spaces to add before/after each module
 ; Individual side values can be defined using:
@@ -674,7 +667,11 @@ module-margin = 0
 
 ; The separator will be inserted between the output of each module
 ; This has the same properties as a label
-separator =
+separator = |
+; separator = ⏽
+separator-foreground = ${colors.blue}
+separator-background = ${colors.background-alt}
+separator-font = 2
 
 ; Prefer fixed center position for the `modules-center` block. 
 ; The center block will stay in the middle of the bar whenever
@@ -743,7 +740,7 @@ double-click-right =
 cursor-click = 
 cursor-scroll =
 
-[module/bspwm]
+[module/desktop]
 type = internal/bspwm
 
 ; Only show workspaces defined on the same output as the bar
@@ -794,14 +791,13 @@ ws-icon-default = ﱢ
 ;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
 ; Default: <label-state>
 format = <label-state>
-; format-background = ${colors.background-alt} 
-; format-foreground = ${colors.foreground-alt} 
+format-background = ${colors.background-alt} 
 
 ; format-underline  = ${colors.violet}
 ; format-overline   = ${colors.cyan}
 
 ; Number of whitespaces
-; format-padding = 4
+format-padding = 2
 ; format-margin  = 4
 ; format-spacing = 4
 
@@ -940,13 +936,245 @@ label-pseudotiled = P
 ; label-separator-foreground = #ffb52a
 ; label-separator-padding = 2
 
-[module/menu]
+[module/network]
+type = internal/network
+
+; Name of the network interface to display. You can get the names of the
+; interfaces on your machine with `ip link`. Wireless interfaces often
+; start with `wl` and ethernet interface with `eno` or `eth`.
+interface = ens33
+
+; Seconds to sleep between updates. Default: 1
+interval = 3.0
+
+; Test connectivity every Nth update. Default: 0
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+ping-interval = 3
+
+; Accumulate values from all interfaces
+; when querying for up/downspeed rate. Default: false
+; accumulate-stats = true
+
+; Consider an `UNKNOWN` interface state as up.
+; Some devices like USB network adapters have 
+; an unknown state, even when they're running
+; Default: false
+; unknown-as-up = true
+
+; Available tags:
+;   <label-connected> (default)
+;   <ramp-signal>
+format-connected = <ramp-signal>
+format-connected-background = ${colors.background-alt}
+format-connected-foreground = ${colors.foreground}
+format-connected-padding = 2
+format-connected-font = 3
+
+format-disconnected = <label-disconnected>
+format-disconnected-background = ${colors.background-alt}
+format-disconnected-foreground = ${colors.foreground}
+format-disconnected-padding = 2
+format-disconnected-font = 3
+
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+format-packetloss = <label-packetloss>
+format-packetloss-background = ${colors.background-alt}
+format-packetloss-foreground = ${colors.foreground}
+format-packetloss-padding = 2
+format-packetloss-font = 3
+
+; Default: %ifname% %local_ip%
+label-connected = 說
+
+; Default: (none)
+label-disconnected = ﲁ
+
+; Default: (none)
+label-packetloss = ﲁ
+
+ramp-signal-0 = 說
+ramp-signal-2 = ﲁ
+	
+# ramp-signal-0 = 😱
+# ramp-signal-1 = 😠
+# ramp-signal-2 = 😒
+# ramp-signal-3 = 😊
+# ramp-signal-4 = 😃
+# ramp-signal-5 = 😈
+
+  
+# ramp-signal-0 = 
+# ramp-signal-1 = 
+# ramp-signal-2 = 
+# ramp-signal-3 = 
+# ramp-signal-4 = 
+
+[module/layout]
+type = internal/xkeyboard
+
+; List of indicators to ignore
+blacklist-0 = num lock
+;blacklist-1 = caps lock
+;blacklist-2 = scroll lock
+
+; Available tags:
+;   <label-layout> (default) ;   <label-indicator> (default)
+format =  <label-indicator> <label-layout>
+
+format-background = ${colors.background-alt}
+format-foreground = ${colors.foreground}
+format-padding = 2
+
+; format-spacing = 0
+format-font = 3
+
+; Available tokens:
+;   %layout%
+;   %name%
+;   %number%
+;   %icon%
+;   %variant% (unreleased)
+; Default: %layout%
+label-layout = %layout%
+
+layout-icon-default = 
+layout-icon-0 = us;
+layout-icon-1 = es;
+
+; Replaces label-indicator
+; Available tokens: %name% | %icon%
+label-indicator-on = %icon%
+
+; Available tokens: %name% | %icon%
+; Default: (none)
+; label-indicator-off = %icon%
+
+; indicator-icon-[0-9]+ = indicator;off icon;on icon
+; Provides the content of the %icon% token in label-indicator-*
+indicator-icon-default = ;בּ
+
+[module/window]
+type = custom/script
+
+	 
+; Available tokens:
+;   %counter%
+; Command to be executed (using "/bin/sh -c [command]")
+exec = ~/.local/bin/bspwm/bspwm-nodes
+; exec = ${env:P_BSPWM_WINDOW_CMD}
+
+; Conditional command that, if defined, needs to exit successfully
+; before the main exec command is invoked.
+; Default: ""
+; exec-if = pgrep -x myservice
+
+; Will the script output continous content?
+; Default: false
+tail = true
+
+; Seconds to sleep between updates
+; Default: 5 (0 if `tail = true`)
+; interval = 5
+; interval = 0.5
+
+format = <label>
+# format-background = ${colors.background-alt}
+# format-foreground = ${colors.foreground-alt}
+# format-padding = 2
+
+[module/volume]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+; sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = false
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Right and Middle click
+click-right = ~/.local/bin/rofi/widget/volume
+; click-right = pavucontrol
+; click-middle =
+
+; Available tags:  *<label-volume>* | <ramp-volume> | <bar-volume>
+format-volume = <ramp-volume>
+format-volume-background = ${colors.background-alt}
+format-volume-foreground = ${colors.foreground}
+format-volume-padding = 2
+
+; Available tags:  *<label-muted>* | <ramp-volume> | <bar-volume>
+format-muted = <label-muted>
+format-muted-background = ${colors.background-alt}
+format-muted-foreground = ${colors.foreground}
+format-muted-padding = 2
+
+; Available tokens:  *%percentage%*  | %decibels%
+label-volume = %percentage%%
+
+; Available tokens:  *%percentage%* | %decibels%
+label-muted = 
+; label-muted = ﱝ
+; label-muted = 🔇
+
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+ramp-volume-3 = 
+
+;ramp-volume-0 = 
+;ramp-volume-1 = 
+;ramp-volume-2 = 
+
+; ramp-volume-0 = 
+; ramp-volume-1 = 
+; ramp-volume-2 = 
+; ramp-volume-3 = 
+
+[module/home]
 type = custom/text
 
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
 click-left = ~/.local/bin/rofi/widget/power
 ; click-middle = notify-send middle
-click-right = ~/.local/bin/rofi/about
+click-right = ~/.local/bin/rofi/widget/power
+
+; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
+; scroll-up = notify-send scroll up
+; scroll-down = notify-send scroll down
+
+; "content" has the same properties as "format-NAME"
+content = ﳐ
+; content = "%{T3}%{T-}"
+
+content-background = ${colors.background-alt}
+content-foreground = ${colors.foreground}
+; content-underline = ${colors.blue}
+; content-overline   = #aa[rrggbb]
+
+content-padding = 2
+content-margin = 
+content-spacing = 
+
+; Use Nerd Font
+content-font = 3
+
+[module/exit]
+type = custom/text
+
+; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
+click-left = ~/.local/bin/rofi/widget/power
+; click-middle = notify-send middle
+click-right = ~/.local/bin/rofi/widget/power
 
 ; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
 ; scroll-up = notify-send scroll up
@@ -962,8 +1190,35 @@ content-foreground = ${colors.foreground}
 ; content-overline   = #aa[rrggbb]
 
 content-padding = 2
-content-margin = 
-content-spacing = 
+; content-margin = 
+; content-spacing = 
 
-;content-font = N
-;content-offset  = N
+; Use Nerd Font
+content-font = 3
+
+[module/date]
+type = internal/date
+
+; Seconds to sleep between updates
+interval = 1.0
+
+date = "%a, %d/%m/%y"
+date-alt = "%a, %d/%m/%y"
+; date-alt = "%A, %d %B %Y"
+time = "%R"
+time-alt = "%I:%M"
+
+; Available tags:
+;   <label> (default)
+format = <label>
+
+format-background = ${colors.background-alt}
+format-foreground = ${colors.foreground}
+format-padding = 2
+
+; Available tokens:
+;   %date% | %time%
+; label = " %date%   %time%"
+; label = %date%  %time%
+label = "%{A1:~/.local/bin/rofi/widget/time:}%time%%{A}"
+label-font = 3

@@ -1,4 +1,7 @@
-#+TITLE: Emacs Custom Configuration 
+:PROPERTIES:
+:ID: polybar
+:END:
+#+TITLE: Polybar Custom Configuration 
 #+AUTHOR: Ricardo Gomez
 #+EMAIL: rgomezgerardi@gmail.com
 #+PROPERTY: header-args :tangle config :noweb strip-export :cache yes
@@ -92,10 +95,10 @@ cyan      = #46D9FF
 dark-cyan = #5699AF
 #+end_src
 
-* Bar1
+* Left
 
 #+begin_src conf
-[bar/bar1]
+[bar/left]
 
 ; Locale used to localize various module data (e.g. date)
 locale = en_US.UTF-8 
@@ -161,7 +164,7 @@ bottom = false
 ; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in a width or height of 50% minus 10 pixels
-width = 10%
+width = 20%
 height = 3%
 
 ; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
@@ -262,9 +265,7 @@ font-5 = "Font Awesome 5 Free Solid:style=Solid"
 
 #+begin_src conf
 ; Modules are added to one of the available blocks
-modules-left = menu
-modules-center = 
-modules-right = 
+modules-left = home window
 
 ; Number of spaces to add before/after each module
 ; Individual side values can be defined using:
@@ -351,11 +352,12 @@ cursor-click =
 cursor-scroll = 
 #+end_src
 
-* Bar2
+* Center
   |   | ⏽         
 
 #+begin_src conf
-[bar/bar2]
+[bar/center]
+; inherit                       = bar/base
 
 ; Locale used to localize various module data (e.g. date)
 locale = en_US.UTF-8 
@@ -421,14 +423,14 @@ bottom = false
 ; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in a width or height of 50% minus 10 pixels
-width = 20%
+width = 40%
 height = 3%
 
 ; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in an offset in the x or y direction 
 ; of 50% minus 10 pixels
-offset-x = 40%
+offset-x = 30%
 offset-y = 0
 
 ; Number of spaces to add at the beginning/end of the bar
@@ -535,7 +537,7 @@ font-5 = "Font Awesome 5 Free Solid:style=Solid"
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
 modules-left =
-modules-center = bspwm
+modules-center = desktop
 modules-right =
 
 ; Number of spaces to add before/after each module
@@ -623,10 +625,10 @@ cursor-click =
 cursor-scroll = 
 #+end_src
 
-* Bar3
+* Rigth
 
 #+begin_src conf
-[bar/bar3]
+[bar/right]
 
 ; Locale used to localize various module data (e.g. date)
 locale = en_US.UTF-8 
@@ -692,14 +694,14 @@ bottom = false
 ; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in a width or height of 50% minus 10 pixels
-width = 10%
+width = 20%
 height = 3%
 
 ; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in an offset in the x or y direction 
 ; of 50% minus 10 pixels
-offset-x = 90%:-6
+offset-x = 80%:-6
 offset-y = 0
 
 ; Number of spaces to add at the beginning/end of the bar
@@ -778,8 +780,8 @@ dpi-y = 96
 ;   font-2 = Termsynu:size=8;-1
 ;   font-3 = FontAwesome:size=10
 ; See the Fonts wiki page for more details
-font-0 = "Ubuntu:style=Light"
-font-1 = "Ubuntu:style=Medium"
+font-0 = "Ubuntu:style=Light;2"
+font-1 = "Ubuntu:style=Medium;2"
 
 ; Symbols
 font-2 = "Symbols Nerd Font:style=2048-em;1"
@@ -792,13 +794,7 @@ font-5 = "Font Awesome 5 Free Solid:style=Solid"
 ** Modules
 
 #+begin_src conf
-; Modules are added to one of the available blocks
-;   modules-left = cpu ram
-;   modules-center = xwindow xbacklight
-;   modules-right = ipc clock
-modules-left =
-modules-center = 
-modules-right = menu
+modules-right = network volume layout date exit
 
 ; Number of spaces to add before/after each module
 ; Individual side values can be defined using:
@@ -807,7 +803,11 @@ module-margin = 0
 
 ; The separator will be inserted between the output of each module
 ; This has the same properties as a label
-separator =
+separator = |
+; separator = ⏽
+separator-foreground = ${colors.blue}
+separator-background = ${colors.background-alt}
+separator-font = 2
 
 ; Prefer fixed center position for the `modules-center` block. 
 ; The center block will stay in the middle of the bar whenever
@@ -982,10 +982,10 @@ ramp-NAME-1 = B
 ramp-NAME-1-weight = 8
 ramp-NAME-2 = C
 
-** Bspwm
+** Desktop
    
 #+begin_src conf
-[module/bspwm]
+[module/desktop]
 type = internal/bspwm
 
 ; Only show workspaces defined on the same output as the bar
@@ -1246,14 +1246,13 @@ ws-icon-default = 
 ;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
 ; Default: <label-state>
 format = <label-state>
-; format-background = ${colors.background-alt} 
-; format-foreground = ${colors.foreground-alt} 
+format-background = ${colors.background-alt} 
 
 ; format-underline  = ${colors.violet}
 ; format-overline   = ${colors.cyan}
 
 ; Number of whitespaces
-; format-padding = 4
+format-padding = 2
 ; format-margin  = 4
 ; format-spacing = 4
 #+end_src
@@ -1377,7 +1376,7 @@ label-monitor = %name%
  #+end_src
 
 ***** Layout
-|  | ﬿ |  | 类 |
+|  | ﬿ |  | 类 |  |  |
 
 #+begin_src conf
 ; The following labels will be used to indicate the layout/mode
@@ -1437,16 +1436,343 @@ label-pseudotiled = P
 ; label-separator-padding = 2
 #+end_src
 
-** Menu
+** Network
 
 #+begin_src conf
-[module/menu]
+[module/network]
+type = internal/network
+
+; Name of the network interface to display. You can get the names of the
+; interfaces on your machine with `ip link`. Wireless interfaces often
+; start with `wl` and ethernet interface with `eno` or `eth`.
+interface = ens33
+
+; Seconds to sleep between updates. Default: 1
+interval = 3.0
+
+; Test connectivity every Nth update. Default: 0
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+ping-interval = 3
+
+; Accumulate values from all interfaces
+; when querying for up/downspeed rate. Default: false
+; accumulate-stats = true
+
+; Consider an `UNKNOWN` interface state as up.
+; Some devices like USB network adapters have 
+; an unknown state, even when they're running
+; Default: false
+; unknown-as-up = true
+#+end_src
+
+*** Format
+
+#+begin_src conf
+; Available tags:
+;   <label-connected> (default)
+;   <ramp-signal>
+format-connected = <ramp-signal>
+format-connected-background = ${colors.background-alt}
+format-connected-foreground = ${colors.foreground}
+format-connected-padding = 2
+format-connected-font = 3
+
+format-disconnected = <label-disconnected>
+format-disconnected-background = ${colors.background-alt}
+format-disconnected-foreground = ${colors.foreground}
+format-disconnected-padding = 2
+format-disconnected-font = 3
+
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+format-packetloss = <label-packetloss>
+format-packetloss-background = ${colors.background-alt}
+format-packetloss-foreground = ${colors.foreground}
+format-packetloss-padding = 2
+format-packetloss-font = 3
+#+end_src
+
+
+**** Label
+直睊 | 說ﲁ |  |  ﯥ | 度ﴹ |   |   |   |  𥉉
+
+All labels support the following tokens:
+%ifname%    [wireless+wired]
+%local_ip%  [wireless+wired]
+%local_ip6% [wireless+wired]
+%essid%     [wireless]
+%signal%    [wireless]
+%upspeed%   [wireless+wired]
+%downspeed% [wireless+wired]
+%linkspeed% [wired]
+
+#+begin_src conf
+; Default: %ifname% %local_ip%
+label-connected = 說
+
+; Default: (none)
+label-disconnected = ﲁ
+
+; Default: (none)
+label-packetloss = ﲁ
+#+end_src
+
+**** Ramp
+Only applies if <ramp-signal> is used
+
+#+begin_src conf
+ramp-signal-0 = 說
+ramp-signal-2 = ﲁ
+	
+# ramp-signal-0 = 😱
+# ramp-signal-1 = 😠
+# ramp-signal-2 = 😒
+# ramp-signal-3 = 😊
+# ramp-signal-4 = 😃
+# ramp-signal-5 = 😈
+
+  
+# ramp-signal-0 = 
+# ramp-signal-1 = 
+# ramp-signal-2 = 
+# ramp-signal-3 = 
+# ramp-signal-4 = 
+#+end_src
+
+**** COMMENT Animation
+Only applies if <animation-packetloss> is used
+
+#+begin_src conf
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+
+	
+; animation-packetloss-0 = 
+;animation-packetloss-0-foreground = #ffa64c
+; animation-packetloss-1 = 
+;animation-packetloss-1-foreground = #000000
+; animation-packetloss-framerate = 500
+#+end_src
+
+** Layout
+
+#+begin_src conf
+[module/layout]
+type = internal/xkeyboard
+
+; List of indicators to ignore
+blacklist-0 = num lock
+;blacklist-1 = caps lock
+;blacklist-2 = scroll lock
+#+end_src
+
+*** Format
+
+#+begin_src conf
+; Available tags:
+;   <label-layout> (default) ;   <label-indicator> (default)
+format =  <label-indicator> <label-layout>
+
+format-background = ${colors.background-alt}
+format-foreground = ${colors.foreground}
+format-padding = 2
+
+; format-spacing = 0
+format-font = 3
+#+end_src
+
+**** Layout
+ | 
+
+#+begin_src conf
+; Available tokens:
+;   %layout%
+;   %name%
+;   %number%
+;   %icon%
+;   %variant% (unreleased)
+; Default: %layout%
+label-layout = %layout%
+
+layout-icon-default = 
+layout-icon-0 = us;
+layout-icon-1 = es;
+#+end_src
+
+**** Indicator
+ |  |  |  | בּ |  | 了 |  | 尿 |  |
+
+#+begin_src conf
+; Replaces label-indicator
+; Available tokens: %name% | %icon%
+label-indicator-on = %icon%
+
+; Available tokens: %name% | %icon%
+; Default: (none)
+; label-indicator-off = %icon%
+
+; indicator-icon-[0-9]+ = indicator;off icon;on icon
+; Provides the content of the %icon% token in label-indicator-*
+indicator-icon-default = ;בּ
+#+end_src
+
+** Window
+
+#+begin_src conf
+[module/window]
+type = custom/script
+
+	 
+; Available tokens:
+;   %counter%
+; Command to be executed (using "/bin/sh -c [command]")
+exec = ~/.local/bin/bspwm/bspwm-nodes
+; exec = ${env:P_BSPWM_WINDOW_CMD}
+
+; Conditional command that, if defined, needs to exit successfully
+; before the main exec command is invoked.
+; Default: ""
+; exec-if = pgrep -x myservice
+
+; Will the script output continous content?
+; Default: false
+tail = true
+
+; Seconds to sleep between updates
+; Default: 5 (0 if `tail = true`)
+; interval = 5
+; interval = 0.5
+#+end_src
+
+*** Format
+
+#+begin_src conf
+format = <label>
+# format-background = ${colors.background-alt}
+# format-foreground = ${colors.foreground-alt}
+# format-padding = 2
+#+end_src
+
+** Volume
+
+#+begin_src conf
+[module/volume]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+; sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = false
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Right and Middle click
+click-right = ~/.local/bin/rofi/widget/volume
+; click-right = pavucontrol
+; click-middle = 
+#+end_src
+
+*** Format
+
+#+begin_src conf
+; Available tags:  *<label-volume>* | <ramp-volume> | <bar-volume>
+format-volume = <ramp-volume>
+format-volume-background = ${colors.background-alt}
+format-volume-foreground = ${colors.foreground}
+format-volume-padding = 2
+
+; Available tags:  *<label-muted>* | <ramp-volume> | <bar-volume>
+format-muted = <label-muted>
+format-muted-background = ${colors.background-alt}
+format-muted-foreground = ${colors.foreground}
+format-muted-padding = 2
+#+end_src
+
+**** Label
+
+#+begin_src conf
+; Available tokens:  *%percentage%*  | %decibels%
+label-volume = %percentage%%
+
+; Available tokens:  *%percentage%* | %decibels%
+label-muted = 
+; label-muted = ﱝ
+; label-muted = 🔇
+#+end_src
+
+**** Ramp
+Only applies if <ramp-volume> is used
+
+#+begin_src conf
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+ramp-volume-3 = 
+
+;ramp-volume-0 = 
+;ramp-volume-1 = 
+;ramp-volume-2 = 
+
+; ramp-volume-0 = 
+; ramp-volume-1 = 
+; ramp-volume-2 = 
+; ramp-volume-3 = 
+#+end_src
+
+** COMMENT Bright
+
+#+begin_src conf
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+; (unreleased)
+; Use the `/sys/class/backlight/actual-brightness` file
+; rather than the regular `brightness` file.
+; Defaults to true unless the specified card is an amdgpu backlight.
+use-actual-brightness = true
+
+; Enable changing the backlight with the scroll wheel
+; NOTE: This may require additional configuration on some systems. Polybar will
+; write to `/sys/class/backlight/${self.card}/brightness` which requires polybar
+; to have write access to that file.
+; DO NOT RUN POLYBAR AS ROOT. 
+; The recommended way is to add the user to the
+; `video` group and give that group write-privileges for the `brightness` file.
+; See the ArchWiki for more information:
+; https://wiki.archlinux.org/index.php/Backlight#ACPI
+; Default: false
+enable-scroll = true
+#+end_src
+
+
+
+
+** Home
+
+#+begin_src conf
+[module/home]
 type = custom/text
 
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
 click-left = ~/.local/bin/rofi/widget/power
 ; click-middle = notify-send middle
-click-right = ~/.local/bin/rofi/about
+click-right = ~/.local/bin/rofi/widget/power
 
 ; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
 ; scroll-up = notify-send scroll up
@@ -1454,7 +1780,44 @@ click-right = ~/.local/bin/rofi/about
 #+end_src
 
 *** Content
- ⏻ 襤 
+ﮟ | ﳐ
+
+#+begin_src conf
+; "content" has the same properties as "format-NAME"
+content = ﳐ
+; content = "%{T3}%{T-}"
+
+content-background = ${colors.background-alt}
+content-foreground = ${colors.foreground}
+; content-underline = ${colors.blue}
+; content-overline   = #aa[rrggbb]
+
+content-padding = 2
+content-margin = 
+content-spacing = 
+
+; Use Nerd Font
+content-font = 3
+#+end_src
+
+** Exit
+
+#+begin_src conf
+[module/exit]
+type = custom/text
+
+; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
+click-left = ~/.local/bin/rofi/widget/power
+; click-middle = notify-send middle
+click-right = ~/.local/bin/rofi/widget/power
+
+; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
+; scroll-up = notify-send scroll up
+; scroll-down = notify-send scroll down
+#+end_src
+
+*** Content
+ | ⏻ | 襤 | 
 
 #+begin_src conf
 ; "content" has the same properties as "format-NAME"
@@ -1467,152 +1830,53 @@ content-foreground = ${colors.foreground}
 ; content-overline   = #aa[rrggbb]
 
 content-padding = 2
-content-margin = 
-content-spacing = 
+; content-margin = 
+; content-spacing = 
 
-;content-font = N
-;content-offset  = N
+; Use Nerd Font
+content-font = 3
 #+end_src
 
-** COMMENT Menu
+** Date
 
 #+begin_src conf
-[module/menu-apps]
-type = custom/menu
+[module/date]
+type = internal/date
 
-; If true, <label-toggle> will be to the left of the menu items (default).
-; If false, it will be on the right of all the items.
-; expand-right = true
+; Seconds to sleep between updates
+interval = 1.0
 
-; "menu-LEVEL-N" has the same properties as "label-NAME" with
-; the additional "exec" property
-;
-; Commands will be executed using "/bin/sh -c $COMMAND"
-
-; menu-0-0 = Browsers
-; menu-0-0-exec = #menu-apps.open.1
-; menu-0-1 = Multimedia
-; menu-0-1-exec = #menu-apps.open.2
-
-; menu-1-0 = Firefox
-; menu-1-0-exec = firefox
-; menu-1-1 = Chromium
-; menu-1-1-exec = chromium
-
-; menu-2-0 = Gimp
-; menu-2-0-exec = gimp
-; menu-2-1 = Scrot
-; menu-2-1-exec = scrot
-
-
-menu-0-0 = Terminate WM
-menu-0-0-foreground = ${colors.accent}
-menu-0-0-exec = bspc quit -1
-menu-0-1 = Reboot
-menu-0-1-foreground = ${colors.accent}
-menu-0-1-exec = menu-open-1
-menu-0-2 = Power off
-menu-0-2-foreground = ${colors.accent}
-menu-0-2-exec = menu-open-2
-menu-0-3 = Lock
-menu-0-3-foreground = ${colors.accent}
-menu-0-3-exec = lockscreen
-
-menu-1-0 = Cancel
-menu-1-0-foreground = ${colors.accent}
-menu-1-0-exec = menu-open-0
-menu-1-1 = Reboot
-menu-1-1-foreground = ${colors.accent}
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = Power off
-menu-2-0-foreground = ${colors.accent}
-menu-2-0-exec = sudo poweroff
-menu-2-1 = Cancel
-menu-2-1-foreground = ${colors.accent}
-menu-2-1-exec = menu-open-0
+date = "%a, %d/%m/%y"
+date-alt = "%a, %d/%m/%y"
+; date-alt = "%A, %d %B %Y"
+time = "%R"
+time-alt = "%I:%M"
 #+end_src
 
 *** Format
 
 #+begin_src conf
 ; Available tags:
-;   <label-toggle> (default) - gets replaced with <label-(open|close)>
-;   <menu> (default)
-; If expand-right is true, the default will be "<label-toggle><menu>" and the
-; other way around otherwise.
-; Note that if you use <label-toggle> you must also include
-; the definition for <label-open>
-format = <label-toggle><menu>
+;   <label> (default)
+format = <label>
+
+format-background = ${colors.background-alt}
+format-foreground = ${colors.foreground}
+format-padding = 2
 #+end_src
 
 **** Label
+ |  |  |  | 
 
 #+begin_src conf
-label-open = Apps
-label-close = x
+; Available tokens:
+;   %date% | %time%
+; label = " %date%   %time%"
+; label = %date%  %time%
+label = "%{A1:~/.local/bin/rofi/widget/time:}%time%%{A}"
+label-font = 3
 #+end_src
 
-***** Separator
-
-#+begin_src conf
-; Optional item separator
-; Default: none
-; label-separator = |
-; label-separator-margin = 1
-#+end_src
-
-
-** COMMENT Volume
-
-#+begin_src conf
-[module/alsa]
-type = internal/alsa
-
-format-volume = <ramp-volume>
-format-volume-suffix = " "
-format-volume-background = ${colors.color1}
-format-muted-background = ${colors.color1}
-
-;format-muted = 
-;ramp-volume-0 = 
-;ramp-volume-1 = 
-;ramp-volume-2 = 
-
-format-muted = " ﱝ "
-ramp-volume-0 = " 奄"
-ramp-volume-1 = " 奔"
-ramp-volume-2 = " 墳"
-
-;format-muted = " 🔇 "
-;ramp-volume-0 = " 🔈 "
-;ramp-volume-1 = " 🔉 "
-;ramp-volume-2 = " 🔊 "
-#+end_src
-
-
-type = internal/volume
-speaker-mixer = Speaker
-headphone-mixer = Headphone
-headphone-id = 9
-
-format-volume = <ramp-volume> <label-volume>
-label-volume = %percentage%%
-label-volume-foreground = ${root.foreground}
-
-format-muted-prefix = " "
-format-muted-foreground = #777
-label-muted = sound muted
-
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-volume-3 = 
-ramp-volume-foreground = #666
-
-ramp-headphones-0 = 
-ramp-headphones-1 = 
-ramp-headphones-foreground = #666
 
 ** COMMENT Separators
   |   | ⏽
@@ -1637,26 +1901,6 @@ content = "%{T-}%{T-}"
 content-foreground = ${colors.color1}
 content-background = ${colors.color2}
 #+end_src
-
-** COMMENT Window
-
-#+begin_src conf
-[module/xwindow]
-
-type = internal/xwindow
-label = " %title% "
-label-maxlen = 50
-label-empty = Empty
-
-format-background = ${colors.color1}
-format-prefix = ""
-format-prefix-foreground = ${colors.color1}
-format-prefix-background = ${colors.background}
-format-suffix = ""
-format-suffix-foreground = ${colors.color1}
-format-suffix-background = ${colors.background}
-#+end_src
-
 
 ** COMMENT Cpu
 ;   
@@ -1687,131 +1931,3 @@ format-background = ${colors.color2}
 label = "%{T2}%{T-} %percentage_used:2:3%%"
 #+end_src
 
-** COMMENT Network
-直睊|  ﯥ | 度ﴹ |   |   |   |  𥉉
-
-#+begin_src conf
-[module/network]
-type = internal/network
-
-interface = ens33
-interval = 3.0
-
-format-connected = <label-connected>
-format-connected-suffix = " "
-format-connected-font = 2
-format-connected-background = ${colors.color1}
-format-disconnected = <label-disconnected>
-format-disconnected-suffix = " "
-format-disconnected-font = 2
-format-disconnected-background = ${colors.color1}
-format-packetloss = <animation-packetloss> <label-connected>
-
-label-connected = "說"
-label-disconnected = "ﲁ " 
-
-;format-packetloss = <animation-packetloss> <label-connected>
-animation-packetloss-0 = 
-;animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 = 
-;animation-packetloss-1-foreground = #000000
-animation-packetloss-framerate = 500
-#+end_src
-
-** COMMENT Wifi
-[module/wifi]
-type = internal/network
-interface = net1
-interval = 3.0
-;udspeed-minwidth = 0
-
-format-connected = <ramp-signal> <label-connected>
-format-connected-prefix = " "
-format-connected-prefix-foreground = #666
-format-connected-prefix-offset = -6
-label-connected = %downspeed:8%
-
-;format-disconnected = <label-disconnected>
-;format-disconnected-prefix = " "
-;format-disconnected-prefix-foreground = #666
-;label-disconnected = not connected
-;label-disconnected-foreground = #999
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = #666
-** COMMENT Date
-
-#+begin_src conf
-[module/date]
-type = internal/date
-
-interval = 5
-format-suffix = " "
-format-background = ${colors.color1}
-;format-prefix = ""
-;format-prefix-background = ${colors.background}
-
-date = "%a, %m/%d/%y"
-date-alt = "%A, %d %B %Y"
-time = "%H:%M"
-time-alt = "%l:%M%P"
-label = "%time% %date%"
-#+end_src
-
-
-# vim:ft=dosini
-
-** COMMENT FS-Root
-
-[module/fs-root]
-type = internal/fs
-mount-0 = /
-label-mounted = %{F#e60053}%percentage_used%%%{F-} used of %mountpoint%
-
-
-** COMMENT keyboard
-
-#+begin_src conf
-[module/keyboard]
-type = internal/xkeyboard
-
-;blacklist-0 = num lock
-;blacklist-1 = caps lock
-;blacklist-2 = scroll lock
-
-format = <label-layout>
-format-suffix = " "
-format-background = ${colors.color1}
-
-label-layout = "%icon%"
-
-layout-icon-default = ?
-layout-icon-0 = us;US
-layout-icon-1 = es;ES
-#+end_src
-
-
-** Github
-
-[module/github]
-type = internal/github
-token = ${file:/home/jaagr/.git-token}
-;empty-notifications = true
-label = %notifications%
-label-padding = 2
-label-background = #f0c209
-label-foreground = #000
-
-** Counter
-
-[module/counter]
-type = internal/counter
-format = <counter>
-interval = 0.1
-
-
-* TODO Get moc module
