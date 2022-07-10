@@ -78,11 +78,11 @@ super + b
 
 # Screenshot
 super + c
-	scrot --exec 'mv $f /mnt/files/Ricardo/Pictures/Screenshots' %d-%m-%Y_%H:%M:%S_scrot.png
+	scrot --exec 'mv $f /mnt/files/Ricardo/Pictures/capture' %d-%m-%Y_%H:%M:%S_scrot.png
 
 # Capture Zone
 super + alt c
-	scrot --select --line style=dash,width=2,color=#51afef,opacity=100 --freeze --exec 'mv $f /mnt/files/Ricardo/Pictures/Screenshots' %d-%m-%Y_%H:%M:%S.png
+	scrot --select --line style=dash,width=2,color=#51afef,opacity=100 --freeze --exec 'mv $f /mnt/files/Ricardo/Pictures/capture' %d-%m-%Y_%H:%M:%S.png
 
 super + e
 	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \

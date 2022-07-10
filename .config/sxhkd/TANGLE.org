@@ -380,11 +380,11 @@ super + b
 #+begin_src shell
 # Screenshot
 super + c
-	scrot --exec 'mv $f /mnt/files/Ricardo/Pictures/Screenshots' %d-%m-%Y_%H:%M:%S_scrot.png
+	scrot --exec 'mv $f /mnt/files/Ricardo/Pictures/capture' %d-%m-%Y_%H:%M:%S_scrot.png
 
 # Capture Zone
 super + alt c
-	scrot --select --line style=dash,width=2,color=#51afef,opacity=100 --freeze --exec 'mv $f /mnt/files/Ricardo/Pictures/Screenshots' %d-%m-%Y_%H:%M:%S.png
+	scrot --select --line style=dash,width=2,color=#51afef,opacity=100 --freeze --exec 'mv $f /mnt/files/Ricardo/Pictures/capture' %d-%m-%Y_%H:%M:%S.png
 #+end_src
 
 * Scratchpad
