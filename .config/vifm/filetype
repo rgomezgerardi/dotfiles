@@ -12,9 +12,6 @@
 fileviewer */ ls --color --group-directories-first
 fileviewer .*/ ls --color --group-directories-first
 
-" ========================================================
-" ===================== Multimedia =======================
-" ========================================================
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.ico, 
         \ {View in sxiv}
@@ -29,7 +26,6 @@ fileviewer *.gif
 	\ vifmimg gifpreview %px %py %pw %ph %c %pc vifmimg clear
 fileviewer *.ico
         \ vifmimg magickpreview %px %py %pw %ph %c %pc vifmimg clear
-
 " Subtitle
 filextype *.srt
     \ {Open with Emacs}
@@ -81,10 +77,6 @@ filetype *.torrent
 fileviewer *.torrent
 	\ dumptorrent -v %c
 
-
-" ========================================================
-" ======================= Office =========================
-" ========================================================
 " Text based files
 "filetype *.txt 
 "    \ {Edit with neovim}
@@ -140,10 +132,6 @@ filetype *.[1-8]
 fileviewer *.[1-8]
 	\ man ./%c | col -b
 
-
-" ========================================================
-" ===================== Programming ======================
-" ========================================================
 " Web
 filextype *.html,*.htm
         \ {Open with qutebrowser}
@@ -160,10 +148,6 @@ filetype *.exe
 	\ {Open Programs}
 	\ WINEPREFIX=/home/ruth/Wine/Default/ wine start /unix %d/%f,
 
-
-" ========================================================
-" ====================== Security ========================
-" ========================================================
 " MD5
 filetype *.md5
        \ {Check MD5 hash sum}
@@ -190,10 +174,6 @@ filetype *.asc
        \ {Check signature}
        \ !!gpg --verify %c,
 
-
-" ========================================================
-" ===================== Mount Files ======================
-" ========================================================
 " FuseZipMount
 filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
 	\ {Mount with fuse-zip}
@@ -242,10 +222,6 @@ filetype *.7z
 fileviewer *.7z
 	\ 7z l %c
 
-
-" ========================================================
-" ===================== Other Files ======================
-" ========================================================
 " Open all the unknow files
 filetype ?*
     \ {Open with Emacs}
@@ -254,5 +230,3 @@ filetype ?*
     \ st nvim %f %i &,
     \ {Open with Xdg-Open}
     \ xdg-open %c
-
-" # vim:ft=vim

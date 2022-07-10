@@ -1,6 +1,3 @@
-" ========================================================
-" ========================= Keys =========================
-" ========================================================
 " Start shell in current directory
 nnoremap s :shell<cr>
 
@@ -78,5 +75,3 @@ map < :!~/.config/vifm/scripts/vifmimg dec<CR>
 
 " Rofi syntax highlighting
 au BufNewFile,BufRead /*.rasi setf css
-
-" # vim:ft=vim

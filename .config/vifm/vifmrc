@@ -1,15 +1,3 @@
-" ========================================================
-"
-"            ██╗   ██╗██╗███████╗███╗   ███╗
-"            ██║   ██║██║██╔════╝████╗ ████║
-"            ██║   ██║██║█████╗  ██╔████╔██║
-"            ╚██╗ ██╔╝██║██╔══╝  ██║╚██╔╝██║
-"             ╚████╔╝ ██║██║     ██║ ╚═╝ ██║
-"              ╚═══╝  ╚═╝╚═╝     ╚═╝     ╚═╝
-"
-" Config File                       Edit By: Ricardo Gomez
-" ========================================================
-
 " Command used to edit files in various contexts
 set vicmd="vim"
 "set vicmd="emacs &> /dev/null &"
@@ -48,7 +36,7 @@ set runexec
 colorscheme Default-256 Default
 
 " Selected color scheme
-colorscheme dark
+colorscheme doom-one
 
 " Format for displaying time in file list
 set timefmt=%m/%d\ %H:%M
@@ -116,7 +104,7 @@ source "$HOME/.config/vifm/filetype"
 source "$HOME/.config/vifm/keymap"
 
 " Set icons (Required Nerd Font)
-source $HOME/.config/vifm/icons
+source "$HOME/.config/vifm/icon"
 
 
 " ========================================================
@@ -138,7 +126,7 @@ mark f "/mnt/files/Ricardo/Resources/Fonts"
 mark g "/mnt/windows/Users/Gerardi"
 mark h "~"
 mark m "/mnt/files/Ricardo/Videos/Movies"
-mark n "/mnt/files/Ricardo/Documents/notes"
+mark n "/mnt/files/Ricardo/Documents/note"
 mark p "/mnt/files/Ricardo/Pictures"
 mark P "/mnt/files/Ricardo/Projects"
 mark r "/mnt/files/Ricardo"
