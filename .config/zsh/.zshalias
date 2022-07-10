@@ -152,16 +152,11 @@ alias fix-pacman-conf="/usr/local/bin/arcolinux-fix-pacman-conf"
 alias fix-pacman-keyserver="/usr/local/bin/arcolinux-fix-pacman-gpg-conf"
 
 # alias emacs="~/.local/bin/emacs"
-e()     { pgrep emacs && emacsclient -n "$@" || emacs -nw "$@" }
-ediff() { emacs -nw --eval "(ediff-files \"$1\" \"$2\")"; }
-eman()  { emacs -nw --eval "(switch-to-buffer (man \"$1\"))"; }
-ekill() { emacsclient --eval '(kill-emacs)'; }
-
 alias mocp="mocp --config ~/.config/moc/config"
 # alias vifm="$HOME/.config/vifm/scripts/vifmrun"
 alias rtorrent="~/.config/rtorrent/start"
 alias figlet="figlet -f ~/.config/figlet/fonts/ANSI\ Shadow.flf"
-alias alacritty='LIBGL_ALWAYS_SOFTWARE=1 alacritty'
+
 { command -v nvim &> /dev/null } && alias vi='nvim' || alias vi='vim'
 { command -v neomutt &> /dev/null } && alias mutt='neomutt'
 
@@ -178,7 +173,7 @@ alias sr="sudo reboot"
 alias fstab="sudo $EDITOR /etc/fstab"
 
 # Dotfiles
-alias stow='stow --no-folding -d $HOME/repo/rgomezgerardi/dotfiles -t $HOME'
+alias stow='stow --no-folding -d $HOME/documents/git/rgomezgerardi/dotfiles -t $HOME'
 
 # Switch between shells
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"

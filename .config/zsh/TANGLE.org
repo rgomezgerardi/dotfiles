@@ -1,3 +1,7 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:ID: zsh
+:END:
 #+TITLE: Zsh Custom Configuration
 #+AUTHOR: Ricardo Gomez
 #+EMAIL: rgomezgerardi@gmail.com
@@ -92,6 +96,18 @@ compinit
 
 # Speedy keys
 xset r rate 210 60
+
+# zsh parameter completion for the dotnet CLI
+
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  reply=( "${(ps:\n:)completions}" )
+}
+
+compctl -K _dotnet_zsh_complete dotnet
+
 
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct
@@ -257,78 +273,59 @@ More completions https://github.com/zsh-users/zsh-completions
 # zsh_add_completion "esc/conda-zsh-completion" false
 #+end_src
 
-* Enviroment
+* Prompt
 :PROPERTIES:
-:header-args:     :tangle .zshenv :shebang "#!/bin/zsh"
+:header-args:     :tangle .zshprompt :shebang "#!/bin/zsh"
 :END:
 
-** System
+** COMMENT Manual
 
 #+begin_src shell
-export PATH="${PATH:+${PATH}:}$(find ~/.local/bin -type d -printf '%p:' | sed 's/:$//')"
-export PATH="$PATH:$HOME/.config/emacs/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.local/share/go/bin"
+# autoload vcs
+# autoload -Uz vcs_info
 
-# export MANPAGER='nvim +Man!'
-export MANWIDTH=999
+# # Enable only git 
+# zstyle ':vcs_info:*' enable git 
 
-#Ibus settings if you need them
-#type ibus-setup in terminal to change settings and start the daemon
-#delete the hashtags of the next lines and restart
-#export GTK_IM_MODULE=ibus
-#export XMODIFIERS=@im=dbus
-#export QT_IM_MODULE=ibus
+# # setup a hook that runs before every prompt. 
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# setopt prompt_subst
+
+# # add a function to check for untracked files in the directory.
+# # from https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
+# zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+
+# +vi-git-untracked(){
+#     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+#         git status --porcelain | grep '??' &> /dev/null ; then
+#         # This will show the marker if there are any untracked files in repo.
+#         # If instead you want to show the marker only if there are untracked
+#         # files in $PWD, use:
+#         #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
+#         hook_com[staged]+='!' # signify new files with a bang
+#     fi
+# }
+
+# # zstyle ':vcs_info:*' check-for-changes true
+# # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
+# # zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
+
+# # PS1="%F{#000000}%K{#f0f0f0}  %k%f%F{#f0f0f0}%K{#1793d1}%k%f%F{#f0f0f0}%K{#1793d1} %B%4(~,../%3~,%~)%b %k%f%F{#1793d1}%f "
+
+# # format our main prompt for hostname current folder, and permissions.
+# PROMPT="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# # PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
+# PROMPT+="\$vcs_info_msg_0_ "
+
+# https://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+# also ascii escape codes
 #+end_src
 
-** Program
+** Spaceship
 
 #+begin_src shell
-#export SHELL=zsh
-export TERMINAL="st"
-export EDITOR="nvim"
-export IDLE="emacsclient"
-#export IDLE="emacsclient -c -a emacs"
-export BROWSER="brave"
-export READER="zathura"
-export IMAGE_VIEWER="sxiv"
-
-export DESKTOP_SESSION="bspwm"
-
-# Wine
-export WINEPREFIX="$HOME/Wine/Default"
-
-# rTorrent
-export RT_HOME="$XDG_CONFIG_HOME/rtorrent"
-
-# export MESA_GL_VERSION_OVERRIDE=4.5
-
-# Ranger
-#export RANGER_LOAD_DEFAULT_RC=FALSE
-#+end_src
-
-** Folder
-
-#+begin_src shell 
-export GIT="$HOME/documents/git"
-export PHONE="$HOME/phone"
-
-export FILES="/mnt/files/Ricardo"
-export BOOKS="$FILES/Books"
-export DOWNLOADS="$FILES/Downloads"
-
-export VIDEOS="$FILES/Videos"
-export MOVIES="$VIDEOS/Movies"
-export SERIES="$VIDEOS/Series"
-
-export DOCUMENTS="$FILES/Documents"
-export NOTES="$DOCUMENTS/Notes"
-
-export MUSIC="$FILES/Music"
-export PICTURES="$FILES/Pictures"
-export PROGRAMS="$FILES/Programs"
-export PROJECTS="$FILES/Projects"
-export ROTYEN="$PROJECTS/godot/2d/Rotyen"
+eval "$(starship init zsh)"
 #+end_src
 
 * Profile
@@ -617,17 +614,27 @@ alias fix-pacman-conf="/usr/local/bin/arcolinux-fix-pacman-conf"
 alias fix-pacman-keyserver="/usr/local/bin/arcolinux-fix-pacman-gpg-conf"
 #+end_src
 
-*** Others
+*** Program
 
 #+begin_src shell
 # alias emacs="~/.local/bin/emacs"
+e()     { pgrep emacs && emacsclient -n "$@" || emacs -nw "$@" }
+ediff() { emacs -nw --eval "(ediff-files \"$1\" \"$2\")"; }
+eman()  { emacs -nw --eval "(switch-to-buffer (man \"$1\"))"; }
+ekill() { emacsclient --eval '(kill-emacs)'; }
+
 alias mocp="mocp --config ~/.config/moc/config"
 # alias vifm="$HOME/.config/vifm/scripts/vifmrun"
 alias rtorrent="~/.config/rtorrent/start"
 alias figlet="figlet -f ~/.config/figlet/fonts/ANSI\ Shadow.flf"
-
+alias alacritty='LIBGL_ALWAYS_SOFTWARE=1 alacritty'
 { command -v nvim &> /dev/null } && alias vi='nvim' || alias vi='vim'
 { command -v neomutt &> /dev/null } && alias mutt='neomutt'
+#+end_src
+
+*** Others
+
+#+begin_src shell
 
 # x11
 alias merge="xrdb -merge ~/.config/xorg/xresources"
@@ -642,7 +649,7 @@ alias sr="sudo reboot"
 alias fstab="sudo $EDITOR /etc/fstab"
 
 # Dotfiles
-alias stow='stow --no-folding -d $HOME/documents/git/rgomezgerardi/dotfiles -t $HOME'
+alias stow='stow --no-folding -d $HOME/repo/rgomezgerardi/dotfiles -t $HOME'
 
 # Switch between shells
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
@@ -656,53 +663,76 @@ alias tosddm="sudo systemctl enable sddm.service -f ; echo 'Sddm is active - reb
 alias bls="betterlockscreen -u /usr/share/backgrounds/arcolinux/"
 #+end_src
 
-* Prompt
+* Enviroment
 :PROPERTIES:
-:header-args:     :tangle .zshprompt :shebang "#!/bin/zsh"
+:header-args:     :tangle .zshenv :shebang "#!/bin/zsh" :comments org
 :END:
 
+** System
+
 #+begin_src shell
-# # autoload vcs
-# autoload -Uz vcs_info
+export PATH="${PATH:+${PATH}:}$(find ~/.local/bin -type d -printf '%p:' | sed 's/:$//')"
+export PATH="$PATH:$HOME/.config/emacs/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/share/go/bin"
 
-# # enable only git 
-# zstyle ':vcs_info:*' enable git 
+# export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 
-# # setup a hook that runs before every prompt. 
-# precmd_vcs_info() { vcs_info }
-# precmd_functions+=( precmd_vcs_info )
-# setopt prompt_subst
+#Ibus settings if you need them
+#type ibus-setup in terminal to change settings and start the daemon
+#delete the hashtags of the next lines and restart
+#export GTK_IM_MODULE=ibus
+#export XMODIFIERS=@im=dbus
+#export QT_IM_MODULE=ibus
 
-# # add a function to check for untracked files in the directory.
-# # from https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
-# zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
-
-# +vi-git-untracked(){
-#     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
-#         git status --porcelain | grep '??' &> /dev/null ; then
-#         # This will show the marker if there are any untracked files in repo.
-#         # If instead you want to show the marker only if there are untracked
-#         # files in $PWD, use:
-#         #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
-#         hook_com[staged]+='!' # signify new files with a bang
-#     fi
-# }
-
-# zstyle ':vcs_info:*' check-for-changes true
-# # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
-# zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
-
-PS1="%F{#000000}%K{#f0f0f0}  %k%f%F{#f0f0f0}%K{#1793d1}%k%f%F{#f0f0f0}%K{#1793d1} %B%4(~,../%3~,%~)%b %k%f%F{#1793d1}%f "
-
-# # format our main prompt for hostname current folder, and permissions.
-# PROMPT="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
-# # PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
-# PROMPT+="\$vcs_info_msg_0_ "
+# export MESA_GL_VERSION_OVERRIDE=4.5
+# LIBGL_ALWAYS_SOFTWARE=1
 #+end_src
 
-** TODO  look into this for more colors
-# https://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
-# also ascii escape codes
+** Folder
+
+#+begin_src shell 
+export REPO="$HOME/repo"
+export PHONE="$HOME/phone"
+export FILES="/mnt/files/Ricardo"
+export BOOKS="$FILES/Books"
+export DOWNLOADS="$FILES/Downloads"
+export VIDEOS="$FILES/Videos"
+export MOVIES="$VIDEOS/Movies"
+export SERIES="$VIDEOS/Series"
+export DOCUMENTS="$FILES/Documents"
+export NOTE="$DOCUMENTS/note"
+export MUSIC="$FILES/Music"
+export PICTURES="$FILES/Pictures"
+export PROGRAMS="$FILES/Programs"
+export PROJECTS="$FILES/Projects"
+export ROTYEN="$PROJECTS/godot/2d/Rotyen"
+#+end_src
+
+** Program
+
+#+begin_src shell
+#export SHELL=zsh
+# export TERM="xterm-256color"
+export TERMINAL="st"
+export EDITOR="vim"
+# export VISUAL="vim"
+export IDLE="emacsclient"
+#export IDLE="emacsclient -c -a emacs"
+export BROWSER="brave"
+export READER="zathura"
+export IMAGE_VIEWER="sxiv"
+export DESKTOP_SESSION="bspwm"
+#+end_src
+
+** Cleanup
+
+#+begin_src shell
+export WINEPREFIX="$HOME/wine/default"
+export RT_HOME="$XDG_CONFIG_HOME/rtorrent"
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+#+end_src
 
 * COMMENT Function
 
