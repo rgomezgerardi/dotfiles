@@ -1,5 +1,4 @@
 #!/bin/sh
-
 modmap=$MODMAP
 resources=$RESOURCES
 session=$SESSION
@@ -71,6 +70,9 @@ picom --daemon &
 # Automounting
 #udiskie &
 
+# Notification
+dunst &
+
 # Emacs Server
 emacs --bg-daemon &
 
@@ -84,4 +86,3 @@ $HOME/.local/bin/polybar &
 
 # Window Manager
 exec bspwm
-# DISPLAY=:0 exec $HOME/.local/bin/dwm
