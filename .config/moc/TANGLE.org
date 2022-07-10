@@ -1,0 +1,492 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:ID: moc
+:END:
+#+TITLE: Moc Custom Configuration
+#+AUTHOR: Ricardo Gomez
+#+EMAIL: rgomezgerardi@gmail.com
+
+
+        ███╗   ███╗ ██████╗  ██████╗
+        ████╗ ████║██╔═══██╗██╔════╝
+        ██╔████╔██║██║   ██║██║     
+        ██║╚██╔╝██║██║   ██║██║     
+        ██║ ╚═╝ ██║╚██████╔╝╚██████╗
+        ╚═╝     ╚═╝ ╚═════╝  ╚═════╝
+
+* Config
+:PROPERTIES:
+:header-args:     :tangle config
+:END:
+
+# Show file titles (title, author, album) instead of file names?
+ReadTags = yes
+
+# Directory in which you store your music files
+MusicDir = $MUSIC
+
+# Start in the music directory by default
+StartInMusicDir = yes
+
+# How to sort
+Sort = FileName
+
+# Show errors in the streams (for example, broken frames in MP3 files)?
+ShowStreamErrors = yes
+
+# Ignore CRC errors in MP3 files?
+MP3IgnoreCRCErrors = yes
+
+# Set playback toggles.
+Repeat = no
+Shuffle = no
+AutoNext = yes
+
+# Set the default format string:
+#FormatString = "%(n:%n :)%(a:%a - :)%(t:%t:)%(A: \(%A\):)"
+FormatString = "%(t:%t:)"
+
+# Input and output buffer sizes (in kilobytes).
+#InputBuffer = 512                  # Minimum value is 32KB
+#OutputBuffer = 512                 # Minimum value is 128KB
+
+# Set how much to fill the input buffer before playing
+Prebuffering = 64
+
+# Use this HTTP proxy server for internet streams.  If not set, the
+# environment variables http_proxy and ALL_PROXY will be used if present.
+#
+# Format: HTTPProxy = PROXY_NAME:PORT
+#
+#HTTPProxy =
+
+# Select the sound driver
+SoundDriver = JACK:ALSA:OSS:SNDIO
+
+# Save software mixer state
+Softmixer_SaveState = yes
+
+# Save equalizer state
+Equalizer_SaveState = yes
+
+# Show files with dot at the beginning?
+ShowHiddenFiles = no
+
+# Hide file name extensions?
+HideFileExtension = yes
+
+# Show file format in menu?
+ShowFormat = yes
+
+# Show file time in menu[ 'yes' | 'no' | 'IfAvailable']
+ShowTime = yes
+
+# Show time played as a percentage in the time progress bar.
+ShowTimePercent = yes
+
+# Theme file to use.  This can be absolute path or relative to
+Theme = ${HOME}/.config/moc/themes/default
+
+# Should MOC try to autoload the default lyrics file for an audio?  (The
+# default lyrics file is a text file with the same file name as the audio
+# file name with any trailing "extension" removed.)
+AutoLoadLyrics = yes
+
+# MOC directory (where pid file, socket and state files are stored).
+MOCDir = "${HOME}/.config/moc/state
+
+# Use mmap() to read files.  mmap() is much slower on NFS.
+UseMMap = no
+
+# Use MIME to identify audio files.  This can make for slower loading
+UseMimeMagic = no
+
+# Assume this encoding for ID3 version 1/1.1 tags (MP3 files). This option is ignored if UseRCC is set to 'yes'.
+ID3v1TagsEncoding = WINDOWS-1250
+
+# Use librcc to fix ID3 version 1/1.1 tags encoding.
+UseRCC = yes
+
+# Use librcc to filenames and directory names encoding.
+UseRCCForFilesystem = yes
+
+# Assume that if the encoding of ID3v2 is set to ISO-8859-1 then the ID3v1TagsEncoding will be the same
+EnforceTagsEncoding = no
+
+# Enable the conversion of filenames from the local encoding to UTF-8.
+FileNamesIconv = no
+
+# Should MOC precache files to assist gapless playback?
+Precache = yes
+
+# Remember the playlist after exit?
+SavePlaylist = no
+
+# When using more than one client (interface) at a time, do they share the playlist?
+SyncPlaylist = yes
+
+# Choose a keymap file
+Keymap = ${HOME}/.config/moc/keymap
+
+# Use ASCII rather than graphic characters for drawing lines.  This helps on some terminals.
+ASCIILines = no
+
+# Display the cursor in the line with the selected file
+UseCursorSelection = no
+
+# Display full paths instead of just file names in the playlist
+PlaylistFullPaths = no
+
+# The following setting describes how block markers are displayed in the play time progress bar
+BlockDecorators = "`\"'"
+
+# How long (in seconds) to leave a message displayed on the screen
+MessageLingerTime = 3
+
+# Display a prefix on delayed messages indicating the number of queued messages still to be displayed
+PrefixQueuedMessages = yes
+
+# String to append to the queued message count if any error messages are still waiting to be displayed
+ErrorMessagesQueued = "!"
+
+# Run the OnSongChange command when a new song starts playing.
+# Specify the full path (i.e. no leading '~') of an executable to run.
+# Arguments will be passed, and you can use the following escapes:
+#
+#     %a artist
+#     %r album
+#     %f filename
+#     %t title
+#     %n track
+#     %d file duration in XX:YY form
+#     %D file duration, number of seconds
+#
+# No pipes/redirects can be used directly, but writing a shell script
+# can do the job.
+#
+# Example:    OnSongChange = "/home/jack/.moc/myscript %a %r"
+#
+#OnSongChange =
+
+# Execute the command every time a song starts playing regardless of whether or not it is just repeating
+RepeatSongChange = no
+
+# Run the OnStop command (full path, no arguments) when MOC changes state
+# to stopped (i.e., when user stopped playing or changes a song).
+#OnStop = "/home/jack/.moc/myscript_on_stop"
+
+# This determines which song to play after finishing all the songs in the queue
+QueueNextSongReturn = yes
+
+
+# When the song changes, should the menu be scrolled so that the currently played file is visible?
+FollowPlayedFile = yes
+
+# What to do if the interface was started and the server is already playing something from the playlist
+CanStartInPlaylist = yes
+
+# How fast to seek (in number of seconds per keystroke)
+SeekTime = 1
+SilentSeekTime = 5
+
+# Always use this sample rate (in Hz) when opening the audio device (0 desactivate)
+ForceSampleRate = 0
+
+# Setting this option to 'yes' allows MOC to use 24bit output
+Allow24bitOutput = no
+
+# Use realtime priority for output buffer thread. This will prevent gaps while playing even with heavy load
+UseRealtimePriority = no
+
+# The number of audio files for which MOC will cache tags.
+TagsCacheSize = 256
+
+# Number items in the playlist.
+PlaylistNumbering = yes
+
+** FastDirs
+# FastDirs, these allow you to jump directly to a directory
+Fastdir1 = "${MusicDir}/Downloaded"
+Fastdir2 = "${MusicDir}/Indie"
+Fastdir3 = "${HOME}/Downloads"
+#Fastdir4 =
+#Fastdir5 =
+#Fastdir6 =
+#Fastdir7 =
+#Fastdir8 =
+#Fastdir9 =
+#Fastdir10 =
+
+** Layout
+# Change the position and size of the menus
+Layout1 = directory(0,0,50%,100%):playlist(50%,0,FILL,100%)
+Layout2 = directory(0,0,100%,50%):playlist(0,50%,100%,FILL)
+Layout3 = directory(50%,50%,50%,50%)
+
+** ExecCommand
+
+# Executing external commands (1 - 10)
+ExecCommand1 = "rm -r %f"
+ExecCommand2 = "cp %f /media/phone"
+ExecCommand3 = "echo Playing %R"
+#ExecCommand4 =
+#ExecCommand5 =
+#ExecCommand6 =
+#ExecCommand7 =
+#ExecCommand8 =
+#ExecCommand9 =
+#ExecCommand10 =
+
+** ModPlug
+# Self-describing ModPlug options (with 'yes' or 'no' values).
+ModPlug_Oversampling = yes
+ModPlug_NoiseReduction = yes
+ModPlug_Reverb = no
+ModPlug_MegaBass = no
+ModPlug_Surround = no
+
+# ModPlug resampling mode.
+# Valid values are:
+#
+#     FIR -      8 tap fir filter (extremely high quality)
+#     SPLINE -   Cubic spline interpolation (high quality)
+#     LINEAR -   Linear interpolation (fast, good quality)
+#     NEAREST -  No interpolation (very fast, extremely bad sound quality)
+#
+#ModPlug_ResamplingMode = FIR
+
+# Other self-describing ModPlug audio characteristic options.
+# (Note that the 32 bit sample size seems to be buggy.)
+#ModPlug_Channels = 2               # 1 or 2 channels
+#ModPlug_Bits = 16                  # 8, 16 or 32 bits
+#ModPlug_Frequency = 44100          # 11025, 22050, 44100 or 48000 Hz
+#ModPlug_ReverbDepth = 0            # 0 (quiet) to 100 (loud)
+#ModPlug_ReverbDelay = 0            # Delay in ms (usually 40-200ms)
+#ModPlug_BassAmount = 0             # 0 (quiet) to 100 (loud).
+#ModPlug_BassRange = 10             # Cutoff in Hz (10-100).
+#ModPlug_SurroundDepth = 0          # Surround level 0(quiet)-100(heavy).
+#ModPlug_SurroundDelay = 0          # Surround delay in ms, usually 5-40ms.
+#ModPlug_LoopCount = 0              # 0 (never), n (times) or -1 (forever)
+
+** TiMidity
+# Self-describing TiMidity audio characteristic options.
+TiMidity_Rate = 44100              # Between 8000 and 48000
+TiMidity_Bits = 16                 # 8 or 16
+TiMidity_Channels = 2              # 1 or 2
+TiMidity_Volume = 100              # 0 to 800
+
+# You can setup a TiMidity-Config-File here
+#TiMidity_Config =
+
+** SidPlay
+# Self-describing SidPlay2 audio characteristic options.
+SidPlay2_DefaultSongLength = 180   # If not in database (in seconds)
+SidPlay2_MinimumSongLength = 0     # Play at least n (in seconds)
+SidPlay2_Frequency = 44100         # 4000 to 48000
+SidPlay2_Bits = 16                 # 8 or 16
+SidPlay2_Optimisation = 0          # 0 (worst quality) to 2 (best quality)
+
+# Set path to a HVSC-compatible database (if not set, database is disabled).
+#SidPlay2_Database =
+
+# SidPlay2 playback Mode:
+#
+#     "M": Mono (best for many SIDs)
+#     "S": Stereo
+#     "L"/"R": Left / Right
+#
+#SidPlay2_PlayMode = "M"
+
+# Use start-song information from SID ('yes') or start at first song
+# ('no').  Songs before the start-song won't be played.  (Note that this
+# option previously took the values 1 and 0; these are now deprecated
+# in favour of 'yes' and 'no'.)
+#SidPlay2_StartAtStart = yes
+
+# Play sub-tunes.  (Note that this option previously took the values 1
+# and 0; these are now deprecated in favour of 'yes' and 'no'.
+#noSidPlay2_PlaySubTunes = yes
+
+* Keymap
+:PROPERTIES:
+:header-args:     :tangle keymap
+:END:
+
+# The format of this file is:
+#
+#     - Lines beginning with # are comments.
+#     - Blank lines are ignored.
+#     - Every other line is expected to be in one of the formats:
+#
+#           COMMAND = [KEY ...]
+#           COMMAND += KEY ...
+#
+# The KEY can be:
+#
+#     - Just a char, like i, L, ", *
+#     - CTRL-KEY sequence: ^k (CTRL-k), ^4
+#     - ALT-KEY (meta) sequence: M-j (ALT-j), M-/
+#     - Special keys: DOWN, UP
+#                     LEFT, RIGHT
+#                     HOME, END
+#                     BACKSPACE
+#                     INS, DEL
+#                     ENTER
+#                     PAGE_UP, PAGE_DOWN
+#                     SPACE, TAB
+#                     KEYPAD_CENTER
+#                     ESCAPE
+#                     F1 - F12
+#
+# Note that the use of a digit as a KEY is deprecated.
+#
+# Maximum number of KEYs for one COMMAND is 5.
+#
+# Omitting the KEY for a COMMAND will unbind all its default keys.  They
+# will also be automatically unbound when you bind new KEYs to it. Individual
+# default KEYs will be automatically unbound when they are explicitly bound
+# to some other COMMAND.
+#
+# Using the '+=' form will cause the KEYs to be appended to any existing
+# (default or explicit) bindings for the COMMAND.  Appending an existing
+# default binding for the same COMMAND will cause MOC to think of that KEY
+# as then being explicitly bound.
+#
+# Only one binding for any given COMMAND can appear in the keymap file.  One
+# exception to this is that if the default keys for a COMMAND are explicitly
+# unbound then a subsequent binding may appear for it.  A second exception
+# is that multiple appending bindings may appear.
+#
+# Meta-key detection is sensitive to the ESCDELAY environment variable (see
+# the manpage for ncurses(3)).  In its absence, MOC resets the default
+# delay to 25ms.  If you need to emulate meta-key sequences using the ESC
+# key, then you may need to set the value of ESCDELAY back to its ncurses
+# default of 1000ms (but doing so will make the response to the ESC key
+# sluggish).
+#
+# If MOC's keypresses are being filtered through some other program (in a
+# GUI environment, for example) which also does meta-key detection, then
+# MOC is at the mercy of the timings with which that program presents them.
+#
+# Default key configuration for MOC (and a list of all available commands):
+
+# MOC control keys:
+quit                  = q
+quit_client           = Q
+
+# Menu and interface control keys:
+go                    = ENTER l
+menu_down             = j
+menu_up               = k
+menu_page_down        = 
+menu_page_up          = 
+menu_first_item       = g
+menu_last_item        = G
+search_menu           = /
+toggle_read_tags      = f
+toggle_show_time      = ^t
+toggle_show_format    = ^f
+toggle_menu           = TAB SPACE
+toggle_layout         = `
+toggle_hidden_files   = o
+next_search           = ^j
+show_lyrics           = 
+theme_menu            = T
+help                  = F1
+refresh               = ^r
+reload                = r
+
+# Audio playing and positioning keys:
+seek_forward          = .
+seek_backward         = ,
+seek_forward_fast     = M-l
+seek_backward_fast    = M-h
+pause                 = c
+stop                  = s
+next                  = n
+previous              = p
+toggle_shuffle        = S
+toggle_repeat         = R
+toggle_auto_next      = X
+toggle_mixer          = x
+go_url                = 
+
+# Volume control keys:
+volume_down_1         = {
+volume_up_1           = }
+volume_down_5         = [
+volume_up_5           = ]
+volume_10             = M-1
+volume_20             = M-2
+volume_30             = M-3
+volume_40             = M-4
+volume_50             = M-5
+volume_60             = M-6
+volume_70             = M-7
+volume_80             = M-8
+volume_90             = M-9
+
+# Directory navigation keys: defaults are Shift-number
+# (i.e., 'shift 1' -> '!' -> 'Fastdir1').
+go_to_a_directory     = :
+go_to_music_directory = m
+go_to_fast_dir1       = !
+go_to_fast_dir2       = @
+go_to_fast_dir3       = #
+go_to_fast_dir4       = $
+go_to_fast_dir5       = %
+go_to_fast_dir6       = ^
+go_to_fast_dir7       = &
+go_to_fast_dir8       = *
+go_to_fast_dir9       = (
+go_to_fast_dir10      = )
+go_to_playing_file    = ~
+go_up                 = h
+
+# Playlist specific keys:
+add_file              = a i
+add_directory         = A I
+plist_add_stream      = ^u
+delete_from_playlist  = d
+playlist_full_paths   = 
+plist_move_up         = u
+plist_move_down       = 
+save_playlist         = V
+remove_dead_entries   = Y
+clear_playlist        = C
+
+# Queue manipulation keys:
+enqueue_file          = z
+clear_queue           = Z
+
+# User interaction control:
+history_up            = k
+history_down          = j
+delete_to_start       = 
+delete_to_end         = 
+cancel                = ^x ESCAPE
+hide_message          = M
+
+# Softmixer specific keys:
+toggle_softmixer      = 
+toggle_make_mono      = 
+
+# Equalizer specific keys:
+toggle_equalizer      = 
+equalizer_refresh     = 
+equalizer_prev        = 
+equalizer_next        =
+
+# External commands:
+mark_start            = 
+mark_end              = 
+exec_command1         = D 
+exec_command2         = F2
+exec_command3         = F3
+exec_command4         = 
+exec_command5         = 
+exec_command6         = 
+exec_command7         = 
+exec_command8         = 
+exec_command9         = 
+exec_command10        = F10
