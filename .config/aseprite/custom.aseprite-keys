@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <keyboard version="1">
     <commands>
-        <key command="ReplaceColor" shortcut="Shift+R" removed="true" />
+        <key command="SaveFileCopyAs" shortcut="Ctrl+Alt+Shift+S" removed="true" />
+        <key command="ExportSpriteSheet" shortcut="Ctrl+E" />
+        <key command="Clear" shortcut="Del" />
+        <key command="Clear" shortcut="Backspace" />
+        <key command="Clear" shortcut="Ctrl+Shift+Enter Pad" />
+        <key command="Fill" shortcut="F" removed="true" />
+        <key command="ReplaceColor" shortcut="Shift+R" />
+        <key command="KeyboardShortcuts" shortcut="Ctrl+Alt+Shift+K" removed="true" />
+        <key command="KeyboardShortcuts" shortcut="Shift+F" />
         <key command="CanvasSize" shortcut="C" removed="true" />
-        <key command="OpenGroup" shortcut="Shift+E" removed="true" />
+        <key command="CanvasSize" shortcut="Shift+C" />
         <key command="NewLayer" shortcut="Shift+N" removed="true" />
         <key command="NewLayer" shortcut="Shift+Enter Pad" />
-        <key command="RemoveLayer" shortcut="Ctrl+Shift+Enter Pad" />
+        <key command="GotoPreviousLayer" context="Normal" shortcut="Down" />
+        <key command="GotoNextLayer" context="Normal" shortcut="Up" />
+        <key command="NewFrame" shortcut="Alt+D" removed="true">
+            <param name="content" value="celcopies" />
+        </key>
+        <key command="GotoPreviousFrame" context="Normal" shortcut="Left" />
+        <key command="GotoNextFrame" context="Normal" shortcut="Right" />
+        <key command="DuplicateLayer" shortcut="Alt+D" />
+        <key command="ModifySelection" shortcut="Space+V">
+            <param name="modifier" value="expand" />
+        </key>
+        <key command="ModifySelection" shortcut="Space+X">
+            <param name="modifier" value="contract" />
+        </key>
     </commands>
     <tools>
         <key tool="rectangular_marquee" shortcut="M" removed="true" />
-        <key tool="rectangular_marquee" shortcut="Shift+R" />
+        <key tool="rectangular_marquee" shortcut="Space+R" />
         <key tool="elliptical_marquee" shortcut="Shift+M" removed="true" />
-        <key tool="elliptical_marquee" shortcut="Shift+E" />
+        <key tool="elliptical_marquee" shortcut="Space+C" />
         <key tool="lasso" shortcut="Q" removed="true" />
-        <key tool="lasso" shortcut="Shift+B" />
+        <key tool="lasso" shortcut="Space+B" />
         <key tool="polygonal_lasso" shortcut="Shift+Q" removed="true" />
-        <key tool="polygonal_lasso" shortcut="Shift+D" />
+        <key tool="polygonal_lasso" shortcut="Space+W" />
         <key tool="magic_wand" shortcut="W" removed="true" />
-        <key tool="magic_wand" shortcut="Shift+F" />
+        <key tool="magic_wand" shortcut="Space+F" />
         <key tool="spray" shortcut="Shift+B" removed="true" />
-        <key tool="spray" shortcut="B" />
-        <key tool="eraser" shortcut="E" removed="true" />
-        <key tool="eraser" shortcut="C" />
+        <key tool="slice" shortcut="Shift+C" removed="true" />
+        <key tool="paint_bucket" shortcut="G" removed="true" />
+        <key tool="paint_bucket" shortcut="F" />
         <key tool="line" shortcut="L" removed="true" />
         <key tool="line" shortcut="W" />
         <key tool="curve" shortcut="Shift+L" removed="true" />
@@ -32,11 +53,10 @@
         <key tool="filled_rectangle" shortcut="U" removed="true" />
         <key tool="filled_rectangle" shortcut="R" />
         <key tool="ellipse" shortcut="Shift+U" removed="true" />
-        <key tool="ellipse" shortcut="E" />
+        <key tool="ellipse" shortcut="C" />
         <key tool="filled_ellipse" shortcut="Shift+U" removed="true" />
-        <key tool="filled_ellipse" shortcut="E" />
+        <key tool="filled_ellipse" shortcut="C" />
         <key tool="polygon" shortcut="Shift+D" removed="true" />
-        <key tool="polygon" shortcut="D" />
         <key tool="blur" shortcut="R" removed="true" />
         <key tool="jumble" shortcut="R" removed="true" />
     </tools>
