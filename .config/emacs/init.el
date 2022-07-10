@@ -1,3 +1,10 @@
+(use-package elec-pair :straight (:type built-in)
+  :demand
+  :custom
+  (electric-pair-pairs '((?\" . ?\") (?\{ . ?\})))
+  :config
+  (electric-pair-mode 1))
+
 (use-package evil
   :demand
   :custom
@@ -33,6 +40,13 @@
   :config
   (evil-collection-init))
 
+(use-package evil-org
+  :demand
+  :after (evil evil-collection org)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 (use-package evil-nerd-commenter
   :after evil
   :preface
@@ -44,6 +58,13 @@
   :general
   ('motion
    "M-;" 'evilnc-comment-or-uncomment-lines))
+
+(use-package evil-surround
+  :after evil
+  :demand
+  :config
+  (global-evil-surround-mode 1)
+)
 
 (use-package evil-goggles
   :demand
@@ -58,8 +79,9 @@
 
 (use-package vi-tilde-fringe
   :hook (prog-mode . vi-tilde-fringe-mode)
-  ;; :gfhook ('(org-mode-hook
-	     ;; dashboard-mode-hook) #'(lambda () (vi-tilde-fringe-mode 0)))  ; Disable for some modes
+; Disable for some modes
+  ((treemacs-mode
+    dashboard-mode) . (lambda () (vi-tilde-fringe-mode 0)))
   :config ())  ; Show message if verbose is activated
 
 ;; (setq-default fill-column 120)
@@ -109,65 +131,53 @@
   :config
   (show-paren-mode 1))
 
-(use-package company
-  ;; :preface
-  ;; (defun +/noweb-reference (command &optional arg &rest ignored)
-  ;; 	"Complete `<<' with the names of defined SRC blocks."
-  ;; 	(interactive (list 'interactive))
-  ;; 	(cl-case command
-  ;;     (interactive (company-begin-backend '+/noweb-reference))
-  ;;     (init (require 'org-element))
-  ;;     (prefix (and (eq major-mode 'org-mode)
-  ;; 				   (eq 'src-block (car (org-element-at-point)))
-  ;; 				   (cons (company-grab-line "^<<\\(\\w*\\)" 1) t)))
-  ;;     (candidates
-  ;;      (org-element-map (org-element-parse-buffer) 'src-block
-  ;; 		 (lambda (src-block)
-  ;; 		   (let ((name (org-element-property :name src-block)))
-  ;; 			 (when name
-  ;; 			   (propertize
-  ;; 				name
-  ;; 				:value (org-element-property :value src-block)
-  ;; 				:annotation (org-element-property :raw-value (org-element-lineage src-block '(headline)))))))))
-  ;;     (sorted t)            ; Show candidates in same order as doc
-  ;;     (ignore-case t)
-  ;;     (duplicates nil)               ; No need to remove duplicates
-  ;;     (post-completion               ; Close the reference with ">>"
-  ;;      (insert ">>"))
-  ;;     ;; Show the contents of the block in a doc-buffer. If you have
-  ;;     ;; company-quickhelp-mode enabled it will show in a popup
-  ;;     (doc-buffer (company-doc-buffer (get-text-property 0 :value arg)))
-  ;;     (annotation (format " [%s]" (get-text-property 0 :annotation arg)))))
-  ;; :hook (after-init . global-company-mode)
+(use-package corfu
   :demand
   :custom
-  (company-minimum-prefix-length 2)
-  (company-idle-delay 0.1)
-  ;; (company-backends '(company-bbdb
-  ;; 		      company-semantic
-  ;; 		      company-cmake
-  ;; 		      company-capf
-  ;; 		      ;; company-clang
-  ;; 		      company-files
-  ;; 		      (company-dabbrev-code company-gtags company-etags company-keywords)
-  ;; 		      company-oddmuse
-  ;; 		      company-dabbrev
-  ;; 		      company-tempo
-  ;; 		      company-yasnippet
-  ;; 		      ))
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-auto-delay 0)
+  (corfu-auto-prefix 2)
   :config
-  (global-company-mode 1)
-  ;; (add-to-list company-backends ')
-  ;; (add-hook 'css-mode-hook
-            ;; (lambda ()
-              ;; (set (make-local-variable 'company-backends) '(company-css))))
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda ()
-  ;;             (set (make-local-variable 'company-backends) '(company-tempo +/noweb-reference))))
+  (corfu-global-mode 1)
   :general
-  (company-active-map
-   "<tab>" #'company-indent-or-complete-common)
-)
+  (corfu-map
+   "M-j" #'corfu-next
+   "M-k" #'corfu-previous))
+
+(use-package cape
+  :after corfu
+  :demand
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-dict)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-ispell)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-line)
+  (add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  (add-to-list 'completion-at-point-functions #'cape-sgml)
+  (add-to-list 'completion-at-point-functions #'cape-symbol)
+  (add-to-list 'completion-at-point-functions #'cape-tex)
+  :general 
+  (leader-def
+   "c p" #'completion-at-point ;; capf
+   "c a" #'cape-abbrev
+   "c d" #'cape-dabbrev        ;; or dabbrev-completion
+   "c w" #'cape-dict
+   "c f" #'cape-file
+   "c i" #'cape-ispell
+   "c k" #'cape-keyword
+   "c l" #'cape-line
+   "c r" #'cape-rfc1345
+   "c &" #'cape-sgml
+   "c s" #'cape-symbol
+   "c t" #'complete-tag        ;; etags
+   "c _" #'cape-tex
+   "c ^" #'cape-tex
+  ))
 
 (use-package dabbrev :straight (:type built-in)
   :general
@@ -242,7 +252,76 @@
   ;; (setq-local beacon-mode nil).
   (beacon-mode 1))
 
+(use-package treemacs
+  :hook
+  ((gdscript-mode) . (lambda () (save-selected-window (treemacs-select-window))))
+  :custom
+  ;; (treemacs-display-in-side-window          nil)
+  ;; (treemacs-expand-after-init               t)
+  ;; (treemacs-position                        'left)
+  ;; (treemacs-silent-filewatch                nil)
+  ;; (treemacs-silent-refresh                  nil)
+  ;; (treemacs-sorting                         'alphabetic-asc)
+  ;; (treemacs-user-mode-line-format           "none")
+  (treemacs-width                           28)
+  (treemacs-follow-after-init t)
+  (treemacs-no-delete-other-windows nil)
+  :config
+  (add-hook
+   'gdscript-mode-hook
+   (lambda () (run-with-timer 10.0 nil #'treemacs-select-window)))
+  (treemacs-follow-mode t)
+  ;; (treemacs-tag-follow-mode t)
+  ;; (treemacs-display-current-project-exclusively)
+  (treemacs-fringe-indicator-mode 'always)
+  (treemacs-git-mode 'simple)
+  (treemacs-filewatch-mode t)
+  (treemacs-indent-guide-mode t)
+  (treemacs-project-follow-mode t)
+  (treemacs-hide-gitignored-files-mode nil)
+
+  ;; (pcase (cons (not (null (executable-find "git")))
+  ;;              (not (null treemacs-python-executable)))
+  ;;   (`(t . t)
+  ;;    (treemacs-git-mode 'deferred))
+  ;;   (`(t . _)
+  ;;    (treemacs-git-mode 'simple)))
+  :general
+  ("M-0"   #'treemacs-select-window)
+  (leader-def
+	"0 0" #'treemacs
+	"0 b" #'treemacs-bookmark
+	"0 t" #'treemacs-find-tag
+	"0 f" #'treemacs-find-file
+	"0 d" #'treemacs-delete-other-windows
+	)
+)
+
+(use-package treemacs-evil
+  :after (treemacs evil)
+  :demand)
+
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :demand)
+
+(use-package treemacs-magit
+  :after (treemacs magit)
+  :demand)
+
+(use-package vimish-fold
+  :after evil
+  :demand
+  :config
+  (vimish-fold-global-mode 1))
+
+(use-package evil-vimish-fold
+  :after (evil vimish-fold)
+  :demand
+  :hook ((prog-mode conf-mode text-mode) . evil-vimish-fold-mode))
+
 (use-package files :straight (:type built-in)
+  :demand
   :preface
   (defun +/save-buffers-kill-emacs (&optional arg)
 	"Offer to save each buffer(once only, no modified buffers exist asking), then kill this Emacs process.
@@ -271,37 +350,23 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   (vc-follow-symlinks t)
   (vc-git-print-log-follow nil)
   (find-file-visit-truename t)
-  ; Smooth Scroll
-  ;; (scroll-step 1)
-  ;; (redisplay-dont-pause nil)
-  ;; (scroll-margin 3)
-  ;; (scroll-conservatively 10000)
-  ;; (scroll-preserve-screen-position 1)
-  ;; (scroll-margin 1)
-  ;; (scroll-conservatively 0)
-  ;; (scroll-up-aggressively 0.01)
-  ;; (scroll-down-aggressively 0.01)
-  ;; (auto-window-vscroll t) ;;      scroll-down-aggressively 0.01
-  ;; (kept-old-versions 0)
   :config
   (fset 'save-buffers-kill-emacs '+/save-buffers-kill-emacs)
   :general
   (leader-def
     "f" '(:ignore t :which-key "file")
     "f f" #'(find-file :wk "find")
-    "f c" #'((lambda () (interactive) (find-file "~/.config/emacs/README.org")) :wk "config")
-    "e r" #'((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :wk "reload emacs config")
-    "e k" #'(kill-emacs :wk "kill emacs")
+    "f c" #'((lambda () (interactive) (find-file "~/.config/emacs/TANGLE.org")) :wk "config")
     "b k" #'(kill-current-buffer :wk "kill current buffer")
     "b K" #'(kill-buffer :wk "kill buffer")
     "b n" #'(next-buffer :wk "next buffer")
     "b p" #'(previous-buffer :wk "previous buffer")
-    "t t" #'(toggle-truncate-lines :wk "toggle truncate lines")
 ))
 
 (use-package autorevert :straight (:type built-in)
   :demand
   :custom
+  (auto-revert-interval 3)
   (global-auto-revert-non-file-buffers t)
   :config
   (global-auto-revert-mode 1))
@@ -346,11 +411,6 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   #'(lambda () (add-hook 'after-save-hook #'+/org-babel-tangle-config))
   ;; #'variable-pitch-mode ;; #'auto-fill-mode ;; #'turn-on-auto-fill
   :config
-  (setq 
-  org-agenda-files "/home/user/.config/emacs/agenda-files"
-  org-agenda-file-regexp "\\`[^.].*\\(\\.org\\)?\\'"
-  )
-  (setq org-agenda-start-with-log-mode t)
   (setq
    org-hide-leading-stars t  ; Non-nil means hide the first N-1 stars in a headline
    org-image-actual-width 300
@@ -421,26 +481,26 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   ;; (add-to-list 'safe-local-variable-values
         ;; '(eval add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t))
   (setq
-  org-babel-tangle-use-relative-file-links nil
-  org-babel-tangle-lang-exts '(("vala" . "vala")
-  							 ("ruby" . "rb")
-  							 ("python" . "py")
-  							 ("picolisp" . "l")
-  							 ("ocaml" . "ml")
-  							 ("maxima" . "max")
-  							 ("lua" . "lua")
-  							 ("lisp" . "lisp")
-  							 ("LilyPond" . "ly")
-  							 ("latex" . "tex")
-  							 ("java" . "java")
-  							 ("haskell" . "hs")
-  							 ("groovy" . "groovy")
-  							 ("clojurescript" . "cljs")
-  							 ("clojure" . "clj")
-  							 ("D" . "d")
-  							 ("C++" . "cpp")
-  							 ("emacs-lisp" . "el")
-  							 ("elisp" . "el"))
+   org-babel-tangle-use-relative-file-links nil
+   org-babel-tangle-lang-exts '(("vala" . "vala")
+  			      ("ruby" . "rb")
+  			      ("python" . "py")
+  			      ("picolisp" . "l")
+  			      ("ocaml" . "ml")
+  			      ("maxima" . "max")
+  			      ("lua" . "lua")
+  			      ("lisp" . "lisp")
+  			      ("LilyPond" . "ly")
+  			      ("latex" . "tex")
+  			      ("java" . "java")
+  			      ("haskell" . "hs")
+  			      ("groovy" . "groovy")
+  			      ("clojurescript" . "cljs")
+  			      ("clojure" . "clj")
+  			      ("D" . "d")
+  			      ("C++" . "cpp")
+  			      ("emacs-lisp" . "el")
+  			      ("elisp" . "el"))
   )
   (setq org-export-backends '(ascii html icalendar latex man md odt org))
   (setq org-odt-preferred-output-format "pdf")  ; Require LibreOffice (docx)
@@ -453,114 +513,33 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
    org-edit-src-content-indentation 0
    org-src-window-setup 'current-window
    org-src-preserve-indentation nil
-   )
+   org-src-lang-modes '(("C" . c)
+  		     ("C++" . c++)
+  		     ("asymptote" . asy)
+  		     ("bash" . sh)
+  		     ("beamer" . latex)
+  		     ("calc" . fundamental)
+  		     ("cpp" . c++)
+  		     ("ditaa" . artist)
+  		     ("dot" . fundamental)
+  		     ("elisp" . emacs-lisp)
+  		     ("ocaml" . tuareg)
+  		     ("screen" . shell-script)
+  		     ("shell" . sh)
+  		     ("gdscript" . gdscript)
+  		     ("vimrc" . vimrc)
+  		     ("yaml" . yaml)
+  		     ("opml" . nxml)
+  		     ("sqlite" . sql))
+  )
   
   ;; (require 'org-tempo)
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (setq org-use-property-inheritance t)
-  (setq
-  org-log-done 'time
-  org-log-into-drawer t
-  org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)"))
-  	  ;; (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
-  )
-  
-  ; Refile
-  (setq org-refile-targets '((nil :maxlevel . 1)
-                             (org-agenda-files :maxlevel . 1)))
-  
-  ; (setq org-refile-targets
-        ;; '(("Archive.org" :maxlevel . 1)))
-  
-  (advice-add 'org-refile :after 'org-save-all-org-buffers)  ; Save Org buffers after refiling!
-  
-  
-  ; Templates
-  (setq org-capture-templates
-    `(("t" "Tasks / Projects")
-      ("tt" "Task" entry (file+olp "/mnt/files/Ricardo/Documents/notes/task.org" "Inbox")
-           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-      ;; ("ts" "Clocked Entry Subtask" entry (clock)
-      ;;      "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-  
-      ("j" "Journal Entries")
-      ("jj" "Journal" entry
-           (file+olp+datetree "/mnt/files/Ricardo/Documents/notes/journal.org")
-           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
-           ;; ,(dw/read-file-as-string "~/notes/Templates/Daily.org")
-           :clock-in :clock-resume
-           :empty-lines 1)
-      ("jm" "Meeting" entry
-           (file+olp+datetree "/mnt/files/Ricardo/Documents/notes/journal.org")
-           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
-           :clock-in :clock-resume
-           :empty-lines 1)
-  
-      ;; ("w" "Workflows")
-      ;; ("we" "Checking Email" entry (file+olp+datetree ,(dw/get-todays-journal-file-name))
-      ;;      "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
-  
-      ("m" "Metrics Capture")
-      ("mw" "Weight" table-line (file+headline "/mnt/files/Ricardo/Documents/notes/metrics.org" "Weight")
-       "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
-  
-  ;; (define-key global-map (kbd "C-c j")
-  ;;   (lambda () (interactive) (org-capture nil "j")))
-  
-  ;; (require 'org-habit)
-  ;; (add-to-list 'org-modules 'org-habit)
-  ;; (setq org-habit-graph-column 60)
-  
-   ;; Configure custom agenda views
-  (setq org-agenda-custom-commands
-    '(("d" "Dashboard"
-       ((agenda "" ((org-deadline-warning-days 7)))
-        (todo "NEXT"
-          ((org-agenda-overriding-header "Next Tasks")))
-        (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
-  
-      ("n" "Next Tasks"
-       ((todo "NEXT"
-          ((org-agenda-overriding-header "Next Tasks")))))
-  
-  
-      ("W" "Work Tasks" tags-todo "+work")
-  
-      ;; Low-effort next actions
-      ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
-       ((org-agenda-overriding-header "Low Effort Tasks")
-        (org-agenda-max-todos 20)
-        (org-agenda-files org-agenda-files)))
-  
-      ("w" "Workflow Status"
-       ((todo "WAIT"
-              ((org-agenda-overriding-header "Waiting on External")
-               (org-agenda-files org-agenda-files)))
-        (todo "REVIEW"
-              ((org-agenda-overriding-header "In Review")
-               (org-agenda-files org-agenda-files)))
-        (todo "PLAN"
-              ((org-agenda-overriding-header "In Planning")
-               (org-agenda-todo-list-sublevels nil)
-               (org-agenda-files org-agenda-files)))
-        (todo "BACKLOG"
-              ((org-agenda-overriding-header "Project Backlog")
-               (org-agenda-todo-list-sublevels nil)
-               (org-agenda-files org-agenda-files)))
-        (todo "READY"
-              ((org-agenda-overriding-header "Ready for Work")
-               (org-agenda-files org-agenda-files)))
-        (todo "ACTIVE"
-              ((org-agenda-overriding-header "Active Projects")
-               (org-agenda-files org-agenda-files)))
-        (todo "COMPLETED"
-              ((org-agenda-overriding-header "Completed Projects")
-               (org-agenda-files org-agenda-files)))
-        (todo "CANC"
-              ((org-agenda-overriding-header "Cancelled Projects")
-               (org-agenda-files org-agenda-files)))))))
+  ;; (org-align-all-tags)
+  (setq org-tags-column (- 68 (window-body-width)))
   (setq
   org-startup-align-all-tables t  ; Non-nil means align all tables when visiting a file
   org-startup-truncated nil  ; Non-nil means entering Org mode will set truncate-lines
@@ -569,11 +548,15 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   org-hide-block-startup nil
   org-startup-indented nil  ; Non-nil means turn on org-indent-mode on startup
   )  
+  
+  ;; (setq org-clock-persist 'history)
+  ;; (org-clock-persistence-insinuate)
   ;; (setq system-time-locale "C") 
   :custom
   (org-support-shift-select 'always)
   (org-modules '(ol-w3m ol-bbdb ol-bibtex ol-docview ol-gnus ol-info ol-irc ol-eww
-		 org-habit org-bookmark org-eshell org-tempo org-toc))
+		 org-habit org-bookmark org-eshell org-tempo))
+;; org-toc
   :general
   (:keymaps 'org-capture-mode-map
 	    [remap evil-save-and-close]          'org-capture-finalize
@@ -593,13 +576,61 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   (leader-def :keymaps 'org-mode-map
     "o" '(:ignore t :which-key "org")
     "o d" #'(org-babel-demarcate-block :wk "demarcate block")
-    "o a" #'(org-agenda :wk "agenda")
     "o c" #'(org-capture :wk "capture")
     "o ;" #'(org-toggle-comment :wk "toggle comment")
     "o :" #'(org-toggle-link-display :wk "toggle link display")
-    "o t" #'(org-todo :wk "todo")
-
+    "o f" #'(org-switchb :wk "switch to agenda file")
+    ;; "o t" #'(org-todo :wk "todo")
     "o l" #'(org-store-link :wk "store link")))
+
+(use-package org-roam
+  :preface
+  (defun +/org-roam-node-insert-immediate (arg &rest args)
+    (interactive "P")
+    (let ((args (cons arg args))
+          (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                    '(:immediate-finish t)))))
+      (apply #'org-roam-node-insert args)))
+  :custom
+  (org-roam-directory (file-truename "/mnt/files/Ricardo/Documents/note"))
+  :config
+  (org-roam-db-autosync-mode)
+  :general
+  (leader-def
+    "n" '(:ignore t :which-key "note")
+    "n b" #'(org-roam-buffer-toggle :wk "buffer")
+    "n f" #'(org-roam-node-find :wk "find node")
+    "n i" #'(org-roam-node-insert :wk "insert node")
+    "n I" #'(+/org-roam-node-insert-immediate :wk "insert node immediate")
+))
+
+(use-package org-agenda :straight (:type built-in)
+  :config
+  (setq
+  org-agenda-files "/home/user/.config/emacs/agenda-file"
+  org-agenda-file-regexp "\\`[^.].*\\(\\.org\\)?\\'"
+  org-agenda-sticky t
+
+  ; Start
+  org-agenda-start-with-log-mode t
+
+  ; Window
+  org-agenda-window-setup 'only-window
+  org-agenda-restore-windows-after-quit t
+
+  ; Daily/Weekly
+  org-agenda-span 'week
+  org-agenda-include-diary nil
+  )
+  :general
+  (leader-def
+    "o a"   #'(org-agenda :wk "agenda")
+    ;; "" #'(org-agenda-file-to-front :wk "file to front")
+  )
+
+  ;; 'org-agenda-mode-map 
+  ;; org-toggle-sticky-agenda
+)
 
 (use-package org-superstar
   :after org
@@ -610,8 +641,10 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
 
 (use-package visual-fill-column
   :hook (visual-line-mode . visual-fill-column-mode)
+  ; Disable
+  ((mhtml-mode) . (lambda () (visual-fill-column-mode 0)))
   :custom
-  (visual-fill-column-width 120)
+  (visual-fill-column-width 128)
   (visual-fill-column-center-text t)
   :config ())  ; Show message if verbose is activated
 
@@ -620,6 +653,31 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   :demand
   :config
   (save-place-mode 1))
+
+(use-package eshell :straight (:type built-in)
+  ;; :gfhook ('eshell-pre-command-hook #'eshell-save-some-history)
+  :custom
+  (eshell-history-size 6000)
+  (eshell-buffer-maximum-lines 6000)
+  (eshell-hist-ignoredups t)
+  (eshell-scroll-to-bottom-on-input t)
+  :config
+  ; Truncate buffer for performance
+  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+  :general
+  (leader-def
+	"e s" '(eshell :which-key "Eshell")))
+
+;;Running programs in a term-mode buffer
+;(with-eval-after-load 'esh-opt
+;  (setq eshell-destroy-buffer-when-process-dies t)
+;  (setq eshell-visual-commands '("htop" "zsh" "vim")))
+
+(use-package eshell-git-prompt
+  :after eshell
+  :demand
+  :config
+  (eshell-git-prompt-use-theme 'powerline))
 
 ;(server-start)  ; Allow this Emacs process to be a server for client processes
 ;(setq show-value-server-raise-frame t)  ; If non-nil, raise frame when switching to a buffer
@@ -671,6 +729,56 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   ;; Runs the function `+/lsp--gdscript-ignore-errors` around `lsp--get-message-type` to suppress unknown notification errors.
   (advice-add #'lsp--get-message-type :around #'+/lsp--gdscript-ignore-errors))
 
+(use-package prog-mode :straight (:type built-in)
+  :demand
+  :custom
+  (prettify-symbols-unprettify-at-point 'right-edge)
+  (prettify-symbols-alist '())
+  :config
+  (global-prettify-symbols-mode 1)
+
+  (setq prettify-symbols-alist '(("TODO" . "")
+	                         ("WAIT" . "")        
+   				 ("NOPE" . "")
+				 ("DONE" . "")
+				 ("[#A]" . "")
+				 ("[#B]" . "")
+ 				 ("[#C]" . "")
+				 ("[ ]" . "")
+				 ("[X]" . "")
+				 ("[-]" . "")
+				 ("#+BEGIN_SRC" . "")
+				 ("#+END_SRC" . "―")
+				 (":PROPERTIES:" . "")
+				 (":END:" . "―")
+				 ("#+STARTUP:" . "")
+				 ("#+TITLE: " . "")
+				 ("#+RESULTS:" . "")
+				 ("#+NAME:" . "")
+				 ("#+ROAM_TAGS:" . "")
+				 ("#+FILETAGS:" . "")
+				 ("#+HTML_HEAD:" . "")
+				 ("#+SUBTITLE:" . "")
+				 ("#+AUTHOR:" . "")
+				 (":Effort:" . "")
+				 ("SCHEDULED:" . "")
+				 ("DEADLINE:" . "")
+				 ("lambda" . 955)
+				 ))
+)
+
+(use-package csharp-mode)
+
+(use-package yaml-mode
+  ;; :general
+  ;; ('yaml-mode-map "\C-m" 'newline-and-indent)
+)
+
+(use-package web-mode)
+
+(use-package vimrc-mode)
+;; (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :preface
@@ -701,7 +809,153 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
 ;;   (lsp-headerline-breadcrumb-mode 1)
 ;;   (lsp-modeline-code-actions-mode 1)
   ;; :general
+  ;; (leader-def :keymaps 'lsp-mode-map
+    ;; "l" '(:ignore t :which-key "lsp")
+  ;; )
 )
+
+(use-package lsp-ui
+  :after lsp-mode
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-sideline-mode 1)
+  ; Sideline
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-sideline-show-code-actions t)
+  (lsp-ui-sideline-update-mode #'point)
+  (lsp-ui-sideline-delay 0.6)
+  ; Peek
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-show-directory t)
+  ; Doc
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-delay 6.0)
+  (lsp-ui-doc-show-with-cursor t)
+  (lsp-ui-doc-show-with-mouse t)
+  ; Imenu
+  (lsp-ui-imenu-window-width 16)
+  (lsp-ui-imenu--custom-mode-line-format nil)
+  (lsp-ui-imenu-auto-refresh nil)
+  (lsp-ui-imenu-refresh-delay nil)
+  ;; :general
+  ;; (:keymaps 'lsp-ui-mode-map
+  ;;   "l p" '(:ignore t :which-key "peek")
+  ;;   "l p d" #'(lsp-ui-peek-find-definitions :wk "definition")
+  ;;   "l p r" #'(lsp-ui-peek-find-references :wk "reference")
+  ;;   "l p w" #'(lsp-ui-peek-find-workspace-symbol :wk "workspace symbol")
+  ;;   "l p i" #'(lsp-ui-peek-find-implementation :wk "implementation")
+  ;;   "l p b" #'(lsp-ui-peek-jump-backward :wk "jump backward")
+  ;;   "l p f" #'(lsp-ui-peek-jump-forward :wk "jump forward")
+  ;; )
+)
+
+(use-package projectile
+  :demand
+  :custom
+  (projectile-discover-projects-in-search-path t)
+  (projectile-project-search-path
+   '("/mnt/files/Ricardo/Projects"))
+  :config
+  (projectile-register-project-type 'godot '("project.godot")
+                                    :project-file "project.godot"
+				    :compile "godot --help"
+				    :test "godot --help"
+				    :run "godot --help")
+  :general
+  (leader-def
+    "p" '(projectile-command-map :which-key "project")
+    "p" '(:ignore t :which-key "project")
+    "p f" '(projectile-find-file :which-key "file")
+    "p d" '(projectile-find-dir :which-key "directory")
+    "p k" '(projectile-kill-buffers :which-key "kill buffers")
+  )
+)
+
+(use-package emacs
+  :init
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
+
+  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+  ;; (setq read-extended-command-predicate
+  ;;       #'command-completion-default-include-p)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
+  :general
+  (leader-def
+    "e r" #'((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :wk "reload emacs config")
+    "e k" #'(kill-emacs :wk "kill emacs")
+  )
+)
+
+(use-package alert
+:demand
+:custom
+(alert-default-style 'libnotify)
+(alert-fade-time 10)
+;; :config
+;; (alert-add-rule :status   '(buried visible idle)
+                ;; :severity '(moderate high urgent)
+                ;; :mode     'evil-smartparens-mode
+                ;; :style 'ignore
+                ;; :continue t)
+)
+
+(use-package org-wild-notifier
+:after org-mode
+:demand
+:custom
+(org-wild-notifier-alert-time '(1))
+(org-wild-notifier-notification-title "Agenda")
+(org-wild-notifier-notification-icon nil)
+(org-wild-notifier-keyword-whitelist '("TODO"))
+(org-wild-notifier-keyword-blacklist nil)
+(org-wild-notifier-tags-whitelist nil)
+(org-wild-notifier-tags-blacklist nil)
+(org-wild-notifier-alert-times-property	"WILD_NOTIFIER_NOTIFY_BEFORE")
+:config
+(org-wild-notifier-mode 1))
+
+(use-package display-line-numbers :straight (:type built-in)
+  :hook ((prog-mode conf-mode) . display-line-numbers-mode)
+  :config ())  ; Show message if verbose is activated
+
+
+
+
+; Disable line numbers for some modes
+;; (defcustom display-line-numbers-exempt-modes
+;;   '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode)
+;;   "Major modes on which to disable line numbers."
+;;   :group 'display-line-numbers
+;;   :type 'list
+;;   :version "green")
+
+;; (defun display-line-numbers--turn-on ()
+;;   "Turn on line numbers except for certain major modes.
+;; Exempt major modes are defined in `display-line-numbers-exempt-modes'."
+;;   (unless (or (minibufferp)
+;;               (member major-mode display-line-numbers-exempt-modes))
+;;     (display-line-numbers-mode)))
+
+;; (global-display-line-numbers-mode)
+
+
+
+
+
+
+;; (dolist (mode '(term-mode-hook
+;; 		dashboard-mode-hook
+;; 		org-mode-hook
+;; 		treemacs-mode-hook
+;; 		eshell-mode-hook))
+;;   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ; Don't pop up UI dialogs when prompting
 (setq use-dialog-box nil)
@@ -774,6 +1028,8 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
     "g k" 'consult-global-mark
     "g i" 'consult-imenu
     "g I" 'consult-imenu-multi
+
+    "f r" '(consult-recent-file :wk "recent-file")
 
     "s f" 'consult-find
     "s F" 'consult-locate
@@ -850,17 +1106,39 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   (doom-modeline-mode 1))
 
 (use-package solaire-mode
-  :after doom-themes
   :demand
-  :hook ((message-mode dashboard-mode) . (lambda () (solaire-mode 0)))
-  ;; :gfhook ('(dashboard-mode-hook) #'(lambda () (solaire-mode 0)))  ; Disable for some modes
-  :config (solaire-global-mode t))
-
-(use-package customize :straight (:type built-in)
-  :custom
-  (custom-file (locate-user-emacs-file "custom-vars.el"))
+  ;; :hook
+  ;; ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  ;; (minibuffer-setup . solaire-mode-fix-minibuffer)
+;;   ((messages-buffer-mode dashboard-mode lisp-interaction-mode) . (lambda () (solaire-mode 0)))
   :config
-  (load custom-file 'noerror 'nomessage))
+  (solaire-global-mode 1)
+  ;; (add-hook 'after-make-frame-functions
+  ;;           (lambda (_frame)
+  ;;             (load-theme 'doom-one t)
+  ;;             (solaire-mode-swap-bg)))
+)
+
+(use-package highlight-indent-guides
+  :hook ((prog-mode conf-mode org-mode) . highlight-indent-guides-mode)
+  :custom
+  (highlight-indent-guides-suppress-auto-error t)
+  (highlight-indent-guides-character 9474)  ; | 124  ⇥ 8677  ⇨ 8680  ↦ 8614 default 9474
+  (highlight-indent-guides-method 'character)  ; Method to use when displaying indent guides
+  (highlight-indent-guides-responsive 'stack)
+  (highlight-indent-guides-auto-enabled t)
+  )
+
+  ;; :config
+  ;; (when doom-theme
+    ;; (+/indent-guides-init-faces-h))
+
+  ;; ;; `highlight-indent-guides' breaks when `org-indent-mode' is active
+  ;; (+/add-hook 'org-mode-local-vars-hook
+  ;;   (defun +indent-guides-disable-maybe-h ()
+  ;;     (and highlight-indent-guides-mode
+  ;;          (bound-and-true-p org-indent-mode)
+  ;;          (highlight-indent-guides-mode -1))))
 
 (use-package helpful
   :general
@@ -871,10 +1149,11 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
     "h o" #'(helpful-symbol :wk "symbol")
     "h v" #'(helpful-variable :wk "variable")
     "h c" #'(helpful-command :wk "command")
-    "h i" #'(info :wk "info")
     "h k" #'(helpful-key :wk "key")
+    "h i" #'(info :wk "info")
     "h r" #'(info-emacs-manual :wk "emacs manual")
     "h a" #'(consult-apropos :wk "apropos")
+    "h s" #'(describe-syntax :wk "syntax")
     "h O" #'((lambda () (interactive) (info "org")) :wk "org manual")
     "h R" #'((lambda () (interactive) (info "elisp")) :wk "elisp manual"))
   :config ())  ; Show message if verbose is activated
@@ -886,3 +1165,9 @@ With prefix ARG, silently save all file-visiting buffers, then kill."
   (which-key-idle-delay 0.4)
   :config
   (which-key-mode))
+
+(use-package customize :straight (:type built-in)
+  :custom
+  (custom-file (locate-user-emacs-file "custom-vars.el"))
+  :config
+  (load custom-file 'noerror 'nomessage))

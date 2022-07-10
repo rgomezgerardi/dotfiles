@@ -130,7 +130,7 @@ This macro accepts, in order:
 (setq use-package-always-defer t  
 	  use-package-always-pin t
 	  use-package-always-ensure nil
-	  use-package-verbose t)
+	  use-package-verbose nil)
 
 (use-package gcmh
   :demand
@@ -165,6 +165,7 @@ This macro accepts, in order:
 
 (use-package general
   :demand
+  :defines texinfo-section-list
   :config
   ;; (general-auto-unbind-keys)  ; Automatic Key Unbinding
   (general-setq auto-revert-interval 10)
