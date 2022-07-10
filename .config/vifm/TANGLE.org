@@ -1,0 +1,678 @@
+:PROPERTIES:
+:author: Ricardo Gomez
+:email:  rgomezgerardi@gmail.com
+:title:  Vifm Custom Configuration 
+:header-args+: :tangle vifmrc
+:header-args+: :tangle-mode (identity #o644)
+:header-args+: :noweb strip-export
+:header-args+: :cache yes
+:header-args+: :mkdirp yes
+:END:
+
+           ██╗   ██╗██╗███████╗███╗   ███╗
+           ██║   ██║██║██╔════╝████╗ ████║
+           ██║   ██║██║█████╗  ██╔████╔██║
+           ╚██╗ ██╔╝██║██╔══╝  ██║╚██╔╝██║
+            ╚████╔╝ ██║██║     ██║ ╚═╝ ██║
+             ╚═══╝  ╚═╝╚═╝     ╚═╝     ╚═╝
+
+* Runcom
+
+#+begin_src vimrc
+" Command used to edit files in various contexts
+set vicmd="vim"
+"set vicmd="emacs &> /dev/null &"
+
+" This makes vifm perform file operations on its own instead of relying on standard utilities like `cp`
+set syscalls
+
+" Trash Directory
+set trash
+
+" This is how many directories to store in the directory history
+set history=80
+
+" Open with preview window
+"view
+
+" Automatically resolve symbolic links on l or Enter
+set nofollowlinks
+
+" Entered commands with unambiguous beginning using :! (e.g. :!Te instead of :!Terminal or :!Te<tab>)
+set fastrun
+
+" Natural sort of (version) numbers within text
+set sortnumbers
+
+" Maximum number of changes that can be undone
+set undolevels=80
+
+" Use Vim's format of help file (has highlighting and "hyperlinks"). If you would rather use a plain text help file set novimhelp
+set vimhelp
+
+" Run an executable file when you press return on the file name
+set runexec
+
+" List of color schemes to try (picks the first one supported by the terminal)
+colorscheme Default-256 Default
+
+" Selected color scheme
+colorscheme doom-one
+
+" Format for displaying time in file list
+set timefmt=%m/%d\ %H:%M
+
+" Show list of matches on tab completion in command-line mode
+set wildmenu
+
+" Display completions in a form of popup with descriptions of the matches
+set wildstyle=popup
+
+" Display suggestions in normal, visual and view modes for keys, marks and registers (at most 5 files).  In other view, when available.
+set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+
+" Ignore case in search patterns unless it contains at least one uppercase letter
+set ignorecase
+set smartcase
+
+" Don't highlight search results automatically
+set nohlsearch
+
+" Use increment searching (search while typing)
+set incsearch
+
+" Try to leave some space from cursor to upper/lower border in lists
+set scrolloff=4
+
+" Don't do too many requests to slow file systems
+if !has('win')
+    set slowfs=curlftpfs
+endif
+
+" Set custom status line look
+set statusline="  Hint: %z%= %A %10u:%-7g %15E %20d  "
+"set statusline="  %t%= %A %10u:%-7g %15E %20d  "
+"set statusline="%{system('lsattr -l ' . expand('%c'))}"
+
+" What should be saved automatically between vifm sessions
+set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
+
+" Dont show delete confirmation
+set confirm-=delete
+
+" Use ag (the silver searcher) instead of grep
+" set grepprg='ag --line-numbers %i %a %s'
+
+" Add the flag to start a interactive shell 
+"set shellcmdflag+=ic
+" set shellcmdflag=-ic
+
+" Add additional places to look for executables
+let $PATH = $HOME.'/.local/bin:/usr/local/bin:'.$PATH
+
+" Empty the ruler. By default, it shows the number of directories+files.
+"set rulerformat=
+set rulerformat='%2l-%S%[ +%x%]'
+
+" Server
+let $VIFM_SERVER_NAME = v:default
+
+
+" File Type and File Viewer
+source "$HOME/.config/vifm/filetype"
+
+" Keys 
+source "$HOME/.config/vifm/keymap"
+
+" Set icons (Required Nerd Font)
+source "$HOME/.config/vifm/icon"
+
+
+" ========================================================
+" ======================= Marks ==========================
+" ========================================================
+mark B "~/.local/bin"
+mark C "/mnt/files/Ricardo/Documents/Assignments/College"
+mark D "/mnt/files/Ricardo/Documents"
+mark F "~/.local/share/fonts"
+mark G "~/documents/git"
+mark H "/"
+mark M "/mnt/files/Ricardo/Music"
+mark R "/mnt/files/Ricardo/Projects/godot/arcade/crossy"
+mark W "/mnt/windows"
+mark b "/mnt/files/Ricardo/Books"
+mark c "~/.config"
+mark d "/mnt/files/Ricardo/Downloads"
+mark f "/mnt/files/Ricardo/Resources/Fonts"
+mark g "/mnt/windows/Users/Gerardi"
+mark h "~"
+mark m "/mnt/files/Ricardo/Videos/Movies"
+mark n "/mnt/files/Ricardo/Documents/note"
+mark p "/mnt/files/Ricardo/Pictures"
+mark P "/mnt/files/Ricardo/Projects"
+mark r "/mnt/files/Ricardo"
+mark s "/mnt/files/Ricardo/Videos/Series"
+mark t "~/phone/Internal shared storage"
+mark u "/mnt/usb"
+mark v "/mnt/files/Ricardo/Videos"
+mark w "/mnt/files/Ricardo/Pictures/wallpaper"
+mark z "~/.config/vifm" 
+
+
+" ========================================================
+" ====================== Commands ========================
+" ========================================================
+" :com[mand][!] command_name action
+command! df df -h %m 2> /dev/null
+command! diff vim -d %f %F
+command! run !! ./%f
+command! make !!make %a
+command! mkcd :mkdir "%a" | cd "%a"
+command! vgrep nvim "+grep %a"
+command! reload :write | restart
+
+" Programs
+command! rm :!rm %a
+command! ex :!ex %a
+command! vi :!st nvim %a 2> /dev/null &
+command! emacs :!/bin/emacs %a %i &
+command! python :!python %a
+command! dragon :!dragon-drag-and-drop --all --and-exit %f %i &
+command! renies :!python ~/.local/bin/python/renies.py %f %i
+#+end_src
+
+* Keymap
+:PROPERTIES:
+:header-args:     :tangle keymap
+:END:
+
+#+begin_src vimrc
+" Start shell in current directory
+nnoremap s :shell<cr>
+
+" Display sorting dialog
+nnoremap S :sort<cr>
+
+" Toggle visibility of preview window
+nnoremap w :view<cr>
+vnoremap w :view<cr>gv
+
+" Open file in the background using its default program
+nnoremap o :file &<cr>l
+
+" Choose with which program to open the file (select the second as default)
+noremap I :file<cr>j
+
+" Set highlighted image as wallpaper
+" nnoremap <C-w> :!bash ~/.config/vifm/scripts/wall.sh %c &<cr>
+
+" Go to the file that is right before "../" for going to the top most file
+nnoremap gg ggj
+
+" Drag and Drop
+noremap <C-d> :dragon<CR>
+
+" Extract files
+nnoremap x :ex %f<cr>
+
+" Rename Movies and Series
+noremap rr :renies %f<CR>
+
+" Interaction with system clipboard
+if executable('xclip')
+	" Yank current directory path into the clipboard
+	"nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+	nnoremap yd :!echo -n %d | xsel --clipboard<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+
+	" Yank current file path into the clipboard
+	"nnoremap yf :!echo -n %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+	nnoremap yf :!echo -n %c:p | xsel --clipboard<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+
+	" Yank current file name into the clipboard
+	"nnoremap yw :!echo -n %c | xclip -selection clipboard %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+	nnoremap yW :!echo -n %c | xsel --clipboard<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+
+	" Yank current file name into the clipboard (without extension)
+	"nnoremap yn :!echo -n %c:r | xclip -selection clipboard %i<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
+	nnoremap yw :!echo -n %c:r | xsel --clipboard<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
+endif
+
+" Panel resizing
+nnoremap - <C-w>5<
+nnoremap _ <C-w>5>
+
+" Faster movement
+nnoremap J 5j
+nnoremap K 5k
+
+" Renaming 
+nnoremap cw cW<c-u>
+nnoremap cW cw
+
+" Open editor to edit vifmrc and apply settings after returning to vifm
+nnoremap ,c :write | edit $MYVIFMRC | restart<cr>
+
+" Reverse image search with Tiney
+" nnoremap re :!bash ~/bin/utils/tineye %c &<cr>
+
+" Toggle wrap setting on ,w key
+nnoremap ,w :set wrap!<cr>
+
+" Get the PDF scrolling functionalities (vifmimg)
+map > :!~/.config/vifm/scripts/vifmimg inc<CR>
+map < :!~/.config/vifm/scripts/vifmimg dec<CR>
+
+" Rofi syntax highlighting
+au BufNewFile,BufRead /*.rasi setf css
+#+end_src
+
+* Scheme
+** Doom One
+
+#+begin_src vimrc :tangle colors/doom-one.vifm
+
+" Syntax:
+" highlight group cterm=attributes ctermfg=foreground_color ctermbg=background_color
+
+" Attributes:
+" bold
+" underline
+" reverse or inverse
+" standout
+" italic (on unsupported systems becomes reverse)
+" none
+
+" The standard ncurses colors are:
+" Default = -1 = None, can be used for transparency or default color
+" Black = 232
+" Red = 1
+" Green = 2
+" Yellow = 3
+" Blue = 12
+" Magenta = 5
+" Cyan = 6
+" White = 255
+
+" Reset all styles first
+highlight clear
+
+highlight Win cterm=none ctermfg=252 ctermbg=236
+highlight Directory cterm=none ctermfg=12 ctermbg=236
+highlight Link cterm=bold ctermfg=6 ctermbg=236
+highlight BrokenLink cterm=bold ctermfg=1 ctermbg=236
+highlight Socket cterm=bold ctermfg=5 ctermbg=236
+highlight Device cterm=bold ctermfg=1 ctermbg=236
+highlight Fifo cterm=bold ctermfg=6 ctermbg=236
+highlight Executable cterm=bold ctermfg=2 ctermbg=236
+highlight Selected cterm=bold ctermfg=236 ctermbg=250
+highlight CurrLine cterm=bold,reverse ctermfg=240 ctermbg=254
+highlight TopLine cterm=none ctermfg=255 ctermbg=236
+highlight TopLineSel cterm=bold ctermfg=255 ctermbg=236
+highlight StatusLine cterm=bold ctermfg=255 ctermbg=236
+highlight WildMenu cterm=underline,reverse ctermfg=6 ctermbg=6
+highlight CmdLine cterm=none ctermfg=255 ctermbg=236
+highlight ErrorMsg cterm=none ctermfg=1 ctermbg=236
+highlight Border cterm=none ctermfg=255 ctermbg=236
+highlight JobLine cterm=bold,reverse ctermfg=6 ctermbg=12
+highlight SuggestBox cterm=bold ctermfg=255 ctermbg=236
+highlight CmpMismatch cterm=bold ctermfg=2 ctermbg=5
+highlight AuxWin cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight TabLine cterm=none ctermfg=6 ctermbg=236
+highlight TabLineSel cterm=bold,reverse ctermfg=255 ctermbg=236
+highlight User1 cterm=bold,underline,reverse,standout,italic ctermfg=6 ctermbg=12
+highlight User2 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight User3 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight User4 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight User5 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight User6 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight User7 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight User8 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight User9 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
+highlight OtherWin cterm=bold,italic, ctermfg=252 ctermbg=236
+#+end_src
+
+* Icon
+:PROPERTIES:
+:header-args:     :tangle icon
+:END:
+
+#+begin_src vimrc
+" Devicons for ViFM
+" https://github.com/cirala/vifm_devicons
+
+" Filetypes/directories
+set classify=' :dir:/, :exe:, :reg:, :link:,? :?:, ::../::'
+
+" Specific files
+set classify+=' ::.Xdefaults,,.Xresources,,.bashprofile,,.bash_profile,,.bashrc,,.dmrc,,.d_store,,.fasd,,.gitconfig,,.gitignore,,.jack-settings,,.mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile,,.recently-used,,.selected_editor,,.xinitpurc,,.zprofile,,.yarnc,,.snclirc,,.tmux.conf,,.urlview,,.config,,.ini,,.user-dirs.dirs,,.mimeapps.list,,.offlineimaprc,,.msmtprc,,.Xauthority,,config::'
+set classify+=' ::dropbox::'
+set classify+=' ::favicon.*,,README,,readme::'
+set classify+=' ::.vim,,.vimrc,,.gvimrc,,.vifm::'
+set classify+=' ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::'
+set classify+=' ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::'
+set classify+=' ::ledger::'
+set classify+=' ::license,,copyright,,copying,,LICENSE,,COPYRIGHT,,COPYING::'
+set classify+=' ::node_modules::'
+set classify+=' ::react.jsx::'
+
+" File extensions
+set classify+='λ ::*.ml,,*.mli::'
+set classify+=' ::*.styl::'
+set classify+=' ::*.scss::'
+set classify+=' ::*.py,,*.pyc,,*.pyd,,*.pyo::'
+set classify+=' ::*.php::'
+set classify+=' ::*.markdown,,*.md::'
+set classify+=' ::*.json::'
+set classify+=' ::*.js::'
+set classify+=' ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.svgz,,*.tga,,*.tiff,,*.xmb,,*.xcf,,*.xpm,,*.xspf,,*.xwd,,*.cr2,,*.dng,,*.3fr,,*.ari,,*.arw,,*.bay,,*.crw,,*.cr3,,*.cap,,*.data,,*.dcs,,*.dcr,,*drf,,*.eip,,*.erf,,*.fff,,*.gpr,,*.iiq,,*.k25,,*.kdc,,*.mdc,,.*mef,,*.mos,,.*.mrw,,.*.obm,,*.orf,,*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl,,*.rw2,,*.rwz,,*.sr2,,*.srf,,*.srf,,*.srw,,*.tif,,*.x3f::'
+set classify+=' ::*.ejs,,*.htm,,*.html,,*.slim,,*.xml::'
+set classify+=' ::*.mustasche::'
+set classify+=' ::*.css,,*.less,,*.bat,,*.conf,,*.ini,,*.rc,,*.yml,,*.cfg,,*.rc::'
+set classify+=' ::*.rss::'
+set classify+=' ::*.coffee::'
+set classify+=' ::*.twig::'
+set classify+=' ::*.c++,,*.cc,,*.c,,*.cpp,,*.cxx,,*.c,,*.h::'
+set classify+=' ::*.hs,,*.lhs::'
+set classify+=' ::*.lua::'
+set classify+=' ::*.jl::'
+set classify+=' ::*.go::'
+set classify+=' ::*.ts::'
+set classify+=' ::*.db,,*.dump,,*.sql::'
+set classify+=' ::*.sln,,*.suo::'
+set classify+=' ::*.exe::'
+set classify+=' ::*.diff,,*.sum,,*.md5,,*.sha512::'
+set classify+=' ::*.scala::'
+set classify+=' ::*.java,,*.jar::'
+set classify+=' ::*.xul::'
+set classify+=' ::*.clj,,*.cljc::'
+set classify+=' ::*.pl,,*.pm,,*.t::'
+set classify+=' ::*.cljs,,*.edn::'
+set classify+=' ::*.rb::'
+set classify+=' ::*.fish,,*.sh,,*.bash::'
+set classify+=' ::*.dart::'
+set classify+=' ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::'
+set classify+=' ::*.rlib,,*.rs::'
+set classify+=' ::*.d::'
+set classify+=' ::*.erl,,*.hrl::'
+set classify+=' ::*.ai::'
+set classify+=' ::*.psb,,*.psd::'
+set classify+=' ::*.jsx::'
+set classify+=' ::*.vim,,*.vimrc::'
+set classify+=' ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
+set classify+=' ::*.avi,,*.flv,,*.mkv,,*.mov,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm::'
+set classify+=' ::*.epub,,*.pdf,,*.fb2,,*.djvu::'
+set classify+=' ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz,,*.gzip,,*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip::'
+set classify+=' ::*.cbr,,*.cbz::'
+set classify+=' ::*.log::'
+set classify+=' ::*.doc,,*.docx,,*.adoc::'
+set classify+=' ::*.xls,,*.xls,,*.xlsmx::'
+set classify+=' ::*.pptx,,*.ppt::'
+#+end_src
+
+* File
+:PROPERTIES:
+:header-args:     :tangle filetype
+:END:
+
+
+#+begin_src vimrc
+" The file type is for the default programs to be used with a file extension.
+" :filetype pattern1,pattern2 defaultprogram,program2
+" :fileviewer pattern1,pattern2 consoleviewer
+
+" Displaying pictures in terminal
+"
+" 
+" Dont show preview on ../
+"fileview ../ echo >/dev/null
+
+" Show ls in the preview window
+fileviewer */ ls --color --group-directories-first
+fileviewer .*/ ls --color --group-directories-first
+#+end_src
+
+** Multimedia
+
+#+begin_src vimrc
+" Images
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.ico, 
+        \ {View in sxiv}
+        \ sxiv %f %i &,
+	\ {Krita}
+        \ krita %f %i &,
+	\ {Aseprite}
+        \ aseprite %f %i &,
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
+        \ vifmimg draw %px %py %pw %ph %c %pc vifmimg clear
+fileviewer *.gif 
+	\ vifmimg gifpreview %px %py %pw %ph %c %pc vifmimg clear
+fileviewer *.ico
+        \ vifmimg magickpreview %px %py %pw %ph %c %pc vifmimg clear
+" Subtitle
+filextype *.srt
+    \ {Open with Emacs}
+    \ emacsclient --alternate-editor="" --create-frame %f %i &,
+    \ {Edit in Gaupol}
+    \ gaupol %f %i &
+
+" Image Editor
+filextype *.kra
+    \ {Edit in Krita}
+    \ krita %f %i &
+
+filextype *.ase
+    \ {Aseprite}
+    \ aseprite %f %i &,
+
+
+
+" Svg
+filextype *.svg,*.svgz
+        \ {Edit in ikscape}
+        \ inkscape %f %i &
+
+" Audio
+filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
+	\ {Mpv}
+	\ mpv --player-operation-mode=pseudo-gui -- %f,
+       \ {Play using cmus}
+       \ ~/.config/moc/opensong.sh %f &> /dev/null &
+
+fileviewer <audio/*>
+        \ vifmimg audiopreview %px %py %pw %ph %c %pc vifmimg clear
+
+" Video
+filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx]
+"	 \ {Open using celluloid}
+"	 \ celluloid --new-window %f %i < /dev/null &> /dev/null &
+	 \ {Open using mpv}
+	 \ mpv %f &> /dev/null &
+fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx]
+        \ vifmimg videopreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+" Torrent
+filetype *.torrent
+	\ {Open using Free Download Manager}
+	\ /opt/freedownloadmanager/fdm %d/%f %i
+fileviewer *.torrent
+	\ dumptorrent -v %c
+#+end_src
+
+** Office
+
+#+begin_src vimrc
+" Text based files
+"filetype *.txt 
+"    \ {Edit with neovim}
+"    \ nvim %f
+fileviewer *.txt
+    \ env -uCOLORTERM bat --color always --wrap never --pager never %c -p
+
+" Fonts
+fileviewer *.otf,*.ttf,*.woff
+        \ vifmimg fontpreview %px %py %pw %ph %c %pc vifmimg clear
+
+
+" Pdf Cbr Djvu and PostScript
+filextype *.pdf,*.cbr,*.cbz,*.cb7,*.djvu,*.ps,*.eps,*.ps.gz
+	\ {Open with zathura}
+	\ zathura %c %i &, 
+	\ {Open with calibre}
+	\ ebook-viewer --detach %f %i &,
+
+
+"fileviewer *.pdf vifmimg pdfpreview %px %py %pw %ph %c %pc vifmimg clear
+
+" E-Books
+filextype *.epub,*.mobi
+	\ {Open with zathura}
+	\ zathura %f %i &,
+	\ {Open with calibre}
+	\ ebook-viewer --detach %f %i &,
+	\ {Open with foliate}
+	\ foliate %f %i &,
+
+
+fileviewer *.epub
+	\ vifmimg epubpreview %px %py %pw %ph %c %pc vifmimg clear
+
+
+" Microsoft Office
+filextype *.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.ppt,*.csv,*.pptx
+	\ {Open with LibreOffice}
+	\ libreoffice %f %i &
+fileviewer *.doc catdoc %c
+fileviewer *.docx docx2txt.pl %f -
+fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
+
+" Mindmap
+filextype *.vym
+        \ {Open with VYM}
+        \ vym %f &,
+
+" Man page
+filetype *.[1-8]
+	\ man ./%c
+fileviewer *.[1-8]
+	\ man ./%c | col -b
+#+end_src
+
+** Programming
+
+#+begin_src vimrc
+" Web
+filextype *.html,*.htm
+        \ {Open with qutebrowser}
+        \ qutebrowser --target=tab %f %i &,
+        \ {Open with librewolf}
+        \ librewolf %f %i &,
+
+" Object
+filetype *.o
+	\ nm %f | less
+
+" Windows
+filetype *.exe
+	\ {Open Programs}
+	\ WINEPREFIX=/home/ruth/Wine/Default/ wine start /unix %d/%f,
+#+end_src
+
+** Security
+
+#+begin_src vimrc
+" MD5
+filetype *.md5
+       \ {Check MD5 hash sum}
+       \ md5sum -c %f %S,
+
+
+" SHA1
+filetype *.sha1
+       \ {Check SHA1 hash sum}
+       \ sha1sum -c %f %S,
+
+" SHA256
+filetype *.sha256
+       \ {Check SHA256 hash sum}
+       \ sha256sum -c %f %S,
+
+" SHA512
+filetype *.sha512
+       \ {Check SHA512 hash sum}
+       \ sha512sum -c %f %S,
+
+" GPG signature
+filetype *.asc
+       \ {Check signature}
+       \ !!gpg --verify %c,
+#+end_src
+
+** Mount
+
+#+begin_src vimrc
+" FuseZipMount
+filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
+	\ {Mount with fuse-zip}
+	\ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
+	\ {View contents}
+	\ zip -sf %c | less,
+	\ {Extract here}
+	\ tar -xf %c,
+fileviewer *.zip,*.jar,*.war,*.ear,*.oxt
+	\ zip -sf %c
+
+" ArchiveMount
+filetype *.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
+       \ {Mount with archivemount}
+       \ FUSE_MOUNT|archivemount %SOURCE_FILE %DESTINATION_DIR
+fileviewer *.tgz,*.tar.gz tar -tzf %c
+fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
+fileviewer *.tar.txz,*.txz xz --list %c
+fileviewer *.tar tar -tf %c
+
+" Rar2FsMount and rar archives
+filetype *.rar
+       \ {Mount with rar2fs}
+       \ FUSE_MOUNT|rar2fs %SOURCE_FILE %DESTINATION_DIR,
+fileviewer *.rar unrar v %c
+
+" IsoMount
+filetype *.iso
+       \ {Mount with fuseiso}
+       \ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
+
+" SshMount
+filetype *.ssh
+       \ {Mount with sshfs}
+       \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR %FOREGROUND,
+
+" FtpMount
+filetype *.ftp
+       \ {Mount with curlftpfs}
+       \ FUSE_MOUNT2|curlftpfs -o ftp_port=-,,disable_eprt %PARAM %DESTINATION_DIR %FOREGROUND,
+
+" Fuse7z and 7z archives
+filetype *.7z
+	\ {Mount with fuse-7z}
+	\ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
+fileviewer *.7z
+	\ 7z l %c
+
+
+#+end_src
+
+** Unknow
+
+#+begin_src vimrc
+" Open all the unknow files
+filetype ?*
+    \ {Open with Emacs}
+    \ ~/.local/bin/emacs %f %i &,
+    \ {Open with Vim}
+    \ st nvim %f %i &,
+    \ {Open with Xdg-Open}
+    \ xdg-open %c
+#+end_src
+
