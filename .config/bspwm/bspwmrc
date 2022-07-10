@@ -118,7 +118,6 @@ bspc monitor -d 1 2 3 4 5 6 7 8 9 0
 
 bspc desktop ^1 --layout tiled
 bspc desktop ^2 --layout monocle
-
 bspc desktop ^3 --layout monocle
 bspc desktop ^4 --layout monocle
 bspc desktop ^5 --layout tiled
@@ -136,18 +135,18 @@ bspc rule -a Chromium desktop='^2' state=tiled follow=on
 bspc rule -a Brave-browser desktop='^2' state=tiled follow=on
 bspc rule -a *:*:"Picture in picture" state=floating manage=off border=off
 # bspc rule -a *:*:"Picture in picture" rectangle=512x288+$((1600-512))+$((900-288)) state=floating border=off manage=off
+# bspc rule -a Com.gitlab.newsflash desktop='^2' state=tiled follow=on
+
 # Code
 bspc rule -a Emacs desktop='^3' state=tiled follow=on
 bspc rule -a Godot desktop='^3' state=tiled follow=on
-bspc rule -a tiled desktop='^3' state=pseudo_tiled follow=on
-
 
 # Editor
 bspc rule -a Gimp desktop='^4' state=pseudo_tiled follow=on
 bspc rule -a Krita desktop='^4' state=pseudo_tiled follow=on
 bspc rule -a Inkscape desktop='^4' state=floating follow=on border=off
 bspc rule -a Aseprite desktop='^4' state=pseudo_tiled follow=on
-bspc rule -a PureRef state=floating
+bspc rule -a tiled desktop='^4' state=pseudo_tiled follow=on
 
 # Player
 bspc rule -a mpv desktop='^5' state=tiled follow=on
@@ -169,6 +168,8 @@ bspc rule -a Download state=floating
 bspc rule -a Music state=floating
 bspc rule -a Audio state=floating
 
+bspc rule -a PureRef state=floating
+
 mapfile -t commands <<- eof
 	st
 	brave
@@ -185,8 +186,7 @@ if ! bspc query -N &> /dev/null; then  # there are no windows
 	if command -v tdrop &> /dev/null; then
 		local args=(-w 90% -h 90% -x 5% -y 5% -a -m)
 		tdrop "${args[@]}" --class "explorer" --name "Explorer" -n 1 st -n "explorer" -c "Explorer" vifm
-		tdrop "${args[@]}" --class "explorer" --name "Explorer" -n 1 st -n "explorer" -c "Explorer" vifm
-		# tdrop "${args[@]}" --class "download" --name "Download" -n 2 st -n "download" -c "Download" rtorrent 
+		tdrop "${args[@]}" --class "download" --name "Download" -n 2 st -n "download" -c "Download" rtorrent 
 		# tdrop "${args[@]}" --class "audio" --name "Audio" -n 3 st -n "audio" -c "Audio" ncpamixer
 		# tdrop "${args[@]}" --class "music" --name "Music" -n 4 st -n "music" -c "Music" mocp --config ~/.config/moc/config 
 	fi
