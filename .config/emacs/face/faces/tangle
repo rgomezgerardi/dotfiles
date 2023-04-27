@@ -1,0 +1,18 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Lisp faces
+
+#+begin_src emacs-lisp
+(use-package faces :straight (:type built-in) 
+  :demand
+  :custom-face
+  (default ((t . (:family "Source Code Pro" :height 120))))
+  (fixed-pitch ((t . (:family "Monospace" :height 120))))
+  (variable-pitch ((t . (:family "Monospace" :height 120))))
+)
+#+end_src
+
+(FACE ((DISPLAY . (ATTR VALUE ATTR VALUE...))...) [NOW [COMMENT]])

@@ -1,0 +1,14 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+
+#+begin_src emacs-lisp
+  (use-package dired-aux
+	:straight nil
+	:defer t
+	:config
+	(setq dired-create-destination-dirs 'ask
+		  dired-vc-rename-file t))
+#+end_src

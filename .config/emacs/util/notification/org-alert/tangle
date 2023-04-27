@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+
+#+begin_src emacs-lisp
+(use-package org-alert
+  :demand
+  :custom
+  (org-alert-interval 300)
+  (org-alert-notification-title "*org*")
+  (org-alert-notify-cutoff 1)
+  :config
+  (org-alert-enable))
+#+end_src

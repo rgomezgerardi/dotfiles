@@ -1,0 +1,18 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Window maker and Command loop for `electric' modes
+
+#+begin_src emacs-lisp
+(use-package electric :straight (:type built-in)
+  :disabled t
+  :demand
+  :custom
+  (electric-indent-inhibit t)
+  (electric-indent-chars '(?\n ?\^?))
+  :config
+  (electric-indent-mode 0)
+  (electric-layout-mode 0))
+#+end_src

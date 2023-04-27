@@ -1,0 +1,30 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A plain-text personal knowledge management system.
+https://github.com/org-roam/org-roam
+
+#+begin_src emacs-lisp
+(use-package org-roam
+  :preface
+  (defun +/org-roam-node-insert-immediate (arg &rest args)
+    (interactive "P")
+    (let ((args (cons arg args))
+          (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                    '(:immediate-finish t)))))
+      (apply #'org-roam-node-insert args)))
+  :custom
+  (org-roam-directory (file-truename "/mnt/files/document/note"))
+  :config
+  (org-roam-db-autosync-mode)
+  :general
+  (leader-def
+    "n" '(:ignore t :which-key "note")
+    "n b" #'(org-roam-buffer-toggle :wk "buffer")
+    "n f" #'(org-roam-node-find :wk "find node")
+    "n i" #'(org-roam-node-insert :wk "insert node")
+    "n I" #'(+/org-roam-node-insert-immediate :wk "insert node immediate")
+))
+#+end_src   

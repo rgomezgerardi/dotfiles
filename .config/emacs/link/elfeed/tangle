@@ -1,0 +1,17 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+An Emacs Atom/RSS feed reader.
+https://github.com/skeeto/elfeed
+
+#+begin_src emacs-lisp
+(use-package elfeed
+  :custom
+  (elfeed-search-filter "@3-days-ago")
+  :general
+  (leader-def
+	"e f" #'elfeed)
+  :config ())  ; Show message if verbose is activated
+#+end_src

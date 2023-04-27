@@ -1,0 +1,30 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Minor mode to highlight indentation
+https://github.com/DarthFennec/highlight-indent-guides
+
+#+begin_src emacs-lisp
+(use-package highlight-indent-guides
+  :hook ((prog-mode conf-mode org-mode) . highlight-indent-guides-mode)
+  :custom
+  (highlight-indent-guides-suppress-auto-error t)
+  (highlight-indent-guides-character 9474)  ; | 124  ⇥ 8677  ⇨ 8680  ↦ 8614 default 9474
+  (highlight-indent-guides-method 'character)  ; Method to use when displaying indent guides
+  (highlight-indent-guides-responsive 'stack)
+  (highlight-indent-guides-auto-enabled t)
+)
+#+end_src
+
+:config
+(when doom-theme
+    ;; (+/indent-guides-init-faces-h))
+
+  ;; ;; `highlight-indent-guides' breaks when `org-indent-mode' is active
+  ;; (+/add-hook 'org-mode-local-vars-hook
+  ;;   (defun +indent-guides-disable-maybe-h ()
+  ;;     (and highlight-indent-guides-mode
+  ;;          (bound-and-true-p org-indent-mode)
+  ;;          (highlight-indent-guides-mode -1))))

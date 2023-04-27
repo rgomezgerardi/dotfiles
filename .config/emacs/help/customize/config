@@ -1,0 +1,5 @@
+(use-package customize :straight (:type built-in)
+  :custom
+  (custom-file (locate-user-emacs-file "custom-vars.el"))
+  :config
+  (load custom-file 'noerror 'nomessage))

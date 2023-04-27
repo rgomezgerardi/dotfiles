@@ -1,0 +1,15 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Enforce a sneaky Garbage Collection strategy to minimize GC interference with user activity
+https://gitlab.com/koral/gcmh
+
+#+begin_src emacs-lisp
+(use-package saveplace :straight (:type built-in)
+  :demand
+  :config
+  (save-place-mode 1)
+)
+#+end_src

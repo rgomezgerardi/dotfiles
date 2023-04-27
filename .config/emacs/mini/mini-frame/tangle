@@ -1,0 +1,24 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Place minibuffer at the top of the current frame on read-from-minibuffer.
+https://github.com/muffinmad/emacs-mini-frame
+
+#+begin_src emacs-lisp
+(use-package mini-frame
+  :hook (after-init . mini-frame-mode)
+  :custom
+  (mini-frame-show-parameters
+   '((top . 50)
+     (width . 0.7)
+     (left . 0.5)))
+  (mini-frame-ignore-commands
+   '(eval-expression
+	 "edebug-eval-expression"
+	 debugger-eval-expression
+	 evil-ex
+	 "consult")
+)
+#+end_src

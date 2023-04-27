@@ -1,0 +1,14 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Uses xterm-color to add customizable 256 color support to term and ansi-term.
+https://github.com/dieggsy/eterm-256color
+
+#+begin_src emacs-lisp
+(use-package eterm-256color
+  :after term
+  :ghook 'term-mode-hook
+  :config ())  ; Show message if verbose is activated
+#+end_src

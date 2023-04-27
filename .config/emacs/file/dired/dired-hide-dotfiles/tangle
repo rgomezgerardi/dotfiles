@@ -1,0 +1,17 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Hide dotfiles in dired
+https://github.com/mattiasb/dired-hide-dotfiles
+
+
+#+begin_src emacs-lisp
+  (use-package dired-hide-dotfiles
+    :after dired
+    :hook (dired-mode . dired-hide-dotfiles-mode)
+    :general
+    (dired-mode-map
+      "H" 'dired-hide-dotfiles-mode))
+#+end_src

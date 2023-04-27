@@ -1,0 +1,14 @@
+# -*- mode: org -*- #
+
+Display available keybindings in popup
+https://github.com/justbur/emacs-which-key
+
+#+begin_src emacs-lisp :tangle config
+;; ‘window-setup-hook’ or ‘tty-setup-hook’
+(use-package which-key
+  :demand
+  :custom
+  (which-key-idle-delay 0.4)
+  :config
+  (which-key-mode))
+#+end_src

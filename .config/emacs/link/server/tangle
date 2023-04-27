@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Lisp code for GNU Emacs running as server process
+
+#+begin_src emacs-lisp
+(use-package server :straight (:type built-in) 
+
+)
+#+end_src
+
+;(server-start)  ; Allow this Emacs process to be a server for client processes
+;(setq show-value-server-raise-frame t)  ; If non-nil, raise frame when switching to a buffer
+;(setq server-window (pop-to-buffer (current-buffer) t)) ; Specification of the window to use for selecting Emacs server buffers

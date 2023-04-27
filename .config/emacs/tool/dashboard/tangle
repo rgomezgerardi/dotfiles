@@ -1,0 +1,72 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+An extensible emacs startup screen showing you what’s most important
+https://github.com/emacs-dashboard/emacs-dashboard
+
+
+#+begin_src emacs-lisp
+(use-package dashboard
+  :preface
+  (defun +/display-startup-time ()
+  "Show the duration of emacs startup"
+  (let ((package-count 0) (time (emacs-init-time)))
+    (when (bound-and-true-p package-alist)
+  (setq package-count (length package-activated-list)))
+    (when (boundp 'straight--profile-cache)
+  (setq package-count (+ (hash-table-size straight--profile-cache) package-count)))
+    (if (zerop package-count)
+	(message "Emacs started in %.4s with %d garbage collections"
+		 time gcs-done)
+  (message "%d packages loaded in %.4s with %d garbage collections"
+	   package-count time gcs-done))))
+  
+  :hook (after-init . dashboard-refresh-buffer)
+  :custom
+  (dashboard-banner-logo-title "Welcome to Emacs!")
+  (dashboard-center-content t)
+  (dashboard-set-file-icons t)
+  (dashboard-set-heading-icons t)
+  (dashboard-show-shortcuts t)
+  (dashboard-startup-banner 'logo)
+  ;; (dashboard-startup-banner (expand-file-name "banner.txt" user-emacs-directory))
+  (dashboard-items '((recents  . 5)
+					 (bookmarks . 5)
+					 (projects . 5)
+					 ;; (agenda . 5)  ; This load org package
+					 (registers . 5)))
+  (dashboard-set-navigator t)
+  (dashboard-navigator-buttons
+   `(((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+	   "GitHub" "rgomezgerardi"
+	   (lambda (&rest _) (browse-url "https://github.com/rgomezgerardi")))
+	  (,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
+	   "LinkedIn" "rgomezgerardi"
+	   (lambda (&rest _) (browse-url "https://linkedin.com"))))))
+  (dashboard-set-init-info t)
+  (dashboard-init-info (+/display-startup-time))
+  (dashboard-set-footer t)
+  (dashboard-footer-messages
+   '("Dashboard is pretty cool!"
+	 "The one true editor, Emacs!"
+	 "Who the hell uses VIM anyway? Go Evil!"
+	 "Free as free speech, free as free Beer"
+	 "Happy coding!"
+	 "Vi Vi Vi, the editor of the beast"
+	 "Go make yourself some friends, or you'll be lonely"
+	 "Welcome to the church of Emacs"
+	 "While any text editor can save your files, only Emacs can save your soul"
+	 "What the fuck are you doing?"))
+  :config
+  (setq initial-buffer-choice  
+		'org-agenda)
+  (if (daemonp)  ; Ensure emacsclient opens on *dashboard* rather than *scratch*
+	  (setq initial-buffer-choice  
+			'org-agenda)))
+#+end_src
+
+  (if (daemonp)  ; Ensure emacsclient opens on *dashboard* rather than *scratch*
+	  (setq initial-buffer-choice  
+			(lambda () (get-buffer "*dashboard*"))))

@@ -1,0 +1,19 @@
+(use-package embark
+  :demand
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  :config
+  (setq embark-quit-after-action '((kill-buffer . t) (t . nil)))
+
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none))))
+  :general 
+  ("C-;" #'embark-act         ;; pick some comfortable binding
+   "C-." #'embark-dwim        ;; good alternative: M-.
+   "C-h B" #'embark-bindings) ;; alternative for `describe-bindings'
+)

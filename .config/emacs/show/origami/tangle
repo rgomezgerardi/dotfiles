@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A text folding minor mode for Emacs.
+https://github.com/gregsexton/origami.el
+
+#+begin_src emacs-lisp
+(setq byte-compile-warnings '(cl-functions))  ; Disable "Package cl is deprecated" message
+
+(use-package origami
+:demand
+:config
+(global-origami-mode 1))
+#+end_src

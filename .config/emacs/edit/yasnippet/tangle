@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A template system for Emacs.
+https://github.com/joaotavora/yasnippet
+
+#+begin_src emacs-lisp
+(use-package yasnippet
+  ;; :ghook ('(conf-mode-hook prog-mode-hook text-mode-hook) #'yas-minor-mode)
+  :demand
+  :config 
+  (yas-global-mode 1)
+)  ; Show message if verbose is activated
+#+end_src

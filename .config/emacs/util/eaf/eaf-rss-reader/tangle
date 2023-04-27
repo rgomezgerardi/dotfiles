@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+
+#+begin_src emacs-lisp
+(use-package eaf-rss-reader
+  :straight (:type built-in)
+  :after eaf
+  :demand
+)
+#+end_src

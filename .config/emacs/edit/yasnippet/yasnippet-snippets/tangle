@@ -1,0 +1,12 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Yasnippet official snippet collections
+https://github.com/AndreaCrotti/yasnippet-snippets
+
+#+begin_src emacs-lisp
+(use-package yasnippet-snippets
+  :after yasnippet)
+#+end_src

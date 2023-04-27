@@ -1,0 +1,22 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A Growl-workalike for Emacs which uses a common notification interface and multiple, selectable "styles".
+https://github.com/jwiegley/alert
+
+#+begin_src emacs-lisp
+(use-package alert
+:demand
+:custom
+(alert-default-style 'libnotify)
+(alert-fade-time 10)
+;; :config
+;; (alert-add-rule :status   '(buried visible idle)
+                ;; :severity '(moderate high urgent)
+                ;; :mode     'evil-smartparens-mode
+                ;; :style 'ignore
+                ;; :continue t)
+)
+#+end_src

@@ -1,0 +1,28 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+#+begin_src emacs-lisp
+(use-package projectile
+  :demand
+  :custom
+  (projectile-discover-projects-in-search-path t)
+  (projectile-project-search-path
+   '("/mnt/files/Ricardo/Projects"))
+  :config
+  (projectile-register-project-type 'godot '("project.godot")
+                                    :project-file "project.godot"
+				    :compile "godot --help"
+				    :test "godot --help"
+				    :run "godot --help")
+  :general
+  (leader-def
+    "p" '(projectile-command-map :which-key "project")
+    "p" '(:ignore t :which-key "project")
+    "p f" '(projectile-find-file :which-key "file")
+    "p d" '(projectile-find-dir :which-key "directory")
+    "p k" '(projectile-kill-buffers :which-key "kill buffers")
+  )
+)
+#+end_src

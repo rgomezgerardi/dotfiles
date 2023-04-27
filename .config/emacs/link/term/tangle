@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+General command interpreter in a window.
+NOTE: term-mode doesn’t work on Windows: “Spawning child process: invalid argument”
+
+#+begin_src emacs-lisp
+(use-package term :straight (:type built-in)
+  :custom
+  (term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+  (explicit-shell-file-name "zsh")
+  (explicit-zsh-args '())
+  :config ())  ; Show message if verbose is activated
+#+end_src

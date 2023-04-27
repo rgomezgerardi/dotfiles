@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Evil integration in treemacs
+https://github.com/Alexander-Miller/treemacs/blob/master/src/extra/treemacs-evil.el
+
+#+begin_src emacs-lisp
+(use-package treemacs-evil
+  :after (treemacs evil)
+  :demand)
+#+end_src

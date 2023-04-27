@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Save minibuffer history
+
+#+begin_src emacs-lisp
+(use-package savehist :straight (:type built-in)
+  ;:hook (minibuffer-setup . savehist-mode)
+  :demand
+  :config
+  (setq history-length 16)
+  (savehist-mode 1)
+)
+#+end_src

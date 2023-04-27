@@ -1,0 +1,8 @@
+(use-package autorevert :straight (:type built-in)
+	:demand
+	:custom
+	(auto-revert-interval 3)
+	(global-auto-revert-non-file-buffers t)
+	:config
+	(global-auto-revert-mode 1)
+)

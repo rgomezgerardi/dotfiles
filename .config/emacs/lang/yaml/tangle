@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Simple major mode to edit YAML file for emacs
+https://github.com/yoshiki/yaml-mode
+
+#+begin_src emacs-lisp
+(use-package yaml-mode)
+#+end_src

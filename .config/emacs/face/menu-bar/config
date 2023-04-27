@@ -1,0 +1,4 @@
+(use-package menu-bar :straight (:type built-in) 
+    :init
+    (menu-bar-mode 0)
+)

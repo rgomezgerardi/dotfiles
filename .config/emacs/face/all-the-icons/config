@@ -1,0 +1,4 @@
+(use-package all-the-icons
+  :demand
+  :if (display-graphic-p)
+  :config ())  ; Show message if verbose is activated

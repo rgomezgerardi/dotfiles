@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Dynamic abbreviation package
+
+#+begin_src emacs-lisp
+(use-package dabbrev :straight (:type built-in)
+  :general
+  (general-swap-key nil 'global
+    "M-/" "C-M-/"))
+#+end_src

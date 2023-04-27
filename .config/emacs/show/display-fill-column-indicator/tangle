@@ -1,0 +1,17 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Display a fill column indicator in the buffer.
+https://github.com/alpaker/fill-column-indicator
+
+#+begin_src emacs-lisp
+(use-package display-fill-column-indicator :straight (:type built-in)
+  :hook ((prog-mode text-mode) . display-fill-column-indicator-mode)
+  :custom
+  (dfci-rule-color "#111122")
+  (dfci-rule-use-dashes nil)
+  (dfci-rule-width 1)
+  (dfci-rule-color "darkblue"))
+#+end_src

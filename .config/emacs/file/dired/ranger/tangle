@@ -1,0 +1,19 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+
+#+begin_src emacs-lisp
+  ;; (use-package ranger
+  ;; :demand
+  ;; :init (ranger-override-dired-mode t))
+  ;; :init (setq ranger-override-dired t))
+  ;; :custom 
+  ;; (ranger-cleanup-on-disable t)
+  ;; (ranger-excluded-extensions '("mkv" "iso" "mp4"))
+  ;; (ranger-deer-show-details t)
+  ;; (ranger-max-preview-size 10)
+  ;; (ranger-show-literal nil)
+  ;; (ranger-hide-cursor nil)
+#+end_src

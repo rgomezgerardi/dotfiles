@@ -1,0 +1,31 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Emacs is a package?
+
+#+begin_src emacs-lisp
+(use-package emacs :straight (:type built-in)
+  :demand
+  :init
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
+
+  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+  ;; (setq read-extended-command-predicate
+  ;;       #'command-completion-default-include-p)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
+
+  (setq use-dialog-box nil)
+  :general
+  (leader-def
+    "e r" #'((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :wk "reload emacs config")
+    "e k" #'(kill-emacs :wk "kill emacs")
+  )
+)
+#+end_src

@@ -1,0 +1,23 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+An Emacs Internet Relay Chat client
+
+#+begin_src emacs-lisp
+(use-package erc :straight (:type built-in)
+  :commands (erc erc-tls)
+  :config
+  (setq erc-server "irc.libera.chat"
+		erc-nick "raisak"
+		;; erc-user-full-name "Ricardo Gomez"
+		erc-track-shorten-start 8
+		erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs" "#systemcrafters"))
+		erc-kill-buffer-on-part t
+        erc-auto-query 'bury)
+  :general
+  (leader-def
+	"e r" '(erc-tls :which-key "ERC"))
+)
+#+end_src

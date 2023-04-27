@@ -1,0 +1,9 @@
+(use-package evil-collection
+  :demand
+  :after evil
+  :custom
+  (evil-collection-setup-minibuffer t)
+  ;; (evil-collection-outline-bind-tab-p nil)
+  :config
+  (evil-collection-init)
+)

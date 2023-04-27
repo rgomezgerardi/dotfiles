@@ -1,0 +1,4 @@
+(use-package tool-bar :straight (:type built-in) 
+    :init
+    (tool-bar-mode 0)
+)

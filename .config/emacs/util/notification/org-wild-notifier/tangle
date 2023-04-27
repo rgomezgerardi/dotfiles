@@ -1,0 +1,25 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A package which adds notification support for org-agenda views.
+With this package you’ll get notifications for TODO entries.
+https://github.com/akhramov/org-wild-notifier.el
+
+#+begin_src emacs-lisp
+(use-package org-wild-notifier
+:after org-mode
+:demand
+:custom
+(org-wild-notifier-alert-time '(1))
+(org-wild-notifier-notification-title "Agenda")
+(org-wild-notifier-notification-icon nil)
+(org-wild-notifier-keyword-whitelist '("TODO"))
+(org-wild-notifier-keyword-blacklist nil)
+(org-wild-notifier-tags-whitelist nil)
+(org-wild-notifier-tags-blacklist nil)
+(org-wild-notifier-alert-times-property	"WILD_NOTIFIER_NOTIFY_BEFORE")
+:config
+(org-wild-notifier-mode 1))
+#+end_src

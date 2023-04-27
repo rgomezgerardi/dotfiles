@@ -1,0 +1,15 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Themes for emacs shell (eshell) prompt.
+https://github.com/xuchunyang/eshell-git-prompt
+
+#+begin_src emacs-lisp
+(use-package eshell-git-prompt
+  :after eshell
+  :demand
+  :config
+  (eshell-git-prompt-use-theme 'powerline))
+#+end_src

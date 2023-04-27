@@ -1,0 +1,17 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Revert individual buffers when files on disk change.
+
+#+begin_src emacs-lisp
+(use-package autorevert :straight (:type built-in)
+	:demand
+	:custom
+	(auto-revert-interval 3)
+	(global-auto-revert-non-file-buffers t)
+	:config
+	(global-auto-revert-mode 1)
+)
+#+end_src

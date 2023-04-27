@@ -1,0 +1,36 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Setup a menu of recently opened files.
+
+#+begin_src emacs-lisp
+(use-package recentf :straight (:type built-in)
+  :demand
+  :preface
+  (defun +/undo-kill-buffer (arg)
+    "Re-open the last buffer killed.  With ARG, re-open the nth buffer."
+    (interactive "p")
+    (let ((recently-killed-list (copy-sequence recentf-list))
+	  (buffer-files-list
+	   (delq nil (mapcar (lambda (buf)
+			       (when (buffer-file-name buf)
+				 (expand-file-name (buffer-file-name buf)))) (buffer-list)))))
+      (mapc
+       (lambda (buf-file)
+	 (setq recently-killed-list
+	       (delq buf-file recently-killed-list)))
+       buffer-files-list)
+      (find-file
+       (if arg (nth arg recently-killed-list)
+	 (car recently-killed-list)))))
+  :custom
+  (recentf-max-menu-items 16)
+  (recentf-max-saved-items 16)
+  :config
+  (recentf-mode 1)
+  (with-eval-after-load 'no-littering
+    (add-to-list 'recentf-exclude no-littering-var-directory)
+    (add-to-list 'recentf-exclude no-littering-etc-directory)))
+#+end_src

@@ -1,0 +1,126 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Display a tab bar in the header line.
+https://github.com/ema2159/centaur-tabs
+
+#+begin_src emacs-lisp
+(use-package centaur-tabs
+  :demand
+  :preface
+  (defun centaur-tabs-buffer-groups ()
+    "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+Group centaur-tabs with mode if buffer is derived from `eshell-mode'
+`emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+All buffer name start with * will group to \"Emacs\".
+Other buffer group by `centaur-tabs-get-group-name' with project name."
+    (list
+      ((string-equal "*" (substring (buffer-name) 0 1)) "Emacs")
+      ((derived-mode-p 'eshell-mode) "EShell")
+      ((derived-mode-p 'emacs-lisp-mode) "Elisp")
+      ((derived-mode-p 'dired-mode) "Dired")
+      ((derived-mode-p 'org-agenda) "Agenda")
+
+      ((memq major-mode '(magit-process-mode
+			  magit-status-mode
+			  magit-diff-mode
+			  magit-log-mode
+			  magit-file-mode
+			  magit-blob-mode
+			  magit-blame-mode
+			  ))
+       "Magit")
+      ((memq major-mode '(org-agenda-mode
+			  org-agenda-clockreport-mode
+			  org-agenda-log-mode
+			  diary-mode))
+       "Agenda")
+      (t
+ (defun centaur-tabs-hide-tab (x)
+  "Do no to show buffer X in tabs."
+  (let ((name (format "%s" x)))
+    (or
+     ;; Current window is not dedicated window.
+     (window-dedicated-p (selected-window))
+
+     ;; Buffer name not match below blacklist.
+     (string-prefix-p "*epc" name)
+     (string-prefix-p "*helm" name)
+     (string-prefix-p "*Helm" name)
+     (string-prefix-p "*Compile-Log*" name)
+     (string-prefix-p "*lsp" name)
+     (string-prefix-p "*company" name)
+     (string-prefix-p "*Flycheck" name)
+     (string-prefix-p "*tramp" name)
+     (string-prefix-p " *Mini" name)
+     (string-prefix-p "*help" name)
+     (string-prefix-p "*straight" name)
+     (string-prefix-p " *temp" name)
+     (string-prefix-p "*Help" name)
+     (string-prefix-p "*mybuf" name)
+
+     ;; Is not magit buffer.
+     (and (string-prefix-p "magit" name)
+	  (not (file-name-extension name)))
+     )))      (centaur-tabs-get-group-name (current-buffer)))))
+  :hook
+  ((dired-mode 
+    help-mode helpful-mode
+    special-mode
+    term-mode calendar-mode
+    delayed-warning
+    debugger-mode
+    ibuffer-mode buffer-menu-mode
+    messages-buffer-mode
+    org-agenda-mode
+    dashboard-mode 
+    org-src-mode
+    ;; org-beamer-mode
+    ;; org-indent-mode
+    ;; org-bullets-mode
+    ;; org-cdlatex-mode
+    popup-buffer-mode) . centaur-tabs-local-mode)
+  :custom
+  (centaur-tabs-style "bar")
+  (centaur-tabs-height 32)
+  (centaur-tabs-set-icons t)
+  (centaur-tabs-set-bar 'left)
+  (centaur-tabs-cycle-scope 'tabs)
+  :config
+  (centaur-tabs-mode 1)
+  (centaur-tabs-group-by-projectile-project)
+  :general
+  ('motion
+   "M-l" '(centaur-tabs-forward :which-key "Next tab")
+   "M-h" '(centaur-tabs-backward :which-key "Previous tab")
+   )
+  (leader-def
+    "t t" '(centaur-tabs--create-new-tab :which-key "New tab")
+    "t l" '(centaur-tabs-forward-group :which-key "Go to next tab group")
+    "t h" '(centaur-tabs-backward-group :which-key "Go to previous tab group")
+    "t G" '(centaur-tabs-select-end-tab :which-key "Select the last tab of the group")
+    "t s" '(centaur-tabs-counsel-switch-group :which-key "Show buffer groups")
+    "t p" '(centaur-tabs-group-by-projectile-project :which-key "Group by projectile project")
+    "t g" '(centaur-tabs-group-buffer-groups :which-key "Use centaur's buffer grouping")
+    ;; "t g g" '(centaur-tabs-select-beg-tab :which-key "Select the first tab of the group")
+  )
+)
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
+(use-package centaur-tabs
+  :custom
+  ;; (centaur-tabs-plain-icons nil)
+  ;; (centaur-tabs-gray-out-icons 'buffer)
+  ;; (centaur-tabs-set-bar 'left)
+  ;; (x-underline-at-descent-line t)  ; Set this only if centaur-tabs-set-bar is 'under
+  ;; (centaur-tabs-set-modified-marker t)
+  ;; (centaur-tabs-close-button "✕")
+  ;; (centaur-tabs-modified-marker "•")
+  :config
+  (centaur-tabs-mode 1)
+
+#+end_src

@@ -1,0 +1,7 @@
+;; ‘window-setup-hook’ or ‘tty-setup-hook’
+(use-package which-key
+  :demand
+  :custom
+  (which-key-idle-delay 0.4)
+  :config
+  (which-key-mode))

@@ -1,0 +1,11 @@
+(use-package no-littering
+  :demand
+  :init
+  (setq 
+   no-littering-etc-directory (expand-file-name "conf" "~/.local/share/remacs")
+   no-littering-var-directory (expand-file-name "data" "~/.local/share/remacs")
+   custom-file (expand-file-name "custom.el" user-emacs-directory)
+   auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save") t))
+   auto-save-list-file-name `((".*" ,(no-littering-expand-var-file-name "auto-save-list") t))
+   ;; url-history-file (expand-file-name "data/url/history" user-emacs-directory)))
+   url-history-file (no-littering-expand-var-file-name "url/history")))

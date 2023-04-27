@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Let’s try to mimic a few features of helm-lsp and lsp-ivy in consult workflow.
+https://github.com/gagbo/consult-lsp
+
+
+#+begin_src emacs-lisp
+(use-package consult-lsp
+  :after '(consult lsp)
+  :config
+  (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols)
+)
+#+end_src

@@ -1,0 +1,7 @@
+(use-package savehist :straight (:type built-in)
+  ;:hook (minibuffer-setup . savehist-mode)
+  :demand
+  :config
+  (setq history-length 16)
+  (savehist-mode 1)
+)

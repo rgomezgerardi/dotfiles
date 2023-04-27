@@ -1,0 +1,30 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Never lose your cursor again
+https://github.com/Malabarba/beacon
+
+#+begin_src emacs-lisp
+(use-package beacon
+	:demand
+	:custom
+	(beacon-size 40)
+	(beacon-color 0.6)
+	;; (beacon-blink-duration)
+	;; (beacon-blink-delay)
+	(beacon-blink-when-window-scrolls t)
+	(beacon-blink-when-window-changes t)
+	(beacon-blink-when-focused t)
+	(beacon-blink-when-point-moves t)
+	;; (beacon-dont-blink-major-modes)
+	;; (beacon-dont-blink-predicates)
+	;; (beacon-dont-blink-commands)
+	;; (beacon-push-mark)
+	:config
+	;; Disable it only in specific buffers
+	;; (setq-local beacon-mode nil).
+	(beacon-mode 1)
+)
+#+end_src

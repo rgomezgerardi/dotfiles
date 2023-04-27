@@ -1,0 +1,19 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Highlight (un)matching of parens and expressions.
+
+#+begin_src emacs-lisp
+(use-package paren :straight (:type built-in)
+	:demand
+	:custom
+	(show-paren-style 'parenthesis)
+	(show-paren-delay 0.125)
+	(blink-matching-paren t)
+	(blink-matching-delay 1)
+	:config
+	(show-paren-mode 1)
+)
+#+end_src

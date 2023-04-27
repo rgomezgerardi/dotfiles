@@ -1,0 +1,18 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Incremental search minor mode.
+
+#+begin_src emacs-lisp
+(use-package isearch :straight (:type built-in)
+  :demand
+  :general
+  (isearch-mode-map
+   "M-e" 'consult-isearch                 ;; orig. isearch-edit-string
+   "M-s e" 'consult-isearch               ;; orig. isearch-edit-string
+   "M-s l" 'consult-line                  ;; needed by consult-line to detect isearch
+   "M-s L" 'consult-line-multi)           ;; needed by consult-line to detect isearch
+)
+#+end_src

@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+https://github.com/yqrashawn/fd-dired
+
+#+begin_src emacs-lisp
+(use-package fd-dired
+  :defer t
+  :init
+  (global-set-key [remap find-dired] #'fd-dired))
+#+end_src

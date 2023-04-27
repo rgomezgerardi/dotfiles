@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Automatic parenthesis pairing
+
+#+begin_src emacs-lisp
+(use-package elec-pair :straight (:type built-in)
+  :disabled t
+  :demand
+  :custom
+  (electric-pair-pairs '((?\" . ?\") (?\{ . ?\})))
+  :config
+  (electric-pair-mode 1))
+#+end_src

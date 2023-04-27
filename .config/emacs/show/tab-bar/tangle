@@ -1,0 +1,42 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Frame-local tabs.
+
+#+begin_src emacs-lisp
+(use-package tab-bar
+  :demand
+  :custom
+  ; Defines what to do when the last tab is closed
+  (tab-bar-close-last-tab-choice 'tab-bar-mode-disable)
+  (tab-bar-close-tab-select 'left)
+  (tab-bar-new-tab-choice "*scratch*")
+  (tab-bar-show 1)
+  :config
+  (tab-bar-mode 1)
+  :general
+  ('motion
+    "M-l" '(tab-bar-switch-to-next-tab :which-key "Next tab")
+    "M-h" '(tab-bar-switch-to-prev-tab :which-key "Previous tab")
+    )
+
+  (leader-def
+    "t"   '(:ignore t :which-key "tab")
+    "t f" '(find-file-other-tab :which-key "Edit file in another tab")
+    "t t" '(tab-bar-new-tab :which-key "New tab")
+    "t q" '(tab-bar-close-tab :which-key "Close tab")
+    "t c" '(tab-bar-close-other-tabs :which-key "Close all tabs, except the selected one")
+    "t r" '(tab-bar-switch-to-recent-tab :which-key "Recent tab")
+    "t l" '(tab-bar-switch-to-next-tab :which-key "Next tab")
+    "t h" '(tab-bar-switch-to-prev-tab :which-key "Previous tab")
+    "t u" '(tab-bar-undo-close-tab :which-key "Restore the last closed tab")
+    ;; "t h" '(tab-bar-history-mode :which-key "Toggle tab history mode")
+
+    )
+)
+    ; Rebind join, and lookup (default K and J vim keybindigs)
+    ;; "k" '(evil-lookup :which-key "Look up the keyword at point")
+    ;; "j" '(evil-join :which-key "Join the selected lines")
+#+end_src

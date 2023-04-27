@@ -1,0 +1,32 @@
+(use-package orderless
+  :demand
+  :custom
+  (completion-styles '(orderless))
+  ;; (orderless-component-separator "[ &]")
+  ;; (orderless-component-separator "[ +]")
+  ;; (completion-category-defaults nil)
+  ;; (completion-category-overrides '((file (styles . (orderless partial-completion)))))
+  ;;:config
+  ;; ...otherwise find-file gets different highlighting than other commands
+  ;; (set-face-attribute 'completions-first-difference nil :inherit nil)
+
+  ;; (setq orderless-style-dispatchers
+  ;; 	'(lambda (pattern _index _total) 
+  ;; 	   (cond
+  ;; 	    Ensure $ works with Consult commands, which add disambiguation suffixes
+  ;; 	    ((string-suffix-p "$" pattern)
+  ;; 	     `(orderless-regexp . ,(concat (substring pattern 0 -1) "[\x100000-\x10FFFD]*$")))
+  ;; 	    ;; Ignore single !
+  ;; 	    ((string= "!" pattern) `(orderless-literal . ""))
+  ;; 	    ;; Without literal
+  ;; 	    ((string-prefix-p "!" pattern) `(orderless-without-literal . ,(substring pattern 1)))
+  ;; 	    ;; Initialism matching
+  ;; 	    ((string-prefix-p "`" pattern) `(orderless-initialism . ,(substring pattern 1)))
+  ;; 	    ((string-suffix-p "`" pattern) `(orderless-initialism . ,(substring pattern 0 -1)))
+  ;; 	    ;; Literal matching
+  ;; 	    ((string-prefix-p "=" pattern) `(orderless-literal . ,(substring pattern 1)))
+  ;; 	    ((string-suffix-p "=" pattern) `(orderless-literal . ,(substring pattern 0 -1)))
+  ;; 	    ;; Flex matching
+  ;; 	    ((string-prefix-p "~" pattern) `(orderless-flex . ,(substring pattern 1)))
+  ;; 	    ((string-suffix-p "~" pattern) `(orderless-flex . ,(substring pattern 0 -1))))))
+)

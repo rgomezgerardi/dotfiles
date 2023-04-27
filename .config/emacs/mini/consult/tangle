@@ -1,0 +1,54 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Practical commands based on the Emacs completion function completing-read.
+https://github.com/minad/consult
+
+#+begin_src emacs-lisp
+(use-package consult
+  :config
+  ; Optionally configure a function which returns the project root directory.
+  ;; (autoload 'projectile-project-root "projectile")
+  ;; (setq consult-project-root-function #'projectile-project-root)
+  (setq completion-in-region-function 'consult-completion-in-region)
+  :general
+  (leader-def
+    ":" 'consult-complex-command
+    "@" 'consult-register
+    "#" 'consult-register-load
+    "'" 'consult-register-store
+    
+    "c h" 'consult-history
+    "c m" 'consult-mode-command
+    "c b" 'consult-bookmark
+    "c k" 'consult-kmacro
+
+    "SPC" '(consult-buffer :which-key "Switch to buffer")
+    "b w" '(consult-buffer-other-window :which-key "Switch to buffer other window")
+    "b f" '(consult-buffer-other-frame :which-key "Switch to buffer other frame")
+
+    "g l" 'consult-goto-line
+    "g e" 'consult-compile-error
+    "g f" 'consult-flymake  ;; Alternative: consult-flycheck
+    "g o" 'consult-outline
+    "g m" 'consult-mark
+    "g k" 'consult-global-mark
+    "g i" 'consult-imenu
+    "g I" 'consult-imenu-multi
+
+    "f r" '(consult-recent-file :wk "recent-file")
+
+    "s f" 'consult-find
+    "s F" 'consult-locate
+    "s g" 'consult-grep
+    "s G" 'consult-git-grep
+    "s r" 'consult-ripgrep
+    "s l" 'consult-line
+    "s L" 'consult-line-multi
+    "s m" 'consult-multi-occur
+    "s k" 'consult-keep-lines
+    "s u" 'consult-focus-lines
+    "s e" 'consult-isearch))
+#+end_src

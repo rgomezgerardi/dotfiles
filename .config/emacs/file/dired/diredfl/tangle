@@ -1,0 +1,12 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Extra font lock rules for a more colourful dired
+https://github.com/purcell/diredfl
+
+#+begin_src emacs-lisp
+(use-package diredfl
+  :hook (dired-mode . diredfl-mode))
+#+end_src

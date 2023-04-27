@@ -1,0 +1,7 @@
+(use-package ibuffer :straight (:type built-in)
+  :general
+  (leader-def
+    "b i" #'(ibuffer :wk "ibuffer")
+    "b b" #'(ibuffer-list-buffers :wk "ibuffer list buffers")
+  )
+)

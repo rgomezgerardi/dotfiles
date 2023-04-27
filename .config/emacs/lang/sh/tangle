@@ -1,0 +1,157 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Shell-script editing commands for Emacs
+
+#+begin_src emacs-lisp
+(defun +/unquote (exp)
+  "Return EXP unquoted."
+  (declare (pure t) (side-effect-free t))
+  (while (memq (car-safe exp) '(quote function))
+    (setq exp (cadr exp)))
+  exp)
+
+
+(defun +/enlist (exp)
+  "Return EXP wrapped in a list, or as-is if already a list."
+  (declare (pure t) (side-effect-free t))
+  (if (listp exp) exp (list exp)))
+
+
+(defun +/resolve-hook-forms (hooks)
+  "Converts a list of modes into a list of hook symbols.
+
+If a mode is quoted, it is left as is. If the entire HOOKS list is quoted, the
+list is returned as-is."
+  (declare (pure t) (side-effect-free t))
+  (let ((hook-list (+/enlist (+/unquote hooks))))
+    (if (eq (car-safe hooks) 'quote)
+	hook-list
+  (cl-loop for hook in hook-list
+	   if (eq (car-safe hook) 'quote)
+	   collect (cadr hook)
+	   else collect (intern (format "%s-hook" (symbol-name hook)))))))
+
+
+(defmacro +/add-hook (hooks &rest rest)
+  "A convenience macro for adding N functions to M hooks.
+
+This macro accepts, in order:
+
+  1. The mode(s) or hook(s) to add to. This is either an unquoted mode, an
+     unquoted list of modes, a quoted hook variable or a quoted list of hook
+     variables.
+  2. Optional properties :local, :append, and/or :depth [N], which will make the
+     hook buffer-local or append to the list of hooks (respectively),
+  3. The function(s) to be added: this can be one function, a quoted list
+     thereof, a list of `defun's, or body forms (implicitly wrapped in a
+     lambda).
+
+\(fn HOOKS [:append :local] FUNCTIONS)"
+  (declare (indent (lambda (indent-point state)
+		     (goto-char indent-point)
+		     (when (looking-at-p "\\s-*(")
+		   (lisp-indent-defform state indent-point))))
+	   (debug t))
+  (let* ((hook-forms (+/resolve-hook-forms hooks))
+	 (func-forms ())
+	 (defn-forms ())
+	 append-p
+	 local-p
+	 remove-p
+	 depth
+	 forms)
+    (while (keywordp (car rest))
+  (pcase (pop rest)
+	(:append (setq append-p t))
+	(:depth  (setq depth (pop rest)))
+	(:local  (setq local-p t))
+	(:remove (setq remove-p t))))
+    (let ((first (car-safe (car rest))))
+  (cond ((null first)
+	     (setq func-forms rest))
+
+	    ((eq first 'defun)
+	     (setq func-forms (mapcar #'cadr rest)
+		   defn-forms rest))
+
+	    ((memq first '(quote function))
+	     (setq func-forms
+		   (if (cdr rest)
+		   (mapcar #'+/unquote rest)
+		     (+/enlist (+/unquote (car rest))))))
+
+	    ((setq func-forms (list `(lambda (&rest _) ,@rest)))))
+  (dolist (hook hook-forms)
+	(dolist (func func-forms)
+	  (push (if remove-p
+		    `(remove-hook ',hook #',func ,local-p)
+		  `(add-hook ',hook #',func ,(or depth append-p) ,local-p))
+		forms)))
+  (macroexp-progn
+   (append defn-forms
+	   (if append-p
+		   (nreverse forms)
+		 forms))))))
+
+
+(defun +sh--match-variables-in-quotes (limit)
+  "Search for variables in double-quoted strings bounded by LIMIT."
+  (with-syntax-table sh-mode-syntax-table
+    (let (res)
+      (while
+          (and (setq res
+                     (re-search-forward
+                      "[^\\]\\(\\$\\)\\({.+?}\\|\\<[a-zA-Z0-9_]+\\|[@*#!]\\)"
+                      limit t))
+               (not (eq (nth 3 (syntax-ppss)) ?\"))))
+      res)))
+
+
+(defun +sh--match-command-subst-in-quotes (limit)
+  "Search for variables in double-quoted strings bounded by LIMIT."
+  (with-syntax-table sh-mode-syntax-table
+    (let (res)
+      (while
+          (and (setq res
+                     (re-search-forward "[^\\]\\(\\$(.+?)\\|`.+?`\\)"
+                                        limit t))
+               (not (eq (nth 3 (syntax-ppss)) ?\"))))
+      res)))
+
+
+(defvar +sh-builtin-keywords
+  '("cat" "cd" "chmod" "chown" "cp" "curl" "date" "echo" "find" "git" "grep"
+    "kill" "less" "ln" "ls" "make" "mkdir" "mv" "pgrep" "pkill" "pwd" "rm"
+    "sleep" "sudo" "touch")
+  "A list of common shell commands to be fontified especially in `sh-mode'.")
+
+(use-package sh-script
+  :straight (:type built-in)
+  :mode ("\\.bats\\'" . sh-mode)
+  :mode ("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
+  :mode ("/bspwmrc\\'" . sh-mode)
+  ;; :custom
+  ;; (sh-indent-after-continuation 'always)
+  :config
+  ; Recognize function names with dashes in them
+  (add-to-list 'sh-imenu-generic-expression
+			   '(sh (nil "^\\s-*function\\s-+\\([[:alpha:]_-][[:alnum:]_-]*\\)\\s-*\\(?:()\\)?" 1)
+					(nil "^\\s-*\\([[:alpha:]_-][[:alnum:]_-]*\\)\\s-*()" 1)))
+
+  ;; 1. Fontifies variables in double quotes
+  ;; 2. Fontify command substitution in double quotes
+  ;; 3. Fontify built-in/common commands (see `+sh-builtin-keywords')
+  (+/add-hook 'sh-mode-hook
+	(defun +sh-init-extra-fontification-h ()
+	  (font-lock-add-keywords
+	   nil `((+sh--match-variables-in-quotes
+			  (1 'font-lock-constant-face prepend)
+			  (2 'font-lock-variable-name-face prepend))
+			 (+sh--match-command-subst-in-quotes
+			  (1 'sh-quoted-exec prepend))
+			 (,(regexp-opt +sh-builtin-keywords 'symbols)
+			  (0 'font-lock-type-face append)))))))
+#+end_src

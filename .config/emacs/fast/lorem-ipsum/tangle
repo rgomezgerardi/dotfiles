@@ -1,0 +1,25 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Add filler lorem ipsum text to Emacs
+https://github.com/jschaf/emacs-lorem-ipsum
+
+#+begin_src emacs-lisp
+(use-package lorem-ipsum
+  :custom
+  (Lorem-ipsum-paragraph-separator “\n\n”)
+  (Lorem-ipsum-sentence-separator “ “)
+  (Lorem-ipsum-list-beginning “”)
+  (Lorem-ipsum-list-bullet “* “)
+  (Lorem-ipsum-list-item-end “\n”)
+  (Lorem-ipsum-list-end “”)
+  :general
+  (leader-def
+    "l i" '(:ignore t :which-key "Lorem Ipsum")
+    "l i s" '(lorem-ipsum-insert-sentences :which-key "Sentence")
+    "l i p" '(lorem-ipsum-insert-paragraphs :which-key "Paragraph")
+    "l i l" '(lorem-ipsum-insert-list :which-key "List"))
+  :config ())  ; Show message if verbose is activated
+#+end_src

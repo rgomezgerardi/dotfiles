@@ -1,0 +1,7 @@
+(use-package evil-org
+  :demand
+  :after (evil evil-collection org)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys)
+)

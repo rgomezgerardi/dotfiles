@@ -1,0 +1,17 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Supplemental evil-mode key-bindings to Emacs org-mode.
+https://github.com/Somelauw/evil-org-mode
+
+#+begin_src emacs-lisp
+(use-package evil-org
+  :demand
+  :after (evil evil-collection org)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys)
+)
+#+end_src

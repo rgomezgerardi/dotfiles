@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Simple templates for Emacs
+https://github.com/minad/tempel
+
+#+begin_src emacs-lisp
+(use-package tempel
+  :demand
+)
+#+end_src

@@ -1,0 +1,27 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Options for doom-themes.
+https://github.com/hlissner/emacs-doom-themes
+
+#+begin_src emacs-lisp
+(use-package doom-themes
+  :demand
+  :custom
+  ;; (doom-theme 'doom-one)  ; This is for highlight indent guide
+  (doom-themes-enable-bold t)  ; If nil, bold will be disabled across all faces
+  (doom-themes-enable-italic t)  ; If nil, italics will be disabled across all faces
+  (doom-themes-padded-modeline nil)  ; Default value for padded-modeline setting for themes that support it
+  (doom-themes-treemacs-theme "doom-atom")
+  :config
+  (load-theme 'doom-one t)
+  (doom-themes-visual-bell-config)  ; Enable flashing the mode-line on error
+  (doom-themes-treemacs-config)  ; Install doom-themes' treemacs configuration
+  (doom-themes-org-config))  ; Corrects (and improves) org-mode's native fontification
+
+; Alist of default values for frame creation
+;; (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+	;; (add-to-list 'default-frame-alist '(alpha . (100 . 100)))
+#+end_src

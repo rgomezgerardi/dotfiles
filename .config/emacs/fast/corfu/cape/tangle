@@ -1,0 +1,44 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Let your completions fly!
+https://github.com/minad/cape
+
+#+begin_src emacs-lisp
+(use-package cape
+  :after corfu
+  :demand
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-dict)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-ispell)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-line)
+  (add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  (add-to-list 'completion-at-point-functions #'cape-sgml)
+  (add-to-list 'completion-at-point-functions #'cape-symbol)
+  (add-to-list 'completion-at-point-functions #'cape-tex)
+  :general 
+  (leader-def
+   "c p" #'completion-at-point ;; capf
+   "c a" #'cape-abbrev
+   "c d" #'cape-dabbrev        ;; or dabbrev-completion
+   "c w" #'cape-dict
+   "c f" #'cape-file
+   "c i" #'cape-ispell
+   "c k" #'cape-keyword
+   "c l" #'cape-line
+   "c r" #'cape-rfc1345
+   "c &" #'cape-sgml
+   "c s" #'cape-symbol
+   "c t" #'complete-tag        ;; etags
+   "c _" #'cape-tex
+   "c ^" #'cape-tex
+  )
+)
+#+end_src

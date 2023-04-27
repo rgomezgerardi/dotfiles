@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A library for inserting Developer icons
+https://github.com/domtronn/all-the-icons.el
+
+#+begin_src emacs-lisp
+  (use-package all-the-icons-dired
+    :after dired
+    :hook (dired-mode . all-the-icons-dired-mode))
+#+end_src

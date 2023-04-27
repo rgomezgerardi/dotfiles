@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Asynchronous rsync from dired
+https://github.com/stsquad/dired-rsync
+
+#+begin_src emacs-lisp
+(use-package dired-rsync
+  :general
+  (dired-mode-map "C-c C-r" 'dired-rsync))
+#+end_src

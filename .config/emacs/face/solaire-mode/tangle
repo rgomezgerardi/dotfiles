@@ -1,0 +1,23 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+If only certain buffers could be so grossly incandescent.
+https://github.com/hlissner/emacs-solaire-mode
+
+#+begin_src emacs-lisp
+(use-package solaire-mode
+  :demand
+  ;; :hook
+  ;; ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  ;; (minibuffer-setup . solaire-mode-fix-minibuffer)
+;;   ((messages-buffer-mode dashboard-mode lisp-interaction-mode) . (lambda () (solaire-mode 0)))
+  :config
+  (solaire-global-mode 1)
+  ;; (add-hook 'after-make-frame-functions
+  ;;           (lambda (_frame)
+  ;;             (load-theme 'doom-one t)
+  ;;             (solaire-mode-swap-bg)))
+)
+#+end_src

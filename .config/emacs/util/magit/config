@@ -1,0 +1,24 @@
+(use-package magit
+  ;; :custom
+  ;; (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  :config
+  (with-eval-after-load 'magit-mode (add-hook 'after-save-hook 'magit-after-save-refresh-status t))
+  ;; Remove some functions
+  ;; (with-eval-after-load 'magit-diff
+  ;; 	(remove-hook 'magit-section-movement-hook
+  ;; 				 'magit-hunk-set-window-start))
+  :general
+  (leader-def
+    "g"     '(:ignore t :which-key "magit")
+    "g s"   'magit-status
+    "g d"   'magit-diff-unstaged
+    "g c"   'magit-branch-or-checkout
+    ;"g l"   '(:ignore t :which-key "log")
+    ;"g l c" 'magit-log-current
+    ;"g l f" 'magit-log-buffer-file
+    "g b"   'magit-branch
+    "g P"   'magit-push-current
+    "g p"   'magit-pull-branch
+    "g f"   'magit-fetch
+    "g F"   'magit-fetch-all
+    "g r"   'magit-rebase))

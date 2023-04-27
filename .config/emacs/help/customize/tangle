@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+
+Customization of the Customization support.
+
+#+begin_src emacs-lisp :tangle config
+(use-package customize :straight (:type built-in)
+  :custom
+  (custom-file (locate-user-emacs-file "custom-vars.el"))
+  :config
+  (load custom-file 'noerror 'nomessage))
+#+end_src
+
+cus-edit

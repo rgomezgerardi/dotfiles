@@ -1,0 +1,27 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Convenience wrappers for keybindings.
+https://github.com/noctuid/general.el
+
+#+begin_src emacs-lisp
+(use-package general
+  :demand
+  :defines texinfo-section-list
+  :config
+  ;; (general-auto-unbind-keys)  ; Automatic Key Unbinding
+  (general-setq auto-revert-interval 10)
+
+  (defconst leader "SPC")
+  (general-create-definer leader-def
+    :states '(motion normal insert emacs)
+    :keymaps 'override
+    :prefix leader
+    :non-normal-prefix (concat "M-" leader)
+    :prefix-command 'leader-prefix-command
+    :prefix-map 'leader-prefix-map)
+  
+  (general-def "<escape>" #'keyboard-escape-quit))
+#+end_src

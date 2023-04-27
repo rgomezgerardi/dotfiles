@@ -1,0 +1,17 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Highlight uncommitted changes using VC
+https://github.com/dgutov/diff-hl
+
+#+begin_src emacs-lisp
+(use-package diff-hl
+  :hook 
+  (dired-mode . diff-hl-dired-mode-unless-remote)
+  (magit-post-refresh . diff-hl-magit-post-refresh)
+  :config
+  ; use margin instead of fringe
+  (diff-hl-margin-mode))
+#+end_src

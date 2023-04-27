@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Displays tildes in the fringe on empty lines a la Vi.
+https://github.com/syl20bnr/vi-tilde-fringe
+
+#+begin_src emacs-lisp
+(use-package vi-tilde-fringe
+  :hook (prog-mode . vi-tilde-fringe-mode)
+; Disable for some modes
+  ((treemacs-mode
+    dashboard-mode) . (lambda () (vi-tilde-fringe-mode 0)))
+  :config ())  ; Show message if verbose is activated
+#+end_src

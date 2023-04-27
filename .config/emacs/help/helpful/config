@@ -1,0 +1,17 @@
+(use-package helpful
+  :general
+  (leader-def
+    "h" '(:ignore t :which-key "help")
+    "h f" #'(helpful-callable :wk "callable")
+    "h F" #'(helpful-function :wk "function")
+    "h o" #'(helpful-symbol :wk "symbol")
+    "h v" #'(helpful-variable :wk "variable")
+    "h c" #'(helpful-command :wk "command")
+    "h k" #'(helpful-key :wk "key")
+    "h i" #'(info :wk "info")
+    "h r" #'(info-emacs-manual :wk "emacs manual")
+    "h a" #'(consult-apropos :wk "apropos")
+    "h s" #'(describe-syntax :wk "syntax")
+    "h O" #'((lambda () (interactive) (info "org")) :wk "org manual")
+    "h R" #'((lambda () (interactive) (info "elisp")) :wk "elisp manual"))
+  :config ())  ; Show message if verbose is activated

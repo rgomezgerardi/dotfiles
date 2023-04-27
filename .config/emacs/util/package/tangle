@@ -1,0 +1,25 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Simple package system for Emacs
+
+#+begin_src emacs-lisp
+(require 'package)
+
+; An alist of archives from which to fetch
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+						 ("melpa-stable" . "https://stable.melpa.org/packages/")
+						 ("org" . "https://orgmode.org/elpa/")
+						 ("elpa" . "https://elpa.gnu.org/packages/")))
+
+; An alist of packages that are pinned to specific archives
+;(setq package-archives 'package-pinned-packages '(org . "org"))
+
+; Make installed packages available when Emacs starts
+(package-initialize)
+
+; Ensure that Emacs has fetched the package list
+(unless package-archive-contents (package-refresh-contents))
+#+end_src

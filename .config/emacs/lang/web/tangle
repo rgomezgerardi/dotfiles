@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Mode for editing web templates aka HTML files embedding parts and blocks.
+https://github.com/fxbois/web-mode
+
+#+begin_src emacs-lisp
+(use-package web-mode)
+#+end_src

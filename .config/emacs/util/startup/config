@@ -1,0 +1,15 @@
+(use-package startup :straight (:type built-in)
+  :init
+  (setq 
+   inhibit-startup-message t
+   inhibit-startup-echo-area-message t
+   inhibit-startup-screen t
+  
+   ; Buffer to show after starting Emacs
+   initial-buffer-choice
+   (lambda ()
+	 ;(get-buffer "*Org Agenda(d)*")
+	 (get-buffer "*Messages*")
+	)
+   )
+)

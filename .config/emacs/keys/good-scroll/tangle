@@ -1,0 +1,24 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Attempt at good pixel-based smooth scrolling in Emacs.
+https://github.com/io12/good-scroll.el
+
+#+begin_src emacs-lisp
+(use-package good-scroll
+:demand
+:preface
+:custom
+(good-scroll-step 50)
+:config
+(good-scroll-mode 1)
+:general
+("<wheel-up>"   'good-scroll-up
+ "<wheel-down>" 'good-scroll-down
+ ;; [remap scroll-up-command]          'good-scroll-up
+ ;; [remap scroll-down-command]          'good-scroll-down
+ [next] #'good-scroll-up-full-screen
+ [prior] #'good-scroll-down-full-screen))
+#+end_src

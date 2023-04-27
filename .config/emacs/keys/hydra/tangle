@@ -1,0 +1,30 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Make bindings that stick around.
+https://github.com/abo-abo/hydra
+
+#+begin_src emacs-lisp
+(use-package hydra
+	:config
+	  (defhydra hydra-zoom (:timeout 4)
+		"zoom"
+		("l" text-scale-increase "in")
+		("h" text-scale-decrease "out")
+		("f" nil "finished" :exit t))
+
+	  (defhydra hydra-yank-pop ()
+		"yank"
+		("C-y" yank nil)
+		("M-y" yank-pop nil)
+		("y" (yank-pop 1) "next")
+		("Y" (yank-pop -1) "prev")
+		("l" helm-show-kill-ring "list" :color blue))   ; or browse-kill-ring
+	:general
+	  (leader-def
+		"z z" '(hydra-zoom/body :which-key "scale text")
+		"M-y" '(hydra-yank-pop/yank-pop :which-key "yank pop")
+		"C-y" '(hydra-yank-pop/yank :which-key "yank")))
+#+end_src

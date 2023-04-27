@@ -1,0 +1,15 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+https://github.com/emacs-evil/evil-surround
+
+#+begin_src emacs-lisp
+(use-package evil-surround
+  :after evil
+  :demand
+  :config
+  (global-evil-surround-mode 1)
+)
+#+end_src

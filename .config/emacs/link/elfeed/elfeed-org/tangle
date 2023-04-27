@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Configure the Elfeed RSS reader with an Orgmode file
+https://github.com/remyhonig/elfeed-org
+
+#+begin_src emacs-lisp
+(use-package elfeed-org
+  ;; :after elfeed
+  :demand
+  :custom
+  (rmh-elfeed-org-files (list "/mnt/files/Ricardo/Documents/note/rss.org"))
+  :config ())  ; Show message if verbose is activated
+#+end_src

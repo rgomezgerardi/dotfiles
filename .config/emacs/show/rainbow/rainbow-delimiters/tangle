@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Highlight brackets according to their depth
+https://github.com/Fanael/rainbow-delimiters
+
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode)
+  :config ())  ; Show message if verbose is activated
+#+end_src

@@ -1,0 +1,31 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Typographic Ligatures in Emacs.
+https://github.com/mickeynp/ligature.el
+
+#+begin_src emacs-lisp
+(use-package ligature
+  :straight (ligature :type git :host github :repo "mickeynp/ligature.el")
+  :ghook ('after-init-hook #'global-ligature-mode)
+  :custom
+  (ligature-ignored-major-modes '(minibuffer-inactive-mode dashboard-mode))
+  (ligature-mode-set-explicitly t)
+  :config
+  (ligature-set-ligatures 't '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "\\\\"
+                               ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                               "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                               "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                               "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                               "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                               "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                               "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                               ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                               "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                               "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "?:" "://"
+                               "?=" "?." "??" ";;" "/*" "/=" "/>" "__" "~~" "(*" "*)" "||>"
+							   ;; "++" "//"  ; Trouble maker
+							   )))
+#+end_src

@@ -1,0 +1,12 @@
+(use-package doom-modeline				;
+  :after doom-themes
+  :demand
+  :custom
+  (column-number-mode t)
+  (inhibit-compacting-font-caches t)
+  (doom-modeline-height 16)  ; How tall the mode-line should be
+  (doom-modeline-icon t)  ; Whether display icons in the mode-line
+  (doom-modeline-indent-info nil)  ; Whether display the indentation information
+  :config
+  (doom-modeline-mode 1)
+)

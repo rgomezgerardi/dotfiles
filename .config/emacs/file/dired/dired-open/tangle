@@ -1,0 +1,19 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Open files from dired using using custom actions
+
+#+begin_src emacs-lisp
+  (use-package dired-open
+    :after dired
+    :commands
+    (dired dired-jump)
+    :config
+    ;; Doesn't work as expected!
+    ;(add-to-list 'dired-open-functions #'dired-open-xdg t)
+    ;; -- OR! --
+    (setq dired-open-extensions '(("png" . "sxiv")
+				  ("mkv" . "mpv"))))
+#+end_src

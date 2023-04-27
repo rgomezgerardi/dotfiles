@@ -1,0 +1,44 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Interface for display-line-numbers
+
+#+begin_src emacs-lisp
+(use-package display-line-numbers :straight (:type built-in)
+  :hook ((prog-mode conf-mode) . display-line-numbers-mode)
+  :config ())  ; Show message if verbose is activated
+
+
+
+
+; Disable line numbers for some modes
+;; (defcustom display-line-numbers-exempt-modes
+;;   '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode)
+;;   "Major modes on which to disable line numbers."
+;;   :group 'display-line-numbers
+;;   :type 'list
+;;   :version "green")
+
+;; (defun display-line-numbers--turn-on ()
+;;   "Turn on line numbers except for certain major modes.
+;; Exempt major modes are defined in `display-line-numbers-exempt-modes'."
+;;   (unless (or (minibufferp)
+;;               (member major-mode display-line-numbers-exempt-modes))
+;;     (display-line-numbers-mode)))
+
+;; (global-display-line-numbers-mode)
+
+
+
+
+
+
+;; (dolist (mode '(term-mode-hook
+;; 		dashboard-mode-hook
+;; 		org-mode-hook
+;; 		treemacs-mode-hook
+;; 		eshell-mode-hook))
+;;   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src

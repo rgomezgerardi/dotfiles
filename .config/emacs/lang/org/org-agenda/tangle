@@ -1,0 +1,153 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:header-args+: :noweb strip-export
+:END:
+
+Options concerning agenda views in Org mode.
+
+#+begin_src emacs-lisp
+(use-package org-agenda :straight (:type built-in)
+  :demand
+  :config
+  ;; (org-agenda nil "d")
+  (setq
+  org-agenda-file-regexp "\\`[^.].*\\(\\.org\\)?\\'"
+  org-agenda-files "/home/user/.config/emacs/agenda-file"
+  org-agenda-sticky t
+
+  <<org-agenda-startup>>
+  <<org-agenda-window>>
+
+  ; Daily/Weekly
+  org-agenda-span 'week
+  org-agenda-include-diary nil
+  )
+
+  <<org-agenda-custom-comands>>
+
+  :general
+  (leader-def
+    "o a"   #'(org-agenda :wk "agenda")
+    ;; "" #'(org-agenda-file-to-front :wk "file to front")
+  )
+)
+#+end_src   
+
+;; 'org-agenda-mode-map 
+;; org-toggle-sticky-agenda
+
+filter by internet connection
+(defun my-auto-exclude-fn (tag)
+  (when (cond ((string= tag "network")
+               (/= 0 (call-process "/sbin/ping" nil nil nil
+                                   "-c1" "-q" "google.com"))))
+    (concat "-" tag)))
+
+(setq org-agenda-auto-exclude-function #'my-auto-exclude-fn)
+
+***** Custom Commands
+
+#+begin_src emacs-lisp :tangle no :noweb-ref org-agenda-custom-comands
+(setq org-agenda-custom-commands '((
+    "d" "Dashboard"
+    agenda            ;3 Type of Search
+    ""                   ;4 Search Term
+    (
+	(org-agenda-span 1)
+	(org-agenda-overriding-header "")
+	(org-agenda-format-date "%A, %e %B %Y")
+	(org-agenda-prefix-format '((agenda . "%-12t")
+				    (timeline . "  % s")))
+	(org-agenda-remove-times-when-in-prefix t)
+	(org-agenda-todo-keyword-format "[ ]")
+	(org-agenda-scheduled-leaders '("" ""))
+	(org-agenda-remove-tags t)
+
+	(org-agenda-time-leading-zero t)
+	(org-agenda-time-grid '(
+	    (today remove-match)
+	    (0600 0700 0800 0900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200)
+	    "      " "----------------"
+	))
+	(org-agenda-current-time-string "<==============>")
+    )
+)))
+
+;; (format-time-string "%A, %e %B %Y")
+
+
+;; (setq org-agenda-custom-commands-contexts
+      ;; '(("a" "d" (in-mode . "message-mode"))))
+#+end_src
+
+
+    (agenda "" ((org-deadline-warning-days 7)))
+    (todo "NEXT" ((org-agenda-overriding-header "Next Tasks")))
+    (tags-todo "home" ((org-agenda-overriding-header "Home")))
+    (tags "garden")
+
+ Configure custom agenda views
+
+
+ 
+(setq org-agenda-custom-commands
+  '(("d" "Dashboard"
+     ((agenda "" ((org-deadline-warning-days 7)))
+      (todo "NEXT" ((org-agenda-overriding-header "Next Tasks")))
+      (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+    ("n" "Next Tasks"
+     ((todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))))
+
+
+    ("W" "Work Tasks" tags-todo "+work")
+
+    ;; Low-effort next actions
+    ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+     ((org-agenda-overriding-header "Low Effort Tasks")
+      (org-agenda-max-todos 20)
+      (org-agenda-files org-agenda-files)))
+
+    ("w" "Workflow Status"
+     ((todo "WAIT"
+            ((org-agenda-overriding-header "Waiting on External")
+             (org-agenda-files org-agenda-files)))
+      (todo "REVIEW"
+            ((org-agenda-overriding-header "In Review")
+             (org-agenda-files org-agenda-files)))
+      (todo "PLAN"
+            ((org-agenda-overriding-header "In Planning")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "BACKLOG"
+            ((org-agenda-overriding-header "Project Backlog")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "READY"
+            ((org-agenda-overriding-header "Ready for Work")
+             (org-agenda-files org-agenda-files)))
+      (todo "ACTIVE"
+            ((org-agenda-overriding-header "Active Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "COMPLETED"
+            ((org-agenda-overriding-header "Completed Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "CANC"
+            ((org-agenda-overriding-header "Cancelled Projects")
+             (org-agenda-files org-agenda-files)))))))
+
+***** Startup
+
+#+begin_src emacs-lisp :tangle no :noweb-ref org-agenda-startup
+org-agenda-start-with-log-mode t
+#+end_src
+
+***** Window
+
+#+begin_src emacs-lisp :tangle no :noweb-ref org-agenda-window
+org-agenda-window-setup 'only-window
+org-agenda-restore-windows-after-quit t
+#+end_src
+

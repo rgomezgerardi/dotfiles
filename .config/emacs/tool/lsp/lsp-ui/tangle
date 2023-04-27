@@ -1,0 +1,44 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+
+#+begin_src emacs-lisp
+(use-package lsp-ui
+  :after lsp-mode
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-sideline-mode 1)
+  ; Sideline
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-sideline-show-code-actions t)
+  (lsp-ui-sideline-update-mode #'point)
+  (lsp-ui-sideline-delay 0.6)
+  ; Peek
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-show-directory t)
+  ; Doc
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-delay 6.0)
+  (lsp-ui-doc-show-with-cursor t)
+  (lsp-ui-doc-show-with-mouse t)
+  ; Imenu
+  (lsp-ui-imenu-window-width 16)
+  (lsp-ui-imenu--custom-mode-line-format nil)
+  (lsp-ui-imenu-auto-refresh nil)
+  (lsp-ui-imenu-refresh-delay nil)
+  ;; :general
+  ;; (:keymaps 'lsp-ui-mode-map
+  ;;   "l p" '(:ignore t :which-key "peek")
+  ;;   "l p d" #'(lsp-ui-peek-find-definitions :wk "definition")
+  ;;   "l p r" #'(lsp-ui-peek-find-references :wk "reference")
+  ;;   "l p w" #'(lsp-ui-peek-find-workspace-symbol :wk "workspace symbol")
+  ;;   "l p i" #'(lsp-ui-peek-find-implementation :wk "implementation")
+  ;;   "l p b" #'(lsp-ui-peek-jump-backward :wk "jump backward")
+  ;;   "l p f" #'(lsp-ui-peek-jump-forward :wk "jump forward")
+  ;; )
+)
+#+end_src

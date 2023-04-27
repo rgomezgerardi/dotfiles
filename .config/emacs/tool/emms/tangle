@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Emms is the Emacs Multimedia System
+https://gnu.org/software/emms
+
+#+begin_src emacs-lisp
+(use-package emms)
+#+end_src

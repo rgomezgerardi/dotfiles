@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+#+begin_src emacs-lisp
+(use-package menu-bar :straight (:type built-in) 
+    :init
+    (menu-bar-mode 0)
+)
+#+end_src

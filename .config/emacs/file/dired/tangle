@@ -1,0 +1,69 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Directory editing.
+
+#+begin_src emacs-lisp
+(use-package dired
+  :straight (:type built-in)
+  :custom
+  (dired-listing-switches "-ahl -v --group-directories-first")
+  (dired-auto-revert-buffer t)  ; Automatically revert Dired buffers on revisiting their directory
+  (dired-dwim-target t)  ; suggest a target for moving/copying intelligently
+  (dired-hide-details-hide-symlink-targets nil)
+  (dired-recursive-copies  'always)  ; Always copy/delete recursively
+  (dired-recursive-deletes 'top)  ; Whether dired deletes directories recursively
+  (dired-create-destination-dirs 'ask)
+  :config
+  ; Don't complain about this command being disabled when we use it
+  (put 'dired-find-alternate-file 'disabled nil)
+  :general
+  (:states 'normal :keymaps 'dired-mode-map
+	  "h" #'dired-up-directory
+	  "l" #'dired-find-file))
+
+;; single invocation example
+;; (general-translate-key nil 'evil-normal-state-keymap
+;;   "n" "j"
+;;   "e" "k"
+;;   ...)
+;; cycling keys en masse
+;; (dolist (keymap keymaps-with-hjkl-keybindings)
+;;   (general-translate-key 'normal keymap
+;;     ;; colemak hnei is qwerty hjkl
+;;     "n" "j"
+;;     "e" "k"
+;;     "i" "l"
+;;     ;; add back nei
+;;     "j" "e"
+;;     "k" "n"
+;;     "l" "i"))
+#+end_src
+
+
+#+begin_src emacs-lisp :tangle no
+  ;(setq split-height-threshold nil)
+  ;(setq split-width-threshold 0)
+
+  ;(custom-set-variables
+  ; '(ediff-window-setup-function 'ediff-setup-windows-plain)
+  ; '(ediff-diff-options "-w")
+  ; '(ediff-split-window-function 'split-window-horizontally))
+  ;(add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+
+  ;(setq split-width-threshold (- (window-width) 10))
+  ;(setq split-height-threshold nil)
+  ;
+  ;(defun count-visible-buffers (&optional frame)
+  ;  "Count how many buffers are currently being shown. Defaults to selected frame."
+  ;  (length (mapcar #'window-buffer (window-list frame))))
+  ;
+  ;(defun do-not-split-more-than-two-windows (window &optional horizontal)
+  ;  (if (and horizontal (> (count-visible-buffers) 1))
+  ;      nil
+  ;    t))
+  ;
+  ;(advice-add 'window-splittable-p :before-while #'do-not-split-more-than-two-windows)
+#+end_src

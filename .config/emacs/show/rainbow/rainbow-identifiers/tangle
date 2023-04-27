@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Highlight identifiers according to their names
+https://github.com/Fanael/rainbow-identifiers
+
+#+begin_src emacs-lisp
+(use-package rainbow-identifiers
+  :hook (prog-mode . rainbow-identifiers-mode)
+  :config ())  ; Show message if verbose is activated
+#+end_src

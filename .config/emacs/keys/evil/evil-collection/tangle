@@ -1,0 +1,20 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A set of keybindings for Evil mode
+https://github.com/emacs-evil/evil-collection
+
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :demand
+  :after evil
+  :custom
+  (evil-collection-setup-minibuffer t)
+  ;; (evil-collection-outline-bind-tab-p nil)
+  :config
+  (evil-collection-init)
+)
+#+end_src

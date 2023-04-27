@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Mode for editing C# in emacs.
+https://github.com/emacs-csharp/csharp-mode
+
+#+begin_src emacs-lisp
+(use-package csharp-mode)
+#+end_src

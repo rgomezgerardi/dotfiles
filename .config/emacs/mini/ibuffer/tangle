@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Operate on buffers like dired
+
+#+begin_src emacs-lisp
+(use-package ibuffer :straight (:type built-in)
+  :general
+  (leader-def
+    "b i" #'(ibuffer :wk "ibuffer")
+    "b b" #'(ibuffer-list-buffers :wk "ibuffer list buffers")
+  )
+)
+#+end_src

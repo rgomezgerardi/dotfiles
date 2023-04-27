@@ -1,0 +1,9 @@
+(use-package marginalia
+  :demand
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  ;; :general
+  ;; (minibuffer-local-map
+   ;; "M-a" #'marginalia-cycle)
+  :config
+  (marginalia-mode 1))

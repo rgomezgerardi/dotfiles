@@ -1,0 +1,16 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Prettify headings and plain lists in Org mode
+https://github.com/integral-dw/org-superstar-mode
+
+#+begin_src emacs-lisp
+(use-package org-superstar
+  :after org
+  :ghook 'org-mode-hook
+  :custom
+  (org-superstar-headline-bullets-list '("●" "◉" "○" "◉" "○"))
+  :config ())  ; Show message if verbose is activated
+#+end_src   

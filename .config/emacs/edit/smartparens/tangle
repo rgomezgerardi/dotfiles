@@ -1,0 +1,21 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A minor mode for dealing with pairs in Emacs.
+https://github.com/Fuco1/smartparens
+
+#+begin_src emacs-lisp
+(use-package smartparens
+  :hook ((prog-mode
+		  text-mode
+		  conf-mode) . (lambda ()
+						 (smartparens-mode 1)
+						 (show-smartparens-mode 1)))
+  :config ())  ; Show message if verbose is activated
+  ;; :config
+  ;; (add-hook 'minibuffer-setup-hook 'turn-on-smartparens-strict-mode))
+  ;; (smartparens-global-strict-mode 1))
+  ;; sp-ignore-mode-list
+#+end_src

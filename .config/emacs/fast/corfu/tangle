@@ -1,0 +1,24 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Completion Overlay Region FUnction
+https://github.com/minad/corfu
+
+#+begin_src emacs-lisp
+(use-package corfu
+	:demand
+	:custom
+	(corfu-cycle t)
+	(corfu-auto t)
+	(corfu-auto-delay 0)
+	(corfu-auto-prefix 2)
+	:config
+	(corfu-global-mode 1)
+	:general
+	(corfu-map
+	 "M-j" #'corfu-next
+	 "M-k" #'corfu-previous)
+)
+#+end_src

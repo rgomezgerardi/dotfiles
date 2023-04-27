@@ -1,0 +1,10 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Cascading Style Sheets (CSS) file editing major mode.
+
+#+begin_src emacs-lisp
+(use-package css :straight (:type built-in))
+#+end_src

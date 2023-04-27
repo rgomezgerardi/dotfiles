@@ -1,0 +1,35 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Highlight or hide text according to cpp conditionals.
+
+#+begin_src emacs-lisp
+(use-package cpp :straight (:type built-in)
+  ;; :ghook 'c++-mode-hook
+  :config
+  (message "hello there!"))
+;compile c++ whit f9
+;(defun code-compile ()
+;  (interactive)
+;  (unless (file-exists-p "Makefile")
+;    (set (make-local-variable 'compile-command)
+;     (let ((file (file-name-nondirectory buffer-file-name)))
+;       (format "%s -o %s %s"
+;           (if  (equal (file-name-extension file) "cpp") "g++" "gcc" )
+;           (file-name-sans-extension file)
+;           file)))
+;    (compile compile-command)))
+;
+;(global-set-key [f9] 'code-compile)
+
+;; clang-format can be triggered using C-c C-f
+;; Create clang-format file using google style
+;; clang-format -style=google -dump-config > .clang-format
+;; (require 'clang-format)
+;; (global-set-key (kbd "C-c C-f") 'clang-format-region)
+
+;; (require 'modern-cpp-font-lock)
+;; (modern-c++-font-lock-global-mode t)
+#+end_src

@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+TeX, LaTeX, and SliTeX mode commands
+
+#+begin_src emacs-lisp
+(use-package tex :straight (:type built-in)
+  :ensure auctex)
+#+end_src

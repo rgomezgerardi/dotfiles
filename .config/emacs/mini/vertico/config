@@ -1,0 +1,38 @@
+(use-package vertico
+  :demand
+  :preface
+  (defun +/vertico-backward-updir ()
+	"Delete char before or go up directory for file cagetory vertico buffers."
+	(interactive)
+	(let ((metadata (completion-metadata (minibuffer-contents)
+   										 minibuffer-completion-table
+   										 minibuffer-completion-predicate)))
+	  (if (and (eq (char-before) ?/)
+   			   (eq (completion-metadata-get metadata 'category) 'file))
+   		  (let ((new-path (minibuffer-contents)))
+   			(delete-region (minibuffer-prompt-end) (point-max))
+   			(insert (abbreviate-file-name
+   					 (file-name-directory
+   					  (directory-file-name
+   					   (expand-file-name new-path))))))
+   		(call-interactively 'backward-delete-char))))
+  :custom
+  (vertico-count 16)
+  (vertico-cycle t)  ; Optionally enable cycling for `vertico-next' and `vertico-previous'
+  (vertico-resize nil)  ; Grow and shrink the Vertico minibuffer
+  ;; (enable-recursive-minibuffers t)  ; Enable recursive minibuffers
+  :config
+  (vertico-mode 1)
+  ;; (setq minibuffer-prompt-properties  ; Do not allow the cursor in the minibuffer prompt
+  ;; 		'(read-only t cursor-intangible t face minibuffer-prompt))
+  ;; (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+  :general
+  (vertico-map
+   "M-j" #'vertico-next
+   "M-S-j" #'vertico-next-group
+   "M-k" #'vertico-previous
+   "M-S-k" #'vertico-previous-group
+   "M-RET" #'vertico-exit-input
+   "<backspace>" #'+/vertico-backward-updir)
+  (minibuffer-local-map
+   "M-h" #'backward-kill-word))

@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+
+#+begin_src emacs-lisp
+(use-package treemacs-magit
+  :after (treemacs magit)
+  :demand)
+#+end_src

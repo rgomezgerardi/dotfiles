@@ -1,0 +1,20 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A use-package declaration for simplifying your ‘.emacs’.
+https://github.com/jwiegley/use-package
+
+#+begin_src emacs-lisp
+; Use package.el
+;(unless (package-installed-p 'use-package)
+;  (package-install 'use-package))
+;(eval-when-compile
+;  (require 'use-package))
+
+(setq use-package-always-defer t  
+      use-package-always-pin t
+      use-package-always-ensure nil
+      use-package-verbose t)
+#+end_src

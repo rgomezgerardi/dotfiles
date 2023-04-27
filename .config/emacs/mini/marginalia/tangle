@@ -1,0 +1,19 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Enrich existing commands with completion annotations.
+https://github.com/minad/marginalia
+
+#+begin_src emacs-lisp
+(use-package marginalia
+  :demand
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  ;; :general
+  ;; (minibuffer-local-map
+   ;; "M-a" #'marginalia-cycle)
+  :config
+  (marginalia-mode 1))
+#+end_src

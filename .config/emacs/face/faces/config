@@ -1,0 +1,7 @@
+(use-package faces :straight (:type built-in) 
+  :demand
+  :custom-face
+  (default ((t . (:family "Source Code Pro" :height 120))))
+  (fixed-pitch ((t . (:family "Monospace" :height 120))))
+  (variable-pitch ((t . (:family "Monospace" :height 120))))
+)

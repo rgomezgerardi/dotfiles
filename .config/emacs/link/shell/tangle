@@ -1,0 +1,30 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Running shell from within Emacs buffers.
+
+#+begin_src emacs-lisp
+(use-package shell :straight (:type built-in)
+  :custom
+  (comint-output-filter-functions
+   (remove 'ansi-color-process-output comint-output-filter-functions))
+
+  ; In Windows if you like PowerShell you can use this config:
+  ; https://docs.microsoft.com/en-us/archive/blogs/dotnetinterop/run-powershell-as-a-shell-within-emacs
+  (explicit-shell-file-name "powershell.exe")
+  (explicit-powershell.exe-args '())
+
+  :config
+  (add-hook 'shell-mode-hook
+	    (lambda ()
+	      ;; Disable font-locking in this buffer to improve performance
+	      (font-lock-mode -1)
+	      ;; Prevent font-locking from being re-enabled in this buffer
+	      (make-local-variable 'font-lock-function)
+	      (setq font-lock-function (lambda (_) nil))
+	      (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter nil t))))
+#+end_src
+
+Better colors: https://github.com/atomontage/xterm-color

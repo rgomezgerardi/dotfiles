@@ -1,0 +1,9 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+
+
+#+begin_src emacs-lisp
+#+end_src

@@ -1,0 +1,21 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Displays a visual hint when editing with evil.
+https://github.com/edkolev/evil-goggles
+
+#+begin_src emacs-lisp
+(use-package evil-goggles
+  :demand
+  :after evil
+  :custom
+  (evil-goggles-duration 0.3)
+  (evil-goggles-async-duration 0.9)
+  :config
+  (custom-set-faces
+   '(evil-goggles-default-face ((t (:inherit region :background "gray60")))))
+  (evil-goggles-mode 1)
+)
+#+end_src

@@ -1,0 +1,5 @@
+(use-package saveplace :straight (:type built-in)
+  :demand
+  :config
+  (save-place-mode 1)
+)

@@ -1,0 +1,28 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+
+#+begin_src emacs-lisp
+  (use-package dired-x
+	:straight nil
+	:hook (dired-mode . dired-omit-mode)
+	:config
+	(setq dired-omit-verbose nil
+		  dired-omit-files
+		  (concat dired-omit-files
+				  "\\|^.DS_Store\\'"
+				  "\\|^.project\\(?:ile\\)?\\'"
+				  "\\|^.\\(svn\\|git\\)\\'"
+				  "\\|^.ccls-cache\\'"
+				  "\\|\\(?:\\.js\\)?\\.meta\\'"
+				  "\\|\\.\\(?:elc\\|o\\|pyo\\|swp\\|class\\)\\'"))
+	;; Disable the prompt about whether I want to kill the Dired buffer for a
+	;; deleted directory. Of course I do!
+	(setq dired-clean-confirm-killing-deleted-buffers nil))
+	;; Let OS decide how to open certain files
+	;; (map! :map dired-mode-map
+	;; 	  :localleader
+	;; 	  "h" #'dired-omit-mode))
+#+end_src

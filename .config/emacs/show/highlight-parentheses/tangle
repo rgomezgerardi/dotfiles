@@ -1,0 +1,12 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A minor mode to highlight parentheses surrounding point.
+
+#+begin_src emacs-lisp
+(use-package highlight-parentheses
+  :hook ((prog-mode text-mode) . highlight-parentheses-mode)
+  :config ())  ; Show message if verbose is activated
+#+end_src

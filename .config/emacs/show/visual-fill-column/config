@@ -1,0 +1,8 @@
+(use-package visual-fill-column
+  :hook (visual-line-mode . visual-fill-column-mode)
+  ; Disable
+  ((mhtml-mode) . (lambda () (visual-fill-column-mode 0)))
+  :custom
+  (visual-fill-column-width 128)
+  (visual-fill-column-center-text t)
+  :config ())  ; Show message if verbose is activated

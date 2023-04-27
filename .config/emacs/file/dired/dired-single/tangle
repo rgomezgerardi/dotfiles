@@ -1,0 +1,17 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Reuse the current dired buffer to visit a directory
+https://github.com/crocket/dired-single
+
+#+begin_src emacs-lisp
+  (use-package dired-single
+    :after dired)
+    ;:config
+    ;(:keymaps '(dired-mode-map evil-normal-state-map)
+    ;(evil-collection-define-key 'normal 'dired-mode-map
+     ;"h" 'dired-single-up-directory
+     ;"l" 'dired-single-buffer))
+#+end_src

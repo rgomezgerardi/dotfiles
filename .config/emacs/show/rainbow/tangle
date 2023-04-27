@@ -1,0 +1,29 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Show color strings with a background color.
+https://github.com/emacsmirror/rainbow-mode
+
+#+begin_src emacs-lisp
+(use-package rainbow-mode
+  :preface
+  (defun rainbow-turn-off-hexadecimal ()
+    "Turn off hexadecimal colours in rainbow-mode."
+    (interactive)
+    (font-lock-remove-keywords
+     nil
+     `(,@rainbow-hexadecimal-colors-font-lock-keywords))
+    (font-lock-fontify-buffer))
+
+  (defun rainbow-turn-off-words ()
+    "Turn off word colours in rainbow-mode."
+    (interactive)
+    (font-lock-remove-keywords
+     nil
+     `(,@rainbow-x-colors-font-lock-keywords))
+    (font-lock-fontify-buffer))
+  :hook ((prog-mode text-mode) . rainbow-mode)
+  :config ())  ; Show message if verbose is activated
+#+end_src

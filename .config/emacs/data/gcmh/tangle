@@ -1,0 +1,19 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Enforce a sneaky Garbage Collection strategy to minimize GC interference with user activity
+https://gitlab.com/koral/gcmh
+
+#+begin_src emacs-lisp
+(use-package gcmh
+  :demand
+  :custom
+  (garbage-collection-messages nil)
+  (gcmh-verbose nil)
+  ;(gcmh-high-cons-threshold)
+  ;(gc-cons-threshold (* 50 1000 1000))  ; The default is 800 kilobytes
+  ;(gc-cons-threshold (* 2 1000 1000))  ; Make gc pauses faster by decreasing the threshold
+  :config ())  ; Show message if verbose is activated
+#+end_src

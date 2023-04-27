@@ -1,0 +1,39 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A free/libre and open-source extensible framework that revolutionizes the graphical capabilities of Emacs.
+https://github.com/emacs-eaf/emacs-application-framework
+
+#+begin_src emacs-lisp
+;; (use-package eaf
+;;   ;; :straight (:type built-in)
+;;   :straight nil
+;;   :load-path "~/.config/emacs/site-lisp/emacs-application-framework"
+;;   :demand
+;;   :custom
+;;   ; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
+;;   (eaf-browser-continue-where-left-off t)
+;;   (eaf-browser-enable-adblocker t)
+;;   (browse-url-browser-function 'eaf-open-browser)
+;;   :config
+;;   (defalias 'browse-web #'eaf-open-browser)
+;;   (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
+;;   (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
+;;   (eaf-bind-key take_photo "p" eaf-camera-keybinding)
+;;   (eaf-bind-key nil "M-q" eaf-browser-keybinding) ;; unbind, see more in the Wiki
+;; )
+
+;; (require 'eaf-browser)
+;; (require 'eaf-pdf-viewer)
+;; (require 'eaf-demo)
+;; (require 'eaf-rss-reader)
+
+(use-package eaf
+:straight '(eaf :type git
+                :host github
+		:repo "emacs-eaf/emacs-application-framework"
+		:files ("*"))
+)
+#+end_src

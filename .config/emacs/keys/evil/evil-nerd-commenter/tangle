@@ -1,0 +1,21 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Comment/uncomment lines efficiently. Like Nerd Commenter in Vim
+https://github.com/redguardtoo/evil-nerd-commenter
+
+#+begin_src emacs-lisp
+(use-package evil-nerd-commenter
+  :after evil
+  :preface
+  (defun counsel-imenu-comments ()
+	(interactive)
+	(let* ((imenu-create-index-function 'evilnc-imenu-create-index-function))
+	  (unless (featurep 'counsel) (require 'counsel))
+	  (counsel-imenu)))
+  :general
+  ('motion
+   "M-;" 'evilnc-comment-or-uncomment-lines))
+#+end_src

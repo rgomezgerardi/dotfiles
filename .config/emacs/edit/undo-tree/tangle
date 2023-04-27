@@ -1,0 +1,14 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Treat undo history as a tree
+https://gitlab.com/tsc25/undo-tree
+
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :disabled t
+    :demand
+    :config (global-undo-tree-mode))
+#+end_src

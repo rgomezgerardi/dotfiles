@@ -1,0 +1,24 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Operations on the current project
+
+#+begin_src emacs-lisp
+(use-package project :straight (:type built-in)
+  :demand
+  :custom
+  ;; (projectile-discover-projects-in-search-path t)
+  ;; (projectile-project-search-path
+   ;; '("/mnt/files/Ricardo/Projects"))
+  :general
+  (leader-def
+    "p" '(:ignore t :which-key "project")
+    "p f" '(project-find-file :which-key "file")
+    "p d" '(project-find-dir :which-key "directory")
+    "p k" '(project-kill-buffers :which-key "kill buffers")
+))
+
+(project-current)
+#+end_src

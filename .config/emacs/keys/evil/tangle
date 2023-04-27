@@ -1,0 +1,35 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Extensible Vi layer for Emacs.
+https://github.com/emacs-evil/evil
+
+#+begin_src emacs-lisp
+(use-package evil
+  :demand
+  :custom
+  (evil-respect-visual-line-mode t)
+  (evil-shift-width 4)
+  (evil-undo-system 'undo-redo)
+  (evil-split-window-below t)
+  (evil-vsplit-window-right t)
+  (evil-want-C-i-jump nil)
+  (evil-want-C-u-scroll nil)
+  (evil-want-integration t)
+  (evil-want-keybinding nil)
+  (evil-auto-indent nil)
+  (evil-echo-state nil)
+  :config
+  (evil-mode 1)
+  :general
+  ('insert
+   "C-g" #'evil-normal-state)
+  :gfhook
+  ; Issue: https://github.com/noctuid/evil-guide#why-dont-keys-defined-with-evil-define-key-work-immediately
+  ('after-init-hook #'(lambda (&rest _)
+       (when-let ((messages-buffer (get-buffer "*Messages*")))
+         (with-current-buffer messages-buffer
+           (evil-normalize-keymaps)))) nil nil t))
+#+end_src

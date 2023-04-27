@@ -1,0 +1,8 @@
+(use-package exec-path-from-shell
+  :demand
+  :custom
+  (exec-path-from-shell-arguments '("-l"))
+  :config
+  ;  gnu/linux Linux |  windows-nt Windows | darwin macOS
+  (when (memq system-type '(gnu/linux darwin))
+	(exec-path-from-shell-initialize)))

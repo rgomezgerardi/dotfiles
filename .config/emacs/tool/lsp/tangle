@@ -1,0 +1,45 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Client for Language Server Protocol
+https://github.com/emacs-lsp/lsp-mode
+
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :preface
+  (defun +/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(orderless))) ;; Configure orderless
+          ;; '(flex) ;; Configure flex (built-in)
+  :hook
+  ((
+    mhtml-mode
+    css-mode
+    js-mode  ; ts-ls
+    ;; c++-mode
+    ;; sh-mode
+    ;; python-mode
+    gdscript-mode
+  ) . lsp-deferred)
+  (lsp-completion-mode . +/lsp-mode-setup-completion)
+  (lsp-mode . lsp-enable-which-key-integration)  ; Which-key integration
+  :custom
+  (lsp-completion-provider :none) ; we use corfu!
+  (lsp-keymap-prefix "C-c l")
+;;   (lsp-modeline-diagnostics-scope :workspace)
+;;   (lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+;;   (lsp-modeline-code-actions-segments '(count icon name))
+  :config
+  (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
+;;   (lsp-headerline-breadcrumb-mode 1)
+;;   (lsp-modeline-code-actions-mode 1)
+  ;; :general
+  ;; (leader-def :keymaps 'lsp-mode-map
+    ;; "l" '(:ignore t :which-key "lsp")
+  ;; )
+)
+#+end_src

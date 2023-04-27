@@ -1,0 +1,14 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+An Emacs minor mode that highlights numeric literals in source code.
+https://github.com/Fanael/highlight-numbers
+
+#+begin_src emacs-lisp
+(use-package highlight-numbers
+  :hook ((prog-mode text-mode) . highlight-numbers-mode)
+  :config ())  ; Show message if verbose is activated
+;; '(highlight-numbers-number ((t (:foreground "#f0ad6d"))))
+#+end_src

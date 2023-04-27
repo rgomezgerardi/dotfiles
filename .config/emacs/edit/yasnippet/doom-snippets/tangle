@@ -1,0 +1,13 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Doom Emacs' Snippet Library
+https://github.com/hlissner/doom-snippets
+
+#+begin_src emacs-lisp
+(use-package doom-snippets
+  :straight (doom-snippets :type git :host github :repo "hlissner/doom-snippets" :files ("*.el" "*"))
+  :after yasnippet)
+#+end_src
