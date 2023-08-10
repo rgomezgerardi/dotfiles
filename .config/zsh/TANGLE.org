@@ -1,10 +1,12 @@
-# -*- mode: org -*- #
+# -*- org -*- #
 :PROPERTIES:
-:ID: zsh
+:id: zsh
+:author: Ricardo Gomez
+:email:  rgomezgerardi@gmail.com
+:title:  Zsh Custom Configuration 
+:header-args+: :noweb strip-export
+:header-args+: :cache yes
 :END:
-#+TITLE: Zsh Custom Configuration
-#+AUTHOR: Ricardo Gomez
-#+EMAIL: rgomezgerardi@gmail.com
 
 * Runcom
 :PROPERTIES:
@@ -12,110 +14,215 @@
 :END:
 Run Commands
 
-#+begin_src shell
-# Source
-# [ -f "$XDG_CONFIG_HOME/zsh/.zshalias" ] && source "$XDG_CONFIG_HOME/zsh/.zshalias"
+** Source
+
+#+begin_src zsh
 source "$ZDOTDIR/.zshalias" 
-source "$ZDOTDIR/.zshprompt" 
+#+end_src
 
-# source "zsh-exports"
-# source "zsh-vim-mode"
-# source "zsh-aliases"
-# source "zsh-prompt"
+** History
 
-# Add custom funtions completion
-fpath+="$ZDOTDIR/completion/"
+#+begin_src zsh
+[[ -d "$XDG_CACHE_HOME/zsh"  ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+setopt APPEND_HISTORY
+setopt BANG_HIST              # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format.
+setopt INC_APPEND_HISTORY     # Write to the history file immediately, not when the shell exits.
+setopt HIST_EXPIRE_DUPS_FIRST # Expire a duplicate event first when trimming history.
+setopt HIST_IGNORE_DUPS       # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS   # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_FIND_NO_DUPS      # Do not display a previously found event.
+setopt HIST_IGNORE_SPACE      # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY            # Do not execute immediately upon history expansion.
+setopt HIST_BEEP              # Beep when accessing non-existent history.
+setopt SHARE_HISTORY
 
-# History
-mkdir -p "$XDG_CACHE_HOME/zsh"
-HISTFILE="$XDG_CACHE_HOME/zsh/histfile"
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory
+export ZCACHEDIR="$XDG_CACHE_HOME/zsh"
+export HISTFILE="$ZCACHEDIR/histfile"
+export HISTSIZE=10000
+export SAVEHIST=10000
 
-# Enable colors
-autoload -Uz colors && colors
+# Lists the ten most used commands.
+alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+#+end_src
 
-# Basic auto/tab completion
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-#zstyle ':completion::complete:lsof:*' menu yes select
-zmodload zsh/complist
-_comp_options+=(globdots)		# Include hidden files.
+** COMMENT Completion
 
+#+begin_src zsh
+# Folder
+_zcompdump="$XDG_CACHE_HOME/zsh/compdump"
+_zcompcache="$XDG_CACHE_HOME/zsh/compcache"
+
+# Options
+setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
+setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
+setopt AUTO_MENU           # Show completion menu on a successive tab press.
+setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
+setopt EXTENDED_GLOB       # Needed for file modification glob modifiers with compinit
+unsetopt MENU_COMPLETE     # Do not autoselect the first completion entry.
+unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
+
+# Styles
+# Use caching to make completion for commands such as dpkg and apt usable.
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path "$_zcompcache"
+# zstyle ':completion:*' menu select
+# zstyle ':completion::complete:lsof:*' menu yes select
 # Use case-insensitive and partial completion
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-setopt no_list_ambiguous
-zstyle ":completion:*:descriptions" format "%B%d%b"
+# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# setopt no_list_ambiguous
+# zstyle ":completion:*:descriptions" format "%B%d%b"
 
-# Expand Global Alias
-globalias() {
-   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
-     zle _expand_alias
-     zle expand-word
-   fi
-   zle self-insert
-}
-zle -N globalias
-bindkey " " globalias
-bindkey "^ " magic-space           # control-space to bypass completion
-bindkey -M isearch " " magic-space # normal space during searches
+# Init
+# Initialize completion styles. Users can set their preferred completion style by
+# calling `compstyle <compstyle>` in their .zshrc, or by defining their own
+# `compstyle_<name>_setup` functions similar to the zsh prompt system.
+fpath+="${0:A:h}/functions"
+autoload -Uz compstyleinit && compstyleinit
+
+# Load and initialize the completion system ignoring insecure directories with a
+# cache time of 20 hours, so it should almost always regenerate the first time a
+# shell is opened each day.
+autoload -Uz compinit
+_comp_files=($_zcompdump(Nmh-20))
+if (( $#_comp_files )); then
+  compinit -i -C -d "$_zcompdump"
+else
+  compinit -i -d "$_zcompdump"
+  # Keep $_zcompdump younger than cache time even if it isn't regenerated.
+  touch "$_zcompdump"
+fi
+# zmodload zsh/complist
+# _comp_options+=(globdots)		# Include hidden files.
+
+# Cleanup
+unset _comp_files _zcompdump _zcompcache
+#+end_src
+
+** Zinit
+
+#+begin_src zsh
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zsh/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+source "$ZDOTDIR/.zplugin"
+#+end_src
+
+** SSH Agent
+
+#+begin_src shell
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+#+end_src
+
+** COMMENT Antidote
+
+#+begin_src zsh
+mkdir -p "$ZDOTDIR/plugin"
+
+if [ -d "$ZDOTDIR/antidote" ] ; then
+    (git -C "$ZDOTDIR/antidote" pull --quiet https://github.com/mattmc3/antidote.git &)
+else
+    git clone --depth=1 https://github.com/mattmc3/antidote.git $ZDOTDIR/antidote && clear
+fi
+
+source $ZDOTDIR/antidote/antidote.zsh
+antidote load $ZDOTDIR/.zplugin
+#+end_src
+
+** COMMENT other
+#+begin_src zsh
+# # Source
+# # [ -f "$XDG_CONFIG_HOME/zsh/.zshalias" ] && source "$XDG_CONFIG_HOME/zsh/.zshalias"
+# source "$ZDOTDIR/.zshprompt" 
+
+# # source "zsh-exports"
+# # source "zsh-vim-mode"
+# # source "zsh-aliases"
+# # source "zsh-prompt"
+
+# # Add custom funtions completion
+# fpath+="$ZDOTDIR/completion/"
+
+# # If not running interactively, don't do anything
+# [[ $- != *i* ]] && return
+
+# # Enable colors
+# autoload -Uz colors && colors
 
 
-# some useful options (man zshoptions)
-setopt autocd  # Automatically cd into directories by just typing the directory name
-setopt autopushd # Keep a directory stack of all the directories you cd to in a session
-setopt pushdignoredups  # Use Git-like -N instead of the default +N
-setopt autocd extendedglob nomatch menucomplete notify
 
-setopt interactive_comments
-stty stop undef		# Disable ctrl-s to freeze terminal.
-zle_highlight=('paste:none')
+# # Expand Global Alias
+# globalias() {
+#    if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+#      zle _expand_alias
+#      zle expand-word
+#    fi
+#    zle self-insert
+# }
+# zle -N globalias
+# bindkey " " globalias
+# bindkey "^ " magic-space           # control-space to bypass completion
+# bindkey -M isearch " " magic-space # normal space during searches
 
-# beeping is annoying
-# unsetopt BEEP
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
+# # some useful options (man zshoptions)
+# setopt autocd  # Automatically cd into directories by just typing the directory name
+# setopt autopushd # Keep a directory stack of all the directories you cd to in a session
+# setopt pushdignoredups  # Use Git-like -N instead of the default +N
+# setopt autocd extendedglob nomatch menucomplete notify
 
-# FZF 
-# TODO update for mac
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+# setopt interactive_comments
+# stty stop undef		# Disable ctrl-s to freeze terminal.
+# zle_highlight=('paste:none')
 
-compinit
+# # beeping is annoying
+# # unsetopt BEEP
 
-# Speedy keys
-xset r rate 210 60
+# autoload -U up-line-or-beginning-search
+# autoload -U down-line-or-beginning-search
+# zle -N up-line-or-beginning-search
+# zle -N down-line-or-beginning-search
 
-# zsh parameter completion for the dotnet CLI
+# # FZF 
+# # TODO update for mac
+# [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+# [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+# [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
+# [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# # export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 
-_dotnet_zsh_complete()
-{
-  local completions=("$(dotnet complete "$words")")
+# # Speedy keys
+# xset r rate 210 60
 
-  reply=( "${(ps:\n:)completions}" )
-}
+# # zsh parameter completion for the dotnet CLI
 
-compctl -K _dotnet_zsh_complete dotnet
+# _dotnet_zsh_complete()
+# {
+#   local completions=("$(dotnet complete "$words")")
+
+#   reply=( "${(ps:\n:)completions}" )
+# }
+
+# compctl -K _dotnet_zsh_complete dotnet
 
 
 # For QT Themes
-export QT_QPA_PLATFORMTHEME=qt5ct
+#export QT_QPA_PLATFORMTHEME=qt5ct
 
-eval "$(zoxide init zsh)"
+#eval "$(zoxide init zsh)"
 #+end_src
 
-** Key-bindings
+** COMMENT Key-bindings
 
 #+begin_src shell
 # bindkey -s '^o' 'ranger^M'
@@ -262,152 +369,102 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 #+end_src
 
-** Plugins
-For more plugins: https://github.com/unixorn/awesome-zsh-plugins
-More completions https://github.com/zsh-users/zsh-completions
-
-#+begin_src shell
-# zsh_add_plugin "zsh-users/zsh-autosuggestions"
-# zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
-# zsh_add_plugin "hlissner/zsh-autopair"
-# zsh_add_completion "esc/conda-zsh-completion" false
-#+end_src
-
-* Prompt
+* Plugin
 :PROPERTIES:
-:header-args:     :tangle .zshprompt :shebang "#!/bin/zsh"
+:header-args:     :tangle .zplugin :shebang "#!/bin/zsh"
 :END:
 
-** COMMENT Manual
+** COMMENT Pure
+Pretty, minimal and fast ZSH prompt
+https://github.com/sindresorhus/pure
 
-#+begin_src shell
-# autoload vcs
-# autoload -Uz vcs_info
-
-# # Enable only git 
-# zstyle ':vcs_info:*' enable git 
-
-# # setup a hook that runs before every prompt. 
-# precmd_vcs_info() { vcs_info }
-# precmd_functions+=( precmd_vcs_info )
-# setopt prompt_subst
-
-# # add a function to check for untracked files in the directory.
-# # from https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
-# zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
-
-# +vi-git-untracked(){
-#     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
-#         git status --porcelain | grep '??' &> /dev/null ; then
-#         # This will show the marker if there are any untracked files in repo.
-#         # If instead you want to show the marker only if there are untracked
-#         # files in $PWD, use:
-#         #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
-#         hook_com[staged]+='!' # signify new files with a bang
-#     fi
-# }
-
-# # zstyle ':vcs_info:*' check-for-changes true
-# # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
-# # zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
-
-# # PS1="%F{#000000}%K{#f0f0f0}  %k%f%F{#f0f0f0}%K{#1793d1}%k%f%F{#f0f0f0}%K{#1793d1} %B%4(~,../%3~,%~)%b %k%f%F{#1793d1}%f "
-
-# # format our main prompt for hostname current folder, and permissions.
-# PROMPT="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
-# # PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
-# PROMPT+="\$vcs_info_msg_0_ "
-
-# https://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
-# also ascii escape codes
+#+begin_src zsh
+# Load the pure theme, with zsh-async library that's bundled with it.
+zi ice pick"async.zsh" src"pure.zsh"
+zi light sindresorhus/pure
+clear
 #+end_src
 
-** Spaceship
+** Powerleve10k
+Powerlevel10k is a theme for Zsh. It emphasizes speed, flexibility and out-of-the-box experience.
+https://github.com/romkatv/powerlevel10k
 
-#+begin_src shell
-eval "$(starship init zsh)"
-#+end_src
+#+begin_src zsh
+# Load powerlevel10k theme
+zinit ice depth"1" # git clone depth
+zinit light romkatv/powerlevel10k
 
-* Profile
-:PROPERTIES:
-:header-args:     :tangle ../../.zprofile :shebang "#!/bin/zsh"
-:END:
-
-** Global Variables 
-
-#+begin_src shell
-# XDG
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-
-# X11
-export XINITRC="$XDG_CONFIG_HOME/xorg/xinitrc"
-export MODMAP="$XDG_CONFIG_HOME/xorg/xmodmap"
-export RESOURCES="$XDG_CONFIG_HOME/xorg/xresources"
-export SESSION="$XDG_CONFIG_HOME/xorg/xsession"
-
-# Zsh
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-#+end_src
-
-** Start Xorg
-
-#+begin_src shell
-# Start Xorg
-if [ -z "$DISPLAY" ] && [ "$XDG_VTNR"  -eq 1 ]; then
-   mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/.local/share/xorg"
-   exec startx "$XINITRC" -keeptty > ~/.local/share/xorg/xorg.log 2>&1
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Start and add the ssh-aget private key of github
-#eval "$(ssh-agent -s)"
-#ssh-add ~/.config/git/ssh/arch
-#trap 'kill $SSH_AGENT_PID' EXIT
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 #+end_src
 
-** SSH Agent
+** Abbr
+zsh-abbr is the zsh manager for auto-expanding abbreviations
+https://github.com/olets/zsh-abbr
 
-#+begin_src shell
-# Set up the SSH agent for key management.
-#if eval `ssh-agent -s`; then
-#    # Only want to add keys on an SSH client, not the server.
-#    if [ "$HOSTNAME" == 'Z11' ]; then
-#	[ -z "$SSH_TTY" ] && ssh-add "$HOME"/.ssh/rsa_{ss,sam,vm}
-#    elif [ "$HOSTNAME" == 'Sam' ]; then
-#	[ -z "$SSH_TTY" ] && ssh-add "$HOME/.ssh/rsa_gitsam"
-#    fi
-#    trap 'kill $SSH_AGENT_PID' EXIT
-#fi
-
-#{
-#	# The RHEL recommended umask for much more safety when creating new files
-#	# and directories. This is the equivalent of octal 700 and 600 for
-#	# directories and files, respectively; drwx------ and -rw-------.
-#	umask 0077
-#
-#	# I need this for when I use my configurations remotely, via SSH.
-#	if [ -n "$SSH_TTY" ] && [ -f "$HOME/.bashrc" ]; then
-#		. "$HOME/.bashrc"
-#	fi
-#
-#	# Set up the SSH agent for key management.
-#	if eval `ssh-agent -s`; then
-#		# Only want to add keys on an SSH client, not the server.
-#		if [ "$HOSTNAME" == 'Z11' ]; then
-#			[ -z "$SSH_TTY" ] && ssh-add "$HOME"/.ssh/rsa_{ss,sam,vm}
-#		elif [ "$HOSTNAME" == 'Sam' ]; then
-#			[ -z "$SSH_TTY" ] && ssh-add "$HOME/.ssh/rsa_gitsam"
-#		fi
-#
-#		trap 'kill $SSH_AGENT_PID' EXIT
-#	fi
-#
-#	PATH+=":$HOME/bin"
-#} &> /dev/null
+#+begin_src zsh
+zinit light olets/zsh-abbr
+abbr import-aliases --quieter --force
 #+end_src
 
-* Aliasing  
+** COMMENT History Substring Search
+This is a clean-room implementation of the Fish shell's history search feature
+https://github.com/zsh-users/zsh-history-substring-search
+
+#+begin_src zsh
+zinit light zdharma-continuum/zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+#+end_src
+
+** History Search Multi Word
+Binds Ctrl-R to a widget that searches for multiple keywords in an AND fashion.
+https://github.com/zdharma-continuum/history-search-multi-word
+
+#+begin_src zsh
+zinit light zdharma-continuum/history-search-multi-word
+#+end_src
+
+** Syntax Highlighting
+Feature rich syntax highlighting for Zsh.
+https://github.com/zdharma-continuum/fast-syntax-highlighting
+
+#+begin_src zsh
+zi wait lucid light-mode for atinit"zicompinit; zicdreplay" zdharma-continuum/fast-syntax-highlighting
+#+end_src
+
+** Autosuggestion
+Fish-like fast/unobtrusive autosuggestions for zsh.
+https://github.com/zsh-users/zsh-autosuggestions
+
+#+begin_src zsh
+zi wait lucid light-mode for atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions
+#+end_src
+
+** Completion
+A minimal, opinionated set of ZSH plugins designed to be small, simple, and focused.
+https://github.com/belak/zsh-utils
+
+#+begin_src zsh
+zinit light belak/zsh-utils
+#+end_src
+
+** Completions
+Additional completion definitions for Zsh.
+https://github.com/zsh-users/zsh-completions
+
+#+begin_src zsh
+zi wait lucid light-mode for blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
+#+end_src
+
+* Aliases  
 :PROPERTIES:
 :header-args:     :tangle .zshalias :shebang "#!/bin/zsh"
 :END:
@@ -415,7 +472,7 @@ fi
 ** Global
 
 #+begin_src shell
-alias -g bg="&> /dev/null &"
+alias -g bg="> /dev/null 2>&1 &"
 #+end_src
 
 ** Suffix
@@ -423,11 +480,11 @@ alias -g bg="&> /dev/null &"
 #+begin_src shell
 alias -s txt="$EDITOR"
 alias -s {jpg,png,bmp}="$IMAGE_VIEWER"
-alias -s md="$IDlE"
+alias -s {md,tex,py}="$VISUAL"
 #+end_src
 
 ** Simple
-*** Color Support
+*** COMMENT Color Support
 	
 #+begin_src shell
 if [ -x /usr/bin/dircolors ]; then
@@ -441,7 +498,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 #+end_src
 
-*** Flags
+*** COMMENT Flags
 
 #+begin_src shell
 alias cp="cp --interactive --verbose"
@@ -458,7 +515,7 @@ alias mpv="mpv --player-operation-mode=pseudo-gui"
 alias rg="rg --sort path"
 #+end_src
 
-*** Package Manager
+*** COMMENT Package Manager
 **** Arch
 
 #+begin_src shell
@@ -506,7 +563,7 @@ alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | n
 alias archlinx-fix-keys="sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman-key --refresh-keys"
 #+end_src
 
-*** Navigation
+*** COMMENT Navigation
 
 #+begin_src shell
 alias ..='cd ..' 
@@ -521,7 +578,7 @@ alias ll='ls -al'
 alias l.="ls -A | egrep '^\.'"
 #+end_src
 
-*** Git
+*** COMMENT Git
 
 #+begin_src shell
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -530,7 +587,7 @@ alias rmgitcache="rm -r ~/.cache/git"
 # alias s="git checkout stable"
 #+end_src
 
-*** System Info
+*** COMMENT System Info
 
 #+begin_src shell
 alias userlist="cut -d: -f1 /etc/passwd"
@@ -554,7 +611,7 @@ alias sysfailed="systemctl list-units --failed"
 alias syslistenabled="systemctl list-unit-files --state=enabled"
 #+end_src
 
-*** Mount and Umount Devices
+*** COMMENT Mount and Umount Devices
 
 #+begin_src shell
 alias mount-iso='sudo mount -o loop --target /mnt/iso --source'
@@ -568,7 +625,7 @@ alias umount-dvd='sudo umount /mnt/dvd'
 alias umount-phone="fusermount -u $PHONE"
 #+end_src
 
-*** Youtube-DL
+*** COMMENT Youtube-DL
 
 #+begin_src shell
 alias yt='youtube-dl'
@@ -585,7 +642,7 @@ alias ytv="yt --format 'best[ext = mp4][height <= 480]'"
 alias ytv-best="yt --format bestvideo+bestaudio "
 #+end_src
 
-*** Security
+*** COMMENT Security
 
 #+begin_src shell
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
@@ -594,7 +651,7 @@ alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 alias fix-keyserver="[ -d ~/.gnupg ] || mkdir ~/.gnupg ; cp /etc/pacman.d/gnupg/gpg.conf ~/.gnupg/ ; echo 'done'"
 #+end_src
 
-*** Maintenance
+*** COMMENT Maintenance
 
 #+begin_src shell
 alias jctl='journalctl -p 3 -xb'
@@ -614,7 +671,7 @@ alias fix-pacman-conf="/usr/local/bin/arcolinux-fix-pacman-conf"
 alias fix-pacman-keyserver="/usr/local/bin/arcolinux-fix-pacman-gpg-conf"
 #+end_src
 
-*** Program
+*** COMMENT Program
 
 #+begin_src shell
 # alias emacs="~/.local/bin/emacs"
@@ -632,7 +689,7 @@ alias alacritty='LIBGL_ALWAYS_SOFTWARE=1 alacritty'
 { command -v neomutt &> /dev/null } && alias mutt='neomutt'
 #+end_src
 
-*** Others
+*** COMMENT Others
 
 #+begin_src shell
 
@@ -663,21 +720,70 @@ alias tosddm="sudo systemctl enable sddm.service -f ; echo 'Sddm is active - reb
 alias bls="betterlockscreen -u /usr/share/backgrounds/arcolinux/"
 #+end_src
 
+* Profile
+:PROPERTIES:
+:header-args:     :tangle .zprofile :shebang "#!/bin/zsh"
+:END:
+Used for executing user's commands at start, will be read when starting as a login shell.
+Typically used to autostart graphical sessions and to set session-wide environment variables.
+
+** COMMENT Start Xorg
+
+#+begin_src shell
+# Start Xorg
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR"  -eq 1 ]; then
+   mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/.local/share/xorg"
+   exec startx "$XINITRC" -keeptty > ~/.local/share/xorg/xorg.log 2>&1
+fi
+
+# Start and add the ssh-aget private key of github
+#eval "$(ssh-agent -s)"
+#ssh-add ~/.config/git/ssh/arch
+#trap 'kill $SSH_AGENT_PID' EXIT
+#+end_src
+
 * Enviroment
 :PROPERTIES:
-:header-args:     :tangle .zshenv :shebang "#!/bin/zsh" :comments org
+:header-args:     :tangle ../../.zshenv :shebang "#!/bin/zsh" :comments org
 :END:
+
+Used for setting user's environment variables; it should not contain commands that produce output or assume the shell is attached to a TTY.
+When this file exists it will always be read.
 
 ** System
 
 #+begin_src shell
-export PATH="${PATH:+${PATH}:}$(find ~/.local/bin -type d -printf '%p:' | sed 's/:$//')"
-export PATH="$PATH:$HOME/.config/emacs/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.local/share/go/bin"
+#export PATH="${PATH:+${PATH}:}$(find ~/.local/bin -type d -printf '%p:' | sed 's/:$//')"
+#export PATH="$PATH:$HOME/.config/emacs/bin"
+#export PATH="$PATH:$HOME/.cargo/bin"
+#export PATH="$PATH:$HOME/.local/share/go/bin"
+# append
+#path+=('/home/david/pear/bin')
+# or prepend
+#path=('/home/david/pear/bin' $path)
+# export to sub-processes (make it inherited by child processes)
+#export PATH
 
 # export MANPAGER='nvim +Man!'
 export MANWIDTH=999
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Other
+export LANG=en_US.UTF-8
+
+# Flameshot
+#export SDL_VIDEODRIVER=wayland
+#export _JAVA_AWT_WM_NONREPARENTING=1
+#export QT_QPA_PLATFORM=wayland
+#export XDG_CURRENT_DESKTOP=sway
+#export XDG_SESSION_DESKTOP=sway
 
 #Ibus settings if you need them
 #type ibus-setup in terminal to change settings and start the daemon
@@ -690,7 +796,24 @@ export MANWIDTH=999
 # LIBGL_ALWAYS_SOFTWARE=1
 #+end_src
 
-** Folder
+*** COMMENT Xorg
+
+#+begin_src zsh
+export XINITRC="$XDG_CONFIG_HOME/xorg/xinitrc"
+export MODMAP="$XDG_CONFIG_HOME/xorg/xmodmap"
+export RESOURCES="$XDG_CONFIG_HOME/xorg/xresources"
+export SESSION="$XDG_CONFIG_HOME/xorg/xsession"
+#+end_src
+
+*** Latex
+
+#+begin_src zsh
+export MANPATH="$MANPATH:/usr/local/texlive/2023/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/usr/local/texlive/2023/texmf-dist/doc/info"
+export PATH="$PATH:/usr/local/texlive/2023/bin/x86_64-linux"
+#+end_src
+
+** COMMENT Folder
 
 #+begin_src shell 
 export REPO="$HOME/repo"
@@ -710,62 +833,26 @@ export PROJECTS="$FILES/Projects"
 export ROTYEN="$PROJECTS/godot/2d/Rotyen"
 #+end_src
 
-** Program
+** COMMENT Program
 
 #+begin_src shell
 #export SHELL=zsh
 # export TERM="xterm-256color"
-export TERMINAL="st"
-export EDITOR="vim"
-# export VISUAL="vim"
-export IDLE="emacsclient"
-#export IDLE="emacsclient -c -a emacs"
-export BROWSER="brave"
+#export TERMINAL="st"
+export EDITOR="vi"
+export VISUAL="emacsclient -c -a emacs"
+#export IDLE="emacsclient"
+#export BROWSER="brave"
 export READER="zathura"
 export IMAGE_VIEWER="sxiv"
-export DESKTOP_SESSION="bspwm"
+#export DESKTOP_SESSION="bspwm"
 #+end_src
 
-** Cleanup
+** COMMENT Cleanup
 
 #+begin_src shell
 export WINEPREFIX="$HOME/wine/default"
 export RT_HOME="$XDG_CONFIG_HOME/rtorrent"
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
-#+end_src
-
-* COMMENT Function
-
-#+begin_src shell :shebang "#!/bin/zsh"
-function add-plugin() {
-    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
-        # zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
-		source "$ZDOTDIR/plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh"
-		source "$ZDOTDIR/plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
-    else
-        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
-    fi
-}
-
-function update-plugins() {
-	find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q
-}
-
-function add-completion() {
-    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
-        # For completions
-		completion_file_path=$(ls $ZDOTDIR/plugins/$PLUGIN_NAME/_*)
-		fpath+="$(dirname "${completion_file_path}")"
-        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh"
-    else
-        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
-		fpath+=$(ls $ZDOTDIR/plugins/$PLUGIN_NAME/_*)
-        [ -f $ZDOTDIR/.zccompdump ] && $ZDOTDIR/.zccompdump
-    fi
-	completion_file="$(basename "${completion_file_path}")"
-	if [ "$2" = true ] && compinit "${completion_file:1}"
-}
 #+end_src
 

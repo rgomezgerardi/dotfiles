@@ -1,108 +1,39 @@
 #!/bin/zsh
-# Source
-# [ -f "$XDG_CONFIG_HOME/zsh/.zshalias" ] && source "$XDG_CONFIG_HOME/zsh/.zshalias"
-source "$ZDOTDIR/.zshalias" 
-source "$ZDOTDIR/.zshprompt" 
+source "$ZDOTDIR/.zshalias"
 
-# source "zsh-exports"
-# source "zsh-vim-mode"
-# source "zsh-aliases"
-# source "zsh-prompt"
+[[ -d "$XDG_CACHE_HOME/zsh"  ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
 
-# Add custom funtions completion
-fpath+="$ZDOTDIR/completion/"
+setopt APPEND_HISTORY
+setopt BANG_HIST              # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format.
+setopt INC_APPEND_HISTORY     # Write to the history file immediately, not when the shell exits.
+setopt HIST_EXPIRE_DUPS_FIRST # Expire a duplicate event first when trimming history.
+setopt HIST_IGNORE_DUPS       # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS   # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_FIND_NO_DUPS      # Do not display a previously found event.
+setopt HIST_IGNORE_SPACE      # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY            # Do not execute immediately upon history expansion.
+setopt HIST_BEEP              # Beep when accessing non-existent history.
+setopt SHARE_HISTORY
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+export ZCACHEDIR="$XDG_CACHE_HOME/zsh"
+export HISTFILE="$ZCACHEDIR/histfile"
+export HISTSIZE=10000
+export SAVEHIST=10000
 
-# History
-mkdir -p "$XDG_CACHE_HOME/zsh"
-HISTFILE="$XDG_CACHE_HOME/zsh/histfile"
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory
+# Lists the ten most used commands.
+alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 
-# Enable colors
-autoload -Uz colors && colors
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zsh/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+source "$ZDOTDIR/.zplugin"
 
-# Basic auto/tab completion
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-#zstyle ':completion::complete:lsof:*' menu yes select
-zmodload zsh/complist
-_comp_options+=(globdots)		# Include hidden files.
-
-# Use case-insensitive and partial completion
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-setopt no_list_ambiguous
-zstyle ":completion:*:descriptions" format "%B%d%b"
-
-# Expand Global Alias
-globalias() {
-   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
-     zle _expand_alias
-     zle expand-word
-   fi
-   zle self-insert
-}
-zle -N globalias
-bindkey " " globalias
-bindkey "^ " magic-space           # control-space to bypass completion
-bindkey -M isearch " " magic-space # normal space during searches
-
-
-# some useful options (man zshoptions)
-setopt autocd  # Automatically cd into directories by just typing the directory name
-setopt autopushd # Keep a directory stack of all the directories you cd to in a session
-setopt pushdignoredups  # Use Git-like -N instead of the default +N
-setopt autocd extendedglob nomatch menucomplete notify
-
-setopt interactive_comments
-stty stop undef		# Disable ctrl-s to freeze terminal.
-zle_highlight=('paste:none')
-
-# beeping is annoying
-# unsetopt BEEP
-
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
-# FZF 
-# TODO update for mac
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-
-compinit
-
-# Speedy keys
-xset r rate 210 60
-
-# For QT Themes
-export QT_QPA_PLATFORMTHEME=qt5ct
-
-eval "$(zoxide init zsh)"
-
-# bindkey -s '^o' 'ranger^M'
-# bindkey -s '^f' 'zi^M'
-# bindkey -s '^s' 'ncdu^M'
-# bindkey -s '^n' 'nvim $(fzf)^M'
-# bindkey -s '^v' 'nvim\n'
-# bindkey -s '^z' 'zi^M'
-# bindkey '^[[P' delete-char
-# bindkey "^p" up-line-or-beginning-search # Up
-# bindkey "^n" down-line-or-beginning-search # Down
-# bindkey "^k" up-line-or-beginning-search # Up
-# bindkey "^j" down-line-or-beginning-search # Down
-# bindkey -r "^u"
-# bindkey -r "^d"
-
-# zsh_add_plugin "zsh-users/zsh-autosuggestions"
-# zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
-# zsh_add_plugin "hlissner/zsh-autopair"
-# zsh_add_completion "esc/conda-zsh-completion" false
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
