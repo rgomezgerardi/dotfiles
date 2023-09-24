@@ -1,0 +1,47 @@
+:PROPERTIES:
+:author: Ricardo Gomez
+:email:  rgomezgerardi@gmail.com
+:title:  EWW Custom Configuration 
+:header-args+: :tangle eww.yuck
+:header-args+: :noweb strip-export
+:header-args+: :cache yes
+:END:
+
+* Window
+
+#+begin_src yuck
+(defwindow razuni
+  :monitor 0
+  :geometry (geometry)
+    :x "0%"
+    :y "0%"
+    :width "90%"
+    :height "30px"
+    :anchor "top center"
+  ; Wayland 
+  :stacking "fg"
+  :exclusive true
+  ;:focusable true
+  (greeter :text "Say hello!"
+           :name "Tim"))
+
+
+(include "./widget")
+#+end_src
+
+* Widget
+:PROPERTIES:
+:header-args:     :tangle widget
+:END:
+
+** Greeter
+
+#+begin_src yuck
+; -*- yuck -*- ; 
+(defwidget greeter [?text name]
+  (box :orientation "horizontal"
+       :halign "center"
+    text
+    (button :onclick "notify-send 'Hello' 'Hello, ${name}'"
+      "Greet")))
+#+end_src

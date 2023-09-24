@@ -1,0 +1,17 @@
+(defwindow razuni
+  :monitor 0
+  :geometry (geometry)
+    :x "0%"
+    :y "0%"
+    :width "90%"
+    :height "30px"
+    :anchor "top center"
+  ; Wayland 
+  :stacking "fg"
+  :exclusive true
+  ;:focusable true
+  (greeter :text "Say hello!"
+           :name "Tim"))
+
+
+(include "./widget")
