@@ -6,7 +6,6 @@
 Major mode for Godot's GDScript language
 https://github.com/godotengine/emacs-gdscript-mode
 
-
 #+begin_src emacs-lisp
 (use-package gdscript-mode
   :preface

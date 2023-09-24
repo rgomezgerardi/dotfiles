@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Parinfer is a proof-of-concept editor mode for Lisp programming languages.
+https://github.com/parinfer/parinfer.js
+
+#+begin_src emacs-lisp
+(use-package parinfer)
+#+end_src

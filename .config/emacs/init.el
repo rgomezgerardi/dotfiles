@@ -13,7 +13,7 @@
  (lambda (package)
    (load-file (expand-file-name (concat (mapconcat 'identity (directory-files-recursively user-emacs-directory package t) nil) "/config")))
    (add-to-list 'skip-dirs package))
- boot-order)
+boot-order)
 
 (mapc
  (lambda (x) (load-file x))

@@ -1,9 +1,13 @@
-# -*- mode: org -*- #
+# -*- org -*- #
 :PROPERTIES:
 :header-args+: :tangle config
 :END:
 
-
+Markdown-mode is a major mode for editing Markdown-formatted text.
+https://jblevins.org/projects/markdown-mode
 
 #+begin_src emacs-lisp
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
 #+end_src

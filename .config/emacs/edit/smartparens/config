@@ -1,0 +1,7 @@
+(use-package smartparens
+  :hook ((prog-mode
+		  text-mode
+		  conf-mode) . (lambda ()
+						 (smartparens-mode 1)
+						 (show-smartparens-mode 1)))
+  :config ())  ; Show message if verbose is activated

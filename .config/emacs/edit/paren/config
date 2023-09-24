@@ -1,11 +1,3 @@
-# -*- org -*- #
-:PROPERTIES:
-:header-args+: :tangle config
-:END:
-
-Highlight (un)matching of parens and expressions.
-
-#+begin_src emacs-lisp
 (use-package paren :straight (:type built-in)
 	:demand
 	:custom
@@ -16,4 +8,3 @@ Highlight (un)matching of parens and expressions.
 	:config
 	(show-paren-mode 1)
 )
-#+end_src

@@ -1,0 +1,11 @@
+# -*- org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Emacs major mode for editing yuck configuration files for ElKowar's Wacky Widgets (eww). 
+https://github.com/mmcjimsey26/yuck-mode
+
+#+begin_src emacs-lisp
+(use-package yuck-mode)
+#+end_src

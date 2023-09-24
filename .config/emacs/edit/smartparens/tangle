@@ -14,8 +14,10 @@ https://github.com/Fuco1/smartparens
 						 (smartparens-mode 1)
 						 (show-smartparens-mode 1)))
   :config ())  ; Show message if verbose is activated
+#+end_src
+
+
   ;; :config
   ;; (add-hook 'minibuffer-setup-hook 'turn-on-smartparens-strict-mode))
   ;; (smartparens-global-strict-mode 1))
   ;; sp-ignore-mode-list
-#+end_src

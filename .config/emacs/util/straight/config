@@ -1,4 +1,4 @@
-(setq straight-base-dir (expand-file-name "~/.local/share/remacs"))
+(setq straight-base-dir (expand-file-name "~/.local/share/emacs"))
 
 (setq straight-recipe-overrides '(straight :type git :host github
           :repo ,(format "%s/straight.el" straight-repository-user)
@@ -7,7 +7,7 @@
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "~/.local/share/remacs/straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+       (expand-file-name "~/.local/share/emacs/straight/repos/straight.el/bootstrap.el"))
       (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
