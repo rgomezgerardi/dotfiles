@@ -1,0 +1,78 @@
+#!/bin/sh
+riverctl map normal Super+Alt Q exit
+
+riverctl map normal Super Q close
+
+for i in $(seq 1 9)
+do
+    tags=$((1 << ($i - 1)))
+
+    # Super+[1-9] to focus tag [0-8]
+    riverctl map normal Super $i set-focused-tags $tags
+
+    # Super+Alt+[1-9] to tag focused view with tag [0-8]
+    riverctl map normal Super+Alt $i set-view-tags $tags
+
+    # Super+Control+[1-9] to toggle focus of tag [0-8]
+    riverctl map normal Super+Control $i toggle-focused-tags $tags
+
+    # Super+Shift+Control+[1-9] to toggle tag [0-8] of focused view
+    riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
+done
+
+riverctl map normal Super J focus-view next
+riverctl map normal Super K focus-view previous
+
+riverctl map normal Super+Shift J swap next
+riverctl map normal Super+Shift K swap previous
+
+# Super+Ctrl+Return to bump the focused view to the top of the layout stack
+riverctl map normal Super+Alt Return zoom
+
+# Super + Left Mouse Button to move views
+riverctl map-pointer normal Super BTN_LEFT move-view
+
+# Super + Right Mouse Button to resize views
+riverctl map-pointer normal Super BTN_RIGHT resize-view
+
+# Super + Middle Mouse Button to toggle float
+riverctl map-pointer normal Super BTN_MIDDLE toggle-float
+
+riverctl map normal Super Return spawn foot
+
+riverctl map normal Super R spawn 'tofi-drun --drun-launch=true'
+
+riverctl map normal Super I spawn 'emacsclient --alternate-editor="" --create-frame'
+
+riverctl map normal Super+Shift P spawn 'sxiv -rt "$PICTURE"'
+
+riverctl map normal Super B spawn firefox
+
+riverctl map normal Super C spawn 'grim - | swappy -f -'
+
+riverctl map normal Super+Alt C spawn 'grim -g "$(slurp)" - | swappy -f -'
+
+riverctl map normal Super+Shift C spawn 'grim -g "$(slurp -p)" -t ppm - | convert - -format "%[pixel:p{0,0}]" txt:- | tail -1 | cut -d" " -f4 | wl-copy'
+
+riverctl map normal Super E spawn 'foot -T "Vifm" tmux new -AD -s "explorer" -n "Vifm" "vifm"'
+
+riverctl map normal Super G spawn aseprite
+
+# Set background and border color
+riverctl background-color 0x002b36
+riverctl border-color-focused 0x93a1a1
+riverctl border-color-unfocused 0x586e75
+
+# Set keyboard repeat rate
+riverctl set-repeat 50 300
+
+#swhks &
+#pkexec swhkd -c ~/.config/swhkd/swhkdrc &
+riverctl spawn foot
+riverctl spawn firefox
+riverctl spawn 'foot -T "Vifm" tmux new -AD -s "explorer" -n "Vifm" "vifm"'
+
+# Set the default layout generator to be rivertile and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivercarro
+exec rivercarro

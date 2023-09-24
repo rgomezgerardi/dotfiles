@@ -1,0 +1,630 @@
+:PROPERTIES:
+:author: Ricardo Gomez
+:email:  rgomezgerardi@gmail.com
+:title:  River Custom Configuration
+:header-args+: :tangle init
+:header-args+: :tangle-mode (identity #o755)
+:header-args+: :noweb strip-export
+:header-args+: :cache yes
+:header-args+: :shebang "#!/bin/sh"
+:END:
+
+* COMMENT Config
+** Global
+
+#+begin_src shell
+# Default split ratio.
+bspc config split_ratio 0.52
+ 
+# Prefix prepended to each of the status lines.
+# bspc config status_prefix
+ 
+# Absolute path to the command used to retrieve rule consequences.
+# The command will receive the following arguments: window ID, class name, instance name, and intermediate consequences.
+#The output of that command must have the following format: key1=value1 key2=value2 ...
+#(the valid key/value pairs are given in the description of the rule command).
+# bspc config external_rules_command
+ 
+# The insertion scheme used when the insertion point is in automatic mode. Accept the following values:
+# longest_side, alternate, spiral.
+bspc config automatic_scheme longest_side
+ 
+# On which child should a new window be attached when adding a window on a single window tree in automatic mode. Accept the following values: first_child, second_child.
+bspc config initial_polarity first_child
+ 
+# The tightness of the algorithm used to decide whether a window is on
+# the DIR side of another window. Accept the following values: high, low.
+# bspc config directional_focus_tightness
+
+# Adjust the brother when unlinking a node from the tree in accordance with the automatic insertion scheme.
+# bspc config removal_adjustment
+
+# Draw the preselection feedback area. Defaults to true.
+# bspc config presel_feedback
+
+# Handle the next mapping_events_count mapping notify events. A negative value implies that every event needs to be handled.
+# bspc config mapping_events_count
+
+# Ignore EWMH focus requests coming from applications.
+bspc config ignore_ewmh_focus false
+
+# Block the fullscreen state transitions that originate from an EWMH request. The possible values are: none, all, or a comma separated list of the following values: enter, exit.
+# bspc config ignore_ewmh_fullscreen
+
+# Ignore strut hinting from clients requesting to reserve space (i.e. task bars).
+bspc config ignore_ewmh_struts false
+#+end_src
+
+** Color
+
+#+begin_src shell
+# Color of the border of an unfocused window.
+# bspc config normal_border_color
+ 
+# Color of the border of a focused window of an unfocused monitor.
+# bspc config active_border_color 
+ 
+# Color of the border of a focused window of a focused monitor.
+bspc config focused_border_color "#51afef"
+ 
+# Color of the node --presel-{dir,ratio} message feedback area.
+# bspc config presel_feedback_color
+#+end_src
+
+** Monitor
+
+#+begin_src shell
+# Padding space added at the sides of the monitor or desktop.
+# bspc config top_padding, right_padding, bottom_padding, left_padding
+
+# Consider disabled monitors as disconnected.
+# bspc config remove_disabled_monitors
+
+# Remove unplugged monitors.
+# bspc config remove_unplugged_monitors
+ 
+# Merge overlapping monitors (the bigger remains).
+# bspc config merge_overlapping_monitors
+#+end_src
+
+** Desktop
+
+#+begin_src shell
+# Remove borders of tiled windows for the monocle desktop layout.
+bspc config borderless_monocle true
+ 
+# Remove gaps of tiled windows for the monocle desktop layout.
+bspc config gapless_monocle false
+
+# Padding space added at the sides of the screen for the monocle desktop layout.
+# bspc config top_monocle_padding, right_monocle_padding, bottom_monocle_padding, left_monocle_padding
+ 
+# Set the desktop layout to monocle if there’s only one tiled window in the tree.
+bspc config single_monocle true
+#+end_src
+ 
+** Window
+   
+#+begin_src shell
+# Size of the gap that separates windows.
+bspc config window_gap 6
+
+# Window border width.
+bspc config border_width 2
+
+# Center pseudo tiled windows into their tiling rectangles. Defaults to true.
+bspc config center_pseudo_tiled true
+
+# Apply ICCCM window size hints.
+# bspc config honor_size_hints
+#+end_src
+
+** COMMENT Node
+
+#+begin_src shell
+#+end_src
+
+** Pointer
+
+#+begin_src shell
+# The minimum interval, in milliseconds, between two motion notify events.
+# bspc config pointer_motion_interval
+
+# Keyboard modifier used for moving or resizing windows. Accept the following values:
+# shift, control, lock, mod1, mod2, mod3, mod4, mod5.
+# bspc config pointer_modifier
+ 
+# Action performed when pressing pointer_modifier + button<n>. Accept the following values: move, resize_side, resize_corner, focus, none.
+# bspc config pointer_action1, pointer_action2, pointer_action3
+
+# When focusing a window, put the pointer at its center.
+bspc config pointer_follows_focus false
+
+# When focusing a monitor, put the pointer at its center.
+bspc config pointer_follows_monitor true
+
+# Button used for focusing a window (or a monitor). The possible values are: button1, button2, button3, any, none. Defaults to button1.
+bspc config click_to_focus button1
+
+# Don’t replay the click that makes a window focused if click_to_focus isn’t none.
+bspc config swallow_first_click false
+
+# Focus the window under the pointer.
+bspc config focus_follows_pointer true
+#+end_src
+
+* COMMENT Monitor
+
+#+begin_src shell
+# bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+#+end_src
+
+* COMMENT Desktop
+
+#+begin_src shell
+bspc desktop ^1 --layout tiled
+bspc desktop ^2 --layout monocle
+bspc desktop ^3 --layout monocle
+bspc desktop ^4 --layout monocle
+bspc desktop ^5 --layout tiled
+bspc desktop ^6 --layout monocle
+bspc desktop ^7 --layout tiled
+bspc desktop ^8 --layout monocle
+bspc desktop ^9 --layout tiled
+bspc desktop ^10 --layout tiled
+#+end_src
+
+** COMMENT Desktop where all windows are floating
+
+#+begin_src shell
+FLOATING_DESKTOP_ID=$(bspc query -D -d '^8')
+
+bspc subscribe node_add | while read -a msg ; do
+   desk_id=${msg[2]}
+   wid=${msg[4]}
+   [ "$FLOATING_DESKTOP_ID" = "$desk_id" ] && bspc node "$wid" -t floating
+done
+#+end_src
+
+* COMMENT Rules
+  
+#+begin_src shell
+# Terminal
+bspc rule -a St desktop='^1' state=tiled follow=on
+
+# Search
+bspc rule -a Chromium desktop='^2' state=tiled follow=on
+bspc rule -a Brave-browser desktop='^2' state=tiled follow=on
+bspc rule -a *:*:"Picture in picture" state=floating manage=off border=off
+# bspc rule -a *:*:"Picture in picture" rectangle=512x288+$((1600-512))+$((900-288)) state=floating border=off manage=off
+# bspc rule -a Com.gitlab.newsflash desktop='^2' state=tiled follow=on
+
+# Code
+bspc rule -a Emacs desktop='^3' state=tiled follow=on
+bspc rule -a Godot desktop='^3' state=tiled follow=on
+
+# Editor
+bspc rule -a Gimp desktop='^4' state=pseudo_tiled follow=on
+bspc rule -a Krita desktop='^4' state=pseudo_tiled follow=on
+bspc rule -a Inkscape desktop='^4' state=floating follow=on border=off
+bspc rule -a Aseprite desktop='^4' state=pseudo_tiled follow=on
+bspc rule -a tiled desktop='^4' state=pseudo_tiled follow=on
+
+# Player
+bspc rule -a mpv desktop='^5' state=tiled follow=on
+bspc rule -a mplayer2 state=floating
+bspc rule -a Zathura desktop='^5' state=tiled follow=on
+
+# Gaming
+bspc rule -a Steam desktop='^6' state=tiled follow=on
+
+# Music
+bspc rule -a Spotify desktop='^9'
+
+# Random
+bspc rule -a "VirtualBox Manager" desktop='^10' state=tiled follow=on
+
+# Scratchpad
+bspc rule -a Explorer state=floating
+bspc rule -a Download state=floating
+bspc rule -a Music state=floating
+bspc rule -a Audio state=floating
+
+bspc rule -a PureRef state=floating
+#+end_src
+
+* Map
+** River
+*** Exit
+
+#+begin_src shell
+riverctl map normal Super+Alt Q exit
+#+end_src
+
+*** Close
+
+#+begin_src shell
+riverctl map normal Super Q close
+#+end_src
+
+*** Focus
+
+#+begin_src shell
+for i in $(seq 1 9)
+do
+    tags=$((1 << ($i - 1)))
+
+    # Super+[1-9] to focus tag [0-8]
+    riverctl map normal Super $i set-focused-tags $tags
+
+    # Super+Alt+[1-9] to tag focused view with tag [0-8]
+    riverctl map normal Super+Alt $i set-view-tags $tags
+
+    # Super+Control+[1-9] to toggle focus of tag [0-8]
+    riverctl map normal Super+Control $i toggle-focused-tags $tags
+
+    # Super+Shift+Control+[1-9] to toggle tag [0-8] of focused view
+    riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
+done
+#+end_src
+
+*** View
+**** Focus the next/previous view in the layout stack
+
+#+begin_src shell
+riverctl map normal Super J focus-view next
+riverctl map normal Super K focus-view previous
+#+end_src
+
+**** Swap the focused view with the next/previous view with the next/previous
+
+#+begin_src shell
+riverctl map normal Super+Shift J swap next
+riverctl map normal Super+Shift K swap previous
+#+end_src
+
+*** Zoom
+Bump the focused view to the top of the layout stack
+
+#+begin_src shell
+# Super+Ctrl+Return to bump the focused view to the top of the layout stack
+riverctl map normal Super+Alt Return zoom
+#+end_src
+
+*** COMMENT Output
+**** Focus the next/previous output
+
+#+begin_src shell
+super + {period, comma}
+	riverctl focus-output {next,previous}
+#+end_src
+
+**** Send the focused view to the next/previous output
+
+#+begin_src shell
+super + shift + {period, comma}
+	riverctl send-to-output {next,previous}
+#+end_src
+
+*** COMMENT Layout
+**** Carro
+
+#+begin_src shell
+super + m
+	riverctl send-layout-cmd rivercarro "main-location monocle"
+#+end_src
+
+**** Carro
+
+#+begin_src shell
+super + m
+	riverctl send-layout-cmd rivercarro "main-location monocle"
+#+end_src
+
+*** Mouse
+**** Move Views
+
+#+begin_src shell
+# Super + Left Mouse Button to move views
+riverctl map-pointer normal Super BTN_LEFT move-view
+#+end_src
+
+**** Resize Views
+
+#+begin_src shell
+# Super + Right Mouse Button to resize views
+riverctl map-pointer normal Super BTN_RIGHT resize-view
+#+end_src
+
+**** Toggle Float
+
+#+begin_src shell
+# Super + Middle Mouse Button to toggle float
+riverctl map-pointer normal Super BTN_MIDDLE toggle-float
+#+end_src
+
+** Program
+*** Terminal
+
+#+begin_src shell
+riverctl map normal Super Return spawn foot
+#+end_src
+
+*** Launcher
+
+#+begin_src shell
+riverctl map normal Super R spawn 'tofi-drun --drun-launch=true'
+#+end_src
+
+*** Idle
+
+#+begin_src shell
+riverctl map normal Super I spawn 'emacsclient --alternate-editor="" --create-frame'
+#+end_src
+
+*** COMMENT Mail
+
+#+begin_src shell
+super + alt + m
+	thunderbird
+#+end_src
+
+*** Image
+
+#+begin_src shell
+riverctl map normal Super+Shift P spawn 'sxiv -rt "$PICTURE"'
+#+end_src
+
+*** COMMENT Editor
+
+#+begin_src shell
+#+end_src
+
+*** COMMENT Statusbar
+
+#+begin_src shell
+super + alt + b
+	$HOME/.local/bin/polybar
+#+end_src
+
+*** Browser
+
+#+begin_src shell
+riverctl map normal Super B spawn firefox
+#+end_src
+
+*** Capture
+**** Screenshot
+
+#+begin_src shell
+riverctl map normal Super C spawn 'grim - | swappy -f -'
+#+end_src
+
+**** Region
+
+#+begin_src shell
+riverctl map normal Super+Alt C spawn 'grim -g "$(slurp)" - | swappy -f -'
+#+end_src
+
+**** Pick a Color
+
+#+begin_src shell
+riverctl map normal Super+Shift C spawn 'grim -g "$(slurp -p)" -t ppm - | convert - -format "%[pixel:p{0,0}]" txt:- | tail -1 | cut -d" " -f4 | wl-copy'
+#+end_src
+
+*** Explorer
+
+#+begin_src shell
+riverctl map normal Super E spawn 'foot -T "Vifm" tmux new -AD -s "explorer" -n "Vifm" "vifm"'
+#+end_src
+
+*** PixelArt
+
+#+begin_src shell
+riverctl map normal Super G spawn aseprite
+#+end_src
+
+*** COMMENT Download
+
+#+begin_src shell
+super + d
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 2 --class "download" --name "Download" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "download" -c "Download" \
+		  rtorrent 
+#+end_src
+
+*** COMMENT Audio
+
+#+begin_src shell
+super + a
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 3 --class "audio"  --name "Audio" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "audio" -c "Audio" \
+		  ncpamixer
+#+end_src
+
+*** COMMENT Music
+
+#+begin_src shell
+super + m
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 4 --class "music"  --name "Music" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "music" -c "Music" \
+		  mocp --config $HOME/.config/moc/config 
+#+end_src
+
+** COMMENT o
+#+begin_src shell
+# Note: the "Super" modifier is also known as Logo, GUI, Windows, Mod4, etc.
+
+# Super+Period and Super+Comma to focus the next/previous output
+riverctl map normal Super Period focus-output next
+riverctl map normal Super Comma focus-output previous
+
+# Super+Shift+{Period,Comma} to send the focused view to the next/previous output
+riverctl map normal Super+Shift Period send-to-output next
+riverctl map normal Super+Shift Comma send-to-output previous
+
+# Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
+riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Super L send-layout-cmd rivertile "main-ratio +0.05"
+
+# Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
+riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
+riverctl map normal Super+Shift L send-layout-cmd rivertile "main-count -1"
+
+# Super+Alt+{H,J,K,L} to move views
+riverctl map normal Super+Alt H move left 100
+riverctl map normal Super+Alt J move down 100
+riverctl map normal Super+Alt K move up 100
+riverctl map normal Super+Alt L move right 100
+
+# Super+Alt+Control+{H,J,K,L} to snap views to screen edges
+riverctl map normal Super+Alt+Control H snap left
+riverctl map normal Super+Alt+Control J snap down
+riverctl map normal Super+Alt+Control K snap up
+riverctl map normal Super+Alt+Control L snap right
+
+# Super+Alt+Shift+{H,J,K,L} to resize views
+riverctl map normal Super+Alt+Shift H resize horizontal -100
+riverctl map normal Super+Alt+Shift J resize vertical 100
+riverctl map normal Super+Alt+Shift K resize vertical -100
+riverctl map normal Super+Alt+Shift L resize horizontal 100
+
+# Super + Left Mouse Button to move views
+riverctl map-pointer normal Super BTN_LEFT move-view
+
+# Super + Right Mouse Button to resize views
+riverctl map-pointer normal Super BTN_RIGHT resize-view
+
+# Super + Middle Mouse Button to toggle float
+riverctl map-pointer normal Super BTN_MIDDLE toggle-float
+
+# Super+0 to focus all tags
+# Super+Shift+0 to tag focused view with all tags
+all_tags=$(((1 << 32) - 1))
+riverctl map normal Super 0 set-focused-tags $all_tags
+riverctl map normal Super+Shift 0 set-view-tags $all_tags
+
+# Super+Space to toggle float
+riverctl map normal Super Space toggle-float
+
+# Super+F to toggle fullscreen
+riverctl map normal Super F toggle-fullscreen
+
+# Super+{Up,Right,Down,Left} to change layout orientation
+riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
+riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
+riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
+riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
+
+# Declare a passthrough mode. This mode has only a single mapping to return to
+# normal mode. This makes it useful for testing a nested wayland compositor
+riverctl declare-mode passthrough
+
+# Super+F11 to enter passthrough mode
+riverctl map normal Super F11 enter-mode passthrough
+
+# Super+F11 to return to normal mode
+riverctl map passthrough Super F11 enter-mode normal
+
+# Various media key mapping examples for both normal and locked mode which do
+# not have a modifier
+for mode in normal locked
+do
+    # Eject the optical drive (well if you still have one that is)
+    riverctl map $mode None XF86Eject spawn 'eject -T'
+
+    # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
+    riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
+
+    # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
+    riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPlay  spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPrev  spawn 'playerctl previous'
+    riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
+
+    # Control screen backlight brightness with light (https://github.com/haikarainen/light)
+    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
+done
+#+end_src
+
+* Config
+
+#+begin_src shell
+# Set background and border color
+riverctl background-color 0x002b36
+riverctl border-color-focused 0x93a1a1
+riverctl border-color-unfocused 0x586e75
+
+# Set keyboard repeat rate
+riverctl set-repeat 50 300
+#+end_src
+
+* Rule
+** COMMENT
+
+#+begin_src shell
+# Terminal
+riverctl rule-add tag 1 no-float -app-id 'foo' -title 'foo'
+
+# Make all views with an app-id that starts with "float" and title "foo" start floating.
+riverctl rule-add float -app-id 'float*' -title 'foo'
+
+# Make all views with app-id "bar" and any title use client-side decorations
+riverctl rule-add csd -app-id "bar"
+
+riverctl rule-add float  -title 'Vifm'
+#+end_src
+
+** COMMENT Search
+
+#+begin_src shell
+riverctl rule-add tag 2 no-float -title 'Firefox'
+#+end_src
+
+** COMMENT Editor
+** COMMENT Gaming
+** COMMENT Image
+
+#+begin_src shell
+riverctl rule-add tag 4 no-float -title 'Aseprite'
+#+end_src
+
+** COMMENT Random
+* Launch
+
+#+begin_src shell
+#swhks &
+#pkexec swhkd -c ~/.config/swhkd/swhkdrc &
+riverctl spawn foot
+riverctl spawn firefox
+riverctl spawn 'foot -T "Vifm" tmux new -AD -s "explorer" -n "Vifm" "vifm"'
+#+end_src
+
+* Layout
+** COMMENT Rivertile
+
+#+begin_src shell
+# Set the default layout generator to be rivertile and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivertile
+rivertile -view-padding 6 -outer-padding 6 &
+#+end_src
+
+** Rivercarro
+
+#+begin_src shell
+# Set the default layout generator to be rivertile and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivercarro
+exec rivercarro
+#+end_src
