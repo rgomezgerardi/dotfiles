@@ -22,3 +22,10 @@ application/x-terminal-emulator=terminal.desktop
 # Torrent
 application/x-bittorrent=torrent.desktop
 x-scheme-handler/magnet=torrent.desktop
+
+# Reader
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+
+# Video
+video/x-matroska=mpv.desktop;
+video/mp4=mpv.desktop;
