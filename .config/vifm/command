@@ -1,0 +1,17 @@
+" :com[mand][!] command_name action
+command! df df -h %m 2> /dev/null
+command! diff vim -d %f %F
+command! run !! ./%f
+command! make !!make %a
+command! mkcd :mkdir "%a" | cd "%a"
+command! vgrep nvim "+grep %a"
+command! reload :write | restart
+
+" Programs
+command! rm :!rm %a
+command! ex :!ex %a
+command! vi :!st nvim %a 2> /dev/null &
+command! emacs :!/bin/emacs %a %i &
+command! python :!python %a
+command! dragon :!dragon-drop --all-compact --and-exit %f &
+command! renies :!python ~/.local/bin/python/renies.py %f %i

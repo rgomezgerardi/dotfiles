@@ -50,3 +50,22 @@ export LANG=en_US.UTF-8
 export MANPATH="$MANPATH:/usr/local/texlive/2023/texmf-dist/doc/man"
 export INFOPATH="$INFOPATH:/usr/local/texlive/2023/texmf-dist/doc/info"
 export PATH="$PATH:/usr/local/texlive/2023/bin/x86_64-linux"
+
+# Folder
+
+
+export REPO="$HOME/repo"
+export PHONE="$HOME/phone"
+export FILE="/mnt/file"
+export BOOKS="$FILES/Books"
+export DOWNLOADS="$FILES/Downloads"
+export VIDEOS="$FILES/Videos"
+export MOVIES="$VIDEOS/Movies"
+export SERIES="$VIDEOS/Series"
+export DOCUMENTS="$FILES/Documents"
+export NOTE="$DOCUMENTS/note"
+export MUSIC="$FILES/Music"
+export PICTURE="$FILE/picture"
+export PROGRAMS="$FILES/Programs"
+export PROJECTS="$FILES/Projects"
+export ROTYEN="$PROJECTS/godot/2d/Rotyen"

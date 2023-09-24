@@ -13,7 +13,7 @@ fileviewer */ ls --color --group-directories-first
 fileviewer .*/ ls --color --group-directories-first
 
 " Images
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.ico, 
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.webp,*.gif,*.xpm,*.ico, 
         \ {View in sxiv}
         \ sxiv %f %i &,
 	\ {Krita}
@@ -227,6 +227,6 @@ filetype ?*
     \ {Open with Emacs}
     \ ~/.local/bin/emacs %f %i &,
     \ {Open with Vim}
-    \ st nvim %f %i &,
+    \ foot vi %f %i &,
     \ {Open with Xdg-Open}
     \ xdg-open %c

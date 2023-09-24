@@ -3,7 +3,7 @@ modmap=$MODMAP
 resources=$RESOURCES
 session=$SESSION
 
-# Keyboard Configuration (This shlould be above xmodmap)
+# Keyboard Configuration (This should be above xmodmap)
 args=(
     # MODEL
     -model pc105
@@ -73,7 +73,7 @@ picom --daemon &
 # Notification
 dunst &
 
-# Emacs Server
+# Editor Server
 emacs --bg-daemon &
 
 # System Monitor

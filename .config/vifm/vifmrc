@@ -1,5 +1,6 @@
 " Command used to edit files in various contexts
-set vicmd="vim"
+set vicmd="vi"
+"set vicmd="vim"
 "set vicmd="emacs &> /dev/null &"
 
 " This makes vifm perform file operations on its own instead of relying on standard utilities like `cp`
@@ -94,8 +95,15 @@ let $PATH = $HOME.'/.local/bin:/usr/local/bin:'.$PATH
 set rulerformat='%2l-%S%[ +%x%]'
 
 " Server
-let $VIFM_SERVER_NAME = v:default
+"let $VIFM_SERVER_NAME = v:default
 
+
+
+" Marks
+source "$HOME/.config/vifm/mark"
+
+" Commands
+source "$HOME/.config/vifm/command"
 
 " File Type and File Viewer
 source "$HOME/.config/vifm/filetype"
@@ -105,56 +113,3 @@ source "$HOME/.config/vifm/keymap"
 
 " Set icons (Required Nerd Font)
 source "$HOME/.config/vifm/icon"
-
-
-" ========================================================
-" ======================= Marks ==========================
-" ========================================================
-mark B "~/.local/bin"
-mark C "/mnt/files/Ricardo/Documents/Assignments/College"
-mark D "/mnt/files/Ricardo/Documents"
-mark F "~/.local/share/fonts"
-mark G "~/documents/git"
-mark H "/"
-mark M "/mnt/files/Ricardo/Music"
-mark R "/mnt/files/Ricardo/Projects/godot/arcade/crossy"
-mark W "/mnt/windows"
-mark b "/mnt/files/Ricardo/Books"
-mark c "~/.config"
-mark d "/mnt/files/Ricardo/Downloads"
-mark f "/mnt/files/Ricardo/Resources/Fonts"
-mark g "/mnt/windows/Users/Gerardi"
-mark h "~"
-mark m "/mnt/files/Ricardo/Videos/Movies"
-mark n "/mnt/files/Ricardo/Documents/note"
-mark p "/mnt/files/Ricardo/Pictures"
-mark P "/mnt/files/Ricardo/Projects"
-mark r "/mnt/files/Ricardo"
-mark s "/mnt/files/Ricardo/Videos/Series"
-mark t "~/phone/Internal shared storage"
-mark u "/mnt/usb"
-mark v "/mnt/files/Ricardo/Videos"
-mark w "/mnt/files/Ricardo/Pictures/wallpaper"
-mark z "~/.config/vifm" 
-
-
-" ========================================================
-" ====================== Commands ========================
-" ========================================================
-" :com[mand][!] command_name action
-command! df df -h %m 2> /dev/null
-command! diff vim -d %f %F
-command! run !! ./%f
-command! make !!make %a
-command! mkcd :mkdir "%a" | cd "%a"
-command! vgrep nvim "+grep %a"
-command! reload :write | restart
-
-" Programs
-command! rm :!rm %a
-command! ex :!ex %a
-command! vi :!st nvim %a 2> /dev/null &
-command! emacs :!/bin/emacs %a %i &
-command! python :!python %a
-command! dragon :!dragon-drag-and-drop --all --and-exit %f %i &
-command! renies :!python ~/.local/bin/python/renies.py %f %i

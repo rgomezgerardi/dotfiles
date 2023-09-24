@@ -46,9 +46,11 @@ export SAVEHIST=10000
 
 # Lists the ten most used commands.
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+
+
 #+end_src
 
-** COMMENT Completion
+** Completion
 
 #+begin_src zsh
 # Folder
@@ -56,6 +58,7 @@ _zcompdump="$XDG_CACHE_HOME/zsh/compdump"
 _zcompcache="$XDG_CACHE_HOME/zsh/compcache"
 
 # Options
+setopt correct
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
 setopt AUTO_MENU           # Show completion menu on a successive tab press.
@@ -69,6 +72,7 @@ unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$_zcompcache"
+
 # zstyle ':completion:*' menu select
 # zstyle ':completion::complete:lsof:*' menu yes select
 # Use case-insensitive and partial completion
@@ -76,12 +80,15 @@ zstyle ':completion::complete:*' cache-path "$_zcompcache"
 # setopt no_list_ambiguous
 # zstyle ":completion:*:descriptions" format "%B%d%b"
 
+zstyle ':completion:*' rehash true # Persistent Rehash
+
+
 # Init
 # Initialize completion styles. Users can set their preferred completion style by
 # calling `compstyle <compstyle>` in their .zshrc, or by defining their own
 # `compstyle_<name>_setup` functions similar to the zsh prompt system.
 fpath+="${0:A:h}/functions"
-autoload -Uz compstyleinit && compstyleinit
+#autoload -Uz compstyleinit && compstyleinit
 
 # Load and initialize the completion system ignoring insecure directories with a
 # cache time of 20 hours, so it should almost always regenerate the first time a
@@ -419,9 +426,13 @@ This is a clean-room implementation of the Fish shell's history search feature
 https://github.com/zsh-users/zsh-history-substring-search
 
 #+begin_src zsh
-zinit light zdharma-continuum/zsh-history-substring-search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+zinit ice wait"0b" lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
+zinit light zsh-users/zsh-history-substring-search
+
+bindkey '^[k' history-substring-search-up
+bindkey '^[j' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 #+end_src
 
 ** History Search Multi Word
@@ -432,6 +443,16 @@ https://github.com/zdharma-continuum/history-search-multi-word
 zinit light zdharma-continuum/history-search-multi-word
 #+end_src
 
+** Autosuggestion
+Fish-like fast/unobtrusive autosuggestions for zsh.
+https://github.com/zsh-users/zsh-autosuggestions
+
+#+begin_src zsh
+zi wait lucid light-mode for atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions
+bindkey '^[l' autosuggest-accept
+bindkey '^[^M' autosuggest-execute
+#+end_src
+
 ** Syntax Highlighting
 Feature rich syntax highlighting for Zsh.
 https://github.com/zdharma-continuum/fast-syntax-highlighting
@@ -440,15 +461,7 @@ https://github.com/zdharma-continuum/fast-syntax-highlighting
 zi wait lucid light-mode for atinit"zicompinit; zicdreplay" zdharma-continuum/fast-syntax-highlighting
 #+end_src
 
-** Autosuggestion
-Fish-like fast/unobtrusive autosuggestions for zsh.
-https://github.com/zsh-users/zsh-autosuggestions
-
-#+begin_src zsh
-zi wait lucid light-mode for atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions
-#+end_src
-
-** Completion
+** COMMENT Completion
 A minimal, opinionated set of ZSH plugins designed to be small, simple, and focused.
 https://github.com/belak/zsh-utils
 
@@ -813,12 +826,12 @@ export INFOPATH="$INFOPATH:/usr/local/texlive/2023/texmf-dist/doc/info"
 export PATH="$PATH:/usr/local/texlive/2023/bin/x86_64-linux"
 #+end_src
 
-** COMMENT Folder
+** Folder
 
 #+begin_src shell 
 export REPO="$HOME/repo"
 export PHONE="$HOME/phone"
-export FILES="/mnt/files/Ricardo"
+export FILE="/mnt/file"
 export BOOKS="$FILES/Books"
 export DOWNLOADS="$FILES/Downloads"
 export VIDEOS="$FILES/Videos"
@@ -827,7 +840,7 @@ export SERIES="$VIDEOS/Series"
 export DOCUMENTS="$FILES/Documents"
 export NOTE="$DOCUMENTS/note"
 export MUSIC="$FILES/Music"
-export PICTURES="$FILES/Pictures"
+export PICTURE="$FILE/picture"
 export PROGRAMS="$FILES/Programs"
 export PROJECTS="$FILES/Projects"
 export ROTYEN="$PROJECTS/godot/2d/Rotyen"

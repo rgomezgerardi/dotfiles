@@ -18,10 +18,10 @@ abbr import-aliases --quieter --force
 
 zinit light zdharma-continuum/history-search-multi-word
 
-zi wait lucid light-mode for atinit"zicompinit; zicdreplay" zdharma-continuum/fast-syntax-highlighting
-
 zi wait lucid light-mode for atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions
+bindkey '^[l' autosuggest-accept
+bindkey '^[^M' autosuggest-execute
 
-zinit light belak/zsh-utils
+zi wait lucid light-mode for atinit"zicompinit; zicdreplay" zdharma-continuum/fast-syntax-highlighting
 
 zi wait lucid light-mode for blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions

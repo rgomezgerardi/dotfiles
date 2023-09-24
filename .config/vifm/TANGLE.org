@@ -20,7 +20,8 @@
 
 #+begin_src vimrc
 " Command used to edit files in various contexts
-set vicmd="vim"
+set vicmd="vi"
+"set vicmd="vim"
 "set vicmd="emacs &> /dev/null &"
 
 " This makes vifm perform file operations on its own instead of relying on standard utilities like `cp`
@@ -115,8 +116,15 @@ let $PATH = $HOME.'/.local/bin:/usr/local/bin:'.$PATH
 set rulerformat='%2l-%S%[ +%x%]'
 
 " Server
-let $VIFM_SERVER_NAME = v:default
+"let $VIFM_SERVER_NAME = v:default
 
+
+
+" Marks
+source "$HOME/.config/vifm/mark"
+
+" Commands
+source "$HOME/.config/vifm/command"
 
 " File Type and File Viewer
 source "$HOME/.config/vifm/filetype"
@@ -126,42 +134,48 @@ source "$HOME/.config/vifm/keymap"
 
 " Set icons (Required Nerd Font)
 source "$HOME/.config/vifm/icon"
+#+end_src
 
+* Mark
+:PROPERTIES:
+:header-args:     :tangle mark
+:END:
 
-" ========================================================
-" ======================= Marks ==========================
-" ========================================================
+#+begin_src vimrc
 mark B "~/.local/bin"
-mark C "/mnt/files/Ricardo/Documents/Assignments/College"
-mark D "/mnt/files/Ricardo/Documents"
+mark C "/mnt/file/document/task/college"
+mark D "/mnt/file/document"
 mark F "~/.local/share/fonts"
-mark G "~/documents/git"
+mark G "/mnt/file/game"
 mark H "/"
-mark M "/mnt/files/Ricardo/Music"
-mark R "/mnt/files/Ricardo/Projects/godot/arcade/crossy"
+mark M "/mnt/file/music"
+mark R "/mnt/file/project/godot/tactic/rocssy"
 mark W "/mnt/windows"
-mark b "/mnt/files/Ricardo/Books"
+mark b "/mnt/file/book"
 mark c "~/.config"
-mark d "/mnt/files/Ricardo/Downloads"
-mark f "/mnt/files/Ricardo/Resources/Fonts"
+mark d "/mnt/file/download"
+mark f "/mnt/file/resource/font"
 mark g "/mnt/windows/Users/Gerardi"
 mark h "~"
-mark m "/mnt/files/Ricardo/Videos/Movies"
-mark n "/mnt/files/Ricardo/Documents/note"
-mark p "/mnt/files/Ricardo/Pictures"
-mark P "/mnt/files/Ricardo/Projects"
-mark r "/mnt/files/Ricardo"
-mark s "/mnt/files/Ricardo/Videos/Series"
+mark m "/mnt/file/video/movie"
+mark n "/mnt/file/document/note"
+mark p "/mnt/file/picture"
+mark P "/mnt/file/project"
+mark r "/mnt/file"
+mark s "/mnt/file/video/serie"
 mark t "~/phone/Internal shared storage"
 mark u "/mnt/usb"
-mark v "/mnt/files/Ricardo/Videos"
-mark w "/mnt/files/Ricardo/Pictures/wallpaper"
+mark v "/mnt/file/video"
+mark w "/mnt/file/picture/wallpaper"
 mark z "~/.config/vifm" 
+#+end_src
 
+* Command
+:PROPERTIES:
+:header-args:     :tangle command
+:END:
 
-" ========================================================
-" ====================== Commands ========================
-" ========================================================
+#+begin_src vimrc
 " :com[mand][!] command_name action
 command! df df -h %m 2> /dev/null
 command! diff vim -d %f %F
@@ -177,7 +191,7 @@ command! ex :!ex %a
 command! vi :!st nvim %a 2> /dev/null &
 command! emacs :!/bin/emacs %a %i &
 command! python :!python %a
-command! dragon :!dragon-drag-and-drop --all --and-exit %f %i &
+command! dragon :!dragon-drop --all-compact --and-exit %f &
 command! renies :!python ~/.local/bin/python/renies.py %f %i
 #+end_src
 
@@ -263,7 +277,7 @@ map > :!~/.config/vifm/scripts/vifmimg inc<CR>
 map < :!~/.config/vifm/scripts/vifmimg dec<CR>
 
 " Rofi syntax highlighting
-au BufNewFile,BufRead /*.rasi setf css
+"au BufNewFile,BufRead /*.rasi setf css
 #+end_src
 
 * Scheme
@@ -364,7 +378,7 @@ set classify+=' ::*.php::'
 set classify+=' ::*.markdown,,*.md::'
 set classify+=' ::*.json::'
 set classify+=' ::*.js::'
-set classify+=' ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.svgz,,*.tga,,*.tiff,,*.xmb,,*.xcf,,*.xpm,,*.xspf,,*.xwd,,*.cr2,,*.dng,,*.3fr,,*.ari,,*.arw,,*.bay,,*.crw,,*.cr3,,*.cap,,*.data,,*.dcs,,*.dcr,,*drf,,*.eip,,*.erf,,*.fff,,*.gpr,,*.iiq,,*.k25,,*.kdc,,*.mdc,,.*mef,,*.mos,,.*.mrw,,.*.obm,,*.orf,,*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl,,*.rw2,,*.rwz,,*.sr2,,*.srf,,*.srf,,*.srw,,*.tif,,*.x3f::'
+set classify+=' ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.webp,,*.svg,,*.svgz,,*.tga,,*.tiff,,*.xmb,,*.xcf,,*.xpm,,*.xspf,,*.xwd,,*.cr2,,*.dng,,*.3fr,,*.ari,,*.arw,,*.bay,,*.crw,,*.cr3,,*.cap,,*.data,,*.dcs,,*.dcr,,*drf,,*.eip,,*.erf,,*.fff,,*.gpr,,*.iiq,,*.k25,,*.kdc,,*.mdc,,.*mef,,*.mos,,.*.mrw,,.*.obm,,*.orf,,*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl,,*.rw2,,*.rwz,,*.sr2,,*.srf,,*.srf,,*.srw,,*.tif,,*.x3f::'
 set classify+=' ::*.ejs,,*.htm,,*.html,,*.slim,,*.xml::'
 set classify+=' ::*.mustasche::'
 set classify+=' ::*.css,,*.less,,*.bat,,*.conf,,*.ini,,*.rc,,*.yml,,*.cfg,,*.rc::'
@@ -435,7 +449,7 @@ fileviewer .*/ ls --color --group-directories-first
 
 #+begin_src vimrc
 " Images
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.ico, 
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.webp,*.gif,*.xpm,*.ico, 
         \ {View in sxiv}
         \ sxiv %f %i &,
 	\ {Krita}
@@ -671,7 +685,7 @@ filetype ?*
     \ {Open with Emacs}
     \ ~/.local/bin/emacs %f %i &,
     \ {Open with Vim}
-    \ st nvim %f %i &,
+    \ foot vi %f %i &,
     \ {Open with Xdg-Open}
     \ xdg-open %c
 #+end_src

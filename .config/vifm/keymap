@@ -74,4 +74,4 @@ map > :!~/.config/vifm/scripts/vifmimg inc<CR>
 map < :!~/.config/vifm/scripts/vifmimg dec<CR>
 
 " Rofi syntax highlighting
-au BufNewFile,BufRead /*.rasi setf css
+"au BufNewFile,BufRead /*.rasi setf css
