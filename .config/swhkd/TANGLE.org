@@ -1,0 +1,672 @@
+:PROPERTIES:
+:author: Ricardo Gomez
+:email:  rgomezgerardi@gmail.com
+:title:  Swhkd Custom Configuration 
+:header-args+: :tangle swhkdrc
+:header-args+: :tangle-mode (identity #o644)
+:header-args+: :noweb strip-export
+:header-args+: :cache yes
+:END:
+
+* System
+** Reload Configuration files:
+
+#+begin_src shell
+super + escape
+	sudo killall swhkd && \
+	pkexec swhkd -c ~/.config/swhkd/swhkdrc &
+#+end_src
+
+** PowerOff/Reboot/Suspend
+
+#+begin_src shell
+super + {alt,ctrl,alt + ctrl} + backspace
+	sudo systemctl {suspend,reboot,poweroff}
+#+end_src
+
+** COMMENT Brigthness
+
+#+begin_src shell
+{_,shift + ,super + }XF86MonBrightness{Down,Up}
+	bright {-1,-10,min,+1,+10,max}
+#+end_src
+
+** Lock
+
+#+begin_src shell
+super + l
+	waylock -fork-on-lock -init-color 0x002b36 -input-color 0x6c71c4 -fail-color 0xdc322f
+#+end_src
+
+* Window
+** COMMENT Bspwm
+*** Quit / Restart
+
+#+begin_src shell
+super + alt + {q,r}
+	bspc {quit,wm -r}
+#+end_src
+
+*** Close and Kill
+
+#+begin_src shell
+super + {_,shift + }q
+	bspc node -{c,k}
+#+end_src
+
+*** Alternate between the tiled and monocle layout
+
+#+begin_src shell
+# super + {grave,Tab}
+super + Tab
+	bspc desktop -l next
+#+end_src
+
+*** Send the newest marked node to the newest preselected node
+
+#+begin_src shell
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+#+end_src
+
+*** State / Flags
+***** Set the window state
+
+#+begin_src shell
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+#+end_src
+
+***** COMMENT Set the node flags
+
+#+begin_src shell
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+#+end_src
+
+*** Focus / Swap
+**** Focus the node in the given direction on the current desktop
+
+#+begin_src shell
+super + {_,shift + }{h,j,k,l}
+	m='.local.!hidden.window'; \
+	focus () { \ 
+		if bspc query -T -d | grep -oq '"layout":"tiled"'; then \
+			bspc node -{f,s} "$1"; \
+		else \
+			bspc node -f "$2"; \
+		fi \
+	;} \
+	focus {west$m next$m,south$m prev$m,north$m next$m,east$m prev$m}; unset -f focus
+#+end_src
+
+**** COMMENT Focus the node for the given path jump
+
+#+begin_src shell
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+#+end_src
+
+**** Focus the next/previous desktop in the current monitor
+
+#+begin_src shell
+# super + bracket{left,right}
+super + {comma,period}
+	bspc desktop -f {prev,next}.local
+#+end_src
+
+**** Focus the last node/desktop
+
+#+begin_src shell
+super + {_,shift + }@space
+	bspc {node,desktop} -f last
+#+end_src
+
+**** COMMENT Focus the older or newer node in the focus history
+
+#+begin_src shell
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+#+end_src
+
+**** Focus or send to the given desktop
+
+#+begin_src shell
+super + {_,alt + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+#+end_src
+
+**** COMMENT Swap the current node and the biggest window
+
+#+begin_src shell
+super + g
+	bspc node -s biggest.window
+#+end_src
+
+*** COMMENT Preselect
+***** Preselect the direction
+
+#+begin_src shell
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+#+end_src
+
+***** Preselect the ratio
+
+#+begin_src shell
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+#+end_src
+
+***** Cancel the preselection for the focused node
+
+#+begin_src shell
+super + ctrl + space
+	bspc node -p cancel
+#+end_src
+
+***** Cancel the preselection for the focused desktop
+
+#+begin_src shell
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+#+end_src
+
+***** Move current window to a pre-selected space
+
+#+begin_src shell
+super + shift + m
+    bspc node -n last.!automatic
+#+end_src
+
+***** COMMENT Rotate tree
+
+#+begin_src shell
+super + shift + {d,a}
+	bspc node @/ -C {forward,backward}
+#+end_src
+
+***** COMMENT Send to desktop
+
+#+begin_src shell
+super + shift + {1-9,0}
+    bspc node -d '^{1-9,10}' --follow
+#+end_src
+
+***** COMMENT Send to monitor
+
+#+begin_src shell
+super + shift + equal
+     node -m last --follow
+#+end_src
+
+***** COMMENT Show clipmenu
+
+#+begin_src shell
+alt + v
+    CM_LAUNCHER=rofi clipmenu \
+        -location 1 \
+        -m -3 \
+        -no-show-icons \
+        -theme-str '* \{ font: 10px; \}' \
+        -theme-str 'listview \{ spacing: 0; \}' \
+        -theme-str 'window \{ width: 20em; \}'
+#+end_src
+
+***** COMMENT Show help
+
+#+begin_src shell
+super + slash
+    sxhkd-help
+#+end_src
+
+***** COMMENT Generate password
+
+#+begin_src shell
+super + r ; g ; p
+    tr -dc "a-zA-Z0-9_#@.-" < /dev/urandom | head -c 14 | xclip -selection clipboard
+#+end_src
+
+***** COMMENT Change wallpaper
+
+#+begin_src shell
+super + r ; c ; b
+    RAND=$(find "$WALLPAPERS" -xtype f | sort -R | head -1) \
+        xwallpaper --zoom "$WALLPAPERS/$RAND"
+#+end_src
+
+***** COMMENT Change lock screen wallpaper
+
+#+begin_src shell
+super + r ; c ; l
+    betterlockscreen -u $WALLPAPERS; \
+    notify-send 'betterlockscreen' 'Changed background'
+#+end_src
+
+***** COMMENT Close screen
+
+#+begin_src shell
+super + shift + c
+    sleep 0.5; xset dpms force standby
+#+end_src
+
+***** COMMENT Lock screen
+
+#+begin_src shell
+super + shift + x
+    betterlockscreen -l dim -t ''
+#+end_src
+
+***** COMMENT Mimic Chrome OS shortcuts
+****** Emulate home/end keys
+
+#+begin_src shell
+ctrl + alt + @{Up,Down}
+    xte 'keyup Control_L' 'keyup Alt_L' 'key {Home,End}'
+#+end_src
+
+****** Emulate home/end keys with shift
+
+#+begin_src shell
+ctrl + alt + shift + @{Up,Down}
+    xte 'keyup Control_L' 'keyup Alt_L' 'key {Home,End}'
+#+end_src
+
+****** Emulate delete key
+
+#+begin_src shell
+~alt + BackSpace
+    xte 'keyup Alt_L' 'key Delete' 'keydown Alt_L'
+#+end_src
+
+*** Move / Resize
+**** Move a floating window
+
+#+begin_src shell
+super + ctrl {h,j,k,l}
+	 node -v {-20 0,0 20,0 -20,20 0}
+#+end_src
+
+**** Smart resize
+Will grow or shrink depending on location.
+Will always grow for floating nodes.
+
+#+begin_src shell
+super + alt + {h,j,k,l}
+  n=10; \
+  { d1=left;   d2=right;  dx=-$n; dy=0;   \
+  , d1=bottom; d2=top;    dx=0;   dy=$n;  \
+  , d1=top;    d2=bottom; dx=0;   dy=-$n; \
+  , d1=right;  d2=left;   dx=$n;  dy=0;   \
+  } \
+   node --resize $d1 $dx $dy ||  node --resize $d2 $dx $dy
+#+end_src
+
+**** COMMENT Expand/contract a window by moving one of its side outward/inward
+
+#+begin_src shell
+super + s : {h,j,k,l}
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+#+end_src
+
+**** COMMENT Expand a window by moving one of its side outward
+
+#+begin_src shell
+super + alt + {h,j,k,l}
+	 node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+#+end_src
+
+**** COMMENT Contract a window by moving one of its side inward
+
+#+begin_src shell
+super + alt + shift + {h,j,k,l}
+	 node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+#+end_src
+
+*** COMMENT Others
+
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+super + alt + control + {h,j,k,l} ; {0-9}
+	bspc node @{west,south,north,east} -r 0.{0-9}
+
+** River
+*** Exit
+
+#+begin_src shell
+super + alt + q
+	riverctl exit
+#+end_src
+
+*** Close
+
+#+begin_src shell
+super + q
+	riverctl close
+#+end_src
+
+*** Focus
+**** Focus Tag
+
+#+begin_src shell
+super + {1-9}
+    riverctl set-focused-tags $((1 << ({1-9} - 1)))
+#+end_src
+
+**** View Tag
+
+#+begin_src shell
+super + alt + {1-9}
+    riverctl set-view-tags $((1 << ({1-9} - 1)))
+#+end_src
+
+**** Toggle Focus Tag
+
+#+begin_src shell
+super + ctrl + {1-9}
+    riverctl toggle-focused-tags $((1 << ({1-9} - 1)))
+#+end_src
+
+**** Toggle View Tag
+
+#+begin_src shell
+super + ctrl + shift + {1-9}
+    riverctl toggle-view-tags $((1 << ({1-9} - 1)))
+#+end_src
+
+*** View
+**** Focus the next/previous view in the layout stack
+
+#+begin_src shell
+super + {j,k}
+	riverctl focus-view {next,previous}
+#+end_src
+
+**** Swap the focused view with the next/previous view with the next/previous
+
+#+begin_src shell
+super + shift + {j,k}
+	riverctl swap {next,previous}
+#+end_src
+
+*** Zoom
+Bump the focused view to the top of the layout stack
+
+#+begin_src shell
+super + ctrl + return
+	zoom
+#+end_src
+
+*** Output
+**** Focus the next/previous output
+
+#+begin_src shell
+super + {period, comma}
+	riverctl focus-output {next,previous}
+#+end_src
+
+**** Send the focused view to the next/previous output
+
+#+begin_src shell
+super + shift + {period, comma}
+	riverctl send-to-output {next,previous}
+#+end_src
+
+*** Layout
+**** Carro
+
+#+begin_src shell
+super + m
+	riverctl send-layout-cmd rivercarro "main-location monocle"
+#+end_src
+
+**** Carro
+
+#+begin_src shell
+super + m
+	riverctl send-layout-cmd rivercarro "main-location monocle"
+#+end_src
+
+*** COMMENT Mouse
+
+#+begin_src shell
+# Super + Left Mouse Button to move views
+super + button1
+	riverctl move-view
+
+# Super + Right Mouse Button to resize views
+super + button2
+	riverctl resize-view
+
+# Super + Middle Mouse Button to toggle float
+super + button3
+	riverctl toggle-float
+#+end_src
+
+*** COMMENT
+
+#+begin_src shell
+# Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
+riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Super L send-layout-cmd rivertile "main-ratio +0.05"
+
+# Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
+riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
+riverctl map normal Super+Shift L send-layout-cmd rivertile "main-count -1"
+
+# Super+Alt+{H,J,K,L} to move views
+riverctl map normal Super+Alt H move left 100
+riverctl map normal Super+Alt J move down 100
+riverctl map normal Super+Alt K move up 100
+riverctl map normal Super+Alt L move right 100
+
+# Super+Alt+Control+{H,J,K,L} to snap views to screen edges
+riverctl map normal Super+Alt+Control H snap left
+riverctl map normal Super+Alt+Control J snap down
+riverctl map normal Super+Alt+Control K snap up
+riverctl map normal Super+Alt+Control L snap right
+
+# Super+Alt+Shift+{H,J,K,L} to resize views
+riverctl map normal Super+Alt+Shift H resize horizontal -100
+riverctl map normal Super+Alt+Shift J resize vertical 100
+riverctl map normal Super+Alt+Shift K resize vertical -100
+riverctl map normal Super+Alt+Shift L resize horizontal 100
+
+# Super+0 to focus all tags
+# Super+Shift+0 to tag focused view with all tags
+all_tags=$(((1 << 32) - 1))
+riverctl map normal Super 0 set-focused-tags $all_tags
+riverctl map normal Super+Shift 0 set-view-tags $all_tags
+
+# Super+Space to toggle float
+riverctl map normal Super Space toggle-float
+
+# Super+F to toggle fullscreen
+riverctl map normal Super F toggle-fullscreen
+
+# Super+{Up,Right,Down,Left} to change layout orientation
+riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
+riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
+riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
+riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
+
+# Declare a passthrough mode. This mode has only a single mapping to return to
+# normal mode. This makes it useful for testing a nested wayland compositor
+riverctl declare-mode passthrough
+
+# Super+F11 to enter passthrough mode
+riverctl map normal Super F11 enter-mode passthrough
+
+# Super+F11 to return to normal mode
+riverctl map passthrough Super F11 enter-mode normal
+
+# Various media key mapping examples for both normal and locked mode which do
+# not have a modifier
+for mode in normal locked
+do
+    # Eject the optical drive (well if you still have one that is)
+    riverctl map $mode None XF86Eject spawn 'eject -T'
+
+    # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
+    riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
+
+    # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
+    riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPlay  spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPrev  spawn 'playerctl previous'
+    riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
+
+    # Control screen backlight brightness with light (https://github.com/haikarainen/light)
+    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
+done
+#+end_src
+
+* Program
+** Terminal
+
+#+begin_src shell
+super + Return
+	foot
+#+end_src
+
+** Launcher
+
+#+begin_src shell
+super + r
+	tofi-drun --drun-launch=true
+#+end_src
+
+** Idle
+
+#+begin_src shell
+super + i
+	emacsclient --alternate-editor="" --create-frame
+#+end_src
+
+** COMMENT Mail
+
+#+begin_src shell
+super + alt + m
+	thunderbird
+#+end_src
+
+** COMMENT Image
+
+#+begin_src shell
+super + shift + equal
+	sxiv -rt "$HOME/image"
+#+end_src
+
+** COMMENT Editor
+
+#+begin_src shell
+#+end_src
+
+** COMMENT Statusbar
+
+#+begin_src shell
+super + alt + b
+	$HOME/.local/bin/polybar
+#+end_src
+
+** Browser
+
+#+begin_src shell
+super + b
+	firefox
+#+end_src
+
+** Capture
+*** Screenshot
+
+#+begin_src shell
+super + c
+	grim - | swappy -f -
+#+end_src
+
+*** Region
+
+#+begin_src shell
+super + alt + c
+	grim -g "$(slurp)" - | swappy -f -
+#+end_src
+
+*** Pick a Color
+
+#+begin_src shell
+super + alt + p
+	grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -1 | cut -d' ' -f4 | wl-copy
+#+end_src
+
+** Explorer
+
+#+begin_src shell
+super + e
+	foot -T 'Vifm' tmux new -AD -s 'explorer' -n 'Vifm' 'vifm'
+#+end_src
+
+** PixelArt
+
+#+begin_src shell
+super + p
+	aseprite
+#+end_src
+
+** COMMENT Download
+
+#+begin_src shell
+super + d
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 2 --class "download" --name "Download" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "download" -c "Download" \
+		  rtorrent 
+#+end_src
+
+** COMMENT Audio
+
+#+begin_src shell
+super + a
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 3 --class "audio"  --name "Audio" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "audio" -c "Audio" \
+		  ncpamixer
+#+end_src
+
+** COMMENT Music
+
+#+begin_src shell
+super + m
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 4 --class "music"  --name "Music" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "music" -c "Music" \
+		  mocp --config $HOME/.config/moc/config 
+#+end_src
+
+* COMMENT Other
+
+XF86Audio{Prev,Next}
+	mpc -q {prev,next}
+
+@XF86LaunchA
+	scrot -s -e 'image_viewer $f'
+
+XF86LaunchB
+	xdotool selectwindow | xsel -bi
+
+super + alt + {0-9}
+	mpc -q seek {0-9}0%
+
+super + o ; {e,w,m}
+	{gvim,firefox,thunderbird}
+

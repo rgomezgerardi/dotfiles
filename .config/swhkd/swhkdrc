@@ -1,0 +1,75 @@
+super + escape
+	sudo killall swhkd && \
+	pkexec swhkd -c ~/.config/swhkd/swhkdrc &
+
+super + {alt,ctrl,alt + ctrl} + backspace
+	sudo systemctl {suspend,reboot,poweroff}
+
+super + l
+	waylock -fork-on-lock -init-color 0x002b36 -input-color 0x6c71c4 -fail-color 0xdc322f
+
+super + alt + q
+	riverctl exit
+
+super + q
+	riverctl close
+
+super + {1-9}
+    riverctl set-focused-tags $((1 << ({1-9} - 1)))
+
+super + alt + {1-9}
+    riverctl set-view-tags $((1 << ({1-9} - 1)))
+
+super + ctrl + {1-9}
+    riverctl toggle-focused-tags $((1 << ({1-9} - 1)))
+
+super + ctrl + shift + {1-9}
+    riverctl toggle-view-tags $((1 << ({1-9} - 1)))
+
+super + {j,k}
+	riverctl focus-view {next,previous}
+
+super + shift + {j,k}
+	riverctl swap {next,previous}
+
+super + ctrl + return
+	zoom
+
+super + {period, comma}
+	riverctl focus-output {next,previous}
+
+super + shift + {period, comma}
+	riverctl send-to-output {next,previous}
+
+super + m
+	riverctl send-layout-cmd rivercarro "main-location monocle"
+
+super + m
+	riverctl send-layout-cmd rivercarro "main-location monocle"
+
+super + Return
+	foot
+
+super + r
+	tofi-drun --drun-launch=true
+
+super + i
+	emacsclient --alternate-editor="" --create-frame
+
+super + b
+	firefox
+
+super + c
+	grim - | swappy -f -
+
+super + alt + c
+	grim -g "$(slurp)" - | swappy -f -
+
+super + alt + p
+	grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -1 | cut -d' ' -f4 | wl-copy
+
+super + e
+	foot -T 'Vifm' tmux new -AD -s 'explorer' -n 'Vifm' 'vifm'
+
+super + p
+	aseprite
