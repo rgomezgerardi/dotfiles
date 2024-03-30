@@ -8,6 +8,8 @@
 #export PATH="$PATH:$HOME/.local/share/go/bin"
 # append
 #path+=('/home/david/pear/bin')
+path+=("$HOME/.cargo/bin")
+
 # or prepend
 #path=('/home/david/pear/bin' $path)
 # export to sub-processes (make it inherited by child processes)
@@ -26,6 +28,10 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Other
 export LANG=en_US.UTF-8
+
+#export WINEPREFIX="$HOME/wine/default"
+#export RT_HOME="$XDG_CONFIG_HOME/rtorrent"
+#export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
 # Flameshot
 #export SDL_VIDEODRIVER=wayland

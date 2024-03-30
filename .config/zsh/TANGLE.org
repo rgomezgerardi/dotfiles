@@ -684,22 +684,24 @@ alias fix-pacman-conf="/usr/local/bin/arcolinux-fix-pacman-conf"
 alias fix-pacman-keyserver="/usr/local/bin/arcolinux-fix-pacman-gpg-conf"
 #+end_src
 
-*** COMMENT Program
+*** Program
 
 #+begin_src shell
-# alias emacs="~/.local/bin/emacs"
-e()     { pgrep emacs && emacsclient -n "$@" || emacs -nw "$@" }
-ediff() { emacs -nw --eval "(ediff-files \"$1\" \"$2\")"; }
-eman()  { emacs -nw --eval "(switch-to-buffer (man \"$1\"))"; }
-ekill() { emacsclient --eval '(kill-emacs)'; }
+# Dotfiles
 
-alias mocp="mocp --config ~/.config/moc/config"
+# alias emacs="~/.local/bin/emacs"
+#e()     { pgrep emacs && emacsclient -n "$@" || emacs -nw "$@" }
+#ediff() { emacs -nw --eval "(ediff-files \"$1\" \"$2\")"; }
+#eman()  { emacs -nw --eval "(switch-to-buffer (man \"$1\"))"; }
+#ekill() { emacsclient --eval '(kill-emacs)'; }
+alias stow='stow --no-folding -d $HOME/repo/dotfiles -t $HOME'
+#alias mocp="mocp --config ~/.config/moc/config"
 # alias vifm="$HOME/.config/vifm/scripts/vifmrun"
-alias rtorrent="~/.config/rtorrent/start"
-alias figlet="figlet -f ~/.config/figlet/fonts/ANSI\ Shadow.flf"
-alias alacritty='LIBGL_ALWAYS_SOFTWARE=1 alacritty'
-{ command -v nvim &> /dev/null } && alias vi='nvim' || alias vi='vim'
-{ command -v neomutt &> /dev/null } && alias mutt='neomutt'
+#alias rtorrent="~/.config/rtorrent/start"
+alias figlet="figlet -f 'ANSI Shadow'"
+#alias alacritty='LIBGL_ALWAYS_SOFTWARE=1 alacritty'
+{ command -v nvim &> /dev/null } && alias vi='visu'
+#{ command -v neomutt &> /dev/null } && alias mutt='neomutt'
 #+end_src
 
 *** COMMENT Others
@@ -718,8 +720,6 @@ alias sr="sudo reboot"
 # Edit the fstab
 alias fstab="sudo $EDITOR /etc/fstab"
 
-# Dotfiles
-alias stow='stow --no-folding -d $HOME/repo/rgomezgerardi/dotfiles -t $HOME'
 
 # Switch between shells
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
@@ -772,6 +772,8 @@ When this file exists it will always be read.
 #export PATH="$PATH:$HOME/.local/share/go/bin"
 # append
 #path+=('/home/david/pear/bin')
+path+=("$HOME/.cargo/bin")
+
 # or prepend
 #path=('/home/david/pear/bin' $path)
 # export to sub-processes (make it inherited by child processes)
@@ -790,6 +792,10 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Other
 export LANG=en_US.UTF-8
+
+#export WINEPREFIX="$HOME/wine/default"
+#export RT_HOME="$XDG_CONFIG_HOME/rtorrent"
+#export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
 # Flameshot
 #export SDL_VIDEODRIVER=wayland
@@ -864,8 +870,5 @@ export IMAGE_VIEWER="sxiv"
 ** COMMENT Cleanup
 
 #+begin_src shell
-export WINEPREFIX="$HOME/wine/default"
-export RT_HOME="$XDG_CONFIG_HOME/rtorrent"
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 #+end_src
 
