@@ -23,4 +23,4 @@ mark t "~/phone/Internal shared storage"
 mark u "/mnt/usb"
 mark v "/mnt/file/video"
 mark w "/mnt/file/picture/wallpaper"
-mark z "~/.config/vifm"
+mark z "~/.config/vifm" TANGLE.org

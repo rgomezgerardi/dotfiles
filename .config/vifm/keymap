@@ -21,7 +21,7 @@ noremap I :file<cr>j
 nnoremap gg ggj
 
 " Drag and Drop
-noremap <C-d> :dragon<CR>
+noremap <C-d> :dragon -i -x -T -a %%f<CR>
 
 " Extract files
 nnoremap x :ex %f<cr>
@@ -29,24 +29,6 @@ nnoremap x :ex %f<cr>
 " Rename Movies and Series
 noremap rr :renies %f<CR>
 
-" Interaction with system clipboard
-if executable('xclip')
-	" Yank current directory path into the clipboard
-	"nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
-	nnoremap yd :!echo -n %d | xsel --clipboard<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
-
-	" Yank current file path into the clipboard
-	"nnoremap yf :!echo -n %c:p | xclip -selection clipboard %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
-	nnoremap yf :!echo -n %c:p | xsel --clipboard<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
-
-	" Yank current file name into the clipboard
-	"nnoremap yw :!echo -n %c | xclip -selection clipboard %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
-	nnoremap yW :!echo -n %c | xsel --clipboard<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
-
-	" Yank current file name into the clipboard (without extension)
-	"nnoremap yn :!echo -n %c:r | xclip -selection clipboard %i<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
-	nnoremap yw :!echo -n %c:r | xsel --clipboard<cr>:echo expand('%"c:r') "is yanked to clipboard"<cr>
-endif
 
 " Panel resizing
 nnoremap - <C-w>5<
@@ -57,8 +39,8 @@ nnoremap J 5j
 nnoremap K 5k
 
 " Renaming 
-nnoremap cw cW<c-u>
-nnoremap cW cw
+"nnoremap cw cW<c-u>
+"nnoremap cW cw
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
 nnoremap ,c :write | edit $MYVIFMRC | restart<cr>
@@ -75,3 +57,43 @@ map < :!~/.config/vifm/scripts/vifmimg dec<CR>
 
 " Rofi syntax highlighting
 "au BufNewFile,BufRead /*.rasi setf css
+
+if has('win')
+    " Yank current directory path to Windows clipboard with forward slashes
+    nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
+    " Yank path to current file to Windows clipboard with forward slashes
+    nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
+elseif $WAYLAND_DISPLAY
+    if executable('wl-copy')
+        " Yank current directory path into primary and selection clipboards
+        nnoremap yd :!echo -n %d | wl-copy %i &&
+                    \ echo -n %d | wl-copy -p %i
+					\ <cr>:echo expand('%"d') 'is yanked to clipboard'<cr>
+        " Yank current file path into into primary and selection clipboards
+        nnoremap yf :!echo -n %c:p | wl-copy %i &&
+                    \ echo -n %c:p | wl-copy -p %i
+					\ <cr>:echo expand('%"c:p') 'is yanked to clipboard'<cr>
+		" Yank current file full name into the clipboard
+        nnoremap yw :!echo -n %c | wl-copy %i &&
+                    \ echo -n %c | wl-copy -p %i
+					\ <cr>:echo expand('%"c') 'is yanked to clipboard'<cr>
+		" Yank current file root name into the clipboard
+        nnoremap yW :!echo -n %c:r | wl-copy %i &&
+                    \ echo -n %c:r | wl-copy -p %i
+					\ <cr>:echo expand('%"c:r') 'is yanked to clipboard'<cr>
+    endif
+elseif $DISPLAY
+    if executable('xclip')
+        " Yank current directory path into the clipboard
+        nnoremap yd :!echo %d | xclip %i<cr>
+        " Yank current file path into the clipboard
+        nnoremap yf :!echo %c:p | xclip %i<cr>
+    elseif executable('xsel')
+        " Yank current directory path into primary and selection clipboards
+        nnoremap yd :!echo -n %d | xsel --input --primary %i &&
+                    \ echo -n %d | xsel --clipboard --input %i<cr>
+        " Yank current file path into into primary and selection clipboards
+        nnoremap yf :!echo -n %c:p | xsel --input --primary %i &&
+                    \ echo -n %c:p | xsel --clipboard --input %i<cr>
+    endif
+endif

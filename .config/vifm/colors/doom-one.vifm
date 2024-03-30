@@ -23,29 +23,37 @@
 " Reset all styles first
 highlight clear
 
-highlight Win cterm=none ctermfg=252 ctermbg=236
-highlight Directory cterm=none ctermfg=12 ctermbg=236
-highlight Link cterm=bold ctermfg=6 ctermbg=236
-highlight BrokenLink cterm=bold ctermfg=1 ctermbg=236
-highlight Socket cterm=bold ctermfg=5 ctermbg=236
-highlight Device cterm=bold ctermfg=1 ctermbg=236
-highlight Fifo cterm=bold ctermfg=6 ctermbg=236
-highlight Executable cterm=bold ctermfg=2 ctermbg=236
+highlight Win cterm=none ctermfg=252 ctermbg=none
+highlight OtherWin cterm=bold,italic, ctermfg=252 ctermbg=none
+highlight AuxWin cterm=bold,underline,reverse,standout,italic ctermfg=252 ctermbg=none
+
+highlight TopLine cterm=none ctermfg=255 ctermbg=none
+highlight TopLineSel cterm=bold ctermfg=255 ctermbg=none
+highlight StatusLine cterm=bold ctermfg=255 ctermbg=none
+highlight Border cterm=none ctermfg=255 ctermbg=none
+
+highlight CmdLine cterm=none ctermfg=252 ctermbg=none
+
+highlight Directory cterm=none ctermfg=12 ctermbg=none
+highlight Link cterm=bold ctermfg=6 ctermbg=none
+highlight BrokenLink cterm=bold ctermfg=1 ctermbg=none
+highlight Socket cterm=bold ctermfg=5 ctermbg=none
+highlight Device cterm=bold ctermfg=1 ctermbg=none
+highlight Fifo cterm=bold ctermfg=6 ctermbg=none
+highlight Executable cterm=bold ctermfg=2 ctermbg=none
+
 highlight Selected cterm=bold ctermfg=236 ctermbg=250
 highlight CurrLine cterm=bold,reverse ctermfg=240 ctermbg=254
-highlight TopLine cterm=none ctermfg=255 ctermbg=236
-highlight TopLineSel cterm=bold ctermfg=255 ctermbg=236
-highlight StatusLine cterm=bold ctermfg=255 ctermbg=236
+
+
 highlight WildMenu cterm=underline,reverse ctermfg=6 ctermbg=6
-highlight CmdLine cterm=none ctermfg=255 ctermbg=236
 highlight ErrorMsg cterm=none ctermfg=1 ctermbg=236
-highlight Border cterm=none ctermfg=255 ctermbg=236
 highlight JobLine cterm=bold,reverse ctermfg=6 ctermbg=12
 highlight SuggestBox cterm=bold ctermfg=255 ctermbg=236
 highlight CmpMismatch cterm=bold ctermfg=2 ctermbg=5
-highlight AuxWin cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
 highlight TabLine cterm=none ctermfg=6 ctermbg=236
 highlight TabLineSel cterm=bold,reverse ctermfg=255 ctermbg=236
+
 highlight User1 cterm=bold,underline,reverse,standout,italic ctermfg=6 ctermbg=12
 highlight User2 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
 highlight User3 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
@@ -55,4 +63,3 @@ highlight User6 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg
 highlight User7 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
 highlight User8 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
 highlight User9 cterm=bold,underline,reverse,standout,italic ctermfg=255 ctermbg=236
-highlight OtherWin cterm=bold,italic, ctermfg=252 ctermbg=236

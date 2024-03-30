@@ -14,8 +14,8 @@ fileviewer .*/ ls --color --group-directories-first
 
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.webp,*.gif,*.xpm,*.ico, 
-        \ {View in sxiv}
-        \ sxiv %f %i &,
+        \ {View in nsxiv}
+        \ nsxiv %f %i &,
 	\ {Krita}
         \ krita %f %i &,
 	\ {Aseprite}
@@ -26,6 +26,7 @@ fileviewer *.gif
 	\ vifmimg gifpreview %px %py %pw %ph %c %pc vifmimg clear
 fileviewer *.ico
         \ vifmimg magickpreview %px %py %pw %ph %c %pc vifmimg clear
+
 " Subtitle
 filextype *.srt
     \ {Open with Emacs}
@@ -225,8 +226,8 @@ fileviewer *.7z
 " Open all the unknow files
 filetype ?*
     \ {Open with Emacs}
-    \ ~/.local/bin/emacs %f %i &,
-    \ {Open with Vim}
-    \ foot vi %f %i &,
+	\ emacsclient --alternate-editor='' --create-frame %f %i,
+    "\ {Open with Vim}
+    "\ foot vi %f %i &,
     \ {Open with Xdg-Open}
     \ xdg-open %c
