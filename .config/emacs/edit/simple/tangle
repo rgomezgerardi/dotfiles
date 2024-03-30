@@ -1,4 +1,4 @@
-# -*- mode: org -*- #
+# -*-org-*- #
 :PROPERTIES:
 :header-args+: :tangle config
 :END:
@@ -6,12 +6,13 @@
 Basic editing commands for Emacs
 
 #+begin_src emacs-lisp
-  (use-package simple :straight (:type built-in) 
+(use-package simple :straight (:type built-in) 
 	  :demand
 	  :custom
 	  (tab-width 4)
 	  ;(fill-column 120) ; Indenting and filling text
 	  ;(indent-tabs-mode t) ; Indentation commands
 	  ;(backward-delete-char-untabify-method 'hungry) ; Killing and yanking commands
-  )
+)
 #+end_src
+

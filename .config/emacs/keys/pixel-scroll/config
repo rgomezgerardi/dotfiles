@@ -1,0 +1,7 @@
+(use-package pixel-scroll :straight (:type built-in) 
+  :demand
+  :custom
+  (pixel-scroll-precision-use-momentum t)
+  :config
+  (pixel-scroll-precision-mode t)
+)

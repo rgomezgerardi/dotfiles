@@ -1,0 +1,13 @@
+# -*-org-*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+A Library for Nerd Font icons
+
+#+begin_src emacs-lisp
+(use-package nerd-icons
+  :custom
+  (nerd-icons-font-family "Symbols Nerd Font Mono")
+)
+#+end_src

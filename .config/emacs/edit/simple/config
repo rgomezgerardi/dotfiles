@@ -1,8 +1,8 @@
 (use-package simple :straight (:type built-in) 
-	:demand
-	:custom
-	(tab-width 4)
-	;(fill-column 120) ; Indenting and filling text
-	;(indent-tabs-mode t) ; Indentation commands
-	;(backward-delete-char-untabify-method 'hungry) ; Killing and yanking commands
+	  :demand
+	  :custom
+	  (tab-width 4)
+	  ;(fill-column 120) ; Indenting and filling text
+	  ;(indent-tabs-mode t) ; Indentation commands
+	  ;(backward-delete-char-untabify-method 'hungry) ; Killing and yanking commands
 )

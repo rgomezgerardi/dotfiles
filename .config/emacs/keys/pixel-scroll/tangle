@@ -1,0 +1,27 @@
+# -*-org-*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Scroll a line smoothly
+
+#+begin_src emacs-lisp
+(use-package pixel-scroll :straight (:type built-in) 
+  :demand
+  :custom
+  (pixel-scroll-precision-use-momentum t)
+  :config
+  (pixel-scroll-precision-mode t)
+)
+#+end_src
+
+
+ ;; scroll one line at a time (less "jumpy" than defaults)
+    
+    (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+    
+    (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+    
+    (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+    
+    (setq scroll-step 1) ;; keyboard scroll one line at a time

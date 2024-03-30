@@ -1,4 +1,4 @@
-# -*- mode: org -*- #
+# -*-org-*- #
 :PROPERTIES:
 :header-args+: :tangle config
 :header-args+: :noweb strip-export
@@ -61,8 +61,8 @@ Settings for Org mode appearance.
  org-image-actual-width 300
  org-src-fontify-natively t
  org-hide-emphasis-markers nil
- org-ellipsis " ↴"  ; The ellipsis to use in the Org mode outline (▾  ↴)
- )
+ org-ellipsis " 󱞣"  ; The ellipsis to use in the Org mode outline (▾ )
+)
 #+end_src
 
 ****** Org Faces
@@ -230,7 +230,7 @@ Options concerning structure editing in Org mode.
 		     ("yaml" . yaml)
 		     ("opml" . nxml)
 		     ("sxhkd" . sxhkd)
-		     ("swhkd" . sxhkd)
+		     ("toml" . toml)
 		     ("yuck" . yuck)
 		     ("sqlite" . sql))
 )

@@ -9,9 +9,10 @@ Lisp faces
 (use-package faces :straight (:type built-in) 
   :demand
   :custom-face
-  (default ((t . (:family "Source Code Pro" :height 120))))
-  (fixed-pitch ((t . (:family "Monospace" :height 120))))
-  (variable-pitch ((t . (:family "Monospace" :height 120))))
+  ;(default ((t . (:family "Source Code Pro Nerd" :height 130))))
+  (default ((t . (:family "SauceCodePro Nerd Font" :height 130))))
+  (fixed-pitch ((t . (:family "Monospace" :height 130))))
+  (variable-pitch ((t . (:family "Monospace" :height 130))))
 )
 #+end_src
 

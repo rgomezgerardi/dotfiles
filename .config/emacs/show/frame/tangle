@@ -1,0 +1,19 @@
+# -*- org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Multi-frame management independent of window systems
+
+#+begin_src emacs-lisp
+(use-package frame :straight (:type built-in) 
+  :demand
+  :preface
+  (defun frame-opacity (frame) 
+    (set-frame-parameter frame 'alpha-background 96)) 
+  :config
+  (frame-opacity nil) 
+  (add-to-list 'after-make-frame-functions 'frame-opacity)
+)
+#+end_src
+

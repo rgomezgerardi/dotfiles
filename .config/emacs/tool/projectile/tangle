@@ -7,15 +7,19 @@
 (use-package projectile
   :demand
   :custom
+  (projectile-indexing-method 'hybrid)
   (projectile-discover-projects-in-search-path t)
+  (projectile-globally-ignored-files '("TAGS" ".projectile" "config"))
   (projectile-project-search-path
-   '("/mnt/files/Ricardo/Projects"))
+   '("/mnt/file/project"))
   :config
+  (projectile-mode)
   (projectile-register-project-type 'godot '("project.godot")
                                     :project-file "project.godot"
-				    :compile "godot --help"
-				    :test "godot --help"
-				    :run "godot --help")
+									:compile "godot --help"
+									:test "godot --help"
+									:run "godot --help")
+
   :general
   (leader-def
     "p" '(projectile-command-map :which-key "project")

@@ -1,0 +1,15 @@
+# -*- org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Smart line-wrapping with wrap-prefix
+https://elpa.gnu.org/packages/adaptive-wrap.html
+
+#+begin_src emacs-lisp
+(use-package adaptive-wrap
+  :hook (visual-line-mode . adaptive-wrap-prefix-mode)
+  :config () ; Show message if verbose is activated
+)  
+#+end_src
+

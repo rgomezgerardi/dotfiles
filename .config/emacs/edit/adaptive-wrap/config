@@ -1,0 +1,4 @@
+(use-package adaptive-wrap
+  :hook (visual-line-mode . adaptive-wrap-prefix-mode)
+  :config () ; Show message if verbose is activated
+)

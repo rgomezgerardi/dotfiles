@@ -1,4 +1,4 @@
-# -*- mode: org -*- #
+# -*- org -*- #
 :PROPERTIES:
 :header-args+: :tangle config
 :END:
@@ -9,10 +9,13 @@ https://github.com/joostkremers/visual-fill-column
 #+begin_src emacs-lisp
 (use-package visual-fill-column
   :hook (visual-line-mode . visual-fill-column-mode)
-  ; Disable
-  ((mhtml-mode) . (lambda () (visual-fill-column-mode 0)))
   :custom
-  (visual-fill-column-width 128)
-  (visual-fill-column-center-text t)
-  :config ())  ; Show message if verbose is activated
+  (visual-fill-column-width 96)
+  (visual-fill-column-enable-sensible-window-split t)
+  :config
+  (setq-default visual-fill-column-center-text t)
+)
 #+end_src
+
+Disable
+((mhtml-mode) . (lambda () (visual-fill-column-mode 0)))

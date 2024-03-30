@@ -1,0 +1,9 @@
+(use-package frame :straight (:type built-in) 
+  :demand
+  :preface
+  (defun frame-opacity (frame) 
+    (set-frame-parameter frame 'alpha-background 96)) 
+  :config
+  (frame-opacity nil) 
+  (add-to-list 'after-make-frame-functions 'frame-opacity)
+)

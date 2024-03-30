@@ -1,0 +1,11 @@
+# -*- mode: org -*- #
+:PROPERTIES:
+:header-args+: :tangle config
+:END:
+
+Major mode for editing TOML files
+https://github.com/dryman/toml-mode.el
+
+#+begin_src emacs-lisp
+(use-package toml-mode)
+#+end_src
