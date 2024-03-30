@@ -1,4 +1,6 @@
-; -*- yuck -*- ; 
+;-*-yuck-*-;
+(include "./widget")
+
 (defwidget greeter [?text name]
   (box :orientation "horizontal"
        :halign "center"
