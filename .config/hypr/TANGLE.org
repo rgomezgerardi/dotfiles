@@ -1,3 +1,24 @@
+:PROPERTIES:
+:author: Ricardo Gomez
+:email:  rgomezgerardi@gmail.com
+:title:  Hyprland Custom Configuration
+:header-args+: :tangle hyprland.conf
+:header-args+: :noweb strip-export
+:header-args+: :cache yes
+:END:
+
+
+██╗  ██╗██╗   ██╗██████╗ ██████╗ ██╗      █████╗ ███╗   ██╗██████╗ 
+██║  ██║╚██╗ ██╔╝██╔══██╗██╔══██╗██║     ██╔══██╗████╗  ██║██╔══██╗
+███████║ ╚████╔╝ ██████╔╝██████╔╝██║     ███████║██╔██╗ ██║██║  ██║
+██╔══██║  ╚██╔╝  ██╔═══╝ ██╔══██╗██║     ██╔══██║██║╚██╗██║██║  ██║
+██║  ██║   ██║   ██║     ██║  ██║███████╗██║  ██║██║ ╚████║██████╔╝
+╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ 
+
+
+* Launch
+
+#+begin_src conf
 # Source a file (multi-file configs)
 # source = ~/.config/hypr/myColors.conf
 	
@@ -5,13 +26,25 @@ exec-once = swww init && swww img '/mnt/file/picture/wallpaper/16:9/one-dark/arc
 exec-once = eww daemon
 exec-once = pypr
 exec-once = ~/.cargo/bin/hyprscratch clean spotless
-exec-once = emacs --bg-daemon &
+exec-once = emacs --bg-daemon & 
+#+end_src
 
+* Monitor
+
+#+begin_src conf
 monitor=,highres,auto,auto
+#+end_src
 
+* Env
+
+#+begin_src conf
 # Some default env vars.
 env = XCURSOR_SIZE,24
+#+end_src
 
+* General
+
+#+begin_src conf
 general {
     gaps_in = 8
     gaps_out = 16
@@ -23,7 +56,11 @@ general {
 	no_focus_fallback = false
     layout = master
 }
+#+end_src
 
+* Input
+
+#+begin_src conf
 input {
     kb_layout = us
     kb_variant =
@@ -40,13 +77,21 @@ input {
 
     sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
 }
+#+end_src
 
+* Device
+
+#+begin_src conf
 # Example per-device config
 # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
 device:epic-mouse-v1 {
     sensitivity = -0.5
 }
+#+end_src
 
+* Master
+
+#+begin_src conf
 master {
     new_is_master = true
     new_on_top = true
@@ -55,13 +100,21 @@ master {
 	inherit_fullscreen = false
 	always_center_master = false
 }
+#+end_src
 
+* Dwindle
+
+#+begin_src conf
 dwindle {
     # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
     pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
     preserve_split = yes # you probably want this
 }
+#+end_src
 
+* Decoration
+
+#+begin_src conf
 decoration {
     rounding = 5
     
@@ -76,7 +129,11 @@ decoration {
     shadow_render_power = 3
     col.shadow = rgba(1a1a1aee)
 }
+#+end_src
 
+* Animation
+
+#+begin_src conf
 animations {
     enabled = yes
 
@@ -89,11 +146,25 @@ animations {
     animation = fade, 1, 7, default
     animation = workspaces, 1, 6, default
 }
+#+end_src
 
+* Misc
+
+misc {
+	always_follow_on_dnd = true
+}
+
+* Gesture
+
+#+begin_src conf
 gestures {
     workspace_swipe = off
 }
+#+end_src
 
+* Workspace
+
+#+begin_src conf
 workspace =  1, on-created-empty: foot # Runcom
 workspace =  2, default:true, on-created-empty: thorium-browser # Search
 workspace =  3, # Code
@@ -103,27 +174,45 @@ workspace =  6, # Gaming
 workspace =  7, # Videos
 workspace =  8, # Music
 workspace =  9, # Record
-workspace = 10, layoutopt:orientation:center # Random
+workspace = 10, layoutopt:orientation:center # Random 
+#+end_src
 
+* Rule
+** Picture in picture
+
+#+begin_src conf
 $window  = title:([Pp]icture)
 windowrulev2 = pin, $window
 windowrulev2 = float, $window
 windowrulev2 = noborder, $window
 windowrulev2 = size 30% 30%, $window
 windowrulev2 = move onscreen 100% 100%, $window
+#+end_src
 
+** Scratchpad
+*** Explorer
+
+#+begin_src conf
 $explorer  = title:(Explorer)
 windowrulev2 = float, $explorer
 windowrulev2 = size 80% 80%, $explorer
 windowrulev2 = dimaround, $explorer
 windowrulev2 = workspace special:scratch_explorer silent, $explorer
+#+end_src
 
+*** Bluetooth
+
+#+begin_src conf
 $bluetooth  = title:(Bluetooth)
 windowrulev2 = float, $bluetooth
 windowrulev2 = size 80% 80%, $bluetooth
 windowrulev2 = dimaround, $bluetooth
 windowrulev2 = workspace special:scratch_bluetooth silent, $bluetooth
+#+end_src
 
+** alsdkfj COMMENT
+
+#+begin_src shell
 # Terminal
 riverctl rule-add tag 1 no-float -app-id 'foo' -title 'foo'
 
@@ -134,13 +223,36 @@ riverctl rule-add float -app-id 'float*' -title 'foo'
 riverctl rule-add csd -app-id "bar"
 
 riverctl rule-add float  -title 'Vifm'
+#+end_src
 
+** COMMENT Image
+
+#+begin_src shell
+riverctl rule-add tag 4 no-float -title 'Aseprite'
+#+end_src
+
+* Keymap
+
+#+begin_src conf
 $mod = mod4
+#+end_src
 
-bind = $mod alt, q, exit,
+** Window
+*** Exit
 
-bind = $mod, q, killactive,
+#+begin_src conf
+bind = $mod alt, q, exit, 
+#+end_src
 
+*** Close
+
+#+begin_src conf
+bind = $mod, q, killactive, 
+#+end_src
+
+*** Focus
+
+#+begin_src conf
 bind = $mod, h, movefocus, l
 bind = $mod, l, movefocus, r
 bind = $mod, k, movefocus, u
@@ -151,12 +263,29 @@ bind = $mod, h, exec, pypr layout_center prev
 bind = $mod, l, exec, pypr layout_center next
 bind = $mod, k, exec, pypr layout_center prev2
 bind = $mod, j, exec, pypr layout_center next2
+#+end_src
 
-bind = $mod, v, togglefloating,
+*** Float
 
+#+begin_src conf
+bind = $mod, v, togglefloating, 
+#+end_src
+
+*** dwindle
+
+bind = $mod, p, pseudo, # dwindle
+bind = $mod, s, togglesplit, # dwindle
+
+*** Move/Resize windows with mainMod + LMB/RMB and dragging
+
+#+begin_src conf
 bindm = $mod, mouse:272, movewindow
 bindm = $mod, mouse:273, resizewindow
+#+end_src
 
+** Workspace
+*** Switch workspaces
+#+begin_src conf
 bind = $mod, 1, workspace, 1
 bind = $mod, 2, workspace, 2
 bind = $mod, 3, workspace, 3
@@ -167,7 +296,11 @@ bind = $mod, 7, workspace, 7
 bind = $mod, 8, workspace, 8
 bind = $mod, 9, workspace, 9
 bind = $mod, 0, workspace, 10
+#+end_src
 
+*** Move active window to a workspace
+
+#+begin_src conf
 bind = $mod shift, 1, movetoworkspace, 1
 bind = $mod shift, 2, movetoworkspace, 2
 bind = $mod shift, 3, movetoworkspace, 3
@@ -178,26 +311,178 @@ bind = $mod shift, 7, movetoworkspace, 7
 bind = $mod shift, 8, movetoworkspace, 8
 bind = $mod shift, 9, movetoworkspace, 9
 bind = $mod shift, 0, movetoworkspace, 10
+#+end_src
 
+*** Scroll through existing workspaces
+
+#+begin_src conf
 bind = $mod, mouse_down, workspace, e+1
 bind = $mod, mouse_up, workspace, e-1
+#+end_src
 
+** Program
+*** Idle
+
+#+begin_src conf
 bind = $mod, i, exec, emacsclient --alternate-editor="" --create-frame
+#+end_src
 
+*** Browser
+
+#+begin_src conf
 bind = $mod, b, exec, [workspace 2] thorium-browser
+#+end_src
 
+*** Capture
+**** Region
+
+#+begin_src conf
 bind = $mod alt, c, exec, grim -g "$(slurp)" - | swappy -f -
 #hyprpicker
+#+end_src
 
+**** Screenshot
+
+#+begin_src conf
 bind = $mod, c, exec, grim - | swappy -f -
+#+end_src
 
+**** Pick a Color
+
+#+begin_src conf
 bind = $mod shift, c, exec, grim -g "$(slurp -p)" -t ppm - | convert - -format "%[pixel:p{0,0}]" txt:- | tail -1 | cut -d" " -f4 | wl-copy
+#+end_src
 
+*** Terminal
+
+#+begin_src conf
 bind = $mod, return, exec, foot
+#+end_src
 
+*** Launcher
+
+#+begin_src conf
 bind = $mod, r, exec, wofi --show drun
+#+end_src
 
+*** COMMENT Mail
+
+#+begin_src shell
+super + alt + m
+	thunderbird
+#+end_src
+
+*** COMMENT Image
+
+#+begin_src shell
+riverctl map normal Super+Shift P spawn 'sxiv -rt "$PICTURE"'
+#+end_src
+
+*** COMMENT Editor
+
+#+begin_src shell
+#+end_src
+
+*** COMMENT Statusbar
+
+#+begin_src shell
+super + alt + b
+	$HOME/.local/bin/polybar
+#+end_src
+
+*** COMMENT Explorer
+
+#+begin_src shell
+riverctl map normal Super E spawn 'foot -T "Vifm" tmux new -AD -s "explorer" -n "Vifm" "vifm"'
+#+end_src
+
+*** COMMENT PixelArt
+
+#+begin_src shell
+riverctl map normal Super G spawn aseprite
+#+end_src
+
+*** COMMENT Download
+
+#+begin_src shell
+super + d
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 2 --class "download" --name "Download" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "download" -c "Download" \
+		  rtorrent 
+#+end_src
+
+*** COMMENT Audio
+
+#+begin_src shell
+super + a
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 3 --class "audio"  --name "Audio" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "audio" -c "Audio" \
+		  ncpamixer
+#+end_src
+
+*** COMMENT Music
+
+#+begin_src shell
+super + m
+	tdrop --width 90% --height 90% --x-offset 5% --y-offset 5% \
+		  --number 4 --class "music"  --name "Music" \
+		  --auto-detect-wm --monitor-aware \
+		  st -n "music" -c "Music" \
+		  mocp --config $HOME/.config/moc/config 
+#+end_src
+
+** Plugin
+
+#+begin_src conf
 bind = $mod alt, r, exec, pypr reload
+#+end_src
 
+** Scratchpad
+
+#+begin_src conf
 bind = $mod, e, exec, pypr toggle explorer
 bind = $mod, a, exec, pypr toggle bluetooth
+#+end_src
+
+* Plugin
+:PROPERTIES:
+:header-args:     :tangle pyprland.toml :comments org
+:END:
+
+** pyprland
+
+#+begin_src toml
+[pyprland]
+
+plugins = [
+	"layout_center",
+	"scratchpads",
+]
+
+
+[layout_center]
+margin = 14
+next = "movefocus r"
+prev = "movefocus l"
+next2 = "movefocus d"
+prev2 = "movefocus u"
+
+
+[scratchpads.explorer]
+command = "foot -T Explorer vifm"
+animation = "fromTop"
+unfocus = "hide"
+lazy = true
+
+
+[scratchpads.bluetooth]
+command = "foot -T Bluetooth bluetuith"
+animation = "fromTop"
+unfocus = "hide"
+lazy = true
+#+end_src
+

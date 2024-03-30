@@ -1,0 +1,31 @@
+# pyprland
+
+
+[pyprland]
+
+plugins = [
+	"layout_center",
+	"scratchpads",
+]
+
+
+[layout_center]
+margin = 14
+next = "movefocus r"
+prev = "movefocus l"
+next2 = "movefocus d"
+prev2 = "movefocus u"
+
+
+[scratchpads.explorer]
+command = "foot -T Explorer vifm"
+animation = "fromTop"
+unfocus = "hide"
+lazy = true
+
+
+[scratchpads.bluetooth]
+command = "foot -T Bluetooth bluetuith"
+animation = "fromTop"
+unfocus = "hide"
+lazy = true
