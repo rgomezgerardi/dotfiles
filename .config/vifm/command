@@ -13,5 +13,5 @@ command! ex :!ex %a
 command! vi :!st nvim %a 2> /dev/null &
 command! emacs :!/bin/emacs %a %i &
 command! python :!python %a
-command! dragon :!dragon-drop --all-compact --and-exit %f &
+command! dragon :!GDK_BACKEND=x11 dragon-drop %a %i &
 command! renies :!python ~/.local/bin/python/renies.py %f %i
