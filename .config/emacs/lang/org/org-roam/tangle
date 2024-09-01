@@ -16,7 +16,7 @@ https://github.com/org-roam/org-roam
                                                     '(:immediate-finish t)))))
       (apply #'org-roam-node-insert args)))
   :custom
-  (org-roam-directory (file-truename "/mnt/file/document/note"))
+  (org-roam-directory (file-truename "/mnt/rpf/document/note"))
   :config
   (org-roam-db-autosync-mode)
   :general
