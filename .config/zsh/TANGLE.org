@@ -119,7 +119,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 source "$ZDOTDIR/.zplugin"
 #+end_src
 
-** SSH Agent
+** COMMENT SSH Agent
 
 #+begin_src shell
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then

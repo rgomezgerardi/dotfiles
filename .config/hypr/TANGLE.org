@@ -84,9 +84,9 @@ input {
 #+begin_src conf
 # Example per-device config
 # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-device:epic-mouse-v1 {
-    sensitivity = -0.5
-}
+#device:epic-mouse-v1 {
+#    sensitivity = -0.5
+#}
 #+end_src
 
 * Master
@@ -210,7 +210,7 @@ windowrulev2 = dimaround, $bluetooth
 windowrulev2 = workspace special:scratch_bluetooth silent, $bluetooth
 #+end_src
 
-** alsdkfj COMMENT
+** COMMENT
 
 #+begin_src shell
 # Terminal
